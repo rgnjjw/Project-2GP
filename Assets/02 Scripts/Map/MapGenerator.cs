@@ -47,7 +47,7 @@ namespace _02_Scripts.Map
         }
 
         [ContextMenu("Destroy Map")]
-        public void DestroyMap()
+        public IEnumerator DestroyMap()
         {
             foreach (var mapObject in _currentMapObjectList)
             {
@@ -57,6 +57,7 @@ namespace _02_Scripts.Map
                         _currentMapObjectList.Remove(mapObject);
                         Destroy(mapObject);
                     });
+                yield return new WaitForSeconds(waitTime);
             }
         }
     }
