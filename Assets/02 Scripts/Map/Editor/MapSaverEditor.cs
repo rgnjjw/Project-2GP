@@ -1,8 +1,7 @@
-using _02_Scripts.Map;
 using UnityEditor;
 using UnityEngine;
 
-namespace _02_Scripts.Editor
+namespace _02_Scripts.Map.Editor
 {
     [CustomEditor(typeof(MapRoot))]
     public class MapSaverEditor : UnityEditor.Editor
