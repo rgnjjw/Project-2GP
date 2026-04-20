@@ -52,7 +52,6 @@ namespace _02_Scripts.Core.FSMSystem.Editor
                 return;
             }
 
-            
             int index = 0;
             string enumString = string.Join(",", _targetData.states.Select(so =>
             {
@@ -60,16 +59,16 @@ namespace _02_Scripts.Core.FSMSystem.Editor
                 EditorUtility.SetDirty(so);
                 return $"{so.stateName} = {index++}";
             }));
-            string ns = FileUtil.GetProjectRelativePath(_folderPath).Substring("Assets/".Length);
-            if (ns.StartsWith("Scripts/"))
-            {
-                ns = ns.Substring("Scripts/".Length);
-            }
 
-            ns = ns.Replace("/", "."); // 슬래시를 .으로 변경한다.
+            string ns = FileUtil.GetProjectRelativePath(_folderPath).Substring("Assets/".Length);
+            ns = string.Join(".", ns.Split('/').Select(part =>
+                char.IsDigit(part[0]) ? "_" + part : part));
+
+            ns = ns.Replace(" ", "_");
+
             string code = string.Format(CodeFormat.EnumFormat, ns, _targetData.enumName, enumString);
             
-            File.WriteAllText($"{_folderPath}/{_targetData.enumName}.cs", code );
+            File.WriteAllText($"{_folderPath}/{_targetData.enumName}.cs", code);
             
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
@@ -77,7 +76,6 @@ namespace _02_Scripts.Core.FSMSystem.Editor
 
         private void HandleFolderBtnClick()
         {
-            //타이틀, 처음으로 열릴 경로(없으면 기본 프로젝트 경로), 선택하지 않았을 때 값
             _folderPath = EditorUtility.OpenFolderPanel("폴더를 선택하세요", _folderPath, "");
 
             if (!string.IsNullOrEmpty(_folderPath))
@@ -87,7 +85,7 @@ namespace _02_Scripts.Core.FSMSystem.Editor
                 _folderPathLabel.text = FileUtil.GetProjectRelativePath(_folderPath);
                 
                 EditorUtility.SetDirty(_targetData);
-                AssetDatabase.SaveAssets(); //모든 에셋을 검사해서 DirtyFlag가 생긴녀석을 저장한다.
+                AssetDatabase.SaveAssets();
             }
         }
     }
