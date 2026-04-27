@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: MOVE
   m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.Core.FSMSystem.StateSO
   stateName: MOVE
-  className: _02_Scripts.Player.FSM.States.PlayerMove
+  className: _02_Scripts.Player.FSM.States.PlayerMoveState
   assetIndex: 1
   stateParam: {fileID: 11400000, guid: a5fb13f22f6fdc5409557bf7fcbfed3e, type: 2}

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: IDLE
   m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.Core.FSMSystem.StateSO
   stateName: IDLE
-  className: _02_Scripts.Player.FSM.States.PlayerIdle
+  className: _02_Scripts.Player.FSM.States.PlayerIdleState
   assetIndex: 0
   stateParam: {fileID: 11400000, guid: 9c55308c912c56a47a5f206e4f14736b, type: 2}
