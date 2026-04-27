@@ -1,4 +1,4 @@
-using _02_Scripts.Interface;
+using _02_Scripts.Core.Interface;
 
 namespace _02_Scripts.Agent
 {

@@ -2,10 +2,10 @@ using UnityEngine;
 
 namespace _02_Scripts.Player.FSM.States
 {
-    public class PlayerIdle : AbstractPlayerState
+    public class PlayerIdleState : AbstractPlayerState
     {
-        private PlayerMover _playerMover;
-        public PlayerIdle(Agent.Agent agent, int clipHash) : base(agent, clipHash)
+        private readonly PlayerMover _playerMover;
+        public PlayerIdleState(Agent.Agent agent, int clipHash) : base(agent, clipHash)
         {
             _playerMover = player.GetModule<PlayerMover>();
         }

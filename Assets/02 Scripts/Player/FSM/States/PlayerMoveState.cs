@@ -2,10 +2,10 @@ using UnityEngine;
 
 namespace _02_Scripts.Player.FSM.States
 {
-    public class PlayerMove : AbstractPlayerState
+    public class PlayerMoveState : AbstractPlayerState
     {
-        private PlayerMover _playerMover;
-        public PlayerMove(Agent.Agent agent, int clipHash) : base(agent, clipHash)
+        private readonly PlayerMover _playerMover;
+        public PlayerMoveState(Agent.Agent agent, int clipHash) : base(agent, clipHash)
         {
             _playerMover = agent.GetModule<PlayerMover>();
         }
@@ -19,17 +19,18 @@ namespace _02_Scripts.Player.FSM.States
             Vector3 forward = player.transform.forward; 
             Vector3 right = player.transform.right;
             
+            if (xInput == 0f && zInput == 0f)
+            {
+                _playerMover.SetMovementX(0f);
+                _playerMover.SetMovementZ(0f);
+                player.ChangeState(PlayerStateEnum.IDLE);
+                return;
+            }
+            
             Vector3 moveDir = forward * zInput + right * xInput;
-
-            moveDir = moveDir.normalized;
 
             _playerMover.SetMovementX(moveDir.x);
             _playerMover.SetMovementZ(moveDir.z);
-
-            if (Mathf.Abs(xInput) < 0.1f && Mathf.Abs(zInput) < 0.1f)
-            {
-                player.ChangeState(PlayerStateEnum.IDLE);
-            }
         }
 
     }

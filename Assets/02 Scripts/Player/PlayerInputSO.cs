@@ -13,6 +13,7 @@ namespace _02_Scripts.Player
         public void OnMove(InputAction.CallbackContext context)
         {
             InputDirection = context.ReadValue<Vector2>();
+            Debug.Log(InputDirection);
         }
 
         public void OnLook(InputAction.CallbackContext context)
@@ -30,6 +31,11 @@ namespace _02_Scripts.Player
             {
                 IsSliding = false;
             }
+        }
+
+        public void OnModuleAction(InputAction.CallbackContext context)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
