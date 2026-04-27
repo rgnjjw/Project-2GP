@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace _02_Scripts.Agent
 {
-    public class AgentHealth : MonoBehaviour,IModule
+    public class AgentHealth : MonoBehaviour,IAfterInitModule,IModule
     {
         public IReadOnlyNotifyValue<int> CurrentHp => GetNotifyHp();
         public int MaxHp => _maxHp;
@@ -16,11 +16,12 @@ namespace _02_Scripts.Agent
         [SerializeField] private int debugCurrentHp;
         [SerializeField] private bool debugIsDead;
 
-        private Agent _owner;
         private NotifyValue<int> _currentHp;
         private int _maxHp;
         private bool _isDead;
         private bool _isInitialized;
+        private Agent _owner;
+
         private NotifyValue<int> GetNotifyHp()
         {
             if (_currentHp == null)
@@ -89,24 +90,23 @@ namespace _02_Scripts.Agent
             if (_currentHp != null)
                 _currentHp.OnValueChanged -= OnValueChanged;
         }
-
-        public void Initialize(ModuleOwner moduleOwner)
+        public void Initialize(ModuleOwner owner)
         {
-            _owner = moduleOwner as Agent;
-            
-            if (_owner == null)
-                return;
-            
+            _owner = owner as Agent;
+        }
+        public void AfterInit()
+        {
             _isDead = false;
             debugIsDead = false;
             _isInitialized = true;
-            
+                        
             int initHealth = _owner.GetModule<IAgentData>().Health.Value;
-
-            _maxHp = initHealth;
             
+            _maxHp = initHealth;
+                        
             GetNotifyHp().Value = initHealth;
             debugCurrentHp = initHealth;
         }
+
     }
 }

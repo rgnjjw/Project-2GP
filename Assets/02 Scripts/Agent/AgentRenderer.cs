@@ -1,5 +1,5 @@
+using _02_Scripts.Core.Interface;
 using _02_Scripts.Core.ModuleSystem;
-using _02_Scripts.Interface;
 using UnityEngine;
 
 namespace _02_Scripts.Agent

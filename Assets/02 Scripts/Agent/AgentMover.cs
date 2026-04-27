@@ -12,8 +12,7 @@ namespace _02_Scripts.Agent
         [SerializeField] private Vector3 groundCheckSize;
         private float _moveSpeed;
         
-        private Agent _owner;
-        private Rigidbody  _rigidbody;
+        private Rigidbody _rigidbody;
         private IMover _mover;
         private IAgentData _ownerData;
         
@@ -25,16 +24,13 @@ namespace _02_Scripts.Agent
         public bool IsGrounded {get; private set; }
         public event Action<bool> OnGroundStatusChanged;
         public event Action<Vector3> OnVelocityChanged;
-        public bool CanManualMovement { get; set; } = true;
 
         public virtual void Initialize(ModuleOwner moduleOwner)
         {
-            _owner = moduleOwner as Agent;
-            _rigidbody = moduleOwner.GetComponent<Rigidbody>();
+            _rigidbody = moduleOwner.gameObject.GetComponent<Rigidbody>();
             _ownerData = moduleOwner.GetModule<IAgentData>();
             _moveSpeed = _ownerData.MoveSpeed.Value;
             _ownerData.MoveSpeed.OnValueChanged += SetMoveSpeed;
-            //값바뀔떄 같이 바꿔주기 만들기 하기
             _moveSpeedMultiplier = 1f;
         }
 
@@ -90,8 +86,6 @@ namespace _02_Scripts.Agent
 
         private void MoveCharacter()
         {
-            if (!CanManualMovement) return;
-
             Vector3 velocity = _rigidbody.linearVelocity;
 
             velocity.x = _movementX * _moveSpeed * _moveSpeedMultiplier;
