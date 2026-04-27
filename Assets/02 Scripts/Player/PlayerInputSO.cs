@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,6 +10,7 @@ namespace _02_Scripts.Player
         public Vector2 InputDirection { get;private set; }
         public Vector2 MouseDelta { get;private set; }  
         public bool IsSliding { get;private set; }
+        public event Action<int,InputAction.CallbackContext> OnChipInput;
 
         public void OnMove(InputAction.CallbackContext context)
         {
@@ -35,7 +37,8 @@ namespace _02_Scripts.Player
 
         public void OnModuleAction(InputAction.CallbackContext context)
         {
-            throw new System.NotImplementedException();
+            int index = context.action.GetBindingIndexForControl(context.control);
+            OnChipInput?.Invoke(index, context);
         }
     }
 }
