@@ -11,6 +11,7 @@ namespace _02_Scripts.Player
         public Vector2 MouseDelta { get;private set; }  
         public bool IsSliding { get;private set; }
         public event Action<int,InputAction.CallbackContext> OnChipInput;
+        public event Action OnJumpKeyPressed;
 
         public void OnMove(InputAction.CallbackContext context)
         {

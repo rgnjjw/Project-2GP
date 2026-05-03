@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace _02_Scripts.Core.FSMSystem
 {
-    [CreateAssetMenu(fileName = "State data", menuName = "Agent/State data", order = 20)]
+    [CreateAssetMenu(fileName = "State DataSO", menuName = "Agent/State DataSO", order = 20)]
     public class StateSO : ScriptableObject
     {
         public string stateName;

@@ -22,7 +22,7 @@ namespace _02_Scripts.Map.Editor
         private void SaveMap(MapRoot mapRoot)
         {
             MapDataSO mapDataSO = mapRoot.TargetMapDataSO;
-            Undo.RecordObject(mapDataSO, "Save Map Data");//수정전에 저장 언도 기능 쓰려고 저장하기
+            Undo.RecordObject(mapDataSO, "Save Map DataSO");//수정전에 저장 언도 기능 쓰려고 저장하기
             mapDataSO.MapObjectList.Clear();//덮어 씌우기 위해 비워주기
 
             foreach (Transform child in mapRoot.transform)
