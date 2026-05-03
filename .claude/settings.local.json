@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-Content \"C:\\\\JJW\\\\GitHub\\\\Project-2GP\\\\Assets\\\\01 Scenes\\\\TestScene.unity\")",
+      "Bash(Measure-Object -Line)",
+      "PowerShell(Get-Content *)"
+    ]
+  }
+}

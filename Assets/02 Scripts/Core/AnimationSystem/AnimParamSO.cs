@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace _02_Scripts.Core.AnimationSystem
 {
-    [CreateAssetMenu(fileName = "Anim param data", menuName = "Lib/AnimParam", order = 20)]
+    [CreateAssetMenu(fileName = "Anim param DataSO", menuName = "Lib/AnimParam", order = 20)]
     public class AnimParamSO : ScriptableObject
     {
         [field: SerializeField] public string ParamName { get; private set; }
