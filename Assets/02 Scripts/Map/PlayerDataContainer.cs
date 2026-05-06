@@ -6,9 +6,6 @@ namespace _02_Scripts.Map
 {
     public class PlayerDataContainer : AgentDataContainer<PlayerDataSO>
     {
-        public override void Initialize(ModuleOwner owner)
-        {
-            base.Initialize(owner);
-        }
+        
     }
 }

@@ -103,7 +103,6 @@ namespace _02_Scripts.Agent
             int initHealth = _owner.GetModule<IAgentData>().Health.Value;
             
             _maxHp = initHealth;
-                        
             GetNotifyHp().Value = initHealth;
             debugCurrentHp = initHealth;
         }

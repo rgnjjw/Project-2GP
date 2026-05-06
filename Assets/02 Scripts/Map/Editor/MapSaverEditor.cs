@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -22,8 +23,9 @@ namespace _02_Scripts.Map.Editor
         private void SaveMap(MapRoot mapRoot)
         {
             MapDataSO mapDataSO = mapRoot.TargetMapDataSO;
-            Undo.RecordObject(mapDataSO, "Save Map DataSO");//수정전에 저장 언도 기능 쓰려고 저장하기
-            mapDataSO.MapObjectList.Clear();//덮어 씌우기 위해 비워주기
+            Undo.RecordObject(mapDataSO, "Save Map DataSO");
+
+            var mapObjectList = new List<MapObjectData>();
 
             foreach (Transform child in mapRoot.transform)
             {
@@ -31,10 +33,10 @@ namespace _02_Scripts.Map.Editor
                 if (prefab == null)
                 {
                     Debug.LogError("프리팹이 아닌 오브젝트가 있습니다");
-                    return;     
+                    return;
                 }
-                
-                mapDataSO.MapObjectList.Add(new MapObjectData
+
+                mapObjectList.Add(new MapObjectData
                 {
                     prefab = prefab,
                     position = child.localPosition,
@@ -42,9 +44,11 @@ namespace _02_Scripts.Map.Editor
                     scale = child.localScale
                 });
             }
-            
-            EditorUtility.SetDirty(mapDataSO);//유니티한테 저장 필요하다고 알려주기
-            AssetDatabase.SaveAssets();//저장
+
+            mapDataSO.MapObjectList = mapObjectList.ToArray();
+
+            EditorUtility.SetDirty(mapDataSO);
+            AssetDatabase.SaveAssets();
         }
     }
 }

@@ -11,18 +11,19 @@ namespace _02_Scripts.Chip.Jump
         private float _jumpPower;
         private int _maxJumpCount;
         private int _currentJumpCount;
-        
+
         public void OnEquip(ChipInstance chip, Player.Player player)
         {
             _playerInputSO = player.PlayerInputSO;
             _playerMover = player.GetModule<PlayerMover>();
-            
-            //방어코드
+
             _playerInputSO.OnJumpKeyPressed -= Jump;
             _playerMover.OnGroundStatusChanged -= JumpCountReset;
-            
+
             _playerInputSO.OnJumpKeyPressed += Jump;
             _playerMover.OnGroundStatusChanged += JumpCountReset;
+
+            ApplyLevelStats(chip);
         }
 
         public void OnUnequip(ChipInstance chip, Player.Player player)
@@ -31,25 +32,28 @@ namespace _02_Scripts.Chip.Jump
             _playerMover.OnGroundStatusChanged -= JumpCountReset;
         }
 
-        public void OnLevelUp(ChipInstance chip)
+        public void OnLevelUp(ChipInstance chip) => ApplyLevelStats(chip);
+
+        private void ApplyLevelStats(ChipInstance chip)
         {
-            if (chip.Data is JumpChipDataSO jumpChipData)
+            if (chip.Data is JumpChipDataSO jumpData)
             {
-                _jumpPower = jumpChipData.LevelData[chip.CurrentLevel].JumpPower;
-                _maxJumpCount = jumpChipData.LevelData[chip.CurrentLevel].MaxJumpCount;
+                var levelData = jumpData.LevelData[chip.CurrentLevel - 1];
+                _jumpPower = levelData.JumpPower;
+                _maxJumpCount = levelData.MaxJumpCount;
             }
         }
 
         private void Jump()
         {
             if (_currentJumpCount >= _maxJumpCount) return;
-            _playerMover.AddForceToAgent(Vector3.up *  _jumpPower);
+            _playerMover.AddForceToAgent(Vector3.up * _jumpPower);
             _currentJumpCount++;
         }
-        
+
         private void JumpCountReset(bool isGrounded)
         {
-            if(isGrounded)
+            if (isGrounded)
                 _currentJumpCount = 0;
         }
     }

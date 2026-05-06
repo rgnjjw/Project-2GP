@@ -12,6 +12,8 @@ namespace _02_Scripts.Player
         public bool IsSliding { get;private set; }
         public event Action<int,InputAction.CallbackContext> OnChipInput;
         public event Action OnJumpKeyPressed;
+        public event Action OnDashKeyPressed;
+        public event Action OnSlideKeyPressed;
 
         public void OnMove(InputAction.CallbackContext context)
         {
@@ -29,11 +31,24 @@ namespace _02_Scripts.Player
             if (context.started)
             {
                 IsSliding = true;
+                OnSlideKeyPressed?.Invoke();
             }
             else if (context.canceled)
             {
                 IsSliding = false;
             }
+        }
+
+        public void OnJump(InputAction.CallbackContext context)
+        {
+            if (context.started)
+                OnJumpKeyPressed?.Invoke();
+        }
+
+        public void OnDash(InputAction.CallbackContext context)
+        {
+            if (context.started)
+                OnDashKeyPressed?.Invoke();
         }
 
         public void OnModuleAction(InputAction.CallbackContext context)

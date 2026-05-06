@@ -1,64 +1,84 @@
 using System.Collections;
 using System.Collections.Generic;
-using DG.Tweening;
 using UnityEngine;
 
 namespace _02_Scripts.Map
 {
     public class MapGenerator : MonoBehaviour
     {
-        [SerializeField] private List<MapDataSO> mapDataSOList;
         [SerializeField] private float generateDuration = 0.5f;
         [SerializeField] private float waitTime = 0.2f;
-        [SerializeField] private Ease ease = Ease.Linear;
+        [SerializeField] private AnimationCurve ease = AnimationCurve.Linear(0, 0, 1, 1);
         [SerializeField] private float initPosY;
-        private readonly List<GameObject> _currentMapObjectList =  new List<GameObject>();
+        private readonly List<GameObject> _currentMapObjectList = new();
 
-        public void GenerateMap(int mapIndex)
+        public IEnumerator GenerateMap(MapDataSO mapData)
         {
             if (_currentMapObjectList.Count > 0)
-                DestroyMap();
+                yield return StartCoroutine(DestroyMap());
             
-            StartCoroutine(GenerateMapRoutine(mapIndex));
-        }
-
-        private IEnumerator GenerateMapRoutine(int mapIndex)
-        {
-            foreach (var mapObject in mapDataSOList[mapIndex].MapObjectList)
+            List<Coroutine> routineList = new List<Coroutine>();
+            
+            foreach (var mapObject in mapData.MapObjectList)
             {
                 GameObject obj = Instantiate(mapObject.prefab, transform);
                 obj.transform.localEulerAngles = mapObject.rotation;
                 obj.transform.localScale = mapObject.scale;
-                
+
                 Vector3 initPos = new Vector3(mapObject.position.x, initPosY, mapObject.position.z);
                 obj.transform.localPosition = initPos;
 
-                obj.transform.DOLocalMoveY(mapObject.position.y, generateDuration).SetEase(ease);
+                _currentMapObjectList.Add(obj);
+                routineList.Add(StartCoroutine(MoveLocal(obj, mapObject.position, generateDuration)));
                 yield return new WaitForSeconds(waitTime);
-                _currentMapObjectList.Add(obj); 
+            }
+
+            foreach (var routine in routineList)
+            {
+                yield return routine;
             }
         }
 
-        //test
-        [ContextMenu("Generate Map")]
-        public void MapGenerateTest()
-        {
-            StartCoroutine(GenerateMapRoutine(0));
-        }
-
-        [ContextMenu("Destroy Map")]
         public IEnumerator DestroyMap()
         {
+            List<Coroutine> coroutines = new();
+
             foreach (var mapObject in _currentMapObjectList)
             {
-                mapObject.transform.DOLocalMoveY(initPosY, generateDuration).SetEase(ease)
-                    .OnComplete(() =>
-                    {
-                        _currentMapObjectList.Remove(mapObject);
-                        Destroy(mapObject);
-                    });
+                if (mapObject == null) continue;
+                Vector3 targetPos = new Vector3(
+                    mapObject.transform.localPosition.x,
+                    initPosY,
+                    mapObject.transform.localPosition.z
+                );
+                coroutines.Add(StartCoroutine(MoveLocal(mapObject, targetPos, generateDuration)));
                 yield return new WaitForSeconds(waitTime);
             }
+
+            foreach (var co in coroutines)
+                yield return co;
+
+            foreach (var mapObject in _currentMapObjectList)
+                Destroy(mapObject);
+
+            _currentMapObjectList.Clear();
+        }
+
+        private IEnumerator MoveLocal(GameObject obj, Vector3 targetLocalPos, float duration)
+        {
+            Vector3 startLocalPos = obj.transform.localPosition;
+            float elapsed = 0f;
+
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                float t = Mathf.Clamp01(elapsed / duration);
+                float curvedT = ease.Evaluate(t);
+                obj.transform.localPosition = Vector3.Lerp(startLocalPos, targetLocalPos, curvedT);
+                yield return null;
+            }
+
+            obj.transform.localPosition = targetLocalPos;
         }
     }
 }

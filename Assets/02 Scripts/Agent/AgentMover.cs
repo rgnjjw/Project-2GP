@@ -18,8 +18,12 @@ namespace _02_Scripts.Agent
         
         private float _movementX;
         private float _movementZ;
-        
+
         private float _moveSpeedMultiplier;
+        private Vector3 _postDashVelocity;
+        private const float PostDashDecay = 80f;
+        private bool _isSlideOverride;
+        private Vector3 _slideOverrideVelocity;
 
         public bool IsGrounded {get; private set; }
         public event Action<bool> OnGroundStatusChanged;
@@ -36,6 +40,35 @@ namespace _02_Scripts.Agent
 
 
         public void SetMoveSpeedMultiplier(float value) => _moveSpeedMultiplier = value;
+
+        public void SetVerticalVelocity(float yVelocity)
+        {
+            Vector3 vel = _rigidbody.linearVelocity;
+            vel.y = yVelocity;
+            _rigidbody.linearVelocity = vel;
+        }
+
+        public void BeginSlide(Vector3 initialVelocity)
+        {
+            _isSlideOverride = true;
+            _slideOverrideVelocity = initialVelocity;
+        }
+
+        public void UpdateSlideVelocity(Vector3 velocity)
+        {
+            _slideOverrideVelocity = velocity;
+        }
+
+        public void EndSlide()
+        {
+            _isSlideOverride = false;
+            _slideOverrideVelocity = Vector3.zero;
+        }
+
+        public void SetDashVelocity(Vector3 velocity, float duration)
+        {
+            _postDashVelocity = velocity;
+        }
 
         public virtual void AddForceToAgent(Vector3 force)
         {
@@ -88,11 +121,34 @@ namespace _02_Scripts.Agent
         {
             Vector3 velocity = _rigidbody.linearVelocity;
 
-            velocity.x = _movementX * _moveSpeed * _moveSpeedMultiplier;
-            velocity.z = _movementZ * _moveSpeed * _moveSpeedMultiplier;
+            if (_isSlideOverride)
+            {
+                velocity.x = _slideOverrideVelocity.x;
+                velocity.z = _slideOverrideVelocity.z;
+                _postDashVelocity = Vector3.zero;
+            }
+            else
+            {
+                float targetX = _movementX * _moveSpeed * _moveSpeedMultiplier;
+                float targetZ = _movementZ * _moveSpeed * _moveSpeedMultiplier;
+                Vector3 target = new Vector3(targetX, 0f, targetZ);
+
+                if (_postDashVelocity.sqrMagnitude > target.sqrMagnitude + 0.01f)
+                {
+                    _postDashVelocity = Vector3.MoveTowards(_postDashVelocity, target, PostDashDecay * Time.fixedDeltaTime);
+                    velocity.x = _postDashVelocity.x;
+                    velocity.z = _postDashVelocity.z;
+                }
+                else
+                {
+                    _postDashVelocity = Vector3.zero;
+                    velocity.x = targetX;
+                    velocity.z = targetZ;
+                }
+            }
 
             _rigidbody.linearVelocity = velocity;
-            
+
             OnVelocityChanged?.Invoke(velocity);
         }
 
