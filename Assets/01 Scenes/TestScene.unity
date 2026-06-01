@@ -1389,7 +1389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f040129540445b2b7445071983f7836, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.Map.UI.StageButtonUI
-  mapData: {fileID: 11400000, guid: 3e56177b2de18854785eeba0194730ce, type: 2}
+  mapData: {fileID: 11400000, guid: 98d6eaea05d363d499dde1ddd4381d2d, type: 2}
 --- !u!114 &1234561001 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 123456789, guid: a54b81eb2d9b69a40bcd6a7ca0879478, type: 3}
@@ -2284,7 +2284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f040129540445b2b7445071983f7836, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.Map.UI.StageButtonUI
-  mapData: {fileID: 11400000, guid: 54329fed76edfe544b1c056183d95822, type: 2}
+  mapData: {fileID: 11400000, guid: 602b305cf58976c4eb29f7da410cfe7d, type: 2}
 --- !u!1001 &1680014330
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2875,7 +2875,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f040129540445b2b7445071983f7836, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.Map.UI.StageButtonUI
-  mapData: {fileID: 11400000, guid: 602b305cf58976c4eb29f7da410cfe7d, type: 2}
+  mapData: {fileID: 11400000, guid: 54329fed76edfe544b1c056183d95822, type: 2}
 --- !u!1 &1965583790
 GameObject:
   m_ObjectHideFlags: 0
@@ -3268,7 +3268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f040129540445b2b7445071983f7836, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.Map.UI.StageButtonUI
-  mapData: {fileID: 11400000, guid: 70968da44c9f5b9458e4903c6aac6346, type: 2}
+  mapData: {fileID: 11400000, guid: 3e56177b2de18854785eeba0194730ce, type: 2}
 --- !u!1 &2122281003
 GameObject:
   m_ObjectHideFlags: 0
@@ -3313,33 +3313,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4f45dbcc0d94c6a9afede94c9988209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.Map.MapGenerator
-  generateDuration: 1
-  waitTime: 0.2
-  ease:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  initPosY: -25
+  generateDuration: 0.7
+  waitTime: 0.05
+  ease: 1
 --- !u!1001 &1085946463942179878
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 namespace _02_Scripts.Map
@@ -8,77 +9,76 @@ namespace _02_Scripts.Map
     {
         [SerializeField] private float generateDuration = 0.5f;
         [SerializeField] private float waitTime = 0.2f;
-        [SerializeField] private AnimationCurve ease = AnimationCurve.Linear(0, 0, 1, 1);
-        [SerializeField] private float initPosY;
+        [SerializeField] private Ease ease = Ease.Linear;
+
         private readonly List<GameObject> _currentMapObjectList = new();
+        private Sequence _activeSequence;
 
         public IEnumerator GenerateMap(MapDataSO mapData)
         {
             if (_currentMapObjectList.Count > 0)
                 yield return StartCoroutine(DestroyMap());
-            
-            List<Coroutine> routineList = new List<Coroutine>();
-            
+
+            _activeSequence?.Kill();
+            _activeSequence = DOTween.Sequence();
+
+            float delay = 0f;
+
             foreach (var mapObject in mapData.MapObjectList)
             {
                 GameObject obj = Instantiate(mapObject.prefab, transform);
+
                 obj.transform.localEulerAngles = mapObject.rotation;
                 obj.transform.localScale = mapObject.scale;
-
-                Vector3 initPos = new Vector3(mapObject.position.x, initPosY, mapObject.position.z);
-                obj.transform.localPosition = initPos;
+                obj.transform.localPosition = mapObject.spawnPosition;
 
                 _currentMapObjectList.Add(obj);
-                routineList.Add(StartCoroutine(MoveLocal(obj, mapObject.position, generateDuration)));
-                yield return new WaitForSeconds(waitTime);
+
+                _activeSequence.Insert(delay, obj.transform.DOLocalMove(mapObject.position, generateDuration).SetEase(ease));
+
+                //꼿는 시간만 다르게 하기
+                delay += waitTime;
             }
 
-            foreach (var routine in routineList)
-            {
-                yield return routine;
-            }
+            yield return _activeSequence.WaitForCompletion();
+            //트윈이 끝날때까지 대기를 한다 WaitForCompletion() 이함수
         }
 
         public IEnumerator DestroyMap()
         {
-            List<Coroutine> coroutines = new();
+            _activeSequence?.Kill();
+            _activeSequence = DOTween.Sequence();
+
+            float delay = 0f;
 
             foreach (var mapObject in _currentMapObjectList)
             {
                 if (mapObject == null) continue;
+
+                MapObject info = mapObject.GetComponent<MapObject>();
+
                 Vector3 targetPos = new Vector3(
                     mapObject.transform.localPosition.x,
-                    initPosY,
-                    mapObject.transform.localPosition.z
-                );
-                coroutines.Add(StartCoroutine(MoveLocal(mapObject, targetPos, generateDuration)));
-                yield return new WaitForSeconds(waitTime);
+                    info != null ? info.spawnPositionY : mapObject.transform.localPosition.y,
+                    mapObject.transform.localPosition.z);
+
+                _activeSequence.Insert(delay, mapObject.transform.DOLocalMove(targetPos, generateDuration).SetEase(ease));
+
+                delay += waitTime;
             }
 
-            foreach (var co in coroutines)
-                yield return co;
+            yield return _activeSequence.WaitForCompletion();//트윈 끝날떄까지 기다리기
 
             foreach (var mapObject in _currentMapObjectList)
-                Destroy(mapObject);
+                if (mapObject != null)
+                    Destroy(mapObject);
 
             _currentMapObjectList.Clear();
         }
 
-        private IEnumerator MoveLocal(GameObject obj, Vector3 targetLocalPos, float duration)
+        private void OnDestroy()
         {
-            Vector3 startLocalPos = obj.transform.localPosition;
-            float elapsed = 0f;
-
-            while (elapsed < duration)
-            {
-                elapsed += Time.deltaTime;
-                float t = Mathf.Clamp01(elapsed / duration);
-                float curvedT = ease.Evaluate(t);
-                obj.transform.localPosition = Vector3.Lerp(startLocalPos, targetLocalPos, curvedT);
-                yield return null;
-            }
-
-            obj.transform.localPosition = targetLocalPos;
+            _activeSequence?.Kill();
         }
     }
 }

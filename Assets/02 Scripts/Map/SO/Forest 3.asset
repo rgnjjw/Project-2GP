@@ -10,73 +10,84 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 10cfc7f9ada84b789d4442735cbd1094, type: 3}
-  m_Name: Forrest 2
+  m_Name: Forest 3
   m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.Map.MapDataSO
   MapObjectList:
   - prefab: {fileID: 8957304962413023527, guid: 3f9b178ccd3b86f4ebbfc1f5a2815e56, type: 3}
     position: {x: 0, y: 25, z: 0}
     rotation: {x: -0, y: -0, z: -0}
     scale: {x: 3, y: 3, z: 3}
+    spawnPosition: {x: 0, y: 20, z: 0}
   - prefab: {fileID: 4661435515762455780, guid: e289bf5debb17f6459818c207d781953, type: 3}
-    position: {x: 31, y: 26.16, z: 6.9}
+    position: {x: 31, y: 25.33, z: 6.9}
     rotation: {x: -0, y: 0, z: 0}
     scale: {x: 4, y: 4, z: 4}
+    spawnPosition: {x: 31, y: 7, z: 6.9}
   - prefab: {fileID: 4661435515762455780, guid: e289bf5debb17f6459818c207d781953, type: 3}
     position: {x: 38, y: 25.45, z: -33.1}
     rotation: {x: -0, y: 0, z: 0}
     scale: {x: 4, y: 4, z: 4}
+    spawnPosition: {x: 38, y: 7, z: -33.1}
   - prefab: {fileID: 4661435515762455780, guid: e289bf5debb17f6459818c207d781953, type: 3}
     position: {x: 38, y: 25.45, z: 38.9}
     rotation: {x: -0, y: 0, z: 0}
     scale: {x: 4, y: 4, z: 4}
-  - prefab: {fileID: 4661435515762455780, guid: e289bf5debb17f6459818c207d781953, type: 3}
-    position: {x: 38, y: 25.45, z: 38.9}
-    rotation: {x: -0, y: 0, z: 0}
-    scale: {x: 4, y: 4, z: 4}
+    spawnPosition: {x: 38, y: 7, z: 38.9}
   - prefab: {fileID: 4661435515762455780, guid: e289bf5debb17f6459818c207d781953, type: 3}
     position: {x: 3.47, y: 25.4, z: 37.24}
     rotation: {x: -0, y: 0, z: 0}
     scale: {x: 4, y: 4, z: 4}
+    spawnPosition: {x: 3.47, y: 7, z: 37.24}
   - prefab: {fileID: 4661435515762455780, guid: e289bf5debb17f6459818c207d781953, type: 3}
     position: {x: -26.5, y: 25.28, z: 18.1}
     rotation: {x: -0, y: 0, z: 0}
     scale: {x: 4, y: 4, z: 4}
+    spawnPosition: {x: -26.5, y: 7, z: 18.1}
   - prefab: {fileID: 8783306491908617939, guid: f02116c209ecd9e488fc4d2cd8996133, type: 3}
     position: {x: -17.9, y: 25.114708, z: 23.57}
     rotation: {x: -0, y: 0, z: 0}
     scale: {x: 3, y: 3, z: 3}
+    spawnPosition: {x: -17.9, y: 25.114708, z: 23.57}
   - prefab: {fileID: 8783306491908617939, guid: f02116c209ecd9e488fc4d2cd8996133, type: 3}
     position: {x: -15.7, y: 24.87, z: 23.65}
     rotation: {x: -0, y: -0, z: 11.159996}
     scale: {x: 3, y: 3, z: 3}
+    spawnPosition: {x: -15.7, y: 24.87, z: 23.65}
   - prefab: {fileID: 8783306491908617939, guid: f02116c209ecd9e488fc4d2cd8996133, type: 3}
     position: {x: -16.38, y: 24.74, z: 25.42}
     rotation: {x: -0, y: -0, z: 11.159996}
     scale: {x: 5, y: 5, z: 5}
+    spawnPosition: {x: -16.38, y: 24.74, z: 25.42}
   - prefab: {fileID: 8783306491908617939, guid: f02116c209ecd9e488fc4d2cd8996133, type: 3}
-    position: {x: 25.9, y: 33.1, z: -20.7}
+    position: {x: 26.27, y: 25.74, z: -22.1}
     rotation: {x: 0.00000042688683, y: 75.4, z: 11.159996}
     scale: {x: 5, y: 5, z: 5}
+    spawnPosition: {x: 26.27, y: 25.74, z: -22.1}
   - prefab: {fileID: 8783306491908617939, guid: f02116c209ecd9e488fc4d2cd8996133, type: 3}
-    position: {x: 14.88, y: 25.65, z: 15.62}
+    position: {x: 14.9, y: 24.9, z: 15.5}
     rotation: {x: 0.00000042688683, y: 75.4, z: 11.159996}
     scale: {x: 7, y: 7, z: 7}
+    spawnPosition: {x: 14.9, y: 24.9, z: 15.5}
   - prefab: {fileID: 108507113624723981, guid: eebb56c82efbd8d4bb0eb6bd925a0e9d, type: 3}
     position: {x: -0.43, y: 26.341974, z: -5.98}
     rotation: {x: -0, y: 0, z: 0}
     scale: {x: 7, y: 7, z: 7}
+    spawnPosition: {x: -0.43, y: 26.341974, z: -5.98}
   - prefab: {fileID: 8783306491908617939, guid: f02116c209ecd9e488fc4d2cd8996133, type: 3}
-    position: {x: -24.8, y: 26.346762, z: -28.1}
+    position: {x: -24.8, y: 24.6, z: -28.1}
     rotation: {x: -0, y: 0, z: 0}
     scale: {x: 12, y: 12, z: 12}
+    spawnPosition: {x: -24.8, y: 24.6, z: -28.1}
   - prefab: {fileID: 8783306491908617939, guid: f02116c209ecd9e488fc4d2cd8996133, type: 3}
-    position: {x: -19.5, y: 23.7, z: -33.6}
+    position: {x: -19.35, y: 22.37, z: -33.67}
     rotation: {x: -0, y: 26.089994, z: 7.299997}
     scale: {x: 12, y: 12, z: 12}
+    spawnPosition: {x: -19.35, y: 22.37, z: -33.67}
   - prefab: {fileID: 8783306491908617939, guid: f02116c209ecd9e488fc4d2cd8996133, type: 3}
     position: {x: -27, y: 22.2, z: -21.8}
     rotation: {x: -0, y: 26.089994, z: 7.299997}
     scale: {x: 12, y: 12, z: 12}
+    spawnPosition: {x: -27, y: 22.2, z: -21.8}
   EnemySpawnData:
   - enemySpawnPoint: {x: 10, y: 29, z: 10}
     enemyPrefab: {fileID: 8307348760182502184, guid: 1303f2d1beaca0d4187c699f7b59f04f, type: 3}

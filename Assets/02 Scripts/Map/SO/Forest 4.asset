@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 10cfc7f9ada84b789d4442735cbd1094, type: 3}
-  m_Name: Forrest 3
+  m_Name: Forest 4
   m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.Map.MapDataSO
   MapObjectList:
   - prefab: {fileID: 8957304962413023527, guid: 3f9b178ccd3b86f4ebbfc1f5a2815e56, type: 3}
     position: {x: 0, y: 25, z: 0}
     rotation: {x: -0, y: -0, z: -0}
     scale: {x: 3, y: 3, z: 3}
+    spawnPosition: {x: 0, y: 20, z: 0}
   EnemySpawnData:
   - enemySpawnPoint: {x: 10, y: 29, z: 10}
     enemyPrefab: {fileID: 8307348760182502184, guid: 1303f2d1beaca0d4187c699f7b59f04f, type: 3}
