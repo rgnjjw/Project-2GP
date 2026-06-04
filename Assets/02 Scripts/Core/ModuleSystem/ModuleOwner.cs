@@ -44,5 +44,10 @@ namespace _02_Scripts.Core.ModuleSystem
             
             return default(T);
         }
+        
+        public IEnumerable<T> GetModules<T>() //여러개 주는거
+        {
+            return _moduleDict.Values.OfType<T>();
+        }
     }
 }

@@ -19,9 +19,9 @@ namespace _02_Scripts.Chip.Slam
 
         public void OnEquip(ChipInstance chip, Player.Player player)
         {
+            _player = player;
             _playerInputSO = player.PlayerInputSO;
             _playerMover = player.GetModule<PlayerMover>();
-            _player = player;
 
             _playerInputSO.OnSlideKeyPressed -= TrySlam;
             _playerMover.OnGroundStatusChanged -= OnGrounded;

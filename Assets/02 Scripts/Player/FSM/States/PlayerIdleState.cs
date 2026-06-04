@@ -19,8 +19,12 @@ namespace _02_Scripts.Player.FSM.States
         public override void Update()
         { 
             base.Update();
+            Debug.Log("IDLE");
             float xInput = player.PlayerInputSO.InputDirection.x;
             float zInput = player.PlayerInputSO.InputDirection.y;
+            
+            _renderer.Animator.SetFloat("MoveX", xInput);
+            _renderer.Animator.SetFloat("MoveY", zInput);
          
             if (xInput != 0 || zInput != 0)
             {
