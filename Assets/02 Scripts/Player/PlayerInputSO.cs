@@ -14,6 +14,7 @@ namespace _02_Scripts.Player
         public event Action OnJumpKeyPressed;
         public event Action OnDashKeyPressed;
         public event Action OnSlideKeyPressed;
+        public event Action OnFireKeyPressed;
 
         public void OnMove(InputAction.CallbackContext context)
         {
@@ -49,6 +50,12 @@ namespace _02_Scripts.Player
         {
             if (context.started)
                 OnDashKeyPressed?.Invoke();
+        }
+
+        public void OnFire(InputAction.CallbackContext context)
+        {
+            if(context.started)
+                OnFireKeyPressed?.Invoke();
         }
 
         public void OnModuleAction(InputAction.CallbackContext context)
