@@ -22,7 +22,7 @@ namespace _02_Scripts.Gun.G_Pistol
 
             base.Fire();
 
-            trailRenderer.DrawTrail(points.ToArray());
+            trailRenderer.DrawTrail(muzzleTrm.position, points.ToArray());
 
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layerMask))
             {

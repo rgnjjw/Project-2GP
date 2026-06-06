@@ -6,13 +6,13 @@ using UnityEngine;
 
 namespace _02_Scripts.Gun
 {
-    public class Gun : ModuleOwner
+    public class Gun : MonoBehaviour
     {
         [SerializeField] protected GunTrailRenderer trailRenderer;
         [SerializeField] protected LayerMask layerMask;
         [SerializeField] protected int bulletDamage;
         [SerializeField] protected float fireDelay = 0.2f;
-        [SerializeField] private Transform muzzleTrm;
+        [SerializeField] protected Transform muzzleTrm;
         [field: SerializeField] public AgentRenderer Renderer { get;private set; }
         public event Action OnFire;
         public event Action OnEquip;
@@ -22,7 +22,6 @@ namespace _02_Scripts.Gun
         public virtual void Equip()
         {
             OnEquip?.Invoke();
-            trailRenderer.SetMuzzleTrm(muzzleTrm);
         }
 
 

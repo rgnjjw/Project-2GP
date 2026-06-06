@@ -6,20 +6,16 @@ namespace _02_Scripts.Gun
     public class GunTrailRenderer : MonoBehaviour
     {
         [SerializeField] private LineRenderer lineRenderer;
-        private Transform _muzzleTrm;
 
-        public void DrawTrail(Vector3[] points)
+        public void DrawTrail(Vector3 muzzlePos, Vector3[] points)
         {
             Vector3[] finalPoints = new Vector3[points.Length];
-            finalPoints[0] = _muzzleTrm.position;
+            finalPoints[0] = muzzlePos;
             for (int i = 1; i < points.Length; i++)
                 finalPoints[i] = points[i];
 
             StartCoroutine(DrawCoroutine(finalPoints));
         }
-
-        public void SetMuzzleTrm(Transform muzzleTrm) => _muzzleTrm = muzzleTrm;
-        
 
         private IEnumerator DrawCoroutine(Vector3[] points)
         {

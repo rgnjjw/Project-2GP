@@ -22,7 +22,7 @@ namespace _02_Scripts.Player
             if (owner is Player)
             {
                 _playerVisuals = owner.GetModules<PlayerRenderer>().ToArray();
-                ChangeVisual(PlayerVisualState.SHOTGUN);//초기화 임시
+                ChangeVisual(PlayerVisualState.PISTOL);
             }
         }
 

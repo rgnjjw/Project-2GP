@@ -15,6 +15,27 @@ namespace _02_Scripts.Player
         public event Action OnDashKeyPressed;
         public event Action OnSlideKeyPressed;
         public event Action OnFireKeyPressed;
+        public event Action<float> OnScrollWeaponInput;
+        public event Action OnWeapon1Pressed;
+        public event Action OnWeapon2Pressed;
+
+        public void OnScrollWeapon(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+                OnScrollWeaponInput?.Invoke(context.ReadValue<Vector2>().y);
+        }
+
+        public void OnWeapon1(InputAction.CallbackContext context)
+        {
+            if (context.started)
+                OnWeapon1Pressed?.Invoke();
+        }
+
+        public void OnWeapon2(InputAction.CallbackContext context)
+        {
+            if (context.started)
+                OnWeapon2Pressed?.Invoke();
+        }
 
         public void OnMove(InputAction.CallbackContext context)
         {

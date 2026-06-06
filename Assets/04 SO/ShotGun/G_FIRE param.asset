@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 653b38cb3d6c422cbb82e232a9eb1e96, type: 3}
   m_Name: G_FIRE param
   m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.Core.AnimationSystem.AnimParamSO
-  <ParamName>k__BackingField: G_EQUIP
-  <ParamHash>k__BackingField: 572381366
+  <ParamName>k__BackingField: G_FIRE
+  <ParamHash>k__BackingField: 1456732170
