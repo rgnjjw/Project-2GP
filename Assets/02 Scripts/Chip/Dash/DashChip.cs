@@ -18,7 +18,6 @@ namespace _02_Scripts.Chip.Dash
         private int _maxDashCount;
         private int _currentDashCount;
         private Coroutine _rechargeCoroutine;
-        private ChipVFXEvent _chipVFXEvent;
 
         public void OnEquip(ChipInstance chip, Player.Player player)
         {
@@ -66,9 +65,20 @@ namespace _02_Scripts.Chip.Dash
         {
             if (_currentDashCount <= 0) return;
             
-            EventBus.Publish(_chipVFXEvent);
-            
             Vector2 input = _playerInputSO.InputDirection;
+
+            string effectName;
+            if (input.magnitude < 0.1f || input.y > 0.5f)
+                effectName = "FrontDash";
+            else if (input.y < -0.5f)
+                effectName = "BackDash";
+            else if (input.x < -0.5f)
+                effectName = "LeftDash";
+            else
+                effectName = "RightDash";
+
+            EventBus.Publish(new EffectEvent(effectName));
+            
             Vector3 dashDir = input.magnitude > 0.1f
                 ? (_player.transform.forward * input.y + _player.transform.right * input.x).normalized
                 : _player.transform.forward;

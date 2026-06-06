@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using _02_Scripts.Agent;
+using _02_Scripts.Chip;
 using _02_Scripts.Core.ModuleSystem;
 using _02_Scripts.Core.Utility;
 using _02_Scripts.Player;
@@ -18,6 +19,7 @@ namespace _02_Scripts.Gun
         [SerializeField] protected float fireDelay = 0.2f;
         [SerializeField] protected Transform muzzleTrm;
         [SerializeField] private RecoilEvent recoilEvent;
+        [SerializeField] private string gunFireEffect;//이펙트
         public event Action OnFire;
         public event Action OnEquip;
         
@@ -32,6 +34,7 @@ namespace _02_Scripts.Gun
         public virtual void Fire()
         {
             EventBus.Publish(recoilEvent);
+            EventBus.Publish(new EffectEvent(gunFireEffect));
             OnFire?.Invoke();
         }
 

@@ -71,9 +71,7 @@ namespace _02_Scripts.Chip.Slam
 
         private void SpawnDustEffect()
         {
-            if (_data.DustEffectPrefab == null) return;
-            var fx = Object.Instantiate(_data.DustEffectPrefab, _player.transform.position, Quaternion.identity);
-            Object.Destroy(fx, 3f);
+            EventBus.Publish(new EffectEvent("LandingDust"));
         }
 
         private void ShakeCamera()

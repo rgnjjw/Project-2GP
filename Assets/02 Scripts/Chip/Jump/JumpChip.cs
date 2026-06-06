@@ -1,3 +1,4 @@
+using _02_Scripts.Core.Utility;
 using _02_Scripts.Player;
 using UnityEngine;
 
@@ -47,6 +48,7 @@ namespace _02_Scripts.Chip.Jump
         private void Jump()
         {
             if (_currentJumpCount >= _maxJumpCount) return;
+            EventBus.Publish(new EffectEvent("JumpDust"));
             _playerMover.AddForceToAgent(Vector3.up * _jumpPower);
             _currentJumpCount++;
         }
