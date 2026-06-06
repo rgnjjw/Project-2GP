@@ -9,7 +9,8 @@ namespace _02_Scripts.Player
     public enum PlayerVisualState
     {
         ALL,
-        Pistol
+        PISTOL,
+        SHOTGUN
     }
 
     public class PlayerVisualController : MonoBehaviour ,IModule //플레이어의 비쥬얼을 컨트롤 하는놈
@@ -21,7 +22,7 @@ namespace _02_Scripts.Player
             if (owner is Player)
             {
                 _playerVisuals = owner.GetModules<PlayerRenderer>().ToArray();
-                ChangeVisual(PlayerVisualState.Pistol);//초기화 임시
+                ChangeVisual(PlayerVisualState.SHOTGUN);//초기화 임시
             }
         }
 

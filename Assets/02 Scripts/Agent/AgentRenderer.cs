@@ -8,12 +8,10 @@ namespace _02_Scripts.Agent
     public class AgentRenderer : MonoBehaviour, IModule, IRenderer
     {
         public Animator Animator { get; private set; }
-        private ModuleOwner _owner;
 
 
         public void Initialize(ModuleOwner owner)
         {
-            _owner = owner;
             Animator = GetComponent<Animator>();
         }
 

@@ -14,7 +14,7 @@ namespace _02_Scripts.Gun
         {
             if (owner is Player.Player player)
             {
-                SwapWeapon(0);
+                SwapWeapon(1);
             }
         }
 

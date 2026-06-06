@@ -1,29 +1,32 @@
+using System;
 using System.Collections.Generic;
+using _02_Scripts.Agent;
 using _02_Scripts.Core.ModuleSystem;
-using _02_Scripts.Player;
 using UnityEngine;
 
 namespace _02_Scripts.Gun
 {
-    public abstract class Gun : MonoBehaviour, IModule
+    public class Gun : ModuleOwner
     {
         [SerializeField] protected GunTrailRenderer trailRenderer;
         [SerializeField] protected LayerMask layerMask;
         [SerializeField] protected int bulletDamage;
         [SerializeField] protected float fireDelay = 0.2f;
+        [SerializeField] private Transform muzzleTrm;
+        [field: SerializeField] public AgentRenderer Renderer { get;private set; }
+        public event Action OnFire;
+        public event Action OnEquip;
         
         protected float nextFireTime;
-        protected PlayerVisualController playerVisualController;
 
-        public void Initialize(ModuleOwner owner)
+        public virtual void Equip()
         {
-            playerVisualController = owner.GetModule<PlayerVisualController>();
+            OnEquip?.Invoke();
+            trailRenderer.SetMuzzleTrm(muzzleTrm);
         }
 
-        public abstract void Equip();
 
-        public abstract void Fire();
-
+        public virtual void Fire() => OnFire?.Invoke();
         protected List<Vector3> GetReflectedPoints(Ray ray, int maxBounce, float maxDistance)
         {
             List<Vector3> points = new List<Vector3>();

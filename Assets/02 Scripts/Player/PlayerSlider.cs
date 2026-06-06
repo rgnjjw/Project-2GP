@@ -11,6 +11,7 @@ namespace _02_Scripts.Player
         [SerializeField] private float minSlideDuration = 0.2f;
         [SerializeField] private float minSlideSpeed = 2f;
         [SerializeField] private LayerMask groundLayer;
+        [SerializeField] private CapsuleCollider playerCollider;
 
         private float _slideBoostSpeed;
         private bool _isEnabled;
@@ -25,7 +26,6 @@ namespace _02_Scripts.Player
         private Player _player;
         private PlayerInputSO _playerInputSO;
         private PlayerMover _playerMover;
-        private CapsuleCollider _collider;
 
         private float _standHeight;
         private float _standCenterY;
@@ -63,15 +63,14 @@ namespace _02_Scripts.Player
             _player = owner as Player;
             _playerInputSO = _player.PlayerInputSO;
             _playerMover = _player.GetModule<PlayerMover>();
-            _collider = GetComponent<CapsuleCollider>();
-            if (_collider == null)
+            if (playerCollider == null)
             {
                 Debug.LogError("[PlayerSlider] Player에 CapsuleCollider가 없습니다. Inspector에서 추가해주세요.");
                 return;
             }
 
-            _standHeight = _collider.height;
-            _standCenterY = _collider.center.y;
+            _standHeight = playerCollider.height;
+            _standCenterY = playerCollider.center.y;
             _crouchHeight = _standHeight * crouchHeightRatio;
 
             _playerInputSO.OnSlideKeyPressed += OnCrouchPressed;
@@ -203,19 +202,19 @@ namespace _02_Scripts.Player
         private void ApplyCrouchCollider()
         {
             float bottom = _standCenterY - _standHeight * 0.5f;
-            _collider.height = _crouchHeight;
-            _collider.center = new Vector3(_collider.center.x, bottom + _crouchHeight * 0.5f, _collider.center.z);
+            playerCollider.height = _crouchHeight;
+            playerCollider.center = new Vector3(playerCollider.center.x, bottom + _crouchHeight * 0.5f, playerCollider.center.z);
         }
 
         private void RestoreCollider()
         {
-            _collider.height = _standHeight;
-            _collider.center = new Vector3(_collider.center.x, _standCenterY, _collider.center.z);
+            playerCollider.height = _standHeight;
+            playerCollider.center = new Vector3(playerCollider.center.x, _standCenterY, playerCollider.center.z);
         }
 
         private bool CanStandUp()
         {
-            float radius = _collider.radius * 0.85f;
+            float radius = playerCollider.radius * 0.85f;
             Vector3 origin = transform.position + Vector3.up * (_crouchHeight * 0.5f + radius);
             float dist = _standHeight - _crouchHeight - radius;
             return !Physics.SphereCast(origin, radius, Vector3.up, out _, Mathf.Max(0f, dist));
