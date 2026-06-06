@@ -2,18 +2,22 @@ using System;
 using System.Collections.Generic;
 using _02_Scripts.Agent;
 using _02_Scripts.Core.ModuleSystem;
+using _02_Scripts.Core.Utility;
+using _02_Scripts.Player;
+using Unity.Cinemachine;
 using UnityEngine;
 
 namespace _02_Scripts.Gun
 {
     public class Gun : MonoBehaviour
     {
+        [field: SerializeField] public AgentRenderer Renderer { get;private set; }
         [SerializeField] protected GunTrailRenderer trailRenderer;
         [SerializeField] protected LayerMask layerMask;
         [SerializeField] protected int bulletDamage;
         [SerializeField] protected float fireDelay = 0.2f;
         [SerializeField] protected Transform muzzleTrm;
-        [field: SerializeField] public AgentRenderer Renderer { get;private set; }
+        [SerializeField] private RecoilEvent recoilEvent;
         public event Action OnFire;
         public event Action OnEquip;
         
@@ -25,7 +29,12 @@ namespace _02_Scripts.Gun
         }
 
 
-        public virtual void Fire() => OnFire?.Invoke();
+        public virtual void Fire()
+        {
+            EventBus.Publish(recoilEvent);
+            OnFire?.Invoke();
+        }
+
         protected List<Vector3> GetReflectedPoints(Ray ray, int maxBounce, float maxDistance)
         {
             List<Vector3> points = new List<Vector3>();

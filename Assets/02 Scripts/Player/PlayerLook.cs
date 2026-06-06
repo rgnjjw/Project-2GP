@@ -1,8 +1,18 @@
+using System;
 using _02_Scripts.Core.ModuleSystem;
+using _02_Scripts.Core.Utility;
 using UnityEngine;
 
 namespace _02_Scripts.Player
 {
+    [Serializable]
+    public struct RecoilEvent
+    {
+        public float Pitch;  
+        public float Yaw;   
+        public bool IsRecoiling;
+    }
+
     public class PlayerLook : MonoBehaviour, IModule, IAfterInitModule
     {
         [SerializeField] private float mouseSensitivity;
@@ -18,6 +28,11 @@ namespace _02_Scripts.Player
         [SerializeField] private float maxFOVBoost = 7f;
         [SerializeField] private float fovLerpSpeed = 8f;
 
+        [Header("Recoil")]
+        [SerializeField] private float recoilStrength = 1f;
+        [SerializeField] private float recoilSpeed = 3f;
+        [SerializeField] private float recoilReturnSpeed = 5f;
+
         private float _rotationX;
         private float _rotationY;
         private Player _player;
@@ -31,6 +46,11 @@ namespace _02_Scripts.Player
         private float _currentTilt;
         private float _currentFOVBoost;
 
+        private float _recoilX;
+        private float _recoilY;
+        private float _recoilTime;
+        private bool _isRecoiling;
+
         private void Awake()
         {
             if (playerCamera != null)
@@ -40,6 +60,16 @@ namespace _02_Scripts.Player
                 _camera = playerCamera.GetComponent<Camera>();
                 if (_camera != null) _defaultFOV = _camera.fieldOfView;
             }
+        }
+
+        private void OnEnable() => EventBus.Subscribe<RecoilEvent>(OnRecoil);
+        private void OnDisable() => EventBus.Unsubscribe<RecoilEvent>(OnRecoil);
+
+        private void OnRecoil(RecoilEvent evt)
+        {
+            _isRecoiling = evt.IsRecoiling;
+            _recoilX += evt.Pitch;
+            _recoilY += evt.Yaw;
         }
 
         public void Initialize(ModuleOwner moduleOwner)
@@ -54,6 +84,23 @@ namespace _02_Scripts.Player
             _playerSlider = _player != null ? _player.GetModule<PlayerSlider>() : null;
         }
 
+        private void UpdateRecoil()
+        {
+            if (_isRecoiling)
+            {
+                _recoilTime += Time.deltaTime * recoilSpeed;
+                float x = ((Mathf.PerlinNoise(_recoilTime, 0f) - 0.5f) * 2f) * recoilStrength;
+                float y = ((Mathf.PerlinNoise(0f, _recoilTime) - 0.5f) * 2f) * recoilStrength;
+                _recoilX = Mathf.Lerp(_recoilX, x, Time.deltaTime * recoilSpeed);
+                _recoilY = Mathf.Lerp(_recoilY, y, Time.deltaTime * recoilSpeed);
+            }
+            else
+            {
+                _recoilX = Mathf.Lerp(_recoilX, 0f, Time.deltaTime * recoilReturnSpeed);
+                _recoilY = Mathf.Lerp(_recoilY, 0f, Time.deltaTime * recoilReturnSpeed);
+            }
+        }
+
         private void Look()
         {
             float angleX = _playerInputSO.MouseDelta.x * mouseSensitivity;
@@ -66,8 +113,8 @@ namespace _02_Scripts.Player
 
             _currentTilt = Mathf.Lerp(_currentTilt, GetTargetTilt(), tiltLerpSpeed * Time.deltaTime);
 
-            Quaternion camTargetRotation = Quaternion.Euler(_rotationX + _currentTilt, 0, 0);
-            Quaternion playerTargetRotation = Quaternion.Euler(0, _rotationY, 0);
+            Quaternion camTargetRotation = Quaternion.Euler(_rotationX + _currentTilt + _recoilX, 0, 0);
+            Quaternion playerTargetRotation = Quaternion.Euler(0, _rotationY + _recoilY, 0);
 
             playerCamera.transform.localRotation = camTargetRotation;
             _player.transform.rotation = playerTargetRotation;
@@ -113,6 +160,7 @@ namespace _02_Scripts.Player
 
         public void Update()
         {
+            UpdateRecoil();
             Look();
             UpdateSlideEffects();
         }

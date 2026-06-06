@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using _02_Scripts.Agent;
+using _02_Scripts.Core.Utility;
+using _02_Scripts.Player;
 using UnityEngine;
 
 namespace _02_Scripts.Gun.G_ShotGun
@@ -8,12 +10,13 @@ namespace _02_Scripts.Gun.G_ShotGun
     {
         [SerializeField] private int pelletCount = 8;
         [SerializeField] private float spreadAngle = 10f;
-
+        
+        
         public override void Fire()
         {
             if (Time.time < nextFireTime) return;
             nextFireTime = Time.time + fireDelay;
-
+            
             for (int i = 0; i < pelletCount; i++)
             {
                 Ray ray = GetSpreadRay();

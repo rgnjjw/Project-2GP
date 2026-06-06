@@ -78,12 +78,7 @@ namespace _02_Scripts.Chip.Slam
 
         private void ShakeCamera()
         {
-            EventBus.Publish(new CameraShakeEvent
-            {
-                Duration = _data.ShakeDuration,
-                Strength = _data.ShakeStrength,
-                Vibrato  = _data.ShakeVibrato
-            });
+            
         }
 
         private void DealAoeDamage() //착지 대미지
