@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace _02_Scripts.Chip
 {
-    public class ChipManageModule : MonoBehaviour,IModule
+    public class ChipManager : MonoBehaviour,IModule
     {
         public int MaxSlot;
         private Player.Player _player;

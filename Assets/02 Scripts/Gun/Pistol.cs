@@ -16,7 +16,7 @@ namespace _02_Scripts.Gun
 
         public override void Equip()
         {
-            playerVisualController.ChangeVisual(PlayerVisualState.GUN);
+            playerVisualController.ChangeVisual(PlayerVisualState.Pistol);
             playerVisualController.CurrentVisual.PlayClip(equipAnimParam.ParamHash, 0, 0);
         }
 
