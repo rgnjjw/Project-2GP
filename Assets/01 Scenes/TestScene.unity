@@ -2949,6 +2949,10 @@ PrefabInstance:
       propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3406310661786125457, guid: 8b0fb50db34505a45b87d6ac00fc2c21, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 32c71e71f02ae9b4182239689099c9e1, type: 2}
     - target: {fileID: 5038178731270205764, guid: 8b0fb50db34505a45b87d6ac00fc2c21, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 11.880027
@@ -4799,7 +4803,7 @@ PrefabInstance:
     - target: {fileID: 3406310661786125457, guid: ccfaaee3c7b062c44b13850d3b70ff39, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 886ecf0ee44718246aa083d8aad49b79, type: 2}
+      objectReference: {fileID: 2100000, guid: 32c71e71f02ae9b4182239689099c9e1, type: 2}
     - target: {fileID: 3880698334217429042, guid: ccfaaee3c7b062c44b13850d3b70ff39, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0.09926963
@@ -11305,10 +11309,18 @@ PrefabInstance:
       propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1120843967257867494, guid: dfc4d87131163204eb41e8626f81e196, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a603faf79878727449ce4541f8b98db4, type: 2}
     - target: {fileID: 2671186576822086404, guid: dfc4d87131163204eb41e8626f81e196, type: 3}
       propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2671186576822086404, guid: dfc4d87131163204eb41e8626f81e196, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a603faf79878727449ce4541f8b98db4, type: 2}
     - target: {fileID: 2736896066900898066, guid: dfc4d87131163204eb41e8626f81e196, type: 3}
       propertyPath: m_CastShadows
       value: 0
@@ -11340,7 +11352,7 @@ PrefabInstance:
     - target: {fileID: 6761378631641702851, guid: dfc4d87131163204eb41e8626f81e196, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: a603faf79878727449ce4541f8b98db4, type: 2}
+      objectReference: {fileID: 2100000, guid: 1b6b71a1962092e40b8ae65cb0c765f8, type: 2}
     - target: {fileID: 6971496768782505918, guid: dfc4d87131163204eb41e8626f81e196, type: 3}
       propertyPath: m_Name
       value: Pistol
@@ -11353,6 +11365,10 @@ PrefabInstance:
       propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7197842547418799271, guid: dfc4d87131163204eb41e8626f81e196, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a603faf79878727449ce4541f8b98db4, type: 2}
     - target: {fileID: 7778961149720055044, guid: dfc4d87131163204eb41e8626f81e196, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.010493575
