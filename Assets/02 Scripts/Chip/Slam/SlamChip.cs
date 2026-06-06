@@ -78,7 +78,7 @@ namespace _02_Scripts.Chip.Slam
 
         private void ShakeCamera()
         {
-            
+            // EventBus.Publish(new RecoilEvent(3,3)); 바꾸기
         }
 
         private void DealAoeDamage() //착지 대미지

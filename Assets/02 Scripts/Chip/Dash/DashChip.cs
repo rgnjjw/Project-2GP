@@ -1,4 +1,5 @@
 using System.Collections;
+using _02_Scripts.Core.Utility;
 using _02_Scripts.Player;
 using UnityEngine;
 
@@ -17,6 +18,7 @@ namespace _02_Scripts.Chip.Dash
         private int _maxDashCount;
         private int _currentDashCount;
         private Coroutine _rechargeCoroutine;
+        private ChipVFXEvent _chipVFXEvent;
 
         public void OnEquip(ChipInstance chip, Player.Player player)
         {
@@ -63,7 +65,9 @@ namespace _02_Scripts.Chip.Dash
         private void Dash()
         {
             if (_currentDashCount <= 0) return;
-
+            
+            EventBus.Publish(_chipVFXEvent);
+            
             Vector2 input = _playerInputSO.InputDirection;
             Vector3 dashDir = input.magnitude > 0.1f
                 ? (_player.transform.forward * input.y + _player.transform.right * input.x).normalized

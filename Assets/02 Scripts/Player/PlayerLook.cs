@@ -11,6 +11,13 @@ namespace _02_Scripts.Player
         public float Pitch;  
         public float Yaw;   
         public bool IsRecoiling;
+
+        public RecoilEvent(float pitch, float yaw, bool isRecoiling = false)
+        {
+            Pitch = pitch;
+            Yaw = yaw;
+            IsRecoiling = isRecoiling;
+        }
     }
 
     public class PlayerLook : MonoBehaviour, IModule, IAfterInitModule
