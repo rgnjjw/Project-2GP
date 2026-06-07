@@ -1,4 +1,5 @@
 using _02_Scripts.Manager;
+using _02_Scripts.UI;
 
 namespace _02_Scripts.Enemy
 {
@@ -7,7 +8,7 @@ namespace _02_Scripts.Enemy
         protected override void OnDead()
         {
             StageManager.Instance.EnemyCount--;
-            StageManager.Instance.ChipCardUI.ShowCards();
+            LevelManager.Instance.AddExp(10);
             Destroy(gameObject);
         }
     }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using _02_Scripts.Manager;
+using _02_Scripts.UI;
 using DG.Tweening;
 using UnityEngine;
 
@@ -29,6 +30,16 @@ namespace _02_Scripts.Chip.Card
         private ChipInstance[] _stageChipInstances;
         private float[] _cardOriginalY;
 
+        private void Awake()
+        {
+            LevelManager.Instance.OnLevelUp += ShowCards;
+        }
+
+        private void OnDestroy()
+        {
+            LevelManager.Instance.OnLevelUp -= ShowCards;
+        }
+
         private void Start()
         {
             _rectTransform = GetComponent<RectTransform>();
@@ -46,7 +57,7 @@ namespace _02_Scripts.Chip.Card
 
             if (chipManager != null) ShowCards();
         }
-        public void ShowCards()
+        public void ShowCards(int level = 0)
         {
             var available = GetAvailableChips();
             if (available.Count == 0) return;
