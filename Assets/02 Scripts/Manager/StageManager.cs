@@ -10,6 +10,7 @@ namespace _02_Scripts.Manager
     {
         [SerializeField] private GameObject mapSelector;//맵 중앙 조작 패널
         [SerializeField] private MapGenerator mapGenerator;
+        [SerializeField] private DoorTrigger doorTrigger; //(임시) 스테이지 고르는 문 닫기위해서
         [field: SerializeField] public ChipCardUI ChipCardUI {get; private set; }//임시 (나중에 삭제 할 것)
 
         public int EnemyCount {get => _enemyCount;//임시
@@ -42,6 +43,7 @@ namespace _02_Scripts.Manager
         {
             yield return StartCoroutine(mapGenerator.DestroyMap()); //이러면 destroy맵이 끝나야 다음꺼 실행
             mapSelector.SetActive(true);
+            doorTrigger.Close();
             CurrentStage++;
         }
     }

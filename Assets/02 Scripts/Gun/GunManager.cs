@@ -57,8 +57,17 @@ namespace _02_Scripts.Gun
 
         public void Fire() => _currentWeapon.Fire();
 
-        private void SwapNext() => SwapWeapon((_currentIndex + 1) % weapons.Length);
-        private void SwapPrev() => SwapWeapon((_currentIndex - 1 + weapons.Length) % weapons.Length);
+        private void SwapNext()
+        {
+            if (_currentIndex < weapons.Length - 1)
+                SwapWeapon(_currentIndex + 1);
+        }
+
+        private void SwapPrev()
+        {
+            if (_currentIndex > 0)
+                SwapWeapon(_currentIndex - 1);
+        }
 
         private void OnDestroy()
         {
