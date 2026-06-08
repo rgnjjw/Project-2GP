@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eb4b772797da9440885e8bd939e9560, type: 3}
   m_Name: ColorCurves
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.ColorCurves
-  active: 1
+  active: 0
   master:
     m_OverrideState: 0
     m_Value:
@@ -177,9 +177,9 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
   lumVsSat:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value:
-      <length>k__BackingField: 0
+      <length>k__BackingField: 1
       m_Loop: 0
       m_ZeroValue: 0.5
       m_Range: 1
@@ -259,10 +259,10 @@ MonoBehaviour:
     m_Value: {x: 0.9787328, y: 0.9831488, z: 1, w: -0.016611233}
   gamma:
     m_OverrideState: 1
-    m_Value: {x: 0.8081123, y: 0.83008677, z: 1, w: 0.28239188}
+    m_Value: {x: 0.8081123, y: 0.83008677, z: 1, w: 0.71428555}
   gain:
     m_OverrideState: 1
-    m_Value: {x: 0, y: 1, z: 0.024921417, w: 0.39867103}
+    m_Value: {x: 0, y: 1, z: 0.024921417, w: 1}
 --- !u!114 &4099051128428048860
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -318,7 +318,7 @@ MonoBehaviour:
   active: 1
   color:
     m_OverrideState: 1
-    m_Value: {r: 0.011971107, g: 0, b: 0.3726415, a: 1}
+    m_Value: {r: 0, g: 0.041046675, b: 0.3584906, a: 1}
   center:
     m_OverrideState: 0
     m_Value: {x: 0.5, y: 0.5}

@@ -1,5 +1,6 @@
 using _02_Scripts.Agent;
 using _02_Scripts.Gun;
+using _02_Scripts.Manager;
 using _02_Scripts.Player.FSM;
 using _02_Scripts.UI;
 using UnityEngine;
@@ -48,12 +49,5 @@ namespace _02_Scripts.Player
         }
 
         public void ChangeState(PlayerStateEnum nextState) => stateMachine.ChangeState((int)nextState);
-
-        [ContextMenu("데미지 테스트")]
-        private void TestDamage()
-        {
-            _playerHealth.ApplyDamage(10);
-        }
-
     }
 }
