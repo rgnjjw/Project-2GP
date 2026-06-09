@@ -19,9 +19,9 @@ MonoBehaviour:
     scale: {x: 3, y: 3, z: 3}
     spawnPosition: {x: 0, y: 20, z: 0}
   EnemySpawnData:
-  - enemySpawnPoint: {x: 10, y: 29, z: 10}
-    enemyPrefab: {fileID: 8307348760182502184, guid: 1303f2d1beaca0d4187c699f7b59f04f, type: 3}
-  - enemySpawnPoint: {x: 10, y: 29, z: -10}
-    enemyPrefab: {fileID: 8307348760182502184, guid: 1303f2d1beaca0d4187c699f7b59f04f, type: 3}
-  - enemySpawnPoint: {x: -10, y: 29, z: -10}
-    enemyPrefab: {fileID: 8307348760182502184, guid: 1303f2d1beaca0d4187c699f7b59f04f, type: 3}
+  - enemySpawnPoint: {x: 10, y: 35, z: 10}
+    enemyPrefab: {fileID: 1236514826353084132, guid: e302f6e3e18fd9447b85ffd4af77d935, type: 3}
+  - enemySpawnPoint: {x: 10, y: 35, z: -10}
+    enemyPrefab: {fileID: 1236514826353084132, guid: e302f6e3e18fd9447b85ffd4af77d935, type: 3}
+  - enemySpawnPoint: {x: -10, y: 35, z: -10}
+    enemyPrefab: {fileID: 1236514826353084132, guid: e302f6e3e18fd9447b85ffd4af77d935, type: 3}

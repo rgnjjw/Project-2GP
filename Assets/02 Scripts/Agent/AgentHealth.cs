@@ -36,20 +36,20 @@ namespace _02_Scripts.Agent
             GetNotifyHp().OnValueChanged += OnValueChanged;
         }
 
-        public void Init(int maxHp)
-        {
-            if (maxHp <= 0)
-                return;
-
-            _isDead = false;
-            debugIsDead = false;
-            _isInitialized = true;
-            
-            _maxHp = maxHp;
-            
-            GetNotifyHp().Value = maxHp;
-            debugCurrentHp = maxHp;
-        }
+        // public void Init(int maxHp)
+        // {
+        //     if (maxHp <= 0)
+        //         return;
+        //
+        //     _isDead = false;
+        //     debugIsDead = false;
+        //     _isInitialized = true;
+        //     
+        //     _maxHp = maxHp;
+        //     
+        //     GetNotifyHp().Value = maxHp;
+        //     debugCurrentHp = maxHp;
+        // }
 
         private void OnValueChanged(int beforeHp, int currentHp)
         {

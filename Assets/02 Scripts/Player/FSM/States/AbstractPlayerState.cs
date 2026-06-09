@@ -16,10 +16,10 @@ namespace _02_Scripts.Player.FSM.States
             }
         }
 
-        public override void Enter(float transitionDuration, int layerIndex = 0)
+        public override void Enter(float crossFadeDuration, int layerIndex = 0)
         {
-            base.Enter(transitionDuration, layerIndex);
-            visualController.CurrentVisual.PlayClip(_stateClipHash,0, transitionDuration, 0);
+            base.Enter(crossFadeDuration, layerIndex);
+            visualController.CurrentVisual.PlayClip(_stateClipHash,0, crossFadeDuration, 0);
         }
     }
 }

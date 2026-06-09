@@ -19,7 +19,7 @@ namespace _02_Scripts.Chip.Card
         [SerializeField] private ChipCardButtonUI[] cards;
         [SerializeField] private StageCardChipData[] stageChipData;
         [SerializeField] private GameObject panel;
-        [SerializeField] private ChipManager chipManager;
+        [SerializeField] private ChipController chipController;
 
         [SerializeField] private float enterDuration = 0.45f;
         [SerializeField] private float enterStagger  = 0.08f;
@@ -55,7 +55,7 @@ namespace _02_Scripts.Chip.Card
 
             panel.SetActive(false);
 
-            if (chipManager != null) ShowCards();
+            if (chipController != null) ShowCards();
         }
         public void ShowCards(int level = 0)
         {
@@ -126,9 +126,9 @@ namespace _02_Scripts.Chip.Card
         private void OnCardSelected(ChipInstance chip, int cardIndex)
         {
             if (!chip.IsEquipped)
-                chipManager.EquipChip(chip);
+                chipController.EquipChip(chip);
             else
-                chipManager.ChipLevelUp(chip);
+                chipController.ChipLevelUp(chip);
 
             for (int i = 0; i < cards.Length; i++)
                 cards[i].SetInteractable(false);

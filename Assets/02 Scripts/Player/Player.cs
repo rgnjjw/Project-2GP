@@ -1,5 +1,4 @@
 using _02_Scripts.Agent;
-using _02_Scripts.Gun;
 using _02_Scripts.Manager;
 using _02_Scripts.Player.FSM;
 using _02_Scripts.UI;
@@ -41,9 +40,8 @@ namespace _02_Scripts.Player
             
         }
 
-        protected override void OnDestroy()
+        protected void OnDestroy()
         {
-            base.OnDestroy();
             PlayerInputSO.OnFireKeyPressed -= _gunManager.Fire;
             _playerHealth.CurrentHp.OnValueChanged -= OnHpChanged;
         }

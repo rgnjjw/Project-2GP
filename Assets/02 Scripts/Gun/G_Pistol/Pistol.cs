@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using _02_Scripts.Agent;
+using _02_Scripts.Core.ModuleSystem;
 using UnityEngine;
 
 namespace _02_Scripts.Gun.G_Pistol
@@ -26,9 +27,9 @@ namespace _02_Scripts.Gun.G_Pistol
 
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layerMask))
             {
-                if (hit.transform.TryGetComponent(out AgentHealth agentHealth))
+                if (hit.transform.TryGetComponent<Enemy.Enemy>(out var enemy))
                 {
-                    agentHealth.ApplyDamage(bulletDamage);
+                    enemy.GetModule<AgentHealth>().ApplyDamage(bulletDamage);
                 }
             }
         }

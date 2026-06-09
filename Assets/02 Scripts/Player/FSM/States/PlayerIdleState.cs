@@ -10,16 +10,15 @@ namespace _02_Scripts.Player.FSM.States
             _playerMover = player.GetModule<PlayerMover>();
         }
 
-        public override void Enter(float transitionDuration, int layerIndex = 0)
+        public override void Enter(float crossFadeDuration, int layerIndex = 0)
         {
-            base.Enter(transitionDuration, layerIndex);
+            base.Enter(crossFadeDuration, layerIndex);
             _playerMover.StopImmediately(true,false,true);
         }
 
         public override void Update()
         { 
             base.Update();
-            Debug.Log("IDLE");
             float xInput = player.PlayerInputSO.InputDirection.x;
             float zInput = player.PlayerInputSO.InputDirection.y;
             

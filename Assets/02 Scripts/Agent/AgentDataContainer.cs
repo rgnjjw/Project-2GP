@@ -7,13 +7,13 @@ namespace _02_Scripts.Agent
 {
     public abstract class AgentDataContainer<T> : MonoBehaviour,IModule,IAgentData where T : AgentDataSO
     {
-        [SerializeField] private T initDataSO;
+        [SerializeField] protected T initDataSO;
         public NotifyValue<int> Health { get; private set;}
         public NotifyValue<int> MaxHealth { get; private set;}
         public NotifyValue<float> MoveSpeed { get; private set;}
         public virtual void Initialize(ModuleOwner owner)
         {
-            Health = new NotifyValue<int>(initDataSO.Health);
+            Health = new NotifyValue<int>(initDataSO.Health);//그냥 인트로해도될듯
             MaxHealth = new NotifyValue<int>(initDataSO.Health);
             MoveSpeed = new NotifyValue<float>(initDataSO.MoveSpeed);
         }

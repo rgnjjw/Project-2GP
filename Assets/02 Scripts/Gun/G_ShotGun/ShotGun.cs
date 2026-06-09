@@ -27,8 +27,10 @@ namespace _02_Scripts.Gun.G_ShotGun
 
                 if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layerMask))
                 {
-                    if (hit.transform.TryGetComponent<AgentHealth>(out var health))
-                        health.ApplyDamage(bulletDamage);
+                    if (hit.transform.TryGetComponent<Enemy.Enemy>(out var enemy))
+                    {
+                        enemy.GetModule<AgentHealth>().ApplyDamage(bulletDamage);
+                    }
                 }
             }
 

@@ -2,7 +2,9 @@ using System.Collections;
 using _02_Scripts.Chip.Card;
 using _02_Scripts.Core.Utility;
 using _02_Scripts.Map;
+using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace _02_Scripts.Manager
 {
@@ -11,6 +13,7 @@ namespace _02_Scripts.Manager
         [SerializeField] private GameObject mapSelector;//맵 중앙 조작 패널
         [SerializeField] private MapGenerator mapGenerator;
         [SerializeField] private DoorTrigger doorTrigger; //(임시) 스테이지 고르는 문 닫기위해서
+        [SerializeField] private NavMeshSurface navMeshSurface;
         [field: SerializeField] public ChipCardUI ChipCardUI {get; private set; }//임시 (나중에 삭제 할 것)
 
         public int EnemyCount {get => _enemyCount;//임시
@@ -32,9 +35,14 @@ namespace _02_Scripts.Manager
             _enemyCount = 0;
             mapSelector.SetActive(false);
             yield return StartCoroutine(mapGenerator.GenerateMap(mapData));
+            navMeshSurface.BuildNavMesh();
             foreach (var enemySpawnData in mapData.EnemySpawnData)
             {
-                GameObject enemy = Instantiate(enemySpawnData.enemyPrefab, enemySpawnData.enemySpawnPoint, Quaternion.identity);
+                Vector3 spawnPos = enemySpawnData.enemySpawnPoint;
+                if (NavMesh.SamplePosition(spawnPos, out NavMeshHit hit, 10f, NavMesh.AllAreas))
+                    spawnPos = hit.position;
+        
+                GameObject enemy = Instantiate(enemySpawnData.enemyPrefab, spawnPos, Quaternion.identity);
                 _enemyCount++;
             }
         }

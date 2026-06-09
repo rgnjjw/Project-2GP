@@ -1,0 +1,17 @@
+using System;
+using _02_Scripts.Core.ModuleSystem;
+using UnityEngine;
+
+namespace _02_Scripts.Enemy
+{
+    public class EnemyAnimationEvent : MonoBehaviour,IModule
+    {
+        public event Action OnAttackEnd;
+        public event Action OnAttack;
+        public void Initialize(ModuleOwner owner) { }
+        
+        public void AttackEnd() => OnAttackEnd?.Invoke();
+
+        public void Attack() => OnAttack?.Invoke();
+    }
+}

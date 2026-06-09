@@ -10,7 +10,7 @@ namespace _02_Scripts.Agent
         public Animator Animator { get; private set; }
 
 
-        public void Initialize(ModuleOwner owner)
+        public virtual void Initialize(ModuleOwner owner)
         {
             Animator = GetComponent<Animator>();
         }

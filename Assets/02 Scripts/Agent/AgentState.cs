@@ -16,7 +16,7 @@ namespace _02_Scripts.Agent
             _renderer = agent.GetModule<IRenderer>();
         }
 
-        public virtual void Enter(float transitionDuration, int layerIndex = 0) { }
+        public virtual void Enter(float crossFadeDuration, int layerIndex = 0) { }
         
         public virtual void Update(){}
         public virtual void Exit(){}
