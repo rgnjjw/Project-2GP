@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18f35416a0c64d2c9f04197c957164fa, type: 3}
+  m_Name: Skeleton__Knife
+  m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.Enemy.EnemyDataSO
+  <Health>k__BackingField: 100
+  <MaxHealth>k__BackingField: 100
+  <MoveSpeed>k__BackingField: 5
+  <ChaseRange>k__BackingField:
+    rid: 4481137890601992884
+  <EnemySkills>k__BackingField:
+  - {fileID: 11400000, guid: 0c27489cad96d194a8fba6c0dcc40c60, type: 2}
+  - {fileID: 11400000, guid: 290e17b34c14aa046a3d26c02100fccb, type: 2}
+  references:
+    version: 2
+    RefIds:
+    - rid: 4481137890601992884
+      type: {class: SphereDetect, ns: _02_Scripts.Core.Detect, asm: Assembly-CSharp}
+      data:
+        layerMask:
+          serializedVersion: 2
+          m_Bits: 256
+        gizmoColor: {r: 1, g: 1, b: 0, a: 1}
+        radius: 30
