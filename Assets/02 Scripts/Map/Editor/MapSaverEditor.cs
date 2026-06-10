@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using _02_Scripts.Enemy;
 
 namespace _02_Scripts.Map.Editor
 {
@@ -26,6 +27,7 @@ namespace _02_Scripts.Map.Editor
             Undo.RecordObject(mapDataSO, "Save Map DataSO");
 
             var mapObjectList = new List<MapObjectData>();
+            var enemySpawnList = new List<EnemySpawnData>();
 
             foreach (Transform child in mapRoot.transform)
             {
@@ -37,21 +39,33 @@ namespace _02_Scripts.Map.Editor
                     return;
                 }
 
-                MapObject info = child.GetComponent<MapObject>();
-
-                Vector3 spawnPos = new Vector3(child.localPosition.x, info != null ? info.spawnPositionY : child.localPosition.y, child.localPosition.z);
-
-                mapObjectList.Add(new MapObjectData
+                if (child.GetComponent<Enemy.Enemy>() != null)
                 {
-                    prefab = prefab,
-                    position = child.localPosition,
-                    rotation = child.localEulerAngles,
-                    scale = child.localScale,
-                    spawnPosition = spawnPos
-                });
+                    enemySpawnList.Add(new EnemySpawnData
+                    {
+                        enemySpawnPoint = child.localPosition,
+                        enemyPrefab = prefab
+                    });
+                }
+                else
+                {
+                    MapObject info = child.GetComponent<MapObject>();
+
+                    Vector3 spawnPos = new Vector3(child.localPosition.x, info != null ? info.spawnPositionY : child.localPosition.y, child.localPosition.z);
+
+                    mapObjectList.Add(new MapObjectData
+                    {
+                        prefab = prefab,
+                        position = child.localPosition,
+                        rotation = child.localEulerAngles,
+                        scale = child.localScale,
+                        spawnPosition = spawnPos
+                    });
+                }
             }
 
             mapDataSO.MapObjectList = mapObjectList.ToArray();
+            mapDataSO.EnemySpawnData = enemySpawnList.ToArray();
 
             EditorUtility.SetDirty(mapDataSO);
             AssetDatabase.SaveAssets();

@@ -19,20 +19,20 @@ MonoBehaviour:
     scale: {x: 3, y: 3, z: 3}
     spawnPosition: {x: 0, y: 20, z: 0}
   - prefab: {fileID: 140224, guid: da2fd4315d0abc44799b3fa3981c630f, type: 3}
-    position: {x: 3.4455192, y: 26.006212, z: 24.354174}
+    position: {x: 3.4455192, y: 25.8, z: 24.354174}
     rotation: {x: -0, y: 0, z: 0}
     scale: {x: 1, y: 1, z: 1}
-    spawnPosition: {x: 3.4455192, y: 26.006212, z: 24.354174}
+    spawnPosition: {x: 3.4455192, y: 25.8, z: 24.354174}
   - prefab: {fileID: 140224, guid: da2fd4315d0abc44799b3fa3981c630f, type: 3}
-    position: {x: 15.61, y: 26.006212, z: 23.37}
+    position: {x: 15.61, y: 25.83, z: 23.37}
     rotation: {x: -0, y: 11.526328, z: -0}
     scale: {x: 1, y: 1, z: 1}
-    spawnPosition: {x: 15.61, y: 26.006212, z: 23.37}
+    spawnPosition: {x: 15.61, y: 25.83, z: 23.37}
   - prefab: {fileID: 140224, guid: da2fd4315d0abc44799b3fa3981c630f, type: 3}
-    position: {x: 29.4, y: 25.98735, z: 15.2}
+    position: {x: 29.4, y: 25.5, z: 15.2}
     rotation: {x: -0, y: 37.054638, z: -0}
     scale: {x: 1, y: 1, z: 1}
-    spawnPosition: {x: 29.4, y: 25.98735, z: 15.2}
+    spawnPosition: {x: 29.4, y: 25.5, z: 15.2}
   - prefab: {fileID: 1119995382747292, guid: a91a6c3e94554af4cb722b325c59bac0, type: 3}
     position: {x: -12.8, y: 23.64, z: -12.3}
     rotation: {x: -0, y: 29.644186, z: -0}
@@ -49,10 +49,10 @@ MonoBehaviour:
     scale: {x: 1.157668, y: 1, z: 1.0702}
     spawnPosition: {x: -4.89, y: 22.82, z: -22.22}
   - prefab: {fileID: 1009672486020486, guid: fbf7f84db94874a48a7c63bbc4a805ee, type: 3}
-    position: {x: -29.94, y: 23.86, z: -12.24}
+    position: {x: -28.97, y: 23.86, z: -12.24}
     rotation: {x: -0, y: 304.2319, z: 0}
     scale: {x: 1.25, y: 1, z: 1}
-    spawnPosition: {x: -29.94, y: 23.86, z: -12.24}
+    spawnPosition: {x: -28.97, y: 23.86, z: -12.24}
   - prefab: {fileID: 1009672486020486, guid: fbf7f84db94874a48a7c63bbc4a805ee, type: 3}
     position: {x: 32.86, y: 24.2, z: -23.37}
     rotation: {x: -0, y: 35.719997, z: -0}
@@ -64,40 +64,40 @@ MonoBehaviour:
     scale: {x: 0.76, y: 1, z: 1}
     spawnPosition: {x: 34.94, y: 24.2, z: -33.44}
   - prefab: {fileID: 164232, guid: 512ac21e21ad7ff4494778b36511e83c, type: 3}
-    position: {x: 14.52, y: 26.351473, z: 1.84}
+    position: {x: 14.52, y: 25.89, z: 1.84}
     rotation: {x: -0, y: 0, z: 0}
     scale: {x: 1, y: 1, z: 1}
-    spawnPosition: {x: 14.52, y: 26.351473, z: 1.84}
+    spawnPosition: {x: 14.52, y: 25.89, z: 1.84}
   - prefab: {fileID: 164232, guid: 512ac21e21ad7ff4494778b36511e83c, type: 3}
-    position: {x: 30.008942, y: 26.351473, z: -11.003499}
+    position: {x: 30.008942, y: 25.27, z: -11.003499}
     rotation: {x: -0, y: 0, z: 0}
     scale: {x: 1, y: 1, z: 1}
-    spawnPosition: {x: 30.008942, y: 26.351473, z: -11.003499}
+    spawnPosition: {x: 30.008942, y: 25.27, z: -11.003499}
   - prefab: {fileID: 164232, guid: 512ac21e21ad7ff4494778b36511e83c, type: 3}
-    position: {x: 30.008942, y: 26.351473, z: -11.003499}
+    position: {x: 33.81, y: 25.55, z: -16.91}
     rotation: {x: -0, y: 0, z: 0}
     scale: {x: 1, y: 1, z: 1}
-    spawnPosition: {x: 30.008942, y: 26.351473, z: -11.003499}
+    spawnPosition: {x: 33.81, y: 25.55, z: -16.91}
   - prefab: {fileID: 164232, guid: 512ac21e21ad7ff4494778b36511e83c, type: 3}
     position: {x: -4.9910593, y: 26.351473, z: -3.003499}
     rotation: {x: -0, y: 0, z: 0}
     scale: {x: 1, y: 1, z: 1}
     spawnPosition: {x: -4.9910593, y: 26.351473, z: -3.003499}
   - prefab: {fileID: 1531002177471514, guid: c89af57159061b046834f7cdcf95e87c, type: 3}
-    position: {x: 18.92, y: 26.25, z: 8.8}
+    position: {x: 18.92, y: 26.06, z: 8.8}
     rotation: {x: -0, y: 323.82806, z: 0}
     scale: {x: 1, y: 1, z: 1}
-    spawnPosition: {x: 18.92, y: 26.25, z: 8.8}
+    spawnPosition: {x: 18.92, y: 26.06, z: 8.8}
   - prefab: {fileID: 1531002177471514, guid: c89af57159061b046834f7cdcf95e87c, type: 3}
     position: {x: -10.3, y: 26.25, z: 3.6}
     rotation: {x: 0, y: 359.24, z: 0}
     scale: {x: 1, y: 1, z: 1}
     spawnPosition: {x: -10.3, y: 26.25, z: 3.6}
   - prefab: {fileID: 1299611275014726, guid: 30621bd78f773044b8cc594184d0ce38, type: 3}
-    position: {x: 8.04, y: 26.140694, z: 14.59}
+    position: {x: 8.04, y: 26.1, z: 14.7}
     rotation: {x: -0, y: 233.75009, z: 0}
     scale: {x: 1, y: 1, z: 1}
-    spawnPosition: {x: 8.04, y: 26.140694, z: 14.59}
+    spawnPosition: {x: 8.04, y: 26.1, z: 14.7}
   - prefab: {fileID: 186728, guid: ae2654206a887034ab7fa253a7619efe, type: 3}
     position: {x: -13.32, y: 33.45, z: -19.86}
     rotation: {x: 0, y: 213.07, z: 0}
@@ -158,4 +158,8 @@ MonoBehaviour:
     rotation: {x: -0, y: 299.2, z: 0}
     scale: {x: 1.15, y: 1.26, z: 1}
     spawnPosition: {x: -18.37, y: 33.48, z: -17.72}
-  EnemySpawnData: []
+  EnemySpawnData:
+  - enemySpawnPoint: {x: 9.618512, y: 26.350658, z: 8.214521}
+    enemyPrefab: {fileID: 4870927246733940613, guid: a4585686866550a4e9afea0f12d93986, type: 3}
+  - enemySpawnPoint: {x: -21.203098, y: 25.800764, z: -38.146362}
+    enemyPrefab: {fileID: 4870927246733940613, guid: a4585686866550a4e9afea0f12d93986, type: 3}
