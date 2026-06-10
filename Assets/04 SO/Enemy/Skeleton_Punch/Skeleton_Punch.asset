@@ -19,6 +19,7 @@ MonoBehaviour:
     rid: 4481137890601992604
   <EnemySkills>k__BackingField:
   - {fileID: 11400000, guid: 9c6091f7d3df2d44f8d91ece87138348, type: 2}
+  - {fileID: 11400000, guid: a30e399c455550043a359d2ac5cdc0c7, type: 2}
   references:
     version: 2
     RefIds:
