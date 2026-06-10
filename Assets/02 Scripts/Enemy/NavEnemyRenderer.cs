@@ -17,6 +17,7 @@ namespace _02_Scripts.Enemy
         [SerializeField] private bool useNavRotation;
 
         private Transform _enemyTrm;
+        private Enemy _enemy;
 
         public override void Initialize(ModuleOwner owner)
         {
@@ -24,16 +25,22 @@ namespace _02_Scripts.Enemy
             
             NavMeshAgent.updateRotation = useNavRotation;
             if (owner is Enemy enemy)
+            {
+                _enemy = enemy;
                 _enemyTrm = enemy.transform;
+            }
+
         }
         
         private void Update()
         {
             if(useForcedRotation)
                 ForceRotationControl();
+            if (_enemy.CurrentTarget != null)
+                LookAtTarget(_enemy.CurrentTarget);
         }
 
-        public void LookAtTarget(Transform target)
+        private void LookAtTarget(Transform target)
         {
             Vector3 direction = target.position - transform.position;
             direction.y = 0;
@@ -48,17 +55,29 @@ namespace _02_Scripts.Enemy
         
         private void ForceRotationControl()
         {
-            if (NavMeshAgent.remainingDistance < 0.01f) return;
+            if (!NavMeshAgent.isActiveAndEnabled)
+                return;
 
-            Vector3 desiredDirection = NavMeshAgent.steeringTarget - transform.position;
-            if (desiredDirection.magnitude < 0.01f) return;
+            if (!NavMeshAgent.isOnNavMesh)
+                return;
 
-            Quaternion targetRotation = Quaternion.LookRotation(desiredDirection);
-            _enemyTrm.rotation = Quaternion.RotateTowards(
-                _enemyTrm.rotation,
-                targetRotation,
-                rotateSpeed * Time.deltaTime
-            );
+            if (NavMeshAgent.remainingDistance < 0.01f)
+                return;
+
+            Vector3 desiredDirection =
+                NavMeshAgent.steeringTarget - transform.position;
+
+            if (desiredDirection.sqrMagnitude < 0.0001f)
+                return;
+
+            Quaternion targetRotation =
+                Quaternion.LookRotation(desiredDirection);
+
+            _enemyTrm.rotation =
+                Quaternion.RotateTowards(
+                    _enemyTrm.rotation,
+                    targetRotation,
+                    rotateSpeed * Time.deltaTime);
         }
         
     }

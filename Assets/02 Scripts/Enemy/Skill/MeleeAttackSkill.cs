@@ -12,8 +12,10 @@ namespace _02_Scripts.Enemy.Skill
             var closest = DamageAreaDetection.GetClosest(centerTrm);
             if (closest == null) return;
     
-            if (closest.TryGetComponent<AgentHealth>(out var health))
-                health.ApplyDamage(Damage);
+            if (closest.transform.TryGetComponent<Player.Player>(out var player))
+            {
+                player.GetModule<AgentHealth>().ApplyDamage(Damage);
+            }
         }
     }
 }

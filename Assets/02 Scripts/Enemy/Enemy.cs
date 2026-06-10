@@ -1,3 +1,5 @@
+using _02_Scripts.Agent;
+using _02_Scripts.Core.AnimationSystem;
 using _02_Scripts.Enemy.Skill;
 using _02_Scripts.Enemy.State;
 using _02_Scripts.Manager;
@@ -8,32 +10,84 @@ namespace _02_Scripts.Enemy
 {
     public class Enemy : Agent.Agent
     {
+        [SerializeField] private AnimParamSO hitAnimParam;
+        [SerializeField] private int hitLayerIndex = 1;
+
         public Transform CurrentTarget { get; set; }
+
+        private EnemyAnimationEvent _animationEvent;
         private EnemySkillController _enemySkillController;
         private NavEnemyRenderer _navEnemyRenderer;
-        protected override void Awake()//풀링후에 Enable로 수정
+        private AgentHealth _agentHealth;
+
+        private float _lastHitAnimTime;
+
+        protected override void Awake()
         {
             base.Awake();
+
             ChangeState(EnemyStateEnum.IDLE);
+
             _enemySkillController = GetModule<EnemySkillController>();
             _navEnemyRenderer = GetModule<NavEnemyRenderer>();
-            _navEnemyRenderer.NavMeshAgent.stoppingDistance = _enemySkillController.GetMinSkillRange() - 0.2f;
+            _agentHealth = GetModule<AgentHealth>();
+            _animationEvent = GetModule<EnemyAnimationEvent>();
+
+            _navEnemyRenderer.NavMeshAgent.stoppingDistance =
+                _enemySkillController.GetMinSkillRange() - 0.2f;
+
+            _agentHealth.CurrentHp.OnValueChanged += OnDamaged;
+            _animationEvent.OnHitEnd += OnHitEndHandle;
+            
+
+            _navEnemyRenderer.Animator.SetLayerWeight(hitLayerIndex, 0f);
         }
 
-        // protected override void OnEnable()
-        // {
-        //     base.OnEnable();
-        //     ChangeState(EnemyStateEnum.IDLE);
-        // }
+        private void OnDamaged(int before, int current)
+        {
+            if (current <= 0)
+                return;
 
+            if (current >= before)
+                return;
+
+            if (Time.time < _lastHitAnimTime + 0.15f)
+                return;
+
+            _lastHitAnimTime = Time.time;
+
+            Animator animator = _navEnemyRenderer.Animator;
+
+            animator.SetLayerWeight(hitLayerIndex, 1f);
+            animator.ResetTrigger(hitAnimParam.ParamHash);
+            animator.SetTrigger(hitAnimParam.ParamHash);
+        }
+
+        public void OnHitEndHandle()
+        {
+            if (_navEnemyRenderer != null)
+            {
+                _navEnemyRenderer.Animator.SetLayerWeight(hitLayerIndex, 0f);
+            }
+        }
 
         protected override void OnDead()
         {
             StageManager.Instance.EnemyCount--;
             LevelManager.Instance.AddExp(10);
-            Destroy(gameObject);
+
+            ChangeState(EnemyStateEnum.DEAD);
         }
-        public void ChangeState(EnemyStateEnum nextState) => stateMachine.ChangeState((int)nextState);
-        
+
+        private void OnDestroy()
+        {
+            if (_agentHealth != null)
+                _agentHealth.CurrentHp.OnValueChanged -= OnDamaged;
+            if (_animationEvent != null)
+                _animationEvent.OnHitEnd -= OnHitEndHandle;
+        }
+
+        public void ChangeState(EnemyStateEnum nextState)
+            => stateMachine.ChangeState((int)nextState);
     }
 }

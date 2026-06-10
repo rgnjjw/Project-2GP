@@ -8,7 +8,7 @@ namespace _02_Scripts.Agent
     public class AgentRenderer : MonoBehaviour, IModule, IRenderer
     {
         public Animator Animator { get; private set; }
-
+        
 
         public virtual void Initialize(ModuleOwner owner)
         {

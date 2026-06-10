@@ -41,20 +41,23 @@ namespace _02_Scripts.Enemy.State
             _renderer.PlayClip(_currentSkill.AnimParam.ParamHash,0,crossFadeDuration, layerIndex);
         }
 
-        private void HandleAttack() => _currentSkill.ExecuteSkill(enemy.transform);
+        private void HandleAttack()
+        {
+            _currentSkill.ExecuteSkill(enemy.transform);
+        }
+
 
         private void HandleAttackEnd()
         {
             _enemySkillController.RecordSkillUsed(_currentSkill);
-            if (_enemyDataContainer.ChaseRange.HasAnyInRange(enemy.transform)
-                && Vector3.Distance(enemy.CurrentTarget.position,enemy.transform.position) <= _navEnemyRenderer.NavMeshAgent.stoppingDistance)
-            {
-                enemy.ChangeState(EnemyStateEnum.CHASE);
-            }
-            else
+
+            if (!_enemyDataContainer.ChaseRange.HasAnyInRange(enemy.transform))
             {
                 enemy.ChangeState(EnemyStateEnum.IDLE);
+                return;
             }
+
+            enemy.ChangeState(EnemyStateEnum.IDLE);
         }
 
         public override void Update()
