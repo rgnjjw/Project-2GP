@@ -1,5 +1,3 @@
-// 베이스 SO에 LevelData 배열 올리기
-
 using System;
 using UnityEngine;
 

@@ -30,7 +30,7 @@ MonoBehaviour:
           m_Bits: 256
         gizmoColor: {r: 1, g: 0, b: 0, a: 1}
         angle: 98.1
-        radius: 3.3
+        radius: 4.32
     - rid: 4481137890601992734
       type: {class: BoxDetect, ns: _02_Scripts.Core.Detect, asm: Assembly-CSharp}
       data:
@@ -38,5 +38,5 @@ MonoBehaviour:
           serializedVersion: 2
           m_Bits: 256
         gizmoColor: {r: 0, g: 1, b: 0, a: 1}
-        size: {x: 3, y: 2, z: 3}
+        size: {x: 7, y: 2, z: 7}
         offset: {x: 0, y: 1, z: 0}

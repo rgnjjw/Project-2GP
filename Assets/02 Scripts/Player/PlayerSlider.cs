@@ -88,6 +88,7 @@ namespace _02_Scripts.Player
         {
             if (!_isEnabled) return;
             if (_isSliding) return;
+            if (!_playerMover.IsGrounded) return;
 
             StartSlide();
         }
@@ -109,6 +110,7 @@ namespace _02_Scripts.Player
             _playerMover.StopImmediately(false, true, false);
             _playerMover.AddForceToAgent(savedDir * savedSpeed * slideJumpForwardMultiplier
                                        + Vector3.up * slideJumpUpForce);
+            _playerMover.SyncMomentumFromVelocity();
         }
 
         private void StartSlide()
@@ -142,7 +144,7 @@ namespace _02_Scripts.Player
         private void ForceEndSlide()
         {
             _isSliding = false;
-            _playerMover.EndSlide();
+            _playerMover.EndSlideAndTransferMomentum();
             RestoreCollider();
         }
 

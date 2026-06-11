@@ -43,6 +43,21 @@ MonoBehaviour:
     rotation: {x: -0, y: 0, z: 0}
     scale: {x: 4, y: 4, z: 4}
     spawnPosition: {x: -26.5, y: 7, z: 18.1}
+  - prefab: {fileID: 4661435515762455780, guid: e289bf5debb17f6459818c207d781953, type: 3}
+    position: {x: -25.2, y: 25.22, z: 7.3}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 4, y: 4, z: 4}
+    spawnPosition: {x: -25.2, y: 7, z: 7.3}
+  - prefab: {fileID: 4661435515762455780, guid: e289bf5debb17f6459818c207d781953, type: 3}
+    position: {x: 18.4, y: 25.07, z: 35.7}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 4, y: 4, z: 4}
+    spawnPosition: {x: 18.4, y: 7, z: 35.7}
+  - prefab: {fileID: 4661435515762455780, guid: e289bf5debb17f6459818c207d781953, type: 3}
+    position: {x: -21, y: 25.09, z: -7}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 4, y: 4, z: 4}
+    spawnPosition: {x: -21, y: 7, z: -7}
   - prefab: {fileID: 8783306491908617939, guid: f02116c209ecd9e488fc4d2cd8996133, type: 3}
     position: {x: -17.9, y: 25.114708, z: 23.57}
     rotation: {x: -0, y: 0, z: 0}
@@ -79,15 +94,35 @@ MonoBehaviour:
     scale: {x: 12, y: 12, z: 12}
     spawnPosition: {x: -24.8, y: 6.5, z: -28.1}
   - prefab: {fileID: 8783306491908617939, guid: f02116c209ecd9e488fc4d2cd8996133, type: 3}
+    position: {x: -7.9, y: 24.5, z: -17.8}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 12, y: 12, z: 12}
+    spawnPosition: {x: -7.9, y: 6.5, z: -17.8}
+  - prefab: {fileID: 8783306491908617939, guid: f02116c209ecd9e488fc4d2cd8996133, type: 3}
     position: {x: -19.35, y: 22.37, z: -33.67}
     rotation: {x: -0, y: 26.089994, z: 7.299997}
     scale: {x: 12, y: 12, z: 12}
     spawnPosition: {x: -19.35, y: 6.5, z: -33.67}
   - prefab: {fileID: 8783306491908617939, guid: f02116c209ecd9e488fc4d2cd8996133, type: 3}
+    position: {x: -12.69, y: 22.37, z: -36.66}
+    rotation: {x: -0, y: 26.089994, z: 7.299997}
+    scale: {x: 12, y: 12, z: 12}
+    spawnPosition: {x: -12.69, y: 6.5, z: -36.66}
+  - prefab: {fileID: 8783306491908617939, guid: f02116c209ecd9e488fc4d2cd8996133, type: 3}
+    position: {x: -5.8, y: 20.2, z: -36.2}
+    rotation: {x: -0, y: 81.67999, z: 7.299997}
+    scale: {x: 12, y: 12, z: 12}
+    spawnPosition: {x: -5.8, y: 6.5, z: -36.2}
+  - prefab: {fileID: 8783306491908617939, guid: f02116c209ecd9e488fc4d2cd8996133, type: 3}
     position: {x: -27, y: 22.2, z: -21.8}
     rotation: {x: -0, y: 26.089994, z: 7.299997}
     scale: {x: 12, y: 12, z: 12}
     spawnPosition: {x: -27, y: 6.5, z: -21.8}
+  - prefab: {fileID: 108507113624723981, guid: eebb56c82efbd8d4bb0eb6bd925a0e9d, type: 3}
+    position: {x: -5.06, y: 25.33, z: 25.92}
+    rotation: {x: -0, y: 0, z: 0}
+    scale: {x: 7, y: 7, z: 7}
+    spawnPosition: {x: -5.06, y: 16, z: 25.92}
   EnemySpawnData:
   - enemySpawnPoint: {x: 4.2555013, y: 26.601377, z: -15.623737}
     enemyPrefab: {fileID: 2354599137957298582, guid: b363d3b81c7c2e24fa37700494da482f, type: 3}

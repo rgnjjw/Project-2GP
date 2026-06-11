@@ -29,7 +29,7 @@ MonoBehaviour:
           serializedVersion: 2
           m_Bits: 256
         gizmoColor: {r: 0, g: 1, b: 0, a: 1}
-        size: {x: 3, y: 2, z: 3}
+        size: {x: 7, y: 2, z: 7}
         offset: {x: 0, y: 1, z: 0}
     - rid: 4481137890601992732
       type: {class: ConeDetect, ns: _02_Scripts.Core.Detect, asm: Assembly-CSharp}
@@ -39,4 +39,4 @@ MonoBehaviour:
           m_Bits: 256
         gizmoColor: {r: 1, g: 0, b: 0, a: 1}
         angle: 93.73
-        radius: 2.92
+        radius: 4.52

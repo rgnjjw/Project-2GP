@@ -10,12 +10,10 @@ namespace _02_Scripts.Enemy.Skill
         public override void ExecuteSkill(Transform centerTrm)
         {
             var closest = DamageAreaDetection.GetClosest(centerTrm);
-            if (closest == null) return;
-    
-            if (closest.transform.TryGetComponent<Player.Player>(out var player))
-            {
+            if (closest != null && closest.transform.TryGetComponent<Player.Player>(out var player))
                 player.GetModule<AgentHealth>().ApplyDamage(Damage);
-            }
+
+            NotifyComplete();
         }
     }
 }

@@ -19,10 +19,12 @@ namespace _02_Scripts.Enemy
         private Transform _enemyTrm;
         private Enemy _enemy;
 
+        public bool IsRotationLocked { get; set; }
+
         public override void Initialize(ModuleOwner owner)
         {
             base.Initialize(owner);
-            
+
             NavMeshAgent.updateRotation = useNavRotation;
             if (owner is Enemy enemy)
             {
@@ -31,9 +33,10 @@ namespace _02_Scripts.Enemy
             }
 
         }
-        
+
         private void Update()
         {
+            if (IsRotationLocked) return;
             if(useForcedRotation)
                 ForceRotationControl();
             if (_enemy.CurrentTarget != null)

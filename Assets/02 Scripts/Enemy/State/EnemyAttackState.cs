@@ -10,7 +10,10 @@ namespace _02_Scripts.Enemy.State
         private readonly EnemyAnimationEvent _enemyAnimationEvent;
         private readonly EnemyDataContainer _enemyDataContainer;
         private SkillSO _currentSkill;
-        
+
+        private bool _animEnded;
+        private bool _skillEnded;
+
         public EnemyAttackState(Agent.Agent agent, int clipHash) : base(agent, clipHash)
         {
             if(enemy == null) return;
@@ -23,22 +26,26 @@ namespace _02_Scripts.Enemy.State
         public override void Enter(float crossFadeDuration, int layerIndex = 0)
         {
             base.Enter(crossFadeDuration, layerIndex);
-            
+
             _navEnemyRenderer.NavMeshAgent.ResetPath();
             _navEnemyRenderer.NavMeshAgent.velocity = Vector3.zero;
-            
+
             _currentSkill = _enemySkillController.GetAvailableSkill();
-            
+
             if (_currentSkill == null)
             {
                 enemy.ChangeState(EnemyStateEnum.IDLE);
                 return;
             }
 
+            _animEnded = false;
+            _skillEnded = false;
+
             _enemyAnimationEvent.OnAttackEnd += HandleAttackEnd;
             _enemyAnimationEvent.OnAttack += HandleAttack;
-            
-            _renderer.PlayClip(_currentSkill.AnimParam.ParamHash,0,crossFadeDuration, layerIndex);
+            _currentSkill.OnExecutionComplete += HandleSkillComplete;
+
+            _renderer.PlayClip(_currentSkill.AnimParam.ParamHash, 0, crossFadeDuration, layerIndex);
         }
 
         private void HandleAttack()
@@ -46,17 +53,23 @@ namespace _02_Scripts.Enemy.State
             _currentSkill.ExecuteSkill(enemy.transform);
         }
 
-
         private void HandleAttackEnd()
         {
+            _animEnded = true;
+            TryTransition();
+        }
+
+        private void HandleSkillComplete()
+        {
+            _skillEnded = true;
+            TryTransition();
+        }
+
+        private void TryTransition()
+        {
+            if (!_animEnded || !_skillEnded) return;
+
             _enemySkillController.RecordSkillUsed(_currentSkill);
-
-            if (!_enemyDataContainer.ChaseRange.HasAnyInRange(enemy.transform))
-            {
-                enemy.ChangeState(EnemyStateEnum.IDLE);
-                return;
-            }
-
             enemy.ChangeState(EnemyStateEnum.IDLE);
         }
 
@@ -71,6 +84,8 @@ namespace _02_Scripts.Enemy.State
             base.Exit();
             _enemyAnimationEvent.OnAttackEnd -= HandleAttackEnd;
             _enemyAnimationEvent.OnAttack -= HandleAttack;
-        }   
+            if (_currentSkill != null)
+                _currentSkill.OnExecutionComplete -= HandleSkillComplete;
+        }
     }
 }

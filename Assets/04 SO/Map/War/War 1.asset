@@ -163,3 +163,25 @@ MonoBehaviour:
     enemyPrefab: {fileID: 4870927246733940613, guid: a4585686866550a4e9afea0f12d93986, type: 3}
   - enemySpawnPoint: {x: -21.203098, y: 25.800764, z: -38.146362}
     enemyPrefab: {fileID: 4870927246733940613, guid: a4585686866550a4e9afea0f12d93986, type: 3}
+  - enemySpawnPoint: {x: 3.660732, y: 26.59556, z: -16.58617}
+    enemyPrefab: {fileID: 2147767683307753553, guid: 6d8eb2f00e62ac64f9d8128caff77694, type: 3}
+  - enemySpawnPoint: {x: 11.514644, y: 26.868977, z: -18.894375}
+    enemyPrefab: {fileID: 2147767683307753553, guid: 6d8eb2f00e62ac64f9d8128caff77694, type: 3}
+  - enemySpawnPoint: {x: 29.449448, y: 25.356905, z: 1.6557542}
+    enemyPrefab: {fileID: 2147767683307753553, guid: 6d8eb2f00e62ac64f9d8128caff77694, type: 3}
+  - enemySpawnPoint: {x: 27.698164, y: 25.430536, z: -4.8803997}
+    enemyPrefab: {fileID: 2147767683307753553, guid: 6d8eb2f00e62ac64f9d8128caff77694, type: 3}
+  - enemySpawnPoint: {x: 29.109722, y: 25.746336, z: 29.760395}
+    enemyPrefab: {fileID: 2147767683307753553, guid: 6d8eb2f00e62ac64f9d8128caff77694, type: 3}
+  - enemySpawnPoint: {x: 6.437816, y: 25.617714, z: 36.319546}
+    enemyPrefab: {fileID: 2147767683307753553, guid: 6d8eb2f00e62ac64f9d8128caff77694, type: 3}
+  - enemySpawnPoint: {x: -14.783178, y: 26.07153, z: 11.775884}
+    enemyPrefab: {fileID: 2147767683307753553, guid: 6d8eb2f00e62ac64f9d8128caff77694, type: 3}
+  - enemySpawnPoint: {x: -24.333044, y: 25.581232, z: -2.409354}
+    enemyPrefab: {fileID: 2147767683307753553, guid: 6d8eb2f00e62ac64f9d8128caff77694, type: 3}
+  - enemySpawnPoint: {x: 15.183784, y: 26.135153, z: 13.995862}
+    enemyPrefab: {fileID: 2147767683307753553, guid: 6d8eb2f00e62ac64f9d8128caff77694, type: 3}
+  - enemySpawnPoint: {x: 16.823114, y: 26.206573, z: -3.9491696}
+    enemyPrefab: {fileID: 2147767683307753553, guid: 6d8eb2f00e62ac64f9d8128caff77694, type: 3}
+  - enemySpawnPoint: {x: 13.127953, y: 26.365086, z: -3.845579}
+    enemyPrefab: {fileID: 2147767683307753553, guid: 6d8eb2f00e62ac64f9d8128caff77694, type: 3}

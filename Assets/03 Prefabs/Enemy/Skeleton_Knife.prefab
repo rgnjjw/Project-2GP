@@ -158,6 +158,7 @@ MonoBehaviour:
   smoothSpeed: 5
   destroyOnDeath: 0
   healthBarDisableTime: 2
+  fadeOutDuration: 0.5
   fillRenderer: {fileID: 103794278060439909}
   fullColor: {r: 0, g: 1, b: 0, a: 1}
   emptyColor: {r: 1, g: 0, b: 0, a: 1}
@@ -495,8 +496,8 @@ Transform:
   m_GameObject: {fileID: 8291943934468267832}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.54, y: 25.323, z: -19.7}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1386640223461968692}
@@ -713,7 +714,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 198248, guid: 27953ea55848f7a48897c38360d8b331, type: 3}
+    - {fileID: 127236, guid: 27953ea55848f7a48897c38360d8b331, type: 3}
+    - {fileID: 176578, guid: 27953ea55848f7a48897c38360d8b331, type: 3}
+    - {fileID: 105400, guid: 27953ea55848f7a48897c38360d8b331, type: 3}
+    - {fileID: 119472, guid: 27953ea55848f7a48897c38360d8b331, type: 3}
+    - {fileID: 172252, guid: 27953ea55848f7a48897c38360d8b331, type: 3}
+    - {fileID: 117970, guid: 27953ea55848f7a48897c38360d8b331, type: 3}
+    - {fileID: 180630, guid: 27953ea55848f7a48897c38360d8b331, type: 3}
+    - {fileID: 188490, guid: 27953ea55848f7a48897c38360d8b331, type: 3}
+    - {fileID: 196068, guid: 27953ea55848f7a48897c38360d8b331, type: 3}
+    - {fileID: 158082, guid: 27953ea55848f7a48897c38360d8b331, type: 3}
+    - {fileID: 136416, guid: 27953ea55848f7a48897c38360d8b331, type: 3}
+    - {fileID: 153836, guid: 27953ea55848f7a48897c38360d8b331, type: 3}
+    - {fileID: 106236, guid: 27953ea55848f7a48897c38360d8b331, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 484422, guid: 27953ea55848f7a48897c38360d8b331, type: 3}
       insertIndex: -1

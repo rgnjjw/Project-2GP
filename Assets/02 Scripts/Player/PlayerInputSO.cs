@@ -9,11 +9,14 @@ namespace _02_Scripts.Player
     {
         public Vector2 InputDirection { get;private set; }
         public Vector2 MouseDelta { get;private set; }  
-        public bool IsSliding { get;private set; }
+        public bool IsSliding { get; private set; }
+        public bool IsRunning { get; private set; }
         public event Action<int,InputAction.CallbackContext> OnChipInput;
         public event Action OnJumpKeyPressed;
         public event Action OnDashKeyPressed;
         public event Action OnSlideKeyPressed;
+        public event Action OnRunKeyPressed;
+        public event Action OnRunKeyReleased;
         public event Action OnFireKeyPressed;
         public event Action<float> OnScrollWeaponInput;
         public event Action OnWeapon1Pressed;
@@ -70,6 +73,20 @@ namespace _02_Scripts.Player
         {
             if (context.started)
                 OnDashKeyPressed?.Invoke();
+        }
+
+        public void OnRun(InputAction.CallbackContext context)
+        {
+            if (context.started)
+            {
+                IsRunning = true;
+                OnRunKeyPressed?.Invoke();
+            }
+            else if (context.canceled)
+            {
+                IsRunning = false;
+                OnRunKeyReleased?.Invoke();
+            }
         }
 
         public void OnFire(InputAction.CallbackContext context)

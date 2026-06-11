@@ -10,24 +10,26 @@ namespace _02_Scripts.Agent
         [Header("Agent Values")]
         [SerializeField] private LayerMask whatIsGround;
         [SerializeField] private Vector3 groundCheckSize;
-        private float _moveSpeed;
-        
-        private Rigidbody _rigidbody;
+        protected float _moveSpeed;
+
+        protected Rigidbody _rigidbody;
         private IMover _mover;
         private IAgentData _ownerData;
-        
-        private float _movementX;
-        private float _movementZ;
 
-        private float _moveSpeedMultiplier;
-        private Vector3 _postDashVelocity;
-        private const float PostDashDecay = 80f;
-        private bool _isSlideOverride;
-        private Vector3 _slideOverrideVelocity;
+        protected float _movementX;
+        protected float _movementZ;
+
+        protected float _moveSpeedMultiplier;
+        protected Vector3 _postDashVelocity;
+        protected const float PostDashDecay = 80f;
+        protected bool _isSlideOverride;
+        protected Vector3 _slideOverrideVelocity;
 
         public bool IsGrounded {get; private set; }
         public event Action<bool> OnGroundStatusChanged;
         public event Action<Vector3> OnVelocityChanged;
+
+        protected void InvokeVelocityChanged(Vector3 velocity) => OnVelocityChanged?.Invoke(velocity);
 
         public virtual void Initialize(ModuleOwner moduleOwner)
         {
@@ -65,7 +67,7 @@ namespace _02_Scripts.Agent
             _slideOverrideVelocity = Vector3.zero;
         }
 
-        public void SetDashVelocity(Vector3 velocity, float duration)
+        public virtual void SetDashVelocity(Vector3 velocity, float duration)
         {
             _postDashVelocity = velocity;
         }
@@ -85,7 +87,7 @@ namespace _02_Scripts.Agent
 
             _rigidbody.linearVelocity = velocity;
         }
-        private void SetMoveSpeed(float before, float current)
+        protected void SetMoveSpeed(float before, float current)
         {
             _moveSpeed = current;
         }
@@ -100,13 +102,13 @@ namespace _02_Scripts.Agent
             _movementZ  = value;
         }
 
-        private void FixedUpdate()
+        protected virtual void FixedUpdate()
         {
             CheckGround();
             MoveCharacter();
         }
 
-        private void CheckGround()
+        protected void CheckGround()
         {
             bool before = IsGrounded;
             IsGrounded = Physics.OverlapBox(transform.position, groundCheckSize, Quaternion.identity, whatIsGround)
@@ -117,7 +119,7 @@ namespace _02_Scripts.Agent
             }
         }
 
-        private void MoveCharacter()
+        protected virtual void MoveCharacter()
         {
             Vector3 velocity = _rigidbody.linearVelocity;
 

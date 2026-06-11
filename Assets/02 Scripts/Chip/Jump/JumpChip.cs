@@ -13,16 +13,19 @@ namespace _02_Scripts.Chip.Jump
         private int _maxJumpCount;
         private int _currentJumpCount;
 
+        private const float JumpBufferWindow = 0.1f;
+        private float _jumpBufferTime = -999f;
+
         public void OnEquip(ChipInstance chip, Player.Player player)
         {
             _playerInputSO = player.PlayerInputSO;
             _playerMover = player.GetModule<PlayerMover>();
 
             _playerInputSO.OnJumpKeyPressed -= Jump;
-            _playerMover.OnGroundStatusChanged -= JumpCountReset;
+            _playerMover.OnGroundStatusChanged -= OnGroundStatusChanged;
 
             _playerInputSO.OnJumpKeyPressed += Jump;
-            _playerMover.OnGroundStatusChanged += JumpCountReset;
+            _playerMover.OnGroundStatusChanged += OnGroundStatusChanged;
 
             ApplyLevelStats(chip);
         }
@@ -30,7 +33,7 @@ namespace _02_Scripts.Chip.Jump
         public void OnUnequip(ChipInstance chip, Player.Player player)
         {
             _playerInputSO.OnJumpKeyPressed -= Jump;
-            _playerMover.OnGroundStatusChanged -= JumpCountReset;
+            _playerMover.OnGroundStatusChanged -= OnGroundStatusChanged;
         }
 
         public void OnLevelUp(ChipInstance chip) => ApplyLevelStats(chip);
@@ -47,16 +50,32 @@ namespace _02_Scripts.Chip.Jump
 
         private void Jump()
         {
-            if (_currentJumpCount >= _maxJumpCount) return;
-            EventBus.Publish(new EffectEvent("JumpDust"));
-            _playerMover.AddForceToAgent(Vector3.up * _jumpPower);
-            _currentJumpCount++;
+            if (_currentJumpCount >= _maxJumpCount)
+            {
+                _jumpBufferTime = Time.time;
+                return;
+            }
+            ExecuteJump();
         }
 
-        private void JumpCountReset(bool isGrounded)
+        private void OnGroundStatusChanged(bool isGrounded)
         {
-            if (isGrounded)
-                _currentJumpCount = 0;
+            if (!isGrounded) return;
+            _currentJumpCount = 0;
+
+            if (Time.time - _jumpBufferTime <= JumpBufferWindow)
+            {
+                _jumpBufferTime = -999f;
+                ExecuteJump();
+            }
+        }
+
+        private void ExecuteJump()
+        {
+            EventBus.Publish(new EffectEvent("JumpDust"));
+            _playerMover.StopImmediately(false, true, false);
+            _playerMover.AddForceToAgent(Vector3.up * _jumpPower);
+            _currentJumpCount++;
         }
     }
 }

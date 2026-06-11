@@ -56,6 +56,7 @@ namespace _02_Scripts.Chip.Slam
             if (_playerMover.IsGrounded) return;
 
             _isSlamming = true;
+            _playerMover.StopImmediately(true, true, true);
             _playerMover.SetVerticalVelocity(-_data.SlamDownSpeed);
         }
 

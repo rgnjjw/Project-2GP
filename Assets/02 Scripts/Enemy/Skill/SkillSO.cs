@@ -1,3 +1,4 @@
+using System;
 using _02_Scripts.Core.AnimationSystem;
 using _02_Scripts.Core.Detect;
 using UnityEngine;
@@ -12,10 +13,14 @@ namespace _02_Scripts.Enemy.Skill
 
         [SerializeReference] public AbstractDetection DamageAreaDetection;
         [SerializeReference] public AbstractDetection TargetFinder;
-        
+
+        public event Action OnExecutionComplete;
+
         public bool CanExecuteSkill(Transform centerTrm)
             => TargetFinder != null && TargetFinder.HasAnyInRange(centerTrm);
 
         public abstract void ExecuteSkill(Transform centerTrm);
+
+        protected void NotifyComplete() => OnExecutionComplete?.Invoke();
     }
 }
