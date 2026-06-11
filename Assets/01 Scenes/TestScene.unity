@@ -6404,6 +6404,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 334204261}
   m_CullTransparentMesh: 1
+--- !u!1 &343686072
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 343686073}
+  - component: {fileID: 343686074}
+  m_Layer: 9
+  m_Name: StaminaContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &343686073
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 343686072}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1119384587}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &343686074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 343686072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fae0413d24b84e42a3fc651286346e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.UI.StaminaBarUI
+  barUI: {fileID: 1566780970}
+  chipController: {fileID: 797153849}
+  container: {fileID: 1566780968}
 --- !u!1 &348175108
 GameObject:
   m_ObjectHideFlags: 0
@@ -7376,7 +7427,7 @@ Transform:
   m_GameObject: {fileID: 444451550}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.071, y: 28.081999, z: -49.153}
+  m_LocalPosition: {x: -0.071, y: 28.081999, z: -46.553}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12717,16 +12768,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1075816796}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 4.6558526e-10, y: -8.41132e-12, z: 0.00218169, w: 0.9999976}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1949159, y: 0.18350028, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1566780969}
+  m_Father: {fileID: 1119384587}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.7, y: -2.168}
+  m_AnchoredPosition: {x: -0.015703976, y: -0.013420582}
   m_SizeDelta: {x: 7.7, y: 2.51}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1075816798
@@ -18019,6 +18070,8 @@ RectTransform:
   m_LocalScale: {x: 5.03, y: 4.73, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 343686073}
+  - {fileID: 1075816797}
   - {fileID: 1566780969}
   m_Father: {fileID: 1164437001}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 2.07}
@@ -21920,7 +21973,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f040129540445b2b7445071983f7836, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.Map.UI.StageButtonUI
-  mapData: {fileID: 11400000, guid: 602b305cf58976c4eb29f7da410cfe7d, type: 2}
+  mapData: {fileID: 11400000, guid: 3e56177b2de18854785eeba0194730ce, type: 2}
 --- !u!1 &1566780968
 GameObject:
   m_ObjectHideFlags: 0
@@ -21930,6 +21983,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1566780969}
+  - component: {fileID: 1566780970}
   m_Layer: 9
   m_Name: StaminaBar
   m_TagString: Untagged
@@ -21949,7 +22003,6 @@ RectTransform:
   m_LocalScale: {x: 0.1949159, y: 0.1835003, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1075816797}
   - {fileID: 493705393}
   - {fileID: 1854051219}
   m_Father: {fileID: 1119384587}
@@ -21959,6 +22012,24 @@ RectTransform:
   m_AnchoredPosition: {x: 0.119, y: 0.385}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1566780970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1566780968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57d04a6a4eae4aa8ae586b2ae28141fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.UI.BarUI
+  bar: {fileID: 1854051220}
+  followBar: {fileID: 493705394}
+  followDelay: 1
+  barDuration: 0.5
+  followDuration: 0.4
+  ease: 1
 --- !u!1 &1652237298
 GameObject:
   m_ObjectHideFlags: 0
@@ -31037,7 +31108,7 @@ Transform:
   m_GameObject: {fileID: 4470903540287569175}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 26.22, z: -49.1}
+  m_LocalPosition: {x: 0, y: 26.22, z: -46.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

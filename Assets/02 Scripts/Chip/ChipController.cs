@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using _02_Scripts.Core.ModuleSystem;
 using UnityEngine;
@@ -6,6 +7,9 @@ namespace _02_Scripts.Chip
 {
     public class ChipController : MonoBehaviour,IModule
     {
+        public event Action<IChip> OnChipEquipped;
+        public event Action<IChip> OnChipUnequipped;
+
         public int MaxSlot;
         private Player.Player _player;
         private List<ChipInstance> _equippedChipList;
@@ -23,10 +27,16 @@ namespace _02_Scripts.Chip
             if(_equippedChipList.Count >= MaxSlot) return false;
 
             var effect = chip.GetEffect();//효과 생성
+            if (effect == null)
+            {
+                Debug.LogError($"[ChipController] ChipId '{chip.Data?.ChipId}' 효과 없음 - 장착 실패");
+                return false;
+            }
             effect.OnEquip(chip, _player);
 
             chip.IsEquipped = true;
             _equippedChipList.Add(chip);
+            OnChipEquipped?.Invoke(effect);
             return true;
         }
 
@@ -34,19 +44,20 @@ namespace _02_Scripts.Chip
         {
             if (!chip.IsEquipped) return;//장착이 안된 칩이라면
             if (!_equippedChipList.Contains(chip)) return;//리스트의 없는 칩이라면
-            
+
             var effect = chip.GetEffect();
             effect.OnUnequip(chip, _player);
-            
+
             chip.IsEquipped = false;
             _equippedChipList.Remove(chip);
+            OnChipUnequipped?.Invoke(effect);
         }
 
         public void ChipLevelUp(ChipInstance chip)
         {
             if (!chip.IsEquipped) return;
             if(!_equippedChipList.Contains(chip)) return;
-            
+
             chip.LevelUp();
             chip.GetEffect().OnLevelUp(chip);
         }

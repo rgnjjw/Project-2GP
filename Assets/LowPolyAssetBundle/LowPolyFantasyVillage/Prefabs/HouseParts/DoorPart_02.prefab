@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 3863815242961978580}
   - component: {fileID: 3863815242958587124}
   - component: {fileID: 3863815242959554100}
-  - component: {fileID: 8371753609312292120}
+  - component: {fileID: 6237650025783508947}
   m_Layer: 0
   m_Name: DoorPart_02
   m_TagString: Untagged
@@ -71,6 +71,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -82,6 +83,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -94,7 +96,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &8371753609312292120
+--- !u!64 &6237650025783508947
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

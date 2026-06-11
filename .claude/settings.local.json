@@ -3,7 +3,9 @@
     "allow": [
       "Bash(Get-Content \"C:\\\\JJW\\\\GitHub\\\\Project-2GP\\\\Assets\\\\01 Scenes\\\\TestScene.unity\")",
       "Bash(Measure-Object -Line)",
-      "PowerShell(Get-Content *)"
+      "PowerShell(Get-Content *)",
+      "mcp__UnityMCP__find_gameobjects",
+      "mcp__UnityMCP__manage_scene"
     ]
   }
 }

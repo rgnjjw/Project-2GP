@@ -102,6 +102,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -113,6 +114,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -773,6 +775,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6855364880809053011}
     m_Modifications:
+    - target: {fileID: 100000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
+      propertyPath: m_Name
+      value: Book_01 (14)
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5194311
@@ -824,10 +830,6 @@ PrefabInstance:
     - target: {fileID: 400000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
       propertyPath: m_LocalScale.z
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
-      propertyPath: m_Name
-      value: Book_01 (14)
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -935,6 +937,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6855364880809053011}
     m_Modifications:
+    - target: {fileID: 100000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
+      propertyPath: m_Name
+      value: Book_01 (13)
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5524311
@@ -987,10 +993,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
-      propertyPath: m_Name
-      value: Book_01 (13)
-      objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1016,6 +1018,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6855364880809053011}
     m_Modifications:
+    - target: {fileID: 100000, guid: 62df20cc230dc054382587085db26498, type: 3}
+      propertyPath: m_Name
+      value: Book_11 (3)
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 62df20cc230dc054382587085db26498, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.28756905
@@ -1064,10 +1070,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 62df20cc230dc054382587085db26498, type: 3}
-      propertyPath: m_Name
-      value: Book_11 (3)
-      objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 62df20cc230dc054382587085db26498, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1093,6 +1095,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6855364880809053011}
     m_Modifications:
+    - target: {fileID: 100000, guid: a1f6e06baf6b137478a47345171144f5, type: 3}
+      propertyPath: m_Name
+      value: Book_05 (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: a1f6e06baf6b137478a47345171144f5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.4314313
@@ -1145,10 +1151,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: a1f6e06baf6b137478a47345171144f5, type: 3}
-      propertyPath: m_Name
-      value: Book_05 (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: a1f6e06baf6b137478a47345171144f5, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1174,6 +1176,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6855364880809053011}
     m_Modifications:
+    - target: {fileID: 100000, guid: 4d5ff4a3fb8fd6f42926e0a1d255453c, type: 3}
+      propertyPath: m_Name
+      value: Book_04 (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4d5ff4a3fb8fd6f42926e0a1d255453c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.10643101
@@ -1230,10 +1236,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 4d5ff4a3fb8fd6f42926e0a1d255453c, type: 3}
-      propertyPath: m_Name
-      value: Book_04 (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 4d5ff4a3fb8fd6f42926e0a1d255453c, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1259,6 +1261,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6855364880809053011}
     m_Modifications:
+    - target: {fileID: 100000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
+      propertyPath: m_Name
+      value: Book_01 (12)
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.15543127
@@ -1303,10 +1309,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
-      propertyPath: m_Name
-      value: Book_01 (12)
-      objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1332,6 +1334,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6855364880809053011}
     m_Modifications:
+    - target: {fileID: 100000, guid: ee962dfe0da01634a8645096ce814cc4, type: 3}
+      propertyPath: m_Name
+      value: Book_03 (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ee962dfe0da01634a8645096ce814cc4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.10656881
@@ -1379,10 +1385,6 @@ PrefabInstance:
     - target: {fileID: 400000, guid: ee962dfe0da01634a8645096ce814cc4, type: 3}
       propertyPath: m_LocalScale.y
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: ee962dfe0da01634a8645096ce814cc4, type: 3}
-      propertyPath: m_Name
-      value: Book_03 (1)
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: ee962dfe0da01634a8645096ce814cc4, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1701,6 +1703,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6855364880809053011}
     m_Modifications:
+    - target: {fileID: 100000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
+      propertyPath: m_Name
+      value: Book_01 (6)
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.74256897
@@ -1744,10 +1750,6 @@ PrefabInstance:
     - target: {fileID: 400000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
-      propertyPath: m_Name
-      value: Book_01 (6)
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
       propertyPath: m_Materials.Array.data[0]

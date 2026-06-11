@@ -9,31 +9,46 @@ namespace _02_Scripts.Chip
     public static class ChipFactory
     {
         private static Dictionary<string, Type> _registry;
-        
+
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]//씬 로드전에 이 함수를 자동으로 실행
         private static void BuildRegistry()
         {
             _registry = new Dictionary<string, Type>();
 
-            var types = AppDomain.CurrentDomain.GetAssemblies()//게임의 모든 어셈블리 가져오기
-                .SelectMany(a => a.GetTypes())//SelectMany : 각 어셈블리에서 클래스들을 꺼내서 하나의 목록으로 합침
-                .Where(t => typeof(IChip).IsAssignableFrom(t)//Where : 거르기,IsAssignableFrom : IChip 구현 했는지
-                         && !t.IsInterface //인터페이스가 아니여야함
-                         && !t.IsAbstract); //추상이 아니여야함
-
-            foreach (var type in types)
+            var allAssemblies = AppDomain.CurrentDomain.GetAssemblies();
+            foreach (var assembly in allAssemblies)
             {
-                var attr = type.GetCustomAttribute<ChipAttribute>();//GetCustomAttribute 모름
-                if (attr != null)
-                    _registry[attr.ChipId] = type; //딕셔너리에 넣기
+                Type[] types;
+                try { types = assembly.GetTypes(); }
+                catch (ReflectionTypeLoadException e) { types = e.Types.Where(t => t != null).ToArray(); }
+
+                foreach (var type in types)
+                {
+                    if (type == null || type.IsInterface || type.IsAbstract) continue;
+                    if (!typeof(IChip).IsAssignableFrom(type)) continue;
+
+                    var attr = type.GetCustomAttribute<ChipAttribute>();
+                    if (attr != null)
+                        _registry[attr.ChipId] = type;
+                    else
+                        Debug.LogWarning($"[ChipFactory] IChip 구현체지만 [Chip] 어트리뷰트 없음: {type.FullName}");
+                }
             }
+
+            Debug.Log($"[ChipFactory] 등록된 칩: {string.Join(", ", _registry.Keys)}");
         }
 
         public static IChip Create(string chipId)
         {
+            if (_registry == null)
+            {
+                Debug.LogError("[ChipFactory] 레지스트리가 null - BuildRegistry가 실행되지 않음");
+                return null;
+            }
             if (_registry.TryGetValue(chipId, out var type))
                 return (IChip)Activator.CreateInstance(type);//객체 생성
-            
+
+            Debug.LogError($"[ChipFactory] '{chipId}' 없음. 등록된 칩: {string.Join(", ", _registry.Keys)}");
             return null;
         }
     }

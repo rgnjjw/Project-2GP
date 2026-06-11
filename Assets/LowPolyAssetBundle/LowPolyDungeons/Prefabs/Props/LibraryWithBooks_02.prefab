@@ -445,6 +445,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -456,6 +457,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -562,6 +564,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3565213436052495283}
     m_Modifications:
+    - target: {fileID: 100000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
+      propertyPath: m_Name
+      value: Book_01 (10)
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.15571594
@@ -605,10 +611,6 @@ PrefabInstance:
     - target: {fileID: 400000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
-      propertyPath: m_Name
-      value: Book_01 (10)
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -720,6 +722,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3565213436052495283}
     m_Modifications:
+    - target: {fileID: 100000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
+      propertyPath: m_Name
+      value: Book_01 (8)
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.66671574
@@ -763,10 +769,6 @@ PrefabInstance:
     - target: {fileID: 400000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
-      propertyPath: m_Name
-      value: Book_01 (8)
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1405,6 +1407,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3565213436052495283}
     m_Modifications:
+    - target: {fileID: 100000, guid: 62df20cc230dc054382587085db26498, type: 3}
+      propertyPath: m_Name
+      value: Book_11 (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 62df20cc230dc054382587085db26498, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.11628413
@@ -1460,10 +1466,6 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 62df20cc230dc054382587085db26498, type: 3}
       propertyPath: m_LocalScale.z
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 62df20cc230dc054382587085db26498, type: 3}
-      propertyPath: m_Name
-      value: Book_11 (2)
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 62df20cc230dc054382587085db26498, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2045,6 +2047,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3565213436052495283}
     m_Modifications:
+    - target: {fileID: 100000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
+      propertyPath: m_Name
+      value: Book_01 (7)
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.078284025
@@ -2088,10 +2094,6 @@ PrefabInstance:
     - target: {fileID: 400000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
-      propertyPath: m_Name
-      value: Book_01 (7)
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2345,6 +2347,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3565213436052495283}
     m_Modifications:
+    - target: {fileID: 100000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
+      propertyPath: m_Name
+      value: Book_01 (9)
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.22828412
@@ -2389,10 +2395,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
-      propertyPath: m_Name
-      value: Book_01 (9)
-      objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -2418,6 +2420,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3565213436052495283}
     m_Modifications:
+    - target: {fileID: 100000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
+      propertyPath: m_Name
+      value: Book_01 (11)
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.8292842
@@ -2461,10 +2467,6 @@ PrefabInstance:
     - target: {fileID: 400000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
-      propertyPath: m_Name
-      value: Book_01 (11)
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: d38ba59c3023492479f174517fd0e1fc, type: 3}
       propertyPath: m_Materials.Array.data[0]

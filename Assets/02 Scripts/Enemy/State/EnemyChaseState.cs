@@ -43,7 +43,7 @@ namespace _02_Scripts.Enemy.State
             Vector3 localVelocity = enemy.transform.InverseTransformDirection(velocity.normalized);
     
             _renderer.Animator.SetFloat("MoveX", localVelocity.x, 0.1f, Time.deltaTime);
-            _renderer.Animator.SetFloat("MoveY", localVelocity.z, 0.1f, Time.deltaTime);
+                _renderer.Animator.SetFloat("MoveY", localVelocity.z, 0.1f, Time.deltaTime);
     
             float normalizedSpeed = velocity.magnitude / _navEnemyRenderer.NavMeshAgent.speed;
             _renderer.Animator.SetFloat(_navEnemyRenderer.SpeedAnimParam.ParamHash, normalizedSpeed, 0.1f, Time.deltaTime);

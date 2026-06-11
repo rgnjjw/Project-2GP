@@ -5,7 +5,7 @@ using UnityEngine;
 namespace _02_Scripts.Chip.Run
 {
     [Chip("Run")]
-    public class RunChip : IChip
+    public class RunChip : IChip, IStaminaProvider
     {
         private PlayerInputSO _playerInputSO;
         private PlayerMover _playerMover;
@@ -74,8 +74,7 @@ namespace _02_Scripts.Chip.Run
                 {
                     if (!_isRunning) StartRun();
                     _stamina = Mathf.Max(0f, _stamina - Time.deltaTime);
-                    if (_stamina <= 0f)
-                        StopRun();
+                    if (_stamina <= 0f) StopRun();
                 }
                 else if (_isRunning)
                 {
