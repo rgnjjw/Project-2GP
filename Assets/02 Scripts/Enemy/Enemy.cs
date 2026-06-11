@@ -19,6 +19,7 @@ namespace _02_Scripts.Enemy
         private EnemySkillController _enemySkillController;
         private NavEnemyRenderer _navEnemyRenderer;
         private AgentHealth _agentHealth;
+        private CapsuleCollider _capsuleCollider;
 
         private float _lastHitAnimTime;
 
@@ -32,13 +33,13 @@ namespace _02_Scripts.Enemy
             _navEnemyRenderer = GetModule<NavEnemyRenderer>();
             _agentHealth = GetModule<AgentHealth>();
             _animationEvent = GetModule<EnemyAnimationEvent>();
+            _capsuleCollider = GetComponent<CapsuleCollider>();
 
             _navEnemyRenderer.NavMeshAgent.stoppingDistance =
                 _enemySkillController.GetMinSkillRange() - 0.2f;
 
             _agentHealth.CurrentHp.OnValueChanged += OnDamaged;
             _animationEvent.OnHitEnd += OnHitEndHandle;
-            
 
             _navEnemyRenderer.Animator.SetLayerWeight(hitLayerIndex, 0f);
         }
@@ -75,6 +76,9 @@ namespace _02_Scripts.Enemy
         {
             StageManager.Instance.EnemyCount--;
             LevelManager.Instance.AddExp(10);
+
+            if (_capsuleCollider != null)
+                _capsuleCollider.enabled = false;
 
             ChangeState(EnemyStateEnum.DEAD);
         }
