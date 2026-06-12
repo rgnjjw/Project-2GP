@@ -11,8 +11,10 @@ namespace _02_Scripts.Player
         public Vector2 MouseDelta { get;private set; }  
         public bool IsSliding { get; private set; }
         public bool IsRunning { get; private set; }
+        public bool IsJumping { get; private set; }
         public event Action<int,InputAction.CallbackContext> OnChipInput;
         public event Action OnJumpKeyPressed;
+        public event Action OnJumpKeyReleased;
         public event Action OnDashKeyPressed;
         public event Action OnSlideKeyPressed;
         public event Action OnRunKeyPressed;
@@ -66,7 +68,15 @@ namespace _02_Scripts.Player
         public void OnJump(InputAction.CallbackContext context)
         {
             if (context.started)
+            {
+                IsJumping = true;
                 OnJumpKeyPressed?.Invoke();
+            }
+            else if (context.canceled)
+            {
+                IsJumping = false;
+                OnJumpKeyReleased?.Invoke();
+            }
         }
 
         public void OnDash(InputAction.CallbackContext context)

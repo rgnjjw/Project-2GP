@@ -13,48 +13,54 @@ namespace _02_Scripts.UI
         [SerializeField] private float followDuration = 0.4f;
         [SerializeField] private Ease ease = Ease.Linear;
 
-        [Header("Realtime (Stamina)")]
-        [SerializeField] private float frontSpeed = 10f;
-        [SerializeField] private float backSpeed = 8f;
-
-        private float _targetFill;
-
-        private void Awake()
-        {
-            _targetFill = bar.fillAmount;
-        }
+        private float _rtTarget = -1f;
+        private bool _rtIncreasing;
+        private float _rtLagStart;
+        private bool _rtLagActive;
 
         public void SetFillRealtime(float amount)
         {
-            _targetFill = Mathf.Clamp01(amount);
+            amount = Mathf.Clamp01(amount);
+
+            if (_rtTarget < 0f)
+            {
+                bar.fillAmount = amount;
+                followBar.fillAmount = amount;
+                _rtTarget = amount;
+                return;
+            }
+
+            bool nowIncreasing = amount > _rtTarget;
+            bool nowDecreasing = amount < _rtTarget;
+            bool directionChanged = (nowIncreasing && !_rtIncreasing) || (nowDecreasing && _rtIncreasing);
+
+            if ((nowIncreasing || nowDecreasing) && (!_rtLagActive || directionChanged))
+            {
+                _rtIncreasing = nowIncreasing;
+                _rtLagStart = Time.time;
+                _rtLagActive = true;
+            }
+
+            _rtTarget = amount;
+
+            if (_rtIncreasing)
+                followBar.fillAmount = amount;
+            else
+                bar.fillAmount = amount;
         }
 
         private void Update()
         {
-            if (bar.fillAmount < _targetFill)
-            {
-                followBar.fillAmount = Mathf.MoveTowards(
-                    followBar.fillAmount,
-                    _targetFill,
-                    frontSpeed * Time.deltaTime);
+            if (!_rtLagActive) return;
+            if (Time.time - _rtLagStart < followDelay) return;
 
-                bar.fillAmount = Mathf.MoveTowards(
-                    bar.fillAmount,
-                    followBar.fillAmount,
-                    backSpeed * Time.deltaTime);
-            }
+            float speed = 1f / (_rtIncreasing ? barDuration : followDuration);
+            float step = speed * Time.deltaTime;
+
+            if (_rtIncreasing)
+                bar.fillAmount = Mathf.MoveTowards(bar.fillAmount, _rtTarget, step);
             else
-            {
-                bar.fillAmount = Mathf.MoveTowards(
-                    bar.fillAmount,
-                    _targetFill,
-                    frontSpeed * Time.deltaTime);
-
-                followBar.fillAmount = Mathf.MoveTowards(
-                    followBar.fillAmount,
-                    bar.fillAmount,
-                    backSpeed * Time.deltaTime);
-            }
+                followBar.fillAmount = Mathf.MoveTowards(followBar.fillAmount, _rtTarget, step);
         }
 
         public void SetFill(float targetAmount)
@@ -66,12 +72,8 @@ namespace _02_Scripts.UI
 
             if (isIncreasing)
             {
-                followBar.DOFillAmount(targetAmount, followDuration)
-                    .SetEase(ease);
-
-                bar.DOFillAmount(targetAmount, barDuration)
-                    .SetEase(ease)
-                    .SetDelay(followDelay)
+                followBar.DOFillAmount(targetAmount, followDuration).SetEase(ease);
+                bar.DOFillAmount(targetAmount, barDuration).SetEase(ease).SetDelay(followDelay)
                     .OnComplete(() =>
                     {
                         if (Mathf.Approximately(bar.fillAmount, 1f))
@@ -83,12 +85,8 @@ namespace _02_Scripts.UI
             }
             else
             {
-                bar.DOFillAmount(targetAmount, barDuration)
-                    .SetEase(ease);
-
-                followBar.DOFillAmount(targetAmount, followDuration)
-                    .SetEase(ease)
-                    .SetDelay(followDelay);
+                bar.DOFillAmount(targetAmount, barDuration).SetEase(ease);
+                followBar.DOFillAmount(targetAmount, followDuration).SetEase(ease).SetDelay(followDelay);
             }
         }
     }

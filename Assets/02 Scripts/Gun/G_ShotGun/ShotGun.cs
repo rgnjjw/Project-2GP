@@ -1,7 +1,4 @@
-using System.Collections.Generic;
 using _02_Scripts.Agent;
-using _02_Scripts.Core.Utility;
-using _02_Scripts.Player;
 using UnityEngine;
 
 namespace _02_Scripts.Gun.G_ShotGun
@@ -10,27 +7,23 @@ namespace _02_Scripts.Gun.G_ShotGun
     {
         [SerializeField] private int pelletCount = 8;
         [SerializeField] private float spreadAngle = 10f;
-        
-        
+
         public override void Fire()
         {
             if (Time.time < nextFireTime) return;
             nextFireTime = Time.time + fireDelay;
-            
+
             for (int i = 0; i < pelletCount; i++)
             {
                 Ray ray = GetSpreadRay();
-                List<Vector3> points = GetReflectedPoints(ray, 1, 1000f);
+                Vector3 hitPoint = GetHitPoint(ray, 1000f);
 
-                var trail = Instantiate(trailRenderer, transform);
-                trail.DrawTrail(muzzleTrm.position, points.ToArray());
+                SpawnBulletTrail(muzzleTrm.position, hitPoint);
 
                 if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layerMask))
                 {
                     if (hit.transform.TryGetComponent<Enemy.Enemy>(out var enemy))
-                    {
                         enemy.GetModule<AgentHealth>().ApplyDamage(bulletDamage);
-                    }
                 }
             }
 
@@ -49,9 +42,7 @@ namespace _02_Scripts.Gun.G_ShotGun
                 0
             );
 
-            Quaternion rotation = Quaternion.Euler(spread);
-            Vector3 direction = rotation * baseRay.direction;
-
+            Vector3 direction = Quaternion.Euler(spread) * baseRay.direction;
             return new Ray(baseRay.origin, direction);
         }
     }

@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65913ef2273581f41b314e9550714d31, type: 3}
+  m_Name: WallRideChipDataSO
+  m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.Chip.WallRide.WallRideChipDataSO
+  <ChipId>k__BackingField: WallRide
+  <Name>k__BackingField: "\uBCBD\uD0C0\uAE30 \uCE69"
+  <Icon>k__BackingField: {fileID: 0}
+  <MaxLevel>k__BackingField: 5
+  <LevelNameAndDescData>k__BackingField:
+  - Name: "\uBCBD \uD0C0\uAE30 \uCE69 \uD68D\uB4DD"
+    Description: "\uBCBD \uD0C0\uAE30 \uCE69\uC744 \uD68D\uB4DD\uD569\uB2C8\uB2E4"
+  - Name: "\uBCBD \uD0C0\uAE30 \uCE69 \uC5C5\uADF8\uB808\uC774\uB4DC"
+    Description: "\uBCBD \uD0C0\uAE30 \uCE69\uC744 \uC5C5\uADF8\uB808\uC774\uB4DC
+      \uD569\uB2C8\uB2E4"
+  - Name: "\uBCBD \uD0C0\uAE30 \uCE69 \uC5C5\uADF8\uB808\uC774\uB4DC"
+    Description: "\uBCBD \uD0C0\uAE30 \uCE69\uC744 \uC5C5\uADF8\uB808\uC774\uB4DC
+      \uD569\uB2C8\uB2E4"
+  - Name: "\uBCBD \uD0C0\uAE30 \uCE69 \uC5C5\uADF8\uB808\uC774\uB4DC"
+    Description: "\uBCBD \uD0C0\uAE30 \uCE69\uC744 \uC5C5\uADF8\uB808\uC774\uB4DC
+      \uD569\uB2C8\uB2E4"
+  - Name: "\uBCBD \uD0C0\uAE30 \uCE69 \uC5C5\uADF8\uB808\uC774\uB4DC"
+    Description: "\uBCBD \uD0C0\uAE30 \uCE69\uC744 \uC5C5\uADF8\uB808\uC774\uB4DC
+      \uD569\uB2C8\uB2E4"
+  WallLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  <LevelData>k__BackingField:
+  - WallRideSpeed: 12
+    WallJumpSideForce: 6
+    WallJumpUpForce: 7
+    WallReleaseForce: 20
+  - WallRideSpeed: 14
+    WallJumpSideForce: 7
+    WallJumpUpForce: 8
+    WallReleaseForce: 22
+  - WallRideSpeed: 17
+    WallJumpSideForce: 8
+    WallJumpUpForce: 9
+    WallReleaseForce: 24
+  - WallRideSpeed: 20
+    WallJumpSideForce: 9
+    WallJumpUpForce: 10
+    WallReleaseForce: 26
+  - WallRideSpeed: 25
+    WallJumpSideForce: 11
+    WallJumpUpForce: 12
+    WallReleaseForce: 30

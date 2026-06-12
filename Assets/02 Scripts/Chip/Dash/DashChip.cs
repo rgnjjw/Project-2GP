@@ -1,5 +1,4 @@
 using System.Collections;
-using _02_Scripts.Core.Utility;
 using _02_Scripts.Player;
 using UnityEngine;
 
@@ -64,21 +63,21 @@ namespace _02_Scripts.Chip.Dash
         private void Dash()
         {
             if (_currentDashCount <= 0) return;
-            
+
             Vector2 input = _playerInputSO.InputDirection;
 
-            string effectName;
+            string effectKey;
             if (input.magnitude < 0.1f || input.y > 0.5f)
-                effectName = "FrontDash";
+                effectKey = "FrontDash";
             else if (input.y < -0.5f)
-                effectName = "BackDash";
+                effectKey = "BackDash";
             else if (input.x < -0.5f)
-                effectName = "LeftDash";
+                effectKey = "LeftDash";
             else
-                effectName = "RightDash";
+                effectKey = "RightDash";
 
-            EventBus.Publish(new EffectEvent(effectName));
-            
+            // EffectManager.Instance?.Play(effectKey);
+
             Vector3 dashDir = input.magnitude > 0.1f
                 ? (_player.transform.forward * input.y + _player.transform.right * input.x).normalized
                 : _player.transform.forward;

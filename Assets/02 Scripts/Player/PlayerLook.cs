@@ -1,6 +1,7 @@
 using System;
 using _02_Scripts.Core.ModuleSystem;
 using _02_Scripts.Core.Utility;
+using DG.Tweening;
 using UnityEngine;
 
 namespace _02_Scripts.Player
@@ -57,6 +58,9 @@ namespace _02_Scripts.Player
         private float _recoilY;
         private float _recoilTime;
         private bool _isRecoiling;
+
+        private float _dutchAngle;
+        private Tween _dutchTween;
 
         private void Awake()
         {
@@ -120,7 +124,7 @@ namespace _02_Scripts.Player
 
             _currentTilt = Mathf.Lerp(_currentTilt, GetTargetTilt(), tiltLerpSpeed * Time.deltaTime);
 
-            Quaternion camTargetRotation = Quaternion.Euler(_rotationX + _currentTilt + _recoilX, 0, 0);
+            Quaternion camTargetRotation = Quaternion.Euler(_rotationX + _currentTilt + _recoilX, 0, _dutchAngle);
             Quaternion playerTargetRotation = Quaternion.Euler(0, _rotationY + _recoilY, 0);
 
             playerCamera.transform.localRotation = camTargetRotation;
@@ -163,6 +167,13 @@ namespace _02_Scripts.Player
             if (_playerSlider != null && _playerSlider.IsSliding)
                 return maxFOVBoost * _playerSlider.SlideSpeedRatio;
             return 0f;
+        }
+
+        public void TweenDutchAngle(float targetAngle, float duration)
+        {
+            _dutchTween?.Kill();
+            _dutchTween = DOTween.To(() => _dutchAngle, x => _dutchAngle = x, targetAngle, duration)
+                .SetEase(Ease.OutQuad);
         }
 
         public void Update()

@@ -67,5 +67,16 @@ namespace _02_Scripts.Player
             Vector3 v = _rigidbody.linearVelocity;
             _postDashVelocity = new Vector3(v.x, 0f, v.z);
         }
+
+        // rigidbody XZ velocity와 _postDashVelocity를 동시에 강제 설정
+        // _postDashVelocity 크기 체크를 우회하므로 어떤 속도든 보장됨
+        public void ForceSetXZVelocity(Vector3 xzVelocity)
+        {
+            _postDashVelocity = xzVelocity;
+            Vector3 vel = _rigidbody.linearVelocity;
+            vel.x = xzVelocity.x;
+            vel.z = xzVelocity.z;
+            _rigidbody.linearVelocity = vel;
+        }
     }
 }

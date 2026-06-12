@@ -13,6 +13,9 @@ namespace _02_Scripts.Player
     public class Player : Agent.Agent
     {
         [field: SerializeField] public PlayerInputSO PlayerInputSO { get; private set; }
+        public bool IsWallRiding { get; set; }
+        public event System.Action OnWallRideEnded;
+        public void FireWallRideEnded() => OnWallRideEnded?.Invoke();
         [SerializeField] private BarUI barUI;
         [SerializeField] private Image redPanel;
         [SerializeField] private RecoilEvent recoilEvent;

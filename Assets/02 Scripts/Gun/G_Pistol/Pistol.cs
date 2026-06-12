@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using _02_Scripts.Agent;
-using _02_Scripts.Core.ModuleSystem;
 using UnityEngine;
 
 namespace _02_Scripts.Gun.G_Pistol
@@ -9,28 +7,22 @@ namespace _02_Scripts.Gun.G_Pistol
     {
         public override void Fire()
         {
-            if (Camera.main == null)
-                return;
-
-            if (Time.time < nextFireTime)
-                return;
+            if (Camera.main == null) return;
+            if (Time.time < nextFireTime) return;
 
             nextFireTime = Time.time + fireDelay;
-            
-            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0));
 
-            List<Vector3> points = GetReflectedPoints(ray, 1, 1000f);
+            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0));
+            Vector3 hitPoint = GetHitPoint(ray, 1000f);
 
             base.Fire();
 
-            trailRenderer.DrawTrail(muzzleTrm.position, points.ToArray());
+            SpawnBulletTrail(muzzleTrm.position, hitPoint);
 
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layerMask))
             {
                 if (hit.transform.TryGetComponent<Enemy.Enemy>(out var enemy))
-                {
                     enemy.GetModule<AgentHealth>().ApplyDamage(bulletDamage);
-                }
             }
         }
     }

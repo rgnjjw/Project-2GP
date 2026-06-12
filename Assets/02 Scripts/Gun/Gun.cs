@@ -1,28 +1,25 @@
 using System;
 using System.Collections.Generic;
 using _02_Scripts.Agent;
-using _02_Scripts.Chip;
-using _02_Scripts.Core.ModuleSystem;
 using _02_Scripts.Core.Utility;
 using _02_Scripts.Player;
-using Unity.Cinemachine;
 using UnityEngine;
 
 namespace _02_Scripts.Gun
 {
     public class Gun : MonoBehaviour
     {
-        [field: SerializeField] public AgentRenderer Renderer { get;private set; }
-        [SerializeField] protected GunTrailRenderer trailRenderer;
+        [field: SerializeField] public AgentRenderer Renderer { get; private set; }
+        [SerializeField] protected GameObject bulletTrailPrefab;
         [SerializeField] protected LayerMask layerMask;
         [SerializeField] protected int bulletDamage;
         [SerializeField] protected float fireDelay = 0.2f;
         [SerializeField] protected Transform muzzleTrm;
         [SerializeField] private RecoilEvent recoilEvent;
-        [SerializeField] private string gunFireEffect;//이펙트
+        [SerializeField] private string gunFireEffect;
         public event Action OnFire;
         public event Action OnEquip;
-        
+
         protected float nextFireTime;
 
         public virtual void Equip()
@@ -30,12 +27,25 @@ namespace _02_Scripts.Gun
             OnEquip?.Invoke();
         }
 
-
         public virtual void Fire()
         {
             EventBus.Publish(recoilEvent);
-            EventBus.Publish(new EffectEvent(gunFireEffect));
+            // EffectManager.Instance?.Play(gunFireEffect);
             OnFire?.Invoke();
+        }
+
+        protected Vector3 GetHitPoint(Ray ray, float maxDistance)
+        {
+            if (Physics.Raycast(ray, out RaycastHit hit, maxDistance, layerMask))
+                return hit.point;
+            return ray.origin + ray.direction * maxDistance;
+        }
+
+        protected void SpawnBulletTrail(Vector3 start, Vector3 end)
+        {
+            if (bulletTrailPrefab == null) return;
+            BulletTrail bullet = Instantiate(bulletTrailPrefab, start, Quaternion.identity).GetComponent<BulletTrail>();
+            bullet.Initialize(start, end);
         }
 
         protected List<Vector3> GetReflectedPoints(Ray ray, int maxBounce, float maxDistance)

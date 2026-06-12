@@ -1,5 +1,4 @@
 using _02_Scripts.Agent;
-using _02_Scripts.Core.Utility;
 using _02_Scripts.Player;
 using UnityEngine;
 
@@ -65,14 +64,9 @@ namespace _02_Scripts.Chip.Slam
             if (!isGrounded || !_isSlamming) return;
 
             _isSlamming = false;
-            SpawnDustEffect();
+            // EffectManager.Instance?.Play("LandingDust");
             ShakeCamera();
             DealAoeDamage();
-        }
-
-        private void SpawnDustEffect()
-        {
-            EventBus.Publish(new EffectEvent("LandingDust"));
         }
 
         private void ShakeCamera()
@@ -80,7 +74,7 @@ namespace _02_Scripts.Chip.Slam
             // EventBus.Publish(new RecoilEvent(3,3)); 바꾸기
         }
 
-        private void DealAoeDamage() //착지 대미지
+        private void DealAoeDamage()
         {
             var hits = Physics.OverlapSphere(_player.transform.position, _damageRadius, _data.EnemyLayer);
             foreach (var hit in hits)
