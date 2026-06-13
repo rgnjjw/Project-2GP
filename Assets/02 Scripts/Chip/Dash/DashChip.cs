@@ -9,6 +9,7 @@ namespace _02_Scripts.Chip.Dash
     {
         private PlayerInputSO _playerInputSO;
         private PlayerMover _playerMover;
+        private PlayerVFXContainer _vfxContainer;
         private Player.Player _player;
 
         private float _dashSpeed;
@@ -22,6 +23,7 @@ namespace _02_Scripts.Chip.Dash
         {
             _playerInputSO = player.PlayerInputSO;
             _playerMover = player.GetModule<PlayerMover>();
+            _vfxContainer = player.GetModule<PlayerVFXContainer>();
             _player = player;
 
             _playerInputSO.OnDashKeyPressed -= Dash;
@@ -76,7 +78,7 @@ namespace _02_Scripts.Chip.Dash
             else
                 effectKey = "RightDash";
 
-            // EffectManager.Instance?.Play(effectKey);
+            _vfxContainer?.Play(effectKey);
 
             Vector3 dashDir = input.magnitude > 0.1f
                 ? (_player.transform.forward * input.y + _player.transform.right * input.x).normalized

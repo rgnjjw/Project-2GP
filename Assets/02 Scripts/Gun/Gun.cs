@@ -10,13 +10,16 @@ namespace _02_Scripts.Gun
     public class Gun : MonoBehaviour
     {
         [field: SerializeField] public AgentRenderer Renderer { get; private set; }
-        [SerializeField] protected GameObject bulletTrailPrefab;
         [SerializeField] protected LayerMask layerMask;
         [SerializeField] protected int bulletDamage;
         [SerializeField] protected float fireDelay = 0.2f;
         [SerializeField] protected Transform muzzleTrm;
         [SerializeField] private RecoilEvent recoilEvent;
-        [SerializeField] private string gunFireEffect;
+        [SerializeField] protected ParticleSystem fireEffect;
+        [SerializeField] protected ParticleSystem hitEffect;
+        [SerializeField] protected TrailRenderer tracerEffect;
+
+        public bool isFiring = false;
         public event Action OnFire;
         public event Action OnEquip;
 
@@ -30,7 +33,7 @@ namespace _02_Scripts.Gun
         public virtual void Fire()
         {
             EventBus.Publish(recoilEvent);
-            // EffectManager.Instance?.Play(gunFireEffect);
+            fireEffect.Play();
             OnFire?.Invoke();
         }
 
@@ -39,13 +42,6 @@ namespace _02_Scripts.Gun
             if (Physics.Raycast(ray, out RaycastHit hit, maxDistance, layerMask))
                 return hit.point;
             return ray.origin + ray.direction * maxDistance;
-        }
-
-        protected void SpawnBulletTrail(Vector3 start, Vector3 end)
-        {
-            if (bulletTrailPrefab == null) return;
-            BulletTrail bullet = Instantiate(bulletTrailPrefab, start, Quaternion.identity).GetComponent<BulletTrail>();
-            bullet.Initialize(start, end);
         }
 
         protected List<Vector3> GetReflectedPoints(Ray ray, int maxBounce, float maxDistance)
