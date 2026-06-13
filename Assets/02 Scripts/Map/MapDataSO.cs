@@ -1,20 +1,18 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace _02_Scripts.Map
 {
-    [CreateAssetMenu(fileName = "MapDataSO", menuName = "Map/MapDataSO", order = 0)]
+    [CreateAssetMenu(fileName = "MapDataSO", menuName = "Map/MapDataSO")]
     public class MapDataSO : ScriptableObject
     {
-        public MapObjectData[] MapObjectList;
-        public EnemySpawnData[] EnemySpawnData;
+        public MapObjectData[] Objects;
     }
 
-    [Serializable]
-    public class EnemySpawnData
+    [System.Serializable]
+    public class MapObjectData
     {
-        public Vector3 enemySpawnPoint;
-        public GameObject enemyPrefab;
+        public GameObject Prefab;
+        public Vector3 Position;
+        public Quaternion Rotation;
     }
 }

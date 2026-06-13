@@ -68,6 +68,16 @@ namespace _02_Scripts.Player
             _postDashVelocity = new Vector3(v.x, 0f, v.z);
         }
 
+        public override void SetDashVelocity(Vector3 velocity, float duration)
+        {
+            if (_isSlideOverride) EndSlide();
+            _postDashVelocity = velocity;
+            Vector3 vel = _rigidbody.linearVelocity;
+            vel.x = velocity.x;
+            vel.z = velocity.z;
+            _rigidbody.linearVelocity = vel;
+        }
+
         // rigidbody XZ velocity와 _postDashVelocity를 동시에 강제 설정
         // _postDashVelocity 크기 체크를 우회하므로 어떤 속도든 보장됨
         public void ForceSetXZVelocity(Vector3 xzVelocity)

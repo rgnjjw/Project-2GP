@@ -16,6 +16,7 @@ namespace _02_Scripts.Enemy
         public void AttackEnd() => OnAttackEnd?.Invoke();
 
         public void Attack() => OnAttack?.Invoke();
+        
         public void Death() => OnDeath?.Invoke();
     }
 }

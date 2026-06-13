@@ -1,8 +1,6 @@
-// MapSaverEditor.cs
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using _02_Scripts.Enemy;
 
 namespace _02_Scripts.Map.Editor
 {
@@ -13,64 +11,48 @@ namespace _02_Scripts.Map.Editor
         {
             base.OnInspectorGUI();
 
-            MapRoot mapRoot = (MapRoot)target;
+            EditorGUILayout.Space();
 
-            if (GUILayout.Button("💾SaveMap"))
-            {
-                SaveMap(mapRoot);
-            }
+            MapRoot root = (MapRoot)target;
+
+            GUI.enabled = root.TargetData != null;
+            if (GUILayout.Button("💾 Save Map", GUILayout.Height(30)))
+                SaveMap(root);
+            GUI.enabled = true;
+
+            if (root.TargetData == null)
+                EditorGUILayout.HelpBox("TargetData를 할당하세요.", MessageType.Warning);
         }
 
-        private void SaveMap(MapRoot mapRoot)
+        private void SaveMap(MapRoot root)
         {
-            MapDataSO mapDataSO = mapRoot.TargetMapDataSO;
-            Undo.RecordObject(mapDataSO, "Save Map DataSO");
+            MapDataSO data = root.TargetData;
+            Undo.RecordObject(data, "Save Map");
 
-            var mapObjectList = new List<MapObjectData>();
-            var enemySpawnList = new List<EnemySpawnData>();
+            var list = new List<MapObjectData>();
 
-            foreach (Transform child in mapRoot.transform)
+            foreach (Transform child in root.transform)
             {
                 GameObject prefab = PrefabUtility.GetCorrespondingObjectFromSource(child.gameObject);
-
                 if (prefab == null)
                 {
-                    Debug.LogError("프리팹이 아닌 오브젝트가 있습니다");
-                    return;
+                    Debug.LogWarning($"[MapSaver] 프리팹이 아닌 오브젝트 스킵: {child.name}");
+                    continue;
                 }
 
-                if (child.GetComponent<Enemy.Enemy>() != null)
+                list.Add(new MapObjectData
                 {
-                    enemySpawnList.Add(new EnemySpawnData
-                    {
-                        enemySpawnPoint = child.localPosition,
-                        enemyPrefab = prefab
-                    });
-                }
-                else
-                {
-                    MapObject info = child.GetComponent<MapObject>();
-
-                    Vector3 spawnPos = new Vector3(child.localPosition.x, info != null ? info.spawnPositionY : child.localPosition.y, child.localPosition.z);
-
-                    mapObjectList.Add(new MapObjectData
-                    {
-                        prefab = prefab,
-                        position = child.localPosition,
-                        rotation = child.localEulerAngles,
-                        scale = child.localScale,
-                        spawnPosition = spawnPos
-                    });
-                }
+                    Prefab = prefab,
+                    Position = child.position,
+                    Rotation = child.rotation
+                });
             }
 
-            mapDataSO.MapObjectList = mapObjectList.ToArray();
-            mapDataSO.EnemySpawnData = enemySpawnList.ToArray();
-
-            EditorUtility.SetDirty(mapDataSO);
+            data.Objects = list.ToArray();
+            EditorUtility.SetDirty(data);
             AssetDatabase.SaveAssets();
 
-            Debug.Log("맵 저장 완료");
+            Debug.Log($"[MapSaver] 저장 완료 — 오브젝트: {list.Count}개");
         }
     }
 }
