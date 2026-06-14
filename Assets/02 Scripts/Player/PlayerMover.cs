@@ -5,17 +5,50 @@ namespace _02_Scripts.Player
 {
     public class PlayerMover : AgentMover
     {
-        [Header("ULTRAKILL Physics")]
         [SerializeField] private float coyoteTime = 0.12f;
 
+        [Header("Slope")]
+        [SerializeField] private float maxSlopeAngle = 45f;
+        [SerializeField] private float slopeRayDistance = 1.5f;
+
         private float _lastGroundedTime = -999f;
+        private Vector3 _slopeNormal = Vector3.up;
 
         public bool IsGroundedOrCoyote => IsGrounded || (Time.time - _lastGroundedTime <= coyoteTime);
 
         protected override void FixedUpdate()
         {
             base.FixedUpdate();
-            if (IsGrounded) _lastGroundedTime = Time.time;
+            if (IsGrounded)
+            {
+                _lastGroundedTime = Time.time;
+                DetectSlope();
+            }
+            else
+            {
+                _slopeNormal = Vector3.up;
+            }
+        }
+
+        private void DetectSlope()
+        {
+            if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, slopeRayDistance))
+            {
+                float angle = Vector3.Angle(hit.normal, Vector3.up);
+                if (angle <= maxSlopeAngle)
+                    _slopeNormal = hit.normal;
+                else
+                    _slopeNormal = Vector3.up;
+            }
+            else
+            {
+                _slopeNormal = Vector3.up;
+            }
+        }
+
+        private Vector3 ProjectOnSlope(Vector3 direction)
+        {
+            return Vector3.ProjectOnPlane(direction, _slopeNormal).normalized * direction.magnitude;
         }
 
         protected override void MoveCharacter()
@@ -34,17 +67,23 @@ namespace _02_Scripts.Player
                 float targetZ = _movementZ * _moveSpeed * _moveSpeedMultiplier;
                 Vector3 target = new Vector3(targetX, 0f, targetZ);
 
+                bool onSlope = _slopeNormal != Vector3.up;
+                if (onSlope)
+                    target = ProjectOnSlope(target);
+
                 if (_postDashVelocity.sqrMagnitude > target.sqrMagnitude + 0.01f)
                 {
                     _postDashVelocity = Vector3.MoveTowards(_postDashVelocity, target, PostDashDecay * Time.fixedDeltaTime);
                     velocity.x = _postDashVelocity.x;
                     velocity.z = _postDashVelocity.z;
+                    if (onSlope) velocity.y = _postDashVelocity.y;
                 }
                 else
                 {
                     _postDashVelocity = Vector3.zero;
-                    velocity.x = targetX;
-                    velocity.z = targetZ;
+                    velocity.x = target.x;
+                    velocity.z = target.z;
+                    if (onSlope) velocity.y = target.y;
                 }
             }
 
@@ -78,8 +117,6 @@ namespace _02_Scripts.Player
             _rigidbody.linearVelocity = vel;
         }
 
-        // rigidbody XZ velocity와 _postDashVelocity를 동시에 강제 설정
-        // _postDashVelocity 크기 체크를 우회하므로 어떤 속도든 보장됨
         public void ForceSetXZVelocity(Vector3 xzVelocity)
         {
             _postDashVelocity = xzVelocity;
