@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using DG.Tweening;
+using Unity.AI.Navigation;
 using UnityEngine;
 
 namespace _02_Scripts.Map
@@ -11,6 +12,7 @@ namespace _02_Scripts.Map
         [SerializeField] private float generateDuration = 0.5f;
         [SerializeField] private float waitBetweenObjects = 0.1f;
         [SerializeField] private Ease ease = Ease.OutBack;
+        [SerializeField] private NavMeshSurface navMeshSurface;
 
         public event Action OnGenerateComplete;
 
@@ -36,6 +38,8 @@ namespace _02_Scripts.Map
                 yield return new WaitForSeconds(waitBetweenObjects);
             }
 
+            yield return new WaitForSeconds(generateDuration);
+            navMeshSurface.BuildNavMesh();
             OnGenerateComplete?.Invoke();
         }
     }

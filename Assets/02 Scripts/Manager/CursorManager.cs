@@ -1,3 +1,4 @@
+using System;
 using _02_Scripts.Core.Utility;
 using UnityEngine;
 
@@ -9,6 +10,12 @@ namespace _02_Scripts.Manager
         {
             Cursor.visible = visible;
             Cursor.lockState = visible ? CursorLockMode.None : CursorLockMode.Locked;
+        }
+
+        //임시
+        private void Start()
+        {
+            SetCursorVisible(false);
         }
     }
 }
