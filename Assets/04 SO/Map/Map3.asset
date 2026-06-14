@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58e3c30353504bbda49a908beac97fae, type: 3}
+  m_Name: Map3
+  m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.Map.MapDataSO
+  Objects:
+  - Prefab: {fileID: 3181803374682010429, guid: 48be47b194aac7645b118dcf0dd4498d, type: 3}
+    Position: {x: 10, y: 6.5, z: 18}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 3181803374682010429, guid: 48be47b194aac7645b118dcf0dd4498d, type: 3}
+    Position: {x: 10, y: 6.5, z: -24}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6210035119187169964, guid: 4a6b0095cc045e548827a6db47aa7199, type: 3}
+    Position: {x: 6, y: 6.5, z: -14}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6210035119187169964, guid: 4a6b0095cc045e548827a6db47aa7199, type: 3}
+    Position: {x: 6, y: 6.5, z: 16}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6210035119187169964, guid: 4a6b0095cc045e548827a6db47aa7199, type: 3}
+    Position: {x: 16, y: 12.5, z: 24}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6210035119187169964, guid: 4a6b0095cc045e548827a6db47aa7199, type: 3}
+    Position: {x: -4, y: 12.5, z: -22}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}

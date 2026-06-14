@@ -22496,7 +22496,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!4 &6385640813415015220
 Transform:
   m_ObjectHideFlags: 0
@@ -22909,8 +22909,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32de7f83116e4ee0a3db35effbfdee99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.Map.MapGenerator
-  data: {fileID: 11400000, guid: 1bcabc67a55f5574aa8c2ac33e8538cc, type: 2}
-  generateDuration: 1
+  data: {fileID: 11400000, guid: b4656c7cca022114dbdfa518fcd85d86, type: 2}
+  generateDuration: 3
   waitBetweenObjects: 0.1
   ease: 1
 --- !u!1660057539 &9223372036854775807

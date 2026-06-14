@@ -35,7 +35,7 @@ MonoBehaviour:
     Position: {x: 8.000023, y: 6.5, z: 15}
     Rotation: {x: -0, y: -1, z: -0, w: 0}
   - Prefab: {fileID: 1076990371101664459, guid: 98abb1b52b55f97459d3fe26870737f4, type: 3}
-    Position: {x: -7.5, y: 7, z: 14.5}
+    Position: {x: -8, y: 6.5, z: 15}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
   - Prefab: {fileID: 1076990371101664459, guid: 98abb1b52b55f97459d3fe26870737f4, type: 3}
     Position: {x: 8, y: 6.5, z: -15}
