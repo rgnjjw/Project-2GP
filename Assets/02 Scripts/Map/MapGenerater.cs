@@ -12,14 +12,9 @@ namespace _02_Scripts.Map
         [SerializeField] private float waitBetweenObjects = 0.1f;
         [SerializeField] private Ease ease = Ease.OutBack;
 
-
-        private void Start()
-        {
-            StartGenerate();
-        }
-
         public event Action OnGenerateComplete;
 
+        [ContextMenu("맵 생성")]
         public void StartGenerate() => StartCoroutine(GenerateMap());
 
         private IEnumerator GenerateMap()
@@ -28,7 +23,12 @@ namespace _02_Scripts.Map
             {
                 if (objData.Prefab == null) continue;
 
-                Vector3 spawnPos = new Vector3(objData.Position.x, 0f, objData.Position.z);
+                float spawnY = objData.Position.y - 20f;
+                MapSpawnOffset offset = objData.Prefab.GetComponent<MapSpawnOffset>();
+                if (offset != null)
+                    spawnY = offset.SpawnOffsetY;
+
+                Vector3 spawnPos = new Vector3(objData.Position.x, spawnY, objData.Position.z);
                 GameObject obj = Instantiate(objData.Prefab, spawnPos, objData.Rotation);
 
                 obj.transform.DOMoveY(objData.Position.y, generateDuration).SetEase(ease);

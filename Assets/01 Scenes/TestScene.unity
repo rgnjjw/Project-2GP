@@ -22910,8 +22910,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.Map.MapGenerator
   data: {fileID: 11400000, guid: b4656c7cca022114dbdfa518fcd85d86, type: 2}
-  generateDuration: 3
-  waitBetweenObjects: 0.1
+  generateDuration: 2
+  waitBetweenObjects: 0.01
   ease: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

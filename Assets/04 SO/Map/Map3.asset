@@ -14,20 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.Map.MapDataSO
   Objects:
   - Prefab: {fileID: 3181803374682010429, guid: 48be47b194aac7645b118dcf0dd4498d, type: 3}
-    Position: {x: 10, y: 6.5, z: 18}
+    Position: {x: 10, y: 30, z: 18}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
   - Prefab: {fileID: 3181803374682010429, guid: 48be47b194aac7645b118dcf0dd4498d, type: 3}
-    Position: {x: 10, y: 6.5, z: -24}
+    Position: {x: 10, y: 30, z: -24}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
   - Prefab: {fileID: 6210035119187169964, guid: 4a6b0095cc045e548827a6db47aa7199, type: 3}
-    Position: {x: 6, y: 6.5, z: -14}
+    Position: {x: 6, y: 28, z: -14}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
   - Prefab: {fileID: 6210035119187169964, guid: 4a6b0095cc045e548827a6db47aa7199, type: 3}
-    Position: {x: 6, y: 6.5, z: 16}
+    Position: {x: -4, y: 34, z: -22}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
   - Prefab: {fileID: 6210035119187169964, guid: 4a6b0095cc045e548827a6db47aa7199, type: 3}
-    Position: {x: 16, y: 12.5, z: 24}
+    Position: {x: 16, y: 34, z: 24}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
   - Prefab: {fileID: 6210035119187169964, guid: 4a6b0095cc045e548827a6db47aa7199, type: 3}
-    Position: {x: -4, y: 12.5, z: -22}
+    Position: {x: 6, y: 28, z: 16}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
