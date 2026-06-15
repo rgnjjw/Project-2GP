@@ -49,7 +49,7 @@ namespace _02_Scripts.Enemy.State
 
         private void HandleAttack()
         {
-            _currentSkill.ExecuteSkill(enemy.transform);
+            _currentSkill.ExecuteSkill(enemy);
         }
 
         private void HandleAttackEnd()

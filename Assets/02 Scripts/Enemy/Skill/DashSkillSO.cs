@@ -13,13 +13,11 @@ namespace _02_Scripts.Enemy.Skill
         [field: SerializeField] public float DashDistance { get; private set; } = 5f;
         [field: SerializeField] public int Damage { get; private set; } = 15;
 
-        public override void ExecuteSkill(Transform centerTrm)
+        public override void ExecuteSkill(Enemy enemy)
         {
-            if (!centerTrm.TryGetComponent<Enemy>(out var enemy)) return;
-
             // 애니메이션 재생 중 플레이어가 TargetFinder 범위를 벗어날 수 있으므로
             // 마지막으로 추적했던 CurrentTarget을 폴백으로 사용
-            Transform target = TargetFinder?.GetClosest(centerTrm) ?? enemy.CurrentTarget;
+            Transform target = TargetFinder?.GetClosest(enemy.transform) ?? enemy.CurrentTarget;
             if (target == null)
             {
                 NotifyComplete();

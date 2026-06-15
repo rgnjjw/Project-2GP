@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52a4b5c4b26cee740a92cf998120d593, type: 3}
+  m_Name: PistolShot
+  m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.Enemy.Skill.RangedAttackSkillSO
+  <AnimParam>k__BackingField: {fileID: 11400000, guid: 71ea734fa451e0348bc958795d2de4aa, type: 2}
+  <Cooldown>k__BackingField: 4
+  DamageAreaDetection:
+    rid: -2
+  TargetFinder:
+    rid: 4481138055766605857
+  <Damage>k__BackingField: 20
+  <TargetLayer>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 256
+  <TracerPrefab>k__BackingField: {fileID: 2090086529666823614, guid: 860aaf4534ce4754297e0f2e79b5e0e0, type: 3}
+  <LaserPrefab>k__BackingField: {fileID: 4999676970033354722, guid: e7f744b06b4d5d3438ab253e4d8dc15c, type: 3}
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 4481138055766605857
+      type: {class: BoxDetect, ns: _02_Scripts.Core.Detect, asm: Assembly-CSharp}
+      data:
+        layerMask:
+          serializedVersion: 2
+          m_Bits: 256
+        gizmoColor: {r: 0, g: 1, b: 0, a: 1}
+        size: {x: 15, y: 2.5, z: 15}
+        offset: {x: 0, y: 1.25, z: 0}

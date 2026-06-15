@@ -22,7 +22,7 @@ namespace _02_Scripts.Enemy.Skill
         [field: SerializeField] public int MaxAttempts { get; private set; } = 20;
         [SerializeField] private SummonEntry[] summonPool;
 
-        public override void ExecuteSkill(Transform centerTrm)
+        public override void ExecuteSkill(Enemy enemy)
         {
             var spawnedPositions = new List<Vector3>();
 
@@ -31,7 +31,7 @@ namespace _02_Scripts.Enemy.Skill
                 GameObject prefab = GetWeightedRandom();
                 if (prefab == null) continue;
 
-                if (!TryGetSpawnPosition(centerTrm.position, spawnedPositions, out Vector3 spawnPos)) continue;
+                if (!TryGetSpawnPosition(enemy.transform.position, spawnedPositions, out Vector3 spawnPos)) continue;
 
                 spawnedPositions.Add(spawnPos);
 

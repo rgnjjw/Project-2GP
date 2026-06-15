@@ -33,7 +33,8 @@ namespace _02_Scripts.Enemy.Skill.Editor
             iterator.NextVisible(true);
             while (iterator.NextVisible(false))
             {
-                if (iterator.name is "<LandingAnimParam>k__BackingField"
+                if (iterator.name is "<AnimParam>k__BackingField"
+                    or "<LandingAnimParam>k__BackingField"
                     or "<Cooldown>k__BackingField"
                     or "DamageAreaDetection"
                     or "TargetFinder"

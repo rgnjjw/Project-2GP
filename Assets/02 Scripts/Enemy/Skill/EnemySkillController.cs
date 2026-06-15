@@ -34,7 +34,7 @@ namespace _02_Scripts.Enemy.Skill
 
             foreach (var skill in _skills)
             {
-                if (!IsOffCooldown(skill) || !skill.CanExecuteSkill(_enemy.transform)) continue;
+                if (!IsOffCooldown(skill) || !skill.CanExecuteSkill(_enemy)) continue;
                 if (skill.TargetFinder == null) continue;
 
                 if (skill.Cooldown > maxCooldown)

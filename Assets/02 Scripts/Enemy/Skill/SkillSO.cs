@@ -16,10 +16,10 @@ namespace _02_Scripts.Enemy.Skill
 
         public event Action OnExecutionComplete;
 
-        public bool CanExecuteSkill(Transform centerTrm)
-            => TargetFinder != null && TargetFinder.HasAnyInRange(centerTrm);
+        public bool CanExecuteSkill(Enemy enemy)
+            => TargetFinder != null && TargetFinder.HasAnyInRange(enemy.transform);
 
-        public abstract void ExecuteSkill(Transform centerTrm);
+        public abstract void ExecuteSkill(Enemy enemy);
 
         protected void NotifyComplete() => OnExecutionComplete?.Invoke();
     }

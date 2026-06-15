@@ -7,9 +7,9 @@ namespace _02_Scripts.Enemy.Skill
     public class MeleeAttackSkill : SkillSO
     {
         [field: SerializeField] public int Damage { get;private set; }
-        public override void ExecuteSkill(Transform centerTrm)
+        public override void ExecuteSkill(Enemy enemy)
         {
-            var closest = DamageAreaDetection.GetClosest(centerTrm);
+            var closest = DamageAreaDetection.GetClosest(enemy.transform);
             if (closest != null && closest.transform.TryGetComponent<Player.Player>(out var player))
                 player.GetModule<AgentHealth>().ApplyDamage(Damage);
 
