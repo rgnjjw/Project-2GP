@@ -40,3 +40,50 @@ MonoBehaviour:
   - Prefab: {fileID: 8023243943003075433, guid: 355742be7a3f82f4086b6d432700e58e, type: 3}
     Position: {x: 14, y: 8.5, z: 0}
     Rotation: {x: -0, y: 1, z: -0, w: 0}
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: 6.18, y: 33.46, z: 0.05}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: 0.01, y: 33.46, z: -6.1}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: -6.05, y: 33.46, z: -0.11}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: -0.15, y: 33.46, z: 5.95}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: -18, y: 25.72, z: -18}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: 18, y: 25.72, z: -18}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: 18, y: 25.72, z: 18}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: -18, y: 25.72, z: 18}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 2510478182919719789, guid: fb86683530b9c5748b2fc70fcfc52684, type: 3}
+    Position: {x: -0.12, y: 33.28, z: 0}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  SpawnPoints:
+  - Type: 2
+    Position: {x: -0.12, y: 33.28, z: 0}
+  - Type: 0
+    Position: {x: 18, y: 25.72, z: 18}
+  - Type: 0
+    Position: {x: -0.15, y: 33.46, z: 5.95}
+  - Type: 0
+    Position: {x: -18, y: 25.72, z: 18}
+  - Type: 0
+    Position: {x: 0.01, y: 33.46, z: -6.1}
+  - Type: 0
+    Position: {x: -18, y: 25.72, z: -18}
+  - Type: 0
+    Position: {x: 6.18, y: 33.46, z: 0.05}
+  - Type: 0
+    Position: {x: 18, y: 25.72, z: -18}
+  - Type: 0
+    Position: {x: -6.05, y: 33.46, z: -0.11}
+  Waves: []
