@@ -24,7 +24,7 @@ namespace _02_Scripts.Enemy.Skill.Editor
             var skill = (SkillSO)target;
             serializedObject.Update();
 
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("<AnimParam>k__BackingField"), new GUIContent("Anim Param"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("<LandingAnimParam>k__BackingField"), new GUIContent("Anim Param"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("<Cooldown>k__BackingField"), new GUIContent("Cooldown"));
 
             EditorGUILayout.Space();
@@ -33,7 +33,7 @@ namespace _02_Scripts.Enemy.Skill.Editor
             iterator.NextVisible(true);
             while (iterator.NextVisible(false))
             {
-                if (iterator.name is "<AnimParam>k__BackingField"
+                if (iterator.name is "<LandingAnimParam>k__BackingField"
                     or "<Cooldown>k__BackingField"
                     or "DamageAreaDetection"
                     or "TargetFinder"

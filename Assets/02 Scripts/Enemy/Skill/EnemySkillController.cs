@@ -29,21 +29,21 @@ namespace _02_Scripts.Enemy.Skill
 
         public SkillSO GetAvailableSkill()
         {
-            SkillSO closestSkill = null;
-            float minRange = float.MaxValue;
+            SkillSO bestSkill = null;
+            float maxCooldown = float.MinValue;
 
             foreach (var skill in _skills)
             {
                 if (!IsOffCooldown(skill) || !skill.CanExecuteSkill(_enemy.transform)) continue;
                 if (skill.TargetFinder == null) continue;
 
-                if (skill.TargetFinder.Range < minRange)
+                if (skill.Cooldown > maxCooldown)
                 {
-                    minRange = skill.TargetFinder.Range;
-                    closestSkill = skill;
+                    maxCooldown = skill.Cooldown;
+                    bestSkill = skill;
                 }
             }
-            return closestSkill;
+            return bestSkill;
         }
         
         public float GetMinSkillRange()

@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b52d4efbab4346678578f553baa19721, type: 3}
+  m_Name: Summon
+  m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.Enemy.Skill.SummonSkill
+  <AnimParam>k__BackingField: {fileID: 11400000, guid: 5e6aaf3d53423fc43a2503901297f32a, type: 2}
+  <Cooldown>k__BackingField: 30
+  DamageAreaDetection:
+    rid: -2
+  TargetFinder:
+    rid: 4481138043974844733
+  <SummonCount>k__BackingField: 4
+  <SpawnRadius>k__BackingField: 10
+  <MinSpacing>k__BackingField: 1.5
+  <MaxAttempts>k__BackingField: 20
+  summonPool:
+  - Prefab: {fileID: 2354599137957298582, guid: b363d3b81c7c2e24fa37700494da482f, type: 3}
+    Weight: 1
+  - Prefab: {fileID: 8291943934468267832, guid: e07f9bbf37d470048b86f0dac618f8a8, type: 3}
+    Weight: 1
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 4481138043974844733
+      type: {class: SphereDetect, ns: _02_Scripts.Core.Detect, asm: Assembly-CSharp}
+      data:
+        layerMask:
+          serializedVersion: 2
+          m_Bits: 1
+        gizmoColor: {r: 0, g: 1, b: 0, a: 1}
+        radius: 25

@@ -56,11 +56,6 @@ namespace _02_Scripts.Enemy
 
             _lastHitAnimTime = Time.time;
 
-            Animator animator = _navEnemyRenderer.Animator;
-
-            animator.SetLayerWeight(hitLayerIndex, 1f);
-            animator.ResetTrigger(hitAnimParam.ParamHash);
-            animator.SetTrigger(hitAnimParam.ParamHash);
         }
 
         protected override void OnDead()
