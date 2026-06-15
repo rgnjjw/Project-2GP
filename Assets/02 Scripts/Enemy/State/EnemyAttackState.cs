@@ -41,14 +41,9 @@ namespace _02_Scripts.Enemy.State
             _skillEnded = false;
 
             _enemyAnimationEvent.OnAttackEnd += HandleAttackEnd;
-            _enemyAnimationEvent.OnAttack += HandleAttack;
             _currentSkill.OnExecutionComplete += HandleSkillComplete;
 
             _renderer.PlayClip(_currentSkill.AnimParam.ParamHash, 0, crossFadeDuration, layerIndex);
-        }
-
-        private void HandleAttack()
-        {
             _currentSkill.ExecuteSkill(enemy);
         }
 
@@ -76,7 +71,6 @@ namespace _02_Scripts.Enemy.State
             base.Exit();
             _navEnemyRenderer.UseForcedRotation = false;
             _enemyAnimationEvent.OnAttackEnd -= HandleAttackEnd;
-            _enemyAnimationEvent.OnAttack -= HandleAttack;
             if (_currentSkill != null)
                 _currentSkill.OnExecutionComplete -= HandleSkillComplete;
         }

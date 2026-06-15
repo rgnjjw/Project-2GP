@@ -11,47 +11,56 @@ namespace _02_Scripts.Enemy.Skill
         [field: SerializeField] public TrailRenderer TracerPrefab { get; private set; }
         [field: SerializeField] public LineRenderer LaserPrefab { get; private set; }
 
-        private Transform _muzzle;
-        private Transform _target;
-        private EnemyAnimationEvent _animEvent;
-        private EnemyLaserAimer _laserAimer;
-
         public override void ExecuteSkill(Enemy enemy)
         {
-            _target = TargetFinder?.GetClosest(enemy.transform) ?? enemy.CurrentTarget;
-            _muzzle = FindMuzzle(enemy);
-            _animEvent = enemy.GetModule<EnemyAnimationEvent>();
-            _laserAimer = enemy.GetModule<EnemyLaserAimer>();
+            var target = TargetFinder?.GetClosest(enemy.transform) ?? enemy.CurrentTarget;
+            var muzzle = FindMuzzle(enemy);
+            var animEvent = enemy.GetModule<EnemyAnimationEvent>();
+            var laserAimer = enemy.GetModule<EnemyLaserAimer>();
 
-            _animEvent.OnPrepare += HandlePrepare;
-            _animEvent.OnAttack += HandleAttack;
-        }
+            Debug.Log($"[RangedSkill] ExecuteSkill 시작 | target={target?.name ?? "null"} | muzzle={muzzle?.name} | animEvent={animEvent != null} | laserAimer={laserAimer != null}");
 
-        private void HandlePrepare()
-        {
-            if (LaserPrefab != null && _laserAimer != null)
-                _laserAimer.StartAim(LaserPrefab, _muzzle, _target, TargetLayer);
-        }
-
-        private void HandleAttack()
-        {
-            _laserAimer?.StopAim();
-
-            if (_target != null)
+            void HandlePrepare()
             {
-                Vector3 dir = (_target.position - _muzzle.position).normalized;
-                FireTracer(_muzzle.position, dir);
+                Debug.Log("[RangedSkill] OnPrepare 발동 - 레이저 조준 시작");
+                if (LaserPrefab != null && laserAimer != null)
+                    laserAimer.StartAim(LaserPrefab, muzzle, target, TargetLayer);
+                else
+                    Debug.LogWarning($"[RangedSkill] OnPrepare - LaserPrefab={LaserPrefab != null} / laserAimer={laserAimer != null}");
             }
 
-            _animEvent.OnPrepare -= HandlePrepare;
-            _animEvent.OnAttack -= HandleAttack;
+            void HandleAttack()
+            {
+                Debug.Log("[RangedSkill] OnAttack 발동 - 발사");
+                laserAimer?.StopAim();
 
-            NotifyComplete();
+                animEvent.OnPrepare -= HandlePrepare;
+                animEvent.OnAttack -= HandleAttack;
+
+                if (target != null)
+                {
+                    Vector3 dir = (target.position - muzzle.position).normalized;
+                    FireTracer(muzzle.position, dir);
+                }
+                else
+                {
+                    Debug.LogWarning("[RangedSkill] OnAttack - target이 null이라 발사 스킵");
+                }
+
+                NotifyComplete();
+            }
+
+            animEvent.OnPrepare += HandlePrepare;
+            animEvent.OnAttack += HandleAttack;
         }
 
         private void FireTracer(Vector3 origin, Vector3 direction)
         {
-            if (TracerPrefab == null) return;
+            if (TracerPrefab == null)
+            {
+                Debug.LogWarning("[RangedSkill] TracerPrefab이 null");
+                return;
+            }
 
             TrailRenderer tracer = Object.Instantiate(TracerPrefab, origin, Quaternion.identity);
             tracer.AddPosition(origin);
@@ -59,12 +68,14 @@ namespace _02_Scripts.Enemy.Skill
             if (Physics.Raycast(origin, direction, out RaycastHit hit, Mathf.Infinity, TargetLayer))
             {
                 tracer.transform.position = hit.point;
+                Debug.Log($"[RangedSkill] 레이캐스트 히트: {hit.transform.name}");
 
                 if (hit.transform.TryGetComponent<Player.Player>(out var player))
                     player.GetModule<AgentHealth>().ApplyDamage(Damage);
             }
             else
             {
+                Debug.Log("[RangedSkill] 레이캐스트 미스");
                 tracer.transform.position = origin + direction * 100f;
             }
         }
@@ -74,8 +85,12 @@ namespace _02_Scripts.Enemy.Skill
             foreach (Transform t in enemy.GetComponentsInChildren<Transform>(true))
             {
                 if (t.name == "Muzzle" || t.CompareTag("Muzzle"))
+                {
+                    Debug.Log($"[RangedSkill] Muzzle 발견: {t.name}");
                     return t;
+                }
             }
+            Debug.LogWarning("[RangedSkill] Muzzle 오브젝트를 찾지 못해 enemy.transform 사용");
             return enemy.transform;
         }
     }

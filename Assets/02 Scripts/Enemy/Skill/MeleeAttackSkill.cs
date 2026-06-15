@@ -6,14 +6,24 @@ namespace _02_Scripts.Enemy.Skill
     [CreateAssetMenu(fileName = "MeleeAttackSkill", menuName = "Skill/MeleeAttackSkill", order = 0)]
     public class MeleeAttackSkill : SkillSO
     {
-        [field: SerializeField] public int Damage { get;private set; }
+        [field: SerializeField] public int Damage { get; private set; }
+
         public override void ExecuteSkill(Enemy enemy)
         {
-            var closest = DamageAreaDetection.GetClosest(enemy.transform);
-            if (closest != null && closest.transform.TryGetComponent<Player.Player>(out var player))
-                player.GetModule<AgentHealth>().ApplyDamage(Damage);
+            var animEvent = enemy.GetModule<EnemyAnimationEvent>();
 
-            NotifyComplete();
+            void HandleAttack()
+            {
+                animEvent.OnAttack -= HandleAttack;
+
+                var closest = DamageAreaDetection.GetClosest(enemy.transform);
+                if (closest != null && closest.TryGetComponent<Player.Player>(out var player))
+                    player.GetModule<AgentHealth>().ApplyDamage(Damage);
+
+                NotifyComplete();
+            }
+
+            animEvent.OnAttack += HandleAttack;
         }
     }
 }
