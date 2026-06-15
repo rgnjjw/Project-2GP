@@ -22,8 +22,13 @@ namespace _02_Scripts.Enemy.State
         {
             base.Enter(crossFadeDuration, layerIndex);
             _checkTimer = 0.2f;
-            _navEnemyRenderer.NavMeshAgent.ResetPath();
-            _navEnemyRenderer.NavMeshAgent.velocity = Vector3.zero;
+    
+            if (_navEnemyRenderer.NavMeshAgent.isActiveAndEnabled)
+            {
+                _navEnemyRenderer.NavMeshAgent.ResetPath();
+                _navEnemyRenderer.NavMeshAgent.velocity = Vector3.zero;
+            }
+    
             _renderer.PlayClip(_stateClipHash, 0, crossFadeDuration, layerIndex);
         }
 

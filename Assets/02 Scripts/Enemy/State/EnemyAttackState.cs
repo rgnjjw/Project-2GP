@@ -8,7 +8,6 @@ namespace _02_Scripts.Enemy.State
         private readonly EnemySkillController _enemySkillController;
         private readonly NavEnemyRenderer _navEnemyRenderer;
         private readonly EnemyAnimationEvent _enemyAnimationEvent;
-        private readonly EnemyDataContainer _enemyDataContainer;
         private SkillSO _currentSkill;
 
         private bool _animEnded;
@@ -20,7 +19,6 @@ namespace _02_Scripts.Enemy.State
             _navEnemyRenderer = enemy.GetModule<NavEnemyRenderer>();
             _enemySkillController = enemy.GetModule<EnemySkillController>();
             _enemyAnimationEvent = enemy.GetModule<EnemyAnimationEvent>();
-            _enemyDataContainer = enemy.GetModule<EnemyDataContainer>();
         }
 
         public override void Enter(float crossFadeDuration, int layerIndex = 0)

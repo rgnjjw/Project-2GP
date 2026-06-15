@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3227282666571667363}
   - component: {fileID: 8615069901982716506}
   - component: {fileID: 476405747024428415}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SmallStairs
   m_TagString: Untagged
   m_Icon: {fileID: 0}

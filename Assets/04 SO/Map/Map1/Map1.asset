@@ -49,3 +49,8 @@ MonoBehaviour:
   - Prefab: {fileID: 1076990371101664459, guid: 98abb1b52b55f97459d3fe26870737f4, type: 3}
     Position: {x: 14.999999, y: 6.5, z: -7.999999}
     Rotation: {x: -0, y: 0.7071068, z: -0, w: -0.7071068}
+  SpawnPoints: []
+  Waves:
+  - {fileID: 11400000, guid: 40a0bd0f5e1a4ba488a70e59701aeca2, type: 2}
+  - {fileID: 11400000, guid: dfbeb30597ed6d649879f8e6dad099af, type: 2}
+  - {fileID: 11400000, guid: bfb807378a2e17e40bd63ef635f3b4aa, type: 2}

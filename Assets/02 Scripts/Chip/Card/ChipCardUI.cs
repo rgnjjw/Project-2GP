@@ -133,6 +133,8 @@ namespace _02_Scripts.Chip.Card
             for (int i = 0; i < cards.Length; i++)
                 cards[i].SetInteractable(false);
 
+            CursorManager.Instance.SetCursorVisible(true); // 추가
+
             cards[cardIndex].GetComponent<RectTransform>()
                 .DOPunchScale(Vector3.one * 0.25f, 0.3f, 0, 0.5f)
                 .OnComplete(PlayExitAnimation);
@@ -141,28 +143,21 @@ namespace _02_Scripts.Chip.Card
         private void PlayExitAnimation()
         {
             float canvasHeight = ((RectTransform)panel.transform).rect.height;
-
             Sequence exitSeq = DOTween.Sequence();
 
             for (int i = 0; i < cards.Length; i++)
             {
                 if (!cards[i].gameObject.activeSelf) continue;
-
                 RectTransform rt = cards[i].GetComponent<RectTransform>();
                 rt.DOKill(true);
-
-                exitSeq.Join(
-                    rt.DOAnchorPosY(-canvasHeight, exitDuration)
-                        .SetEase(Ease.InBack)
-                );
+                exitSeq.Join(rt.DOAnchorPosY(-canvasHeight, exitDuration).SetEase(Ease.InBack));
             }
-            
-            CursorManager.Instance.SetCursorVisible(false);
 
             exitSeq.OnComplete(() =>
             {
                 panel.SetActive(false);
                 _rectTransform.anchoredPosition = _originalPosition;
+                CursorManager.Instance.SetCursorVisible(false); // 여기로 이동
             });
         }
 

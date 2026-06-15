@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3523977999185921944}
   - component: {fileID: 4372868965331616492}
   - component: {fileID: 4826558523382994599}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BigCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

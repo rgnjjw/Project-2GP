@@ -8,7 +8,7 @@ namespace _02_Scripts.Enemy.State
         private readonly NavEnemyRenderer _navEnemyRenderer;
         private readonly EnemySkillController _enemySkillController;
         private readonly EnemyDataContainer _enemyDataContainer;
-        private float _checkTimer;//연산비용을 줄이기 위해 사용함
+        private float _checkTimer;
     
         public EnemyChaseState(Agent.Agent agent, int clipHash) : base(agent, clipHash)
         {
@@ -17,16 +17,16 @@ namespace _02_Scripts.Enemy.State
             _enemyDataContainer = enemy.GetModule<EnemyDataContainer>();
             _enemySkillController = enemy.GetModule<EnemySkillController>();
         }
-
+        
         public override void Enter(float crossFadeDuration, int layerIndex = 0)
         {
             base.Enter(crossFadeDuration, layerIndex);
             _checkTimer = 0.2f;
 
             enemy.CurrentTarget = _enemyDataContainer.ChaseRange.GetClosest(enemy.transform);
-            if (enemy.CurrentTarget != null)
+            if (enemy.CurrentTarget != null && _navEnemyRenderer.NavMeshAgent.isActiveAndEnabled)
                 _navEnemyRenderer.NavMeshAgent.SetDestination(enemy.CurrentTarget.position);
-            
+
             _renderer.PlayClip(_stateClipHash, 0, crossFadeDuration, layerIndex);
 
             float normalizedSpeed = _navEnemyRenderer.NavMeshAgent.velocity.magnitude / _navEnemyRenderer.NavMeshAgent.speed;
@@ -36,14 +36,9 @@ namespace _02_Scripts.Enemy.State
         public override void Update()
         {
             base.Update();
-            
-            Debug.Log("CHASE STATE");
-            
+
             Vector3 velocity = _navEnemyRenderer.NavMeshAgent.velocity;
             Vector3 localVelocity = enemy.transform.InverseTransformDirection(velocity.normalized);
-    
-            _renderer.Animator.SetFloat("MoveX", localVelocity.x, 0.1f, Time.deltaTime);
-                _renderer.Animator.SetFloat("MoveY", localVelocity.z, 0.1f, Time.deltaTime);
     
             float normalizedSpeed = velocity.magnitude / _navEnemyRenderer.NavMeshAgent.speed;
             _renderer.Animator.SetFloat(_navEnemyRenderer.SpeedAnimParam.ParamHash, normalizedSpeed, 0.1f, Time.deltaTime);
@@ -59,14 +54,14 @@ namespace _02_Scripts.Enemy.State
             }
 
             if (!_enemyDataContainer.ChaseRange.HasAnyInRange(enemy.transform) 
-                || Vector3.Distance(enemy.CurrentTarget.position,enemy.transform.position) <= _navEnemyRenderer.NavMeshAgent.stoppingDistance)
+                || Vector3.Distance(enemy.CurrentTarget.position, enemy.transform.position) <= _navEnemyRenderer.NavMeshAgent.stoppingDistance)
             {
                 enemy.ChangeState(EnemyStateEnum.IDLE);
                 return;
             }
 
             var target = _enemyDataContainer.ChaseRange.GetClosest(enemy.transform);
-            if (target != null)
+            if (target != null && _navEnemyRenderer.NavMeshAgent.isActiveAndEnabled)
                 _navEnemyRenderer.NavMeshAgent.SetDestination(target.position);
         }
     }

@@ -60,7 +60,6 @@ namespace _02_Scripts.Enemy
 
         protected override void OnDead()
         {
-            // StageManager.Instance.EnemyCount--;//적 카운트
             LevelManager.Instance.AddExp(10);
 
             if (_capsuleCollider != null)

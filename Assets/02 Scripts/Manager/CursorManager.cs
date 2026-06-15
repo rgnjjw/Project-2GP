@@ -12,10 +12,5 @@ namespace _02_Scripts.Manager
             Cursor.lockState = visible ? CursorLockMode.None : CursorLockMode.Locked;
         }
 
-        //임시
-        private void Start()
-        {
-            SetCursorVisible(false);
-        }
     }
 }

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7559398441865785223}
   - component: {fileID: 4345324205454782571}
   - component: {fileID: 1138507999112838551}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: StairCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

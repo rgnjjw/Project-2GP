@@ -1,3 +1,4 @@
+using System;
 using _02_Scripts.Core.Utility;
 using _02_Scripts.Map;
 using UnityEngine;
@@ -6,12 +7,18 @@ namespace _02_Scripts.Manager
 {
     public class StageManager : MonoSingleton<StageManager>
     {
-        [SerializeField] private GameObject mapSelectorRoot;
         [SerializeField] private MapGenerator mapGenerator;
         [SerializeField] private WaveManager waveManager;
+        
+        [SerializeField] private MapDataSO testMapData; // 임시
 
+        private void Start()
+        {
+            if (testMapData != null)
+                StartStage(testMapData);
+        }
         public int CurrentLevel { get; private set; } = 1;
-
+        
         protected override void Awake()
         {
             base.Awake();
@@ -21,7 +28,6 @@ namespace _02_Scripts.Manager
 
         public void StartStage(MapDataSO mapData)
         {
-            mapSelectorRoot.SetActive(false);
             waveManager.SetMapData(mapData);
             mapGenerator.StartGenerate(mapData);
         }
@@ -33,8 +39,8 @@ namespace _02_Scripts.Manager
 
         private void OnAllWavesCleared()
         {
+            mapGenerator.StartDestroy();
             CurrentLevel++;
-            mapSelectorRoot.SetActive(true);
         }
 
         protected override void OnDestroy()

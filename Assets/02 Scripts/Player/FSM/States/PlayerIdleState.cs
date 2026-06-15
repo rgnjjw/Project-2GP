@@ -22,9 +22,6 @@ namespace _02_Scripts.Player.FSM.States
             float xInput = player.PlayerInputSO.InputDirection.x;
             float zInput = player.PlayerInputSO.InputDirection.y;
             
-            _renderer.Animator.SetFloat("MoveX", xInput);
-            _renderer.Animator.SetFloat("MoveY", zInput);
-         
             if (xInput != 0 || zInput != 0)
             {
                 player.ChangeState(PlayerStateEnum.MOVE);
