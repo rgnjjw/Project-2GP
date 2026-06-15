@@ -23,7 +23,7 @@ namespace _02_Scripts.Enemy.State
             base.Enter(crossFadeDuration, layerIndex);
             _checkTimer = 0.2f;
     
-            if (_navEnemyRenderer.NavMeshAgent.isActiveAndEnabled)
+            if (_navEnemyRenderer.NavMeshAgent.isActiveAndEnabled && _navEnemyRenderer.NavMeshAgent.isOnNavMesh)
             {
                 _navEnemyRenderer.NavMeshAgent.ResetPath();
                 _navEnemyRenderer.NavMeshAgent.velocity = Vector3.zero;
@@ -35,7 +35,6 @@ namespace _02_Scripts.Enemy.State
         public override void Update()
         {
             base.Update();
-            Debug.Log("IDLE STATE");
             
             _checkTimer += Time.deltaTime;
             if (_checkTimer < 0.2f) return;

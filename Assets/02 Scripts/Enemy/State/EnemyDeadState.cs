@@ -13,14 +13,6 @@ namespace _02_Scripts.Enemy.State
             _animationEvent = agent.GetModule<EnemyAnimationEvent>();
         }
 
-        public override void Update()
-        {
-            base.Update();
-            {
-                Debug.Log("DEAD");
-            }
-        }
-
         public override void Enter(float crossFadeDuration, int layerIndex = 0)
         {
             base.Enter(crossFadeDuration, layerIndex);
