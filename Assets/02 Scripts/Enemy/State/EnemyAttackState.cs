@@ -27,6 +27,7 @@ namespace _02_Scripts.Enemy.State
 
             _navEnemyRenderer.NavMeshAgent.ResetPath();
             _navEnemyRenderer.NavMeshAgent.velocity = Vector3.zero;
+            _navEnemyRenderer.UseForcedRotation = true;
 
             _currentSkill = _enemySkillController.GetAvailableSkill();
 
@@ -70,16 +71,10 @@ namespace _02_Scripts.Enemy.State
             _enemySkillController.RecordSkillUsed(_currentSkill);
             enemy.ChangeState(EnemyStateEnum.IDLE);
         }
-
-        public override void Update()
-        {
-            base.Update();
-            Debug.Log("Attack STATE");
-        }
-
         public override void Exit()
         {
             base.Exit();
+            _navEnemyRenderer.UseForcedRotation = false;
             _enemyAnimationEvent.OnAttackEnd -= HandleAttackEnd;
             _enemyAnimationEvent.OnAttack -= HandleAttack;
             if (_currentSkill != null)

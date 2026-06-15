@@ -83,6 +83,7 @@ Transform:
   - {fileID: 3514630756278525957}
   - {fileID: 7203965995297201110}
   - {fileID: 4418589773349568992}
+  - {fileID: 3877098938909879403}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5173401487123294308
@@ -149,7 +150,7 @@ NavMeshAgent:
   m_Speed: 3.5
   m_Acceleration: 50
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 200
   m_StoppingDistance: 3
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -202,6 +203,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd7371100d984bb78d66783882f5f07a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.Enemy.Skill.EnemySkillController
+--- !u!1001 &103821993692647343
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1045636072099165842}
+    m_Modifications:
+    - target: {fileID: 3800723062151193540, guid: 7d022558707f05c46bc266f6e732a9e8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3800723062151193540, guid: 7d022558707f05c46bc266f6e732a9e8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3800723062151193540, guid: 7d022558707f05c46bc266f6e732a9e8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3800723062151193540, guid: 7d022558707f05c46bc266f6e732a9e8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3800723062151193540, guid: 7d022558707f05c46bc266f6e732a9e8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3800723062151193540, guid: 7d022558707f05c46bc266f6e732a9e8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3800723062151193540, guid: 7d022558707f05c46bc266f6e732a9e8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3800723062151193540, guid: 7d022558707f05c46bc266f6e732a9e8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3800723062151193540, guid: 7d022558707f05c46bc266f6e732a9e8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3800723062151193540, guid: 7d022558707f05c46bc266f6e732a9e8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6577081331056256284, guid: 7d022558707f05c46bc266f6e732a9e8, type: 3}
+      propertyPath: m_Name
+      value: HitFlash
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7d022558707f05c46bc266f6e732a9e8, type: 3}
+--- !u!4 &3877098938909879403 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3800723062151193540, guid: 7d022558707f05c46bc266f6e732a9e8, type: 3}
+  m_PrefabInstance: {fileID: 103821993692647343}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4816239877239574189
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -537,9 +600,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.Enemy.NavEnemyRenderer
   <NavMeshAgent>k__BackingField: {fileID: 3606267079864196982}
   <SpeedAnimParam>k__BackingField: {fileID: 11400000, guid: 308aeae103cd3914cb03ea43dec1f282, type: 2}
-  rotateSpeed: 360
-  useForcedRotation: 1
-  useNavRotation: 0
+  rotateSpeed: 100
+  useNavRotation: 1
 --- !u!114 &5732108688251981821
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,7 +7,6 @@ using UnityEngine;
 
 namespace _02_Scripts.Chip.Card
 {
-
     [Serializable]
     public class StageCardChipData
     {
@@ -57,6 +56,7 @@ namespace _02_Scripts.Chip.Card
 
             if (chipController != null) ShowCards();
         }
+
         public void ShowCards(int level = 0)
         {
             var available = GetAvailableChips();
@@ -65,6 +65,7 @@ namespace _02_Scripts.Chip.Card
             Shuffle(available);
             int count = Mathf.Min(cards.Length, available.Count);
 
+            Time.timeScale = 0f;
             panel.SetActive(true);
             CursorManager.Instance.SetCursorVisible(true);
             Canvas.ForceUpdateCanvases();
@@ -83,7 +84,6 @@ namespace _02_Scripts.Chip.Card
                 cards[captured].Setup(available[captured], chip => OnCardSelected(chip, captured));
 
                 RectTransform rt = cards[captured].GetComponent<RectTransform>();
-
                 rt.DOKill(true);
                 rt.anchoredPosition = new Vector2(rt.anchoredPosition.x, -canvasHeight);
             }
@@ -93,7 +93,7 @@ namespace _02_Scripts.Chip.Card
 
         private void PlayEnterAnimation(int count)
         {
-            Sequence enterSeq = DOTween.Sequence();
+            Sequence enterSeq = DOTween.Sequence().SetUpdate(true);
 
             for (int i = 0; i < count; i++)
             {
@@ -101,7 +101,7 @@ namespace _02_Scripts.Chip.Card
                 RectTransform rt = cards[captured].GetComponent<RectTransform>();
                 enterSeq.Insert(
                     captured * enterStagger,
-                    rt.DOAnchorPosY(_cardOriginalY[captured], enterDuration).SetEase(Ease.OutBack)
+                    rt.DOAnchorPosY(_cardOriginalY[captured], enterDuration).SetEase(Ease.OutBack).SetUpdate(true)
                 );
             }
 
@@ -133,31 +133,32 @@ namespace _02_Scripts.Chip.Card
             for (int i = 0; i < cards.Length; i++)
                 cards[i].SetInteractable(false);
 
-            CursorManager.Instance.SetCursorVisible(true); // 추가
+            CursorManager.Instance.SetCursorVisible(true);
 
             cards[cardIndex].GetComponent<RectTransform>()
-                .DOPunchScale(Vector3.one * 0.25f, 0.3f, 0, 0.5f)
+                .DOPunchScale(Vector3.one * 0.25f, 0.3f, 0, 0.5f).SetUpdate(true)
                 .OnComplete(PlayExitAnimation);
         }
 
         private void PlayExitAnimation()
         {
             float canvasHeight = ((RectTransform)panel.transform).rect.height;
-            Sequence exitSeq = DOTween.Sequence();
+            Sequence exitSeq = DOTween.Sequence().SetUpdate(true);
 
             for (int i = 0; i < cards.Length; i++)
             {
                 if (!cards[i].gameObject.activeSelf) continue;
                 RectTransform rt = cards[i].GetComponent<RectTransform>();
                 rt.DOKill(true);
-                exitSeq.Join(rt.DOAnchorPosY(-canvasHeight, exitDuration).SetEase(Ease.InBack));
+                exitSeq.Join(rt.DOAnchorPosY(-canvasHeight, exitDuration).SetEase(Ease.InBack).SetUpdate(true));
             }
 
             exitSeq.OnComplete(() =>
             {
+                Time.timeScale = 1f;
                 panel.SetActive(false);
                 _rectTransform.anchoredPosition = _originalPosition;
-                CursorManager.Instance.SetCursorVisible(false); // 여기로 이동
+                CursorManager.Instance.SetCursorVisible(false);
             });
         }
 

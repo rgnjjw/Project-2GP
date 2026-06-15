@@ -20,6 +20,7 @@ namespace _02_Scripts.Enemy
         private NavEnemyRenderer _navEnemyRenderer;
         private AgentHealth _agentHealth;
         private CapsuleCollider _capsuleCollider;
+        private HitFlash _hitFlash;
 
         private float _lastHitAnimTime;
 
@@ -33,6 +34,7 @@ namespace _02_Scripts.Enemy
             _navEnemyRenderer = GetModule<NavEnemyRenderer>();
             _agentHealth = GetModule<AgentHealth>();
             _animationEvent = GetModule<EnemyAnimationEvent>();
+            _hitFlash = GetModule<HitFlash>();
             _capsuleCollider = GetComponent<CapsuleCollider>();
 
             _navEnemyRenderer.NavMeshAgent.stoppingDistance =
@@ -45,17 +47,12 @@ namespace _02_Scripts.Enemy
 
         private void OnDamaged(int before, int current)
         {
-            if (current <= 0)
-                return;
-
-            if (current >= before)
-                return;
-
-            if (Time.time < _lastHitAnimTime + 0.15f)
-                return;
+            if (current <= 0) return;
+            if (current >= before) return;
+            if (Time.time < _lastHitAnimTime + 0.15f) return;
 
             _lastHitAnimTime = Time.time;
-
+            _hitFlash?.Flash();
         }
 
         protected override void OnDead()

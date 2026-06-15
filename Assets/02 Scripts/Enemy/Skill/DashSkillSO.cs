@@ -92,7 +92,10 @@ namespace _02_Scripts.Enemy.Skill
             agent.speed = originalSpeed;
             agent.acceleration = originalAccel;
             agent.updateRotation = originalUpdateRotation;
-            agent.ResetPath();
+            
+            if (agent.isActiveAndEnabled && agent.isOnNavMesh)
+                agent.ResetPath();
+            
             navRenderer.IsRotationLocked = false;
 
             NotifyComplete();

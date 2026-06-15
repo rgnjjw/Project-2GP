@@ -9,7 +9,7 @@ namespace _02_Scripts.Enemy.State
         private readonly EnemySkillController _enemySkillController;
         private readonly EnemyDataContainer _enemyDataContainer;
         private float _checkTimer;
-    
+
         public EnemyChaseState(Agent.Agent agent, int clipHash) : base(agent, clipHash)
         {
             if (enemy == null) return;
@@ -17,11 +17,12 @@ namespace _02_Scripts.Enemy.State
             _enemyDataContainer = enemy.GetModule<EnemyDataContainer>();
             _enemySkillController = enemy.GetModule<EnemySkillController>();
         }
-        
+
         public override void Enter(float crossFadeDuration, int layerIndex = 0)
         {
             base.Enter(crossFadeDuration, layerIndex);
             _checkTimer = 0.2f;
+            _navEnemyRenderer.UseChaseRotation = true;
 
             enemy.CurrentTarget = _enemyDataContainer.ChaseRange.GetClosest(enemy.transform);
             if (enemy.CurrentTarget != null && _navEnemyRenderer.NavMeshAgent.isActiveAndEnabled)
@@ -38,8 +39,6 @@ namespace _02_Scripts.Enemy.State
             base.Update();
 
             Vector3 velocity = _navEnemyRenderer.NavMeshAgent.velocity;
-            Vector3 localVelocity = enemy.transform.InverseTransformDirection(velocity.normalized);
-    
             float normalizedSpeed = velocity.magnitude / _navEnemyRenderer.NavMeshAgent.speed;
             _renderer.Animator.SetFloat(_navEnemyRenderer.SpeedAnimParam.ParamHash, normalizedSpeed, 0.1f, Time.deltaTime);
 
@@ -53,7 +52,7 @@ namespace _02_Scripts.Enemy.State
                 return;
             }
 
-            if (!_enemyDataContainer.ChaseRange.HasAnyInRange(enemy.transform) 
+            if (!_enemyDataContainer.ChaseRange.HasAnyInRange(enemy.transform)
                 || Vector3.Distance(enemy.CurrentTarget.position, enemy.transform.position) <= _navEnemyRenderer.NavMeshAgent.stoppingDistance)
             {
                 enemy.ChangeState(EnemyStateEnum.IDLE);
@@ -63,6 +62,12 @@ namespace _02_Scripts.Enemy.State
             var target = _enemyDataContainer.ChaseRange.GetClosest(enemy.transform);
             if (target != null && _navEnemyRenderer.NavMeshAgent.isActiveAndEnabled)
                 _navEnemyRenderer.NavMeshAgent.SetDestination(target.position);
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+            _navEnemyRenderer.UseChaseRotation = false;
         }
     }
 }
