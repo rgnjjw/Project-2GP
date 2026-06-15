@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 436615f52f1741699d05aa7fa627d3e8, type: 3}
+  m_Name: MeleeAttack
+  m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.Enemy.Skill.MeleeAttackSkill
+  <AnimParam>k__BackingField: {fileID: 11400000, guid: 28d92d4c9d0d6e3479062414407bb00e, type: 2}
+  <Cooldown>k__BackingField: 1
+  DamageAreaDetection:
+    rid: 4481138043974844642
+  TargetFinder:
+    rid: 4481138043974844644
+  <Damage>k__BackingField: 10
+  references:
+    version: 2
+    RefIds:
+    - rid: 4481138043974844642
+      type: {class: ConeDetect, ns: _02_Scripts.Core.Detect, asm: Assembly-CSharp}
+      data:
+        layerMask:
+          serializedVersion: 2
+          m_Bits: 256
+        gizmoColor: {r: 1, g: 0, b: 0, a: 1}
+        angle: 100
+        radius: 3.5
+    - rid: 4481138043974844644
+      type: {class: BoxDetect, ns: _02_Scripts.Core.Detect, asm: Assembly-CSharp}
+      data:
+        layerMask:
+          serializedVersion: 2
+          m_Bits: 256
+        gizmoColor: {r: 0, g: 1, b: 0, a: 1}
+        size: {x: 4, y: 3, z: 5}
+        offset: {x: 0, y: 2, z: 1.41}

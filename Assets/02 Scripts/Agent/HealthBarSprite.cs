@@ -16,24 +16,19 @@ namespace _02_Scripts.Agent
        [SerializeField] private float healthBarDisableTime = 2f;
        [SerializeField] private float fadeOutDuration = 0.5f;
        
-       private Camera _camera;
-       
        [Header("Color")] 
        [SerializeField] private SpriteRenderer fillRenderer;
        [SerializeField] private Color fullColor = Color.green;
        [SerializeField] private Color emptyColor = Color.red;
        private Color _targetColor;
        private Coroutine _activeCoroutine;
-       
+
        private SpriteRenderer[] _allRenderers;
 
        private void Awake()
        {
           if (agentHealth == null)
              agentHealth = GetComponentInParent<AgentHealth>();
-          
-          if(_camera == null)
-             _camera = Camera.main;
 
           _allRenderers = GetComponentsInChildren<SpriteRenderer>(true);
           
@@ -53,13 +48,6 @@ namespace _02_Scripts.Agent
 
        private void LateUpdate()
        {
-          if (_camera != null)
-          {
-             Vector3 dir = transform.position - _camera.transform.position;
-             if(dir.sqrMagnitude > 0f)
-                transform.rotation = Quaternion.LookRotation(dir);
-          }
-          
           if (!useSmooth || scaleHandler == null) return;
           
           Vector3 scale = scaleHandler.localScale;
@@ -115,7 +103,6 @@ namespace _02_Scripts.Agent
        private float GetFill()
           => agentHealth.CurrentHp.Value / (float)Mathf.Max(agentHealth.MaxHp, 1);
 
-       //풀링할떄 ㄱㄱ
        public void ResetForPool()
        {
           DOTween.Kill(gameObject);

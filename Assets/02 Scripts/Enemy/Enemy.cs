@@ -39,7 +39,6 @@ namespace _02_Scripts.Enemy
                 _enemySkillController.GetMinSkillRange() - 0.2f;
 
             _agentHealth.CurrentHp.OnValueChanged += OnDamaged;
-            _animationEvent.OnHitEnd += OnHitEndHandle;
 
             _navEnemyRenderer.Animator.SetLayerWeight(hitLayerIndex, 0f);
         }
@@ -64,14 +63,6 @@ namespace _02_Scripts.Enemy
             animator.SetTrigger(hitAnimParam.ParamHash);
         }
 
-        public void OnHitEndHandle()
-        {
-            if (_navEnemyRenderer != null)
-            {
-                _navEnemyRenderer.Animator.SetLayerWeight(hitLayerIndex, 0f);
-            }
-        }
-
         protected override void OnDead()
         {
             // StageManager.Instance.EnemyCount--;//적 카운트
@@ -87,8 +78,6 @@ namespace _02_Scripts.Enemy
         {
             if (_agentHealth != null)
                 _agentHealth.CurrentHp.OnValueChanged -= OnDamaged;
-            if (_animationEvent != null)
-                _animationEvent.OnHitEnd -= OnHitEndHandle;
         }
 
         public void ChangeState(EnemyStateEnum nextState)

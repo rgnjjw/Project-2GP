@@ -19,6 +19,12 @@ namespace _02_Scripts.Map
         [ContextMenu("맵 생성")]
         public void StartGenerate() => StartCoroutine(GenerateMap());
 
+        public void StartGenerate(MapDataSO overrideData)
+        {
+            data = overrideData;
+            StartCoroutine(GenerateMap());
+        }
+
         private IEnumerator GenerateMap()
         {
             foreach (var objData in data.Objects)

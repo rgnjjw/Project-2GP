@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using _02_Scripts.Enemy;
 using UnityEditor;
 using UnityEngine;
 
@@ -29,8 +30,7 @@ namespace _02_Scripts.Map.Editor
             MapDataSO data = root.TargetData;
             Undo.RecordObject(data, "Save Map");
 
-            var list = new List<MapObjectData>();
-
+            var objects = new List<MapObjectData>();
             foreach (Transform child in root.transform)
             {
                 GameObject prefab = PrefabUtility.GetCorrespondingObjectFromSource(child.gameObject);
@@ -40,7 +40,7 @@ namespace _02_Scripts.Map.Editor
                     continue;
                 }
 
-                list.Add(new MapObjectData
+                objects.Add(new MapObjectData
                 {
                     Prefab = prefab,
                     Position = child.position,
@@ -48,11 +48,24 @@ namespace _02_Scripts.Map.Editor
                 });
             }
 
-            data.Objects = list.ToArray();
+            var spawnPoints = new List<SpawnPointData>();
+            EnemySpawnPoint[] pointComponents = FindObjectsByType<EnemySpawnPoint>(FindObjectsSortMode.None);
+            foreach (var sp in pointComponents)
+            {
+                spawnPoints.Add(new SpawnPointData
+                {
+                    Type = sp.Type,
+                    Position = sp.transform.position
+                });
+            }
+
+            data.Objects = objects.ToArray();
+            data.SpawnPoints = spawnPoints.ToArray();
+
             EditorUtility.SetDirty(data);
             AssetDatabase.SaveAssets();
 
-            Debug.Log($"[MapSaver] 저장 완료 — 오브젝트: {list.Count}개");
+            Debug.Log($"[MapSaver] 저장 완료 — 오브젝트: {objects.Count}개, 스폰포인트: {spawnPoints.Count}개");
         }
     }
 }
