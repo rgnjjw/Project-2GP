@@ -15,7 +15,6 @@ namespace _02_Scripts.Enemy
 
         public Transform CurrentTarget { get; set; }
 
-        private EnemyAnimationEvent _animationEvent;
         private EnemySkillController _enemySkillController;
         private NavEnemyRenderer _navEnemyRenderer;
         private AgentHealth _agentHealth;
@@ -33,7 +32,6 @@ namespace _02_Scripts.Enemy
             _enemySkillController = GetModule<EnemySkillController>();
             _navEnemyRenderer = GetModule<NavEnemyRenderer>();
             _agentHealth = GetModule<AgentHealth>();
-            _animationEvent = GetModule<EnemyAnimationEvent>();
             _hitFlash = GetModule<HitFlash>();
             _capsuleCollider = GetComponent<CapsuleCollider>();
 
