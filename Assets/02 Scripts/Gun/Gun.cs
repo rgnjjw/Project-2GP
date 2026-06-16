@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
 using _02_Scripts.Agent;
-using _02_Scripts.Core.Utility;
-using _02_Scripts.Player;
+using Unity.Cinemachine;
 using UnityEngine;
 
 namespace _02_Scripts.Gun
@@ -10,11 +9,12 @@ namespace _02_Scripts.Gun
     public class Gun : MonoBehaviour
     {
         [field: SerializeField] public AgentRenderer Renderer { get; private set; }
+        [SerializeField] protected CinemachineImpulseSource impulseSource;
+        [SerializeField] protected RecoilDataSO recoilData;
         [SerializeField] protected LayerMask layerMask;
         [SerializeField] protected int bulletDamage;
         [SerializeField] protected float fireDelay = 0.2f;
         [SerializeField] protected Transform muzzleTrm;
-        [SerializeField] private RecoilEvent recoilEvent;
         [SerializeField] protected ParticleSystem fireEffect;
         [SerializeField] protected ParticleSystem hitEffect;
         [SerializeField] protected TrailRenderer tracerEffect;
@@ -27,13 +27,22 @@ namespace _02_Scripts.Gun
 
         public virtual void Equip()
         {
+            if (recoilData != null && impulseSource != null)
+            {
+                impulseSource.ImpulseDefinition.ImpulseShape = recoilData.ImpulseShape;
+                impulseSource.ImpulseDefinition.ImpulseDuration = recoilData.Duration;
+            }
+
             OnEquip?.Invoke();
         }
 
         public virtual void Fire()
         {
-            EventBus.Publish(recoilEvent);
             fireEffect.Play();
+
+            if (impulseSource != null && recoilData != null)
+                impulseSource.GenerateImpulse(recoilData.Direction * recoilData.Force);
+
             OnFire?.Invoke();
         }
 

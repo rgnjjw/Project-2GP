@@ -16,26 +16,32 @@ namespace _02_Scripts.UI
 
         public void AddExp(int amount)
         {
-            if (_currentLevel > expPerLevel.Length) return; 
+            if (_currentLevel > expPerLevel.Length) return;
 
             _currentExp += amount;
-
-            while (_currentLevel <= expPerLevel.Length && _currentExp >= expPerLevel[_currentLevel - 1])
-            {
-                _currentExp -= expPerLevel[_currentLevel - 1];
-                _currentLevel++;
-                OnLevelUp?.Invoke(_currentLevel);
-            }
-
-            UpdateBar();
+            ProcessExp();
         }
 
-        private void UpdateBar()
+        private void ProcessExp()
         {
-            if (_currentLevel - 1 >= expPerLevel.Length) return;
+            if (_currentLevel > expPerLevel.Length) return;
 
-            float ratio = (float)_currentExp / expPerLevel[_currentLevel - 1];
-            levelBar.SetFill(ratio);
+            int needed = expPerLevel[_currentLevel - 1];
+
+            if (_currentExp >= needed)
+            {
+                levelBar.SetFill(1f, () =>
+                {
+                    _currentExp -= needed;
+                    _currentLevel++;
+                    OnLevelUp?.Invoke(_currentLevel);
+                    ProcessExp();
+                });
+            }
+            else
+            {
+                levelBar.SetFill((float)_currentExp / needed);
+            }
         }
     }
 }

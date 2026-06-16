@@ -2,8 +2,8 @@ using _02_Scripts.Agent;
 using _02_Scripts.Core.AnimationSystem;
 using _02_Scripts.Enemy.Skill;
 using _02_Scripts.Enemy.State;
-using _02_Scripts.Manager;
 using _02_Scripts.UI;
+using _02_Scripts.UI.StyleBar;
 using UnityEngine;
 
 namespace _02_Scripts.Enemy
@@ -61,6 +61,7 @@ namespace _02_Scripts.Enemy
                 _capsuleCollider.enabled = false;
 
             ChangeState(EnemyStateEnum.DEAD);
+            StyleManager.Instance.AddStyleScore(StyleAction.Kill);
         }
 
         private void OnDestroy()

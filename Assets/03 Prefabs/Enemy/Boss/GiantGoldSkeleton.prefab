@@ -150,7 +150,7 @@ NavMeshAgent:
   m_Speed: 3.5
   m_Acceleration: 50
   avoidancePriority: 50
-  m_AngularSpeed: 200
+  m_AngularSpeed: 1000
   m_StoppingDistance: 3
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -601,7 +601,6 @@ MonoBehaviour:
   <NavMeshAgent>k__BackingField: {fileID: 3606267079864196982}
   <SpeedAnimParam>k__BackingField: {fileID: 11400000, guid: 308aeae103cd3914cb03ea43dec1f282, type: 2}
   rotateSpeed: 100
-  useNavRotation: 1
 --- !u!114 &5732108688251981821
 MonoBehaviour:
   m_ObjectHideFlags: 0

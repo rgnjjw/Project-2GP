@@ -27,7 +27,7 @@ namespace _02_Scripts.Enemy.State
 
             _navEnemyRenderer.NavMeshAgent.ResetPath();
             _navEnemyRenderer.NavMeshAgent.velocity = Vector3.zero;
-            _navEnemyRenderer.UseForcedRotation = true;
+            _navEnemyRenderer.UseForcedRotation = false; // 처음엔 꺼
 
             _currentSkill = _enemySkillController.GetAvailableSkill();
 
@@ -41,10 +41,22 @@ namespace _02_Scripts.Enemy.State
             _skillEnded = false;
 
             _enemyAnimationEvent.OnAttackEnd += HandleAttackEnd;
+            _enemyAnimationEvent.OnPrepare += HandlePrepare;
+            _enemyAnimationEvent.OnAttack += HandleAttack;
             _currentSkill.OnExecutionComplete += HandleSkillComplete;
 
             _renderer.PlayClip(_currentSkill.AnimParam.ParamHash, 0, crossFadeDuration, layerIndex);
             _currentSkill.ExecuteSkill(enemy);
+        }
+
+        private void HandlePrepare()
+        {
+            _navEnemyRenderer.UseForcedRotation = true;
+        }
+
+        private void HandleAttack()
+        {
+            _navEnemyRenderer.UseForcedRotation = false;
         }
 
         private void HandleAttackEnd()

@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -63,7 +64,7 @@ namespace _02_Scripts.UI
                 followBar.fillAmount = Mathf.MoveTowards(followBar.fillAmount, _rtTarget, step);
         }
 
-        public void SetFill(float targetAmount)
+        public void SetFill(float targetAmount, Action onComplete = null)
         {
             bar.DOKill();
             followBar.DOKill();
@@ -81,12 +82,14 @@ namespace _02_Scripts.UI
                             bar.fillAmount = 0f;
                             followBar.fillAmount = 0f;
                         }
+                        onComplete?.Invoke();
                     });
             }
             else
             {
                 bar.DOFillAmount(targetAmount, barDuration).SetEase(ease);
                 followBar.DOFillAmount(targetAmount, followDuration).SetEase(ease).SetDelay(followDelay);
+                onComplete?.Invoke();
             }
         }
     }
