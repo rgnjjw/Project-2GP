@@ -1,6 +1,4 @@
-using System;
 using _02_Scripts.Agent;
-using _02_Scripts.Core.ModuleSystem;
 using UnityEngine;
 
 namespace _02_Scripts.Gun
@@ -9,7 +7,8 @@ namespace _02_Scripts.Gun
     {
         [SerializeField] protected Gun gun;
         protected AgentRenderer gunRenderer;
-        private void Awake()
+
+        protected virtual void Awake()
         {
             gunRenderer = gun.Renderer;
             gun.OnEquip += OnEquipAnim;
@@ -18,6 +17,5 @@ namespace _02_Scripts.Gun
 
         protected abstract void OnEquipAnim();
         protected abstract void OnFireAnim();
-
     }
 }

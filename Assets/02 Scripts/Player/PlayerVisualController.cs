@@ -10,7 +10,8 @@ namespace _02_Scripts.Player
     {
         ALL,
         PISTOL,
-        SHOTGUN
+        SHOTGUN,
+        MACHINEGUN
     }
 
     public class PlayerVisualController : MonoBehaviour ,IModule //플레이어의 비쥬얼을 컨트롤 하는놈

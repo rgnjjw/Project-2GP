@@ -20,6 +20,7 @@ namespace _02_Scripts.Gun
         [SerializeField] protected ParticleSystem hitEffect;
         [SerializeField] protected TrailRenderer tracerEffect;
 
+        public virtual bool IsAutoFire => false;
         public bool isFiring = false;
         public event Action OnFire;
         public event Action OnEquip;
@@ -34,8 +35,13 @@ namespace _02_Scripts.Gun
         public virtual void Fire()
         {
             EventBus.Publish(recoilEvent);
-            fireEffect.Play();
+            PlayFireEffect();
             OnFire?.Invoke();
+        }
+
+        protected virtual void PlayFireEffect()
+        {
+            fireEffect?.Play();
         }
 
         protected Vector3 GetHitPoint(Ray ray, float maxDistance)

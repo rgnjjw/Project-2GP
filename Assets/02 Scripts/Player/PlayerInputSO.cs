@@ -5,14 +5,16 @@ using UnityEngine.InputSystem;
 namespace _02_Scripts.Player
 {
     [CreateAssetMenu(fileName = "PlayerInputSO", menuName = "Player/PlayerInputSO", order = 0)]
-    public class PlayerInputSO : ScriptableObject,Controls.IPlayerActions
+    public class PlayerInputSO : ScriptableObject, Controls.IPlayerActions
     {
-        public Vector2 InputDirection { get;private set; }
-        public Vector2 MouseDelta { get;private set; }  
+        public Vector2 InputDirection { get; private set; }
+        public Vector2 MouseDelta { get; private set; }
         public bool IsSliding { get; private set; }
         public bool IsRunning { get; private set; }
         public bool IsJumping { get; private set; }
-        public event Action<int,InputAction.CallbackContext> OnChipInput;
+        public bool IsFireHeld { get; private set; }
+
+        public event Action<int, InputAction.CallbackContext> OnChipInput;
         public event Action OnJumpKeyPressed;
         public event Action OnJumpKeyReleased;
         public event Action OnDashKeyPressed;
@@ -23,6 +25,7 @@ namespace _02_Scripts.Player
         public event Action<float> OnScrollWeaponInput;
         public event Action OnWeapon1Pressed;
         public event Action OnWeapon2Pressed;
+        public event Action OnWeapon3Pressed;
 
         public void OnScrollWeapon(InputAction.CallbackContext context)
         {
@@ -40,6 +43,12 @@ namespace _02_Scripts.Player
         {
             if (context.started)
                 OnWeapon2Pressed?.Invoke();
+        }
+
+        public void OnWeapon3(InputAction.CallbackContext context)
+        {
+            if (context.started)
+                OnWeapon3Pressed?.Invoke();
         }
 
         public void OnMove(InputAction.CallbackContext context)
@@ -101,8 +110,15 @@ namespace _02_Scripts.Player
 
         public void OnFire(InputAction.CallbackContext context)
         {
-            if(context.started)
+            if (context.started)
+            {
+                IsFireHeld = true;
                 OnFireKeyPressed?.Invoke();
+            }
+            else if (context.canceled)
+            {
+                IsFireHeld = false;
+            }
         }
 
         public void OnModuleAction(InputAction.CallbackContext context)
