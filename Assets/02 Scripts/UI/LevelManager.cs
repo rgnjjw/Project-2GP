@@ -11,6 +11,8 @@ namespace _02_Scripts.UI
         
         public event Action<int> OnLevelUp;
 
+        public int CurrentLevel => _currentLevel;
+        public float ExpMultiplier { get; set; } = 1f;
         private int _currentLevel = 1;
         private int _currentExp;
 
@@ -18,7 +20,7 @@ namespace _02_Scripts.UI
         {
             if (_currentLevel > expPerLevel.Length) return;
 
-            _currentExp += amount;
+            _currentExp += Mathf.RoundToInt(amount * ExpMultiplier);
             ProcessExp();
         }
 

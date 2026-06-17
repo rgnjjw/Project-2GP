@@ -29,7 +29,7 @@ namespace _02_Scripts.Gun.G_ShotGun
                     tracer.transform.position = hit.point;
 
                     if (hit.transform.TryGetComponent<Enemy.Enemy>(out var enemy))
-                        enemy.GetModule<AgentHealth>().ApplyDamage(bulletDamage);
+                        DealDamage(enemy.GetModule<AgentHealth>(), bulletDamage);
                 }
                 else
                 {

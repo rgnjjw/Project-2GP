@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using _02_Scripts.Core.ModuleSystem;
 using _02_Scripts.Player;
+using _02_Scripts.Shop;
 using _02_Scripts.UI;
 using UnityEngine;
 
@@ -13,6 +15,7 @@ namespace _02_Scripts.Manager
         private int _currentIndex;
         private PlayerInputSO _playerInput;
         private PlayerVisualController _playerVisualController;
+        private readonly HashSet<int> _unlockedWeapons = new();
 
         public void Initialize(ModuleOwner owner)
         {
@@ -30,7 +33,15 @@ namespace _02_Scripts.Manager
 
         public void AfterInit()
         {
+            _unlockedWeapons.Add(0);
+            if (ShopManager.Instance != null)
+                ShopManager.Instance.OnWeaponUnlocked += UnlockWeapon;
             SwapWeapon(0);
+        }
+
+        public void UnlockWeapon(int index)
+        {
+            _unlockedWeapons.Add(index);
         }
 
         private void Update()
@@ -49,6 +60,7 @@ namespace _02_Scripts.Manager
         private void SwapWeapon(int index)
         {
             if (index < 0 || index >= weapons.Length) return;
+            if (!_unlockedWeapons.Contains(index)) return;
 
             _currentIndex = index;
             _currentWeapon = weapons[_currentIndex];
@@ -91,24 +103,32 @@ namespace _02_Scripts.Manager
 
         private void SwapNext()
         {
-            if (_currentIndex < weapons.Length - 1)
-                SwapWeapon(_currentIndex + 1);
+            for (int i = _currentIndex + 1; i < weapons.Length; i++)
+            {
+                if (_unlockedWeapons.Contains(i)) { SwapWeapon(i); return; }
+            }
         }
 
         private void SwapPrev()
         {
-            if (_currentIndex > 0)
-                SwapWeapon(_currentIndex - 1);
+            for (int i = _currentIndex - 1; i >= 0; i--)
+            {
+                if (_unlockedWeapons.Contains(i)) { SwapWeapon(i); return; }
+            }
         }
 
         private void OnDestroy()
         {
-            if (_playerInput == null) return;
-            _playerInput.OnScrollWeaponInput -= OnScroll;
-            _playerInput.OnWeapon1Pressed -= OnWeapon1;
-            _playerInput.OnWeapon2Pressed -= OnWeapon2;
-            _playerInput.OnWeapon3Pressed -= OnWeapon3;
-            _playerInput.OnFireKeyPressed -= OnFirePressed;
+            if (_playerInput != null)
+            {
+                _playerInput.OnScrollWeaponInput -= OnScroll;
+                _playerInput.OnWeapon1Pressed -= OnWeapon1;
+                _playerInput.OnWeapon2Pressed -= OnWeapon2;
+                _playerInput.OnWeapon3Pressed -= OnWeapon3;
+                _playerInput.OnFireKeyPressed -= OnFirePressed;
+            }
+            if (ShopManager.Instance != null)
+                ShopManager.Instance.OnWeaponUnlocked -= UnlockWeapon;
         }
     }
 }

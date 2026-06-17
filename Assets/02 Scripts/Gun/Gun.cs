@@ -44,6 +44,13 @@ namespace _02_Scripts.Gun
             fireEffect?.Play();
         }
 
+        protected void DealDamage(AgentHealth target, int damage)
+        {
+            if (target == null) return;
+            target.ApplyDamage(damage);
+            EventBus.Publish(new PlayerDamageDealtEvent(damage));
+        }
+
         protected Vector3 GetHitPoint(Ray ray, float maxDistance)
         {
             if (Physics.Raycast(ray, out RaycastHit hit, maxDistance, layerMask))

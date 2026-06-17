@@ -67,9 +67,11 @@ namespace _02_Scripts.Agent
             }
         }
 
+        public bool IsInvincible { get; set; }
+
         public void ApplyDamage(int damage)
         {
-            if (!_isInitialized || _isDead || damage <= 0)
+            if (!_isInitialized || _isDead || damage <= 0 || IsInvincible)
                 return;
             
             var hp = GetNotifyHp();
