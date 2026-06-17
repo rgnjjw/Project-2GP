@@ -2,6 +2,7 @@ using System;
 using _02_Scripts.Core.ModuleSystem;
 using _02_Scripts.Core.Utility;
 using DG.Tweening;
+using Unity.Cinemachine;
 using UnityEngine;
 
 namespace _02_Scripts.Player
@@ -9,15 +10,15 @@ namespace _02_Scripts.Player
     [Serializable]
     public struct RecoilEvent
     {
-        public float Pitch;  
-        public float Yaw;   
-        public bool IsRecoiling;
+        public float Pitch;
+        public float Yaw;
+        public float FOVKick;
 
-        public RecoilEvent(float pitch, float yaw, bool isRecoiling = false)
+        public RecoilEvent(float pitch, float yaw, float fovKick = 2f)
         {
             Pitch = pitch;
             Yaw = yaw;
-            IsRecoiling = isRecoiling;
+            FOVKick = fovKick;
         }
     }
 
@@ -37,9 +38,8 @@ namespace _02_Scripts.Player
         [SerializeField] private float fovLerpSpeed = 8f;
 
         [Header("Recoil")]
-        [SerializeField] private float recoilStrength = 1f;
-        [SerializeField] private float recoilSpeed = 3f;
-        [SerializeField] private float recoilReturnSpeed = 5f;
+        [SerializeField] private float recoilReturnSpeed = 8f;
+        [SerializeField] private float recoilFOVReturnSpeed = 10f;
 
         private float _rotationX;
         private float _rotationY;
@@ -47,7 +47,7 @@ namespace _02_Scripts.Player
         private PlayerInputSO _playerInputSO;
         private PlayerSlider _playerSlider;
 
-        private Camera _camera;
+        private CinemachineCamera _cinemachineCamera;
         private float _defaultFOV;
         private float _standingCamHeight;
         private float _currentCamHeight;
@@ -56,8 +56,7 @@ namespace _02_Scripts.Player
 
         private float _recoilX;
         private float _recoilY;
-        private float _recoilTime;
-        private bool _isRecoiling;
+        private float _recoilFOV;
 
         private float _dutchAngle;
         private Tween _dutchTween;
@@ -68,8 +67,12 @@ namespace _02_Scripts.Player
             {
                 _standingCamHeight = playerCamera.transform.localPosition.y;
                 _currentCamHeight = _standingCamHeight;
-                _camera = playerCamera.GetComponent<Camera>();
-                if (_camera != null) _defaultFOV = _camera.fieldOfView;
+                _cinemachineCamera = playerCamera.GetComponent<CinemachineCamera>();
+                if (_cinemachineCamera != null)
+                {
+                    _defaultFOV = _cinemachineCamera.Lens.FieldOfView;
+                    _currentFOVBoost = _defaultFOV;
+                }
             }
         }
 
@@ -78,9 +81,9 @@ namespace _02_Scripts.Player
 
         private void OnRecoil(RecoilEvent evt)
         {
-            _isRecoiling = evt.IsRecoiling;
-            _recoilX += evt.Pitch;
-            _recoilY += evt.Yaw;
+            _recoilX -= evt.Pitch;
+            _recoilY += UnityEngine.Random.Range(-evt.Yaw, evt.Yaw);
+            _recoilFOV += evt.FOVKick;
         }
 
         public void Initialize(ModuleOwner moduleOwner)
@@ -97,19 +100,9 @@ namespace _02_Scripts.Player
 
         private void UpdateRecoil()
         {
-            if (_isRecoiling)
-            {
-                _recoilTime += Time.deltaTime * recoilSpeed;
-                float x = ((Mathf.PerlinNoise(_recoilTime, 0f) - 0.5f) * 2f) * recoilStrength;
-                float y = ((Mathf.PerlinNoise(0f, _recoilTime) - 0.5f) * 2f) * recoilStrength;
-                _recoilX = Mathf.Lerp(_recoilX, x, Time.deltaTime * recoilSpeed);
-                _recoilY = Mathf.Lerp(_recoilY, y, Time.deltaTime * recoilSpeed);
-            }
-            else
-            {
-                _recoilX = Mathf.Lerp(_recoilX, 0f, Time.deltaTime * recoilReturnSpeed);
-                _recoilY = Mathf.Lerp(_recoilY, 0f, Time.deltaTime * recoilReturnSpeed);
-            }
+            _recoilX = Mathf.Lerp(_recoilX, 0f, Time.deltaTime * recoilReturnSpeed);
+            _recoilY = Mathf.Lerp(_recoilY, 0f, Time.deltaTime * recoilReturnSpeed);
+            _recoilFOV = Mathf.Lerp(_recoilFOV, 0f, Time.deltaTime * recoilFOVReturnSpeed);
         }
 
         private void Look()
@@ -140,11 +133,14 @@ namespace _02_Scripts.Player
             camPos.y = _currentCamHeight;
             playerCamera.transform.localPosition = camPos;
 
-            if (_camera != null)
+            if (_cinemachineCamera != null)
             {
-                float targetFOV = _defaultFOV + GetTargetFOVBoost();
+                float targetFOV = _defaultFOV + GetTargetFOVBoost() + _recoilFOV;
                 _currentFOVBoost = Mathf.Lerp(_currentFOVBoost, targetFOV, fovLerpSpeed * Time.deltaTime);
-                _camera.fieldOfView = _currentFOVBoost;
+
+                var lens = _cinemachineCamera.Lens;
+                lens.FieldOfView = _currentFOVBoost;
+                _cinemachineCamera.Lens = lens;
             }
         }
 
@@ -161,6 +157,7 @@ namespace _02_Scripts.Player
                 return slideTiltAngle;
             return 0f;
         }
+
 
         private float GetTargetFOVBoost()
         {

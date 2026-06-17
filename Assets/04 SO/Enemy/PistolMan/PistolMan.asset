@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.Enemy.EnemyDataSO
   <Health>k__BackingField: 100
   <MaxHealth>k__BackingField: 100
-  <MoveSpeed>k__BackingField: 3
+  <MoveSpeed>k__BackingField: 1
   <ChaseRange>k__BackingField:
     rid: 4481138055766605849
   <EnemySkills>k__BackingField:

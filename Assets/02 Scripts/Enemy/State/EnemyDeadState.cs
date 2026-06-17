@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace _02_Scripts.Enemy.State
@@ -22,6 +23,7 @@ namespace _02_Scripts.Enemy.State
             _navEnemyRenderer.NavMeshAgent.enabled = false;
 
             _renderer.PlayClip(_stateClipHash, 0, 0.1f);
+            enemy.StartCoroutine(FallbackDestroy());
         }
 
         public override void Exit()
@@ -33,6 +35,13 @@ namespace _02_Scripts.Enemy.State
         private void HandleDeathEnd()
         {
             UnityEngine.Object.Destroy(enemy.gameObject);
+        }
+
+        private IEnumerator FallbackDestroy()
+        {
+            yield return new WaitForSeconds(3f);
+            if (enemy != null)
+                UnityEngine.Object.Destroy(enemy.gameObject);
         }
     }   
 }

@@ -1,7 +1,8 @@
 using _02_Scripts.Manager;
+using _02_Scripts.Map;
 using UnityEngine;
 
-namespace _02_Scripts.Map.UI
+namespace _02_Scripts.UI
 {
     public class StageButtonUI : MonoBehaviour
     {

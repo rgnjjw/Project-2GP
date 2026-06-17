@@ -25,9 +25,13 @@ namespace _02_Scripts.Enemy.State
         {
             base.Enter(crossFadeDuration, layerIndex);
 
-            _navEnemyRenderer.NavMeshAgent.ResetPath();
-            _navEnemyRenderer.NavMeshAgent.velocity = Vector3.zero;
-            _navEnemyRenderer.UseForcedRotation = false; // 처음엔 꺼
+            if (_navEnemyRenderer.NavMeshAgent.isActiveAndEnabled && _navEnemyRenderer.NavMeshAgent.isOnNavMesh)
+            {
+                _navEnemyRenderer.NavMeshAgent.ResetPath();
+                _navEnemyRenderer.NavMeshAgent.velocity = Vector3.zero;
+            }
+            
+            _navEnemyRenderer.UseForcedRotation = false;
 
             _currentSkill = _enemySkillController.GetAvailableSkill();
 
@@ -83,8 +87,12 @@ namespace _02_Scripts.Enemy.State
             base.Exit();
             _navEnemyRenderer.UseForcedRotation = false;
             _enemyAnimationEvent.OnAttackEnd -= HandleAttackEnd;
+            _enemyAnimationEvent.OnPrepare -= HandlePrepare;
+            _enemyAnimationEvent.OnAttack -= HandleAttack;
             if (_currentSkill != null)
                 _currentSkill.OnExecutionComplete -= HandleSkillComplete;
+
+            enemy.GetModule<EnemyLaserAimer>()?.StopAim();
         }
     }
 }

@@ -21,6 +21,7 @@ namespace _02_Scripts.UI.StyleBar
 
         public event Action<StyleGrade> OnGradeChanged;
         public event Action<float> OnScoreChanged;
+        public event Action<string> OnStyleAction;
 
         public StyleGrade CurrentGrade { get; private set; } = StyleGrade.D;
         public float CurrentScore { get; private set; } = 0f;
@@ -44,8 +45,20 @@ namespace _02_Scripts.UI.StyleBar
                 StyleAction.FastMove => scoreData.FastMoveScore,
                 _ => 0f
             };
+            
+            string message = action switch
+            {
+                StyleAction.Kill => $"Kill! +{scoreData.KillScore}",
+                StyleAction.Headshot => $"Headshot! +{scoreData.HeadshotScore}",
+                StyleAction.DashKill => $"Dash Kill! +{scoreData.DashKillScore}",
+                StyleAction.HighJump => $"High Jump! +{scoreData.HighJumpScore}",
+                StyleAction.FastMove => $"Fast! +{scoreData.FastMoveScore}",
+                _ => ""
+            };
+
             AddScore(score);
             NotifyAction();
+            OnStyleAction?.Invoke(message);
         }
 
         private void AddScore(float amount)
@@ -86,5 +99,6 @@ namespace _02_Scripts.UI.StyleBar
         {
             _lastActionTime = Time.time;
         }
+
     }
 }
