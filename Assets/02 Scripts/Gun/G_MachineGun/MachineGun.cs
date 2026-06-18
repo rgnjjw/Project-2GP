@@ -15,13 +15,13 @@ namespace _02_Scripts.Gun.G_MachineGun
 
         public override bool IsAutoFire => true;
         public bool LastFiredLeft { get; private set; }
-        public bool IsSkillActive { get; private set; }
+        [field:SerializeField] public bool IsSkillActive { get; private set; }
 
         private bool _isLeft;
         private int _skillLevel = 1;
         private float _skillCooldownRemaining;//쿨타임
         private float _skillTimeRemaining;//스킬의 지속시간
-
+    
         public bool IsSkillReady => _skillCooldownRemaining <= 0f;
 
         public override void SetSkillLevel(int level) => _skillLevel = level;

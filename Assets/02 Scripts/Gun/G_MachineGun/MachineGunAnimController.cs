@@ -8,6 +8,9 @@ namespace _02_Scripts.Gun.G_MachineGun
         [SerializeField] private AnimParamSO bodyEquipAnimParam;
         [SerializeField] private AnimParamSO gunEquipAnimParam;
 
+        [SerializeField] private AnimParamSO gunIdleAnimParam;
+        [SerializeField] private AnimParamSO bodyIdleAnimParam;
+
         [SerializeField] private AnimParamSO gunRightFireAnimParam;
         [SerializeField] private AnimParamSO bodyRightFireAnimParam;
 
@@ -64,6 +67,8 @@ namespace _02_Scripts.Gun.G_MachineGun
 
         private void OnSkillEndAnim()
         {
+            gunRenderer.PlayClip(bodyIdleAnimParam.ParamHash, 0, 0);
+            gunRenderer.PlayClip(gunIdleAnimParam.ParamHash, 0, 0,1);
         }
     }
 }
