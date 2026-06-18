@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec5d3cc271cff5b43bab6837be91136c, type: 3}
   m_Name: Map2_Wave1
   m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.Map.WaveDataSO
-  meleeCount: 10
-  rangedCount: 0
+  meleeCount: 7
+  rangedCount: 2
   spawnBoss: 1

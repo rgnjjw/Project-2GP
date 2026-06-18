@@ -43,10 +43,8 @@ MonoBehaviour:
   - Damage: 80
     DamageRadius: 7
   <SlamDownSpeed>k__BackingField: 30
-  <DustEffectPrefab>k__BackingField: {fileID: 4857329183746591234, guid: e9729237970a25f48abe94b980c5e96a, type: 3}
-  <ShakeDuration>k__BackingField: 0.3
-  <ShakeStrength>k__BackingField: 0.4
-  <ShakeVibrato>k__BackingField: 20
+  <ShakeStrength>k__BackingField: 0.25
+  <ShakeDirection>k__BackingField: {x: 1, y: 0, z: 1}
   <EnemyLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 128

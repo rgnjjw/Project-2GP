@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Map2_Wave3
   m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.Map.WaveDataSO
   meleeCount: 15
-  rangedCount: 0
+  rangedCount: 4
   spawnBoss: 1

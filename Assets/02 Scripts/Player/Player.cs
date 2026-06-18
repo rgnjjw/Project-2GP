@@ -37,7 +37,6 @@ namespace _02_Scripts.Player
             _gunManager = GetModule<GunManager>();
             _playerHealth = GetModule<AgentHealth>();
 
-            PlayerInputSO.OnFireKeyPressed += _gunManager.Fire;
             _playerHealth.CurrentHp.OnValueChanged += OnHpChanged;
 
             Color color = redPanel.color;
@@ -77,7 +76,6 @@ namespace _02_Scripts.Player
 
         protected void OnDestroy()
         {
-            PlayerInputSO.OnFireKeyPressed -= _gunManager.Fire;
             _playerHealth.CurrentHp.OnValueChanged -= OnHpChanged;
         }
 

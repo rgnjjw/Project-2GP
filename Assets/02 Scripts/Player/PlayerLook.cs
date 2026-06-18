@@ -28,6 +28,7 @@ namespace _02_Scripts.Player
         [SerializeField] public float clampAngleX = 45f;
         [SerializeField] private GameObject playerCamera;
         [SerializeField] private float cameraSmoothSpeed = 2f;
+        [SerializeField] private CinemachineImpulseSource impulseSource;
 
         [Header("Slide Camera")]
         [SerializeField] private float crouchHeightRatio = 0.55f;
@@ -76,14 +77,28 @@ namespace _02_Scripts.Player
             }
         }
 
-        private void OnEnable() => EventBus.Subscribe<RecoilEvent>(OnRecoil);
-        private void OnDisable() => EventBus.Unsubscribe<RecoilEvent>(OnRecoil);
+        private void OnEnable()
+        {
+            EventBus.Subscribe<RecoilEvent>(OnRecoil);
+            EventBus.Subscribe<CameraShakeEvent>(OnCameraShake);
+        }
+
+        private void OnDisable()
+        {
+            EventBus.Unsubscribe<RecoilEvent>(OnRecoil);
+            EventBus.Unsubscribe<CameraShakeEvent>(OnCameraShake);
+        }
 
         private void OnRecoil(RecoilEvent evt)
         {
             _recoilX -= evt.Pitch;
             _recoilY += UnityEngine.Random.Range(-evt.Yaw, evt.Yaw);
             _recoilFOV += evt.FOVKick;
+        }
+
+        private void OnCameraShake(CameraShakeEvent evt)
+        {
+            impulseSource?.GenerateImpulse(evt.Velocity);
         }
 
         public void Initialize(ModuleOwner moduleOwner)
@@ -175,6 +190,7 @@ namespace _02_Scripts.Player
 
         public void Update()
         {
+            if (Mathf.Approximately(Time.timeScale, 0f)) return;
             UpdateRecoil();
             Look();
             UpdateSlideEffects();

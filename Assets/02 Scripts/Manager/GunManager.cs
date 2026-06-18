@@ -34,6 +34,8 @@ namespace _02_Scripts.Manager
         public void AfterInit()
         {
             _unlockedWeapons.Add(0);
+            _unlockedWeapons.Add(1);
+            _unlockedWeapons.Add(2);
             if (ShopManager.Instance != null)
                 ShopManager.Instance.OnWeaponUnlocked += UnlockWeapon;
             SwapWeapon(0);
@@ -47,6 +49,8 @@ namespace _02_Scripts.Manager
         private void Update()
         {
             if (_playerInput == null || _currentWeapon == null) return;
+            if (Mathf.Approximately(Time.timeScale, 0f)) return;
+            if (PauseManager.Instance != null && PauseManager.Instance.JustResumed) return;
             if (_currentWeapon.IsAutoFire && _playerInput.IsFireHeld)
                 _currentWeapon.Fire();
         }
@@ -54,6 +58,8 @@ namespace _02_Scripts.Manager
         private void OnFirePressed()
         {
             if (_currentWeapon == null || _currentWeapon.IsAutoFire) return;
+            if (Mathf.Approximately(Time.timeScale, 0f)) return;
+            if (PauseManager.Instance != null && PauseManager.Instance.JustResumed) return;
             _currentWeapon.Fire();
         }
 

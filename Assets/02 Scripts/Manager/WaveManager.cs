@@ -23,6 +23,7 @@ namespace _02_Scripts.Manager
 
         public void StartWaves(int currentLevel)
         {
+            StopAllCoroutines();
             _waveIndex = 0;
             _livingEnemyCount = 0;
             StartCoroutine(RunWaves(currentLevel));
@@ -84,19 +85,29 @@ namespace _02_Scripts.Manager
                 return;
 
             GameObject prefab = prefabs[Random.Range(0, prefabs.Length)];
-            SpawnPointData point = points[Random.Range(0, points.Count)];
+            int pointIndex = Random.Range(0, points.Count);
+            SpawnPointData point = points[pointIndex];
+            points.RemoveAt(pointIndex);
 
             GameObject enemyObj = Instantiate(prefab, point.Position, Quaternion.identity);
             _livingEnemyCount++;
 
             AgentHealth health = enemyObj.GetComponentInChildren<AgentHealth>();
             if (health != null)
-                health.OnDead += OnEnemyDead;
+            {
+                void OnDead()
+                {
+                    _livingEnemyCount = Mathf.Max(0, _livingEnemyCount - 1);
+                    health.OnDead -= OnDead;
+                }
+                health.OnDead += OnDead;
+            }
+            else
+            {
+                _livingEnemyCount = Mathf.Max(0, _livingEnemyCount - 1);
+                Debug.LogWarning($"[WaveManager] 스폰된 적에 AgentHealth 없음: {enemyObj.name}");
+            }
         }
 
-        private void OnEnemyDead()
-        {
-            _livingEnemyCount = Mathf.Max(0, _livingEnemyCount - 1);
-        }
     }
 }

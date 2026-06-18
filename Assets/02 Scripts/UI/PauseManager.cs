@@ -1,4 +1,6 @@
+using System.Collections;
 using _02_Scripts.Core.Utility;
+using _02_Scripts.Manager;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,6 +12,7 @@ namespace _02_Scripts.UI
 
         public bool IsPaused { get; private set; }
         public bool IsSubPanelOpen { get; private set; }
+        public bool JustResumed { get; private set; }
 
         private void Awake()
         {
@@ -45,6 +48,7 @@ namespace _02_Scripts.UI
         {
             IsPaused = true;
             Time.timeScale = 0f;
+            CursorManager.Instance.SetCursorVisible(true);
             pauseMenuPanel.SetActive(true);
         }
 
@@ -53,6 +57,15 @@ namespace _02_Scripts.UI
             IsPaused = false;
             Time.timeScale = 1f;
             pauseMenuPanel.SetActive(false);
+            StartCoroutine(ResumeRoutine());
+        }
+
+        private IEnumerator ResumeRoutine()
+        {
+            JustResumed = true;
+            yield return null;
+            JustResumed = false;
+            CursorManager.Instance.SetCursorVisible(false);
         }
 
         public void OpenSubPanel()

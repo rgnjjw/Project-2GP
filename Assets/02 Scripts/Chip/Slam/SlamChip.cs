@@ -1,4 +1,5 @@
 using _02_Scripts.Agent;
+using _02_Scripts.Core.Utility;
 using _02_Scripts.Player;
 using UnityEngine;
 
@@ -71,7 +72,7 @@ namespace _02_Scripts.Chip.Slam
 
         private void ShakeCamera()
         {
-            // EventBus.Publish(new RecoilEvent(3,3)); 바꾸기
+            EventBus.Publish(new CameraShakeEvent(_data.ShakeStrength, _data.ShakeDirection));
         }
 
         private void DealAoeDamage()
