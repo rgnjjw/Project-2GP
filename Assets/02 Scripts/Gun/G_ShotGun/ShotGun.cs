@@ -1,4 +1,5 @@
 using _02_Scripts.Agent;
+using _02_Scripts.Gun.Skill;
 using UnityEngine;
 
 namespace _02_Scripts.Gun.G_ShotGun
@@ -7,6 +8,70 @@ namespace _02_Scripts.Gun.G_ShotGun
     {
         [SerializeField] private int pelletCount = 8;
         [SerializeField] private float spreadAngle = 10f;
+        [SerializeField] private ShotGunSkillDataSO skillData;
+        [SerializeField] private Transform chainsawOrigin;
+
+        private int _skillLevel = 1;
+        private float _skillCooldownRemaining;
+        private bool _isGrinding;
+        private float _damageAccumulator;
+
+        public bool IsGrinding => _isGrinding;
+        public bool IsSkillReady => _skillCooldownRemaining <= 0f;
+
+        public override void SetSkillLevel(int level) => _skillLevel = level;
+
+        public override void OnSkillPressed()
+        {
+            if (skillData == null || !IsSkillReady) return;
+            _isGrinding = true;
+            _damageAccumulator = 0f;
+            FireSkillStart();
+        }
+
+        public override void OnSkillReleased()
+        {
+            if (!_isGrinding) return;
+            _isGrinding = false;
+            FireSkillEnd();
+            if (skillData != null)
+                _skillCooldownRemaining = skillData.GetLevel(_skillLevel).Cooldown;
+        }
+
+        public override void TickSkill(float deltaTime)
+        {
+            if (_skillCooldownRemaining > 0f)
+                _skillCooldownRemaining -= deltaTime;
+
+            if (!_isGrinding || skillData == null) return;
+
+            var data = skillData.GetLevel(_skillLevel);
+            _damageAccumulator += data.DamagePerSecond * deltaTime;
+
+            if (_damageAccumulator >= 1f)
+            {
+                int dmg = Mathf.FloorToInt(_damageAccumulator);
+                _damageAccumulator -= dmg;
+
+                Transform origin = chainsawOrigin != null ? chainsawOrigin : muzzleTrm;
+                Collider[] hits = Physics.OverlapSphere(origin.position, data.Range, skillData.EnemyMask);
+
+                AgentHealth closest = null;
+                float closestDist = float.MaxValue;
+                foreach (var col in hits)
+                {
+                    if (!col.transform.TryGetComponent<Enemy.Enemy>(out var enemy)) continue;
+                    float dist = Vector3.Distance(origin.position, col.transform.position);
+                    if (dist < closestDist)
+                    {
+                        closestDist = dist;
+                        closest = enemy.GetModule<AgentHealth>();
+                    }
+                }
+                if (closest != null)
+                    DealDamage(closest, dmg);
+            }
+        }
 
         public override void Fire()
         {

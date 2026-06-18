@@ -13,6 +13,7 @@ namespace _02_Scripts.Player
         public bool IsRunning { get; private set; }
         public bool IsJumping { get; private set; }
         public bool IsFireHeld { get; private set; }
+        public bool IsSkillHeld { get; private set; }
 
         public event Action<int, InputAction.CallbackContext> OnChipInput;
         public event Action OnJumpKeyPressed;
@@ -26,6 +27,8 @@ namespace _02_Scripts.Player
         public event Action OnWeapon1Pressed;
         public event Action OnWeapon2Pressed;
         public event Action OnWeapon3Pressed;
+        public event Action OnSkillKeyPressed;
+        public event Action OnSkillKeyReleased;
 
         public void OnScrollWeapon(InputAction.CallbackContext context)
         {
@@ -125,6 +128,20 @@ namespace _02_Scripts.Player
         {
             int index = context.action.GetBindingIndexForControl(context.control);
             OnChipInput?.Invoke(index, context);
+        }
+
+        public void OnSkill(InputAction.CallbackContext context)
+        {
+            if (context.started)
+            {
+                IsSkillHeld = true;
+                OnSkillKeyPressed?.Invoke();
+            }
+            else if (context.canceled)
+            {
+                IsSkillHeld = false;
+                OnSkillKeyReleased?.Invoke();
+            }
         }
     }
 }

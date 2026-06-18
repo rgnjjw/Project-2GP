@@ -22,7 +22,7 @@ MonoBehaviour:
   <TargetLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 256
-  <TargetHeightOffset>k__BackingField: 2
+  <TargetHeightOffset>k__BackingField: 1.8
   <TracerPrefab>k__BackingField: {fileID: 2090086529666823614, guid: 860aaf4534ce4754297e0f2e79b5e0e0, type: 3}
   <LaserPrefab>k__BackingField: {fileID: 4999676970033354722, guid: e7f744b06b4d5d3438ab253e4d8dc15c, type: 3}
   references:

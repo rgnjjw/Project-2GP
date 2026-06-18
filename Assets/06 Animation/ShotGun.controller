@@ -188,7 +188,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: B_SawMode_Loop_Baked
+  m_Name: B_SKILL
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -248,10 +248,10 @@ AnimatorStateMachine:
     m_Position: {x: -284.66864, y: 127.41479, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8922931662503122250}
-    m_Position: {x: -282.508, y: 19.384148, z: 0}
+    m_Position: {x: -290, y: 70, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -162563460439901805}
-    m_Position: {x: -241.45636, y: -58.397835, z: 0}
+    m_Position: {x: -260, y: -30, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -295,7 +295,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: B_SawMode_End_Baked
+  m_Name: B_END
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -565,7 +565,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: B_SawMode_Enter_Baked
+  m_Name: B_LOOP
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []

@@ -24,6 +24,8 @@ namespace _02_Scripts.Gun
         public bool isFiring = false;
         public event Action OnFire;
         public event Action OnEquip;
+        public event Action OnSkillStart;
+        public event Action OnSkillEnd;
 
         protected float nextFireTime;
 
@@ -44,6 +46,12 @@ namespace _02_Scripts.Gun
             fireEffect?.Play();
         }
 
+        protected void PlayFireFeedbackOnly()
+        {
+            EventBus.Publish(recoilEvent);
+            PlayFireEffect();
+        }
+
         protected void DealDamage(AgentHealth target, int damage)
         {
             if (target == null) return;
@@ -57,6 +65,14 @@ namespace _02_Scripts.Gun
                 return hit.point;
             return ray.origin + ray.direction * maxDistance;
         }
+
+        public virtual void OnSkillPressed() { }
+        public virtual void OnSkillReleased() { }
+        public virtual void TickSkill(float deltaTime) { }
+        public virtual void SetSkillLevel(int level) { }
+
+        protected void FireSkillStart() => OnSkillStart?.Invoke();
+        protected void FireSkillEnd() => OnSkillEnd?.Invoke();
 
         protected List<Vector3> GetReflectedPoints(Ray ray, int maxBounce, float maxDistance)
         {

@@ -28,6 +28,8 @@ namespace _02_Scripts.Manager
                 _playerInput.OnWeapon2Pressed += OnWeapon2;
                 _playerInput.OnWeapon3Pressed += OnWeapon3;
                 _playerInput.OnFireKeyPressed += OnFirePressed;
+                _playerInput.OnSkillKeyPressed += OnSkillPressed;
+                _playerInput.OnSkillKeyReleased += OnSkillReleased;
             }
         }
 
@@ -46,6 +48,13 @@ namespace _02_Scripts.Manager
             _unlockedWeapons.Add(index);
         }
 
+        // 무기 스킬 레벨 설정 (상점 강화 / 레벨업 등에서 호출). 레벨이 오르면 대미지 증가·쿨타임 감소.
+        public void SetWeaponSkillLevel(int weaponIndex, int level)
+        {
+            if (weaponIndex < 0 || weaponIndex >= weapons.Length) return;
+            weapons[weaponIndex].SetSkillLevel(level);
+        }
+
         private void Update()
         {
             if (_playerInput == null || _currentWeapon == null) return;
@@ -53,6 +62,7 @@ namespace _02_Scripts.Manager
             if (PauseManager.Instance != null && PauseManager.Instance.JustResumed) return;
             if (_currentWeapon.IsAutoFire && _playerInput.IsFireHeld)
                 _currentWeapon.Fire();
+            _currentWeapon.TickSkill(Time.deltaTime);
         }
 
         private void OnFirePressed()
@@ -61,6 +71,20 @@ namespace _02_Scripts.Manager
             if (Mathf.Approximately(Time.timeScale, 0f)) return;
             if (PauseManager.Instance != null && PauseManager.Instance.JustResumed) return;
             _currentWeapon.Fire();
+        }
+
+        private void OnSkillPressed()
+        {
+            if (_currentWeapon == null) return;
+            if (Mathf.Approximately(Time.timeScale, 0f)) return;
+            if (PauseManager.Instance != null && PauseManager.Instance.JustResumed) return;
+            _currentWeapon.OnSkillPressed();
+        }
+
+        private void OnSkillReleased()
+        {
+            if (_currentWeapon == null) return;
+            _currentWeapon.OnSkillReleased();
         }
 
         private void SwapWeapon(int index)
@@ -132,6 +156,8 @@ namespace _02_Scripts.Manager
                 _playerInput.OnWeapon2Pressed -= OnWeapon2;
                 _playerInput.OnWeapon3Pressed -= OnWeapon3;
                 _playerInput.OnFireKeyPressed -= OnFirePressed;
+                _playerInput.OnSkillKeyPressed -= OnSkillPressed;
+                _playerInput.OnSkillKeyReleased -= OnSkillReleased;
             }
             if (ShopManager.Instance != null)
                 ShopManager.Instance.OnWeaponUnlocked -= UnlockWeapon;

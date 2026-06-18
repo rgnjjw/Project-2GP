@@ -1,4 +1,5 @@
 using _02_Scripts.Agent;
+using _02_Scripts.Gun.Skill;
 using UnityEngine;
 
 namespace _02_Scripts.Gun.G_MachineGun
@@ -9,18 +10,80 @@ namespace _02_Scripts.Gun.G_MachineGun
         [SerializeField] private Transform muzzleLeft;
         [SerializeField] private ParticleSystem fireEffectRight;
         [SerializeField] private ParticleSystem fireEffectLeft;
+        [SerializeField] private MachineGunSkillDataSO skillData;
+        [SerializeField] private GunAnimationEvent animEvent;
 
         public override bool IsAutoFire => true;
         public bool LastFiredLeft { get; private set; }
+        public bool IsSkillActive { get; private set; }
 
         private bool _isLeft;
+        private int _skillLevel = 1;
+        private float _skillCooldownRemaining;//쿨타임
+        private float _skillTimeRemaining;//스킬의 지속시간
+
+        public bool IsSkillReady => _skillCooldownRemaining <= 0f;
+
+        public override void SetSkillLevel(int level) => _skillLevel = level;
+
+        private void Awake()
+        {
+            if (animEvent != null)
+                animEvent.OnSkillFire += SkillFireShot;
+        }
+
+        private void OnDestroy()
+        {
+            if (animEvent != null)
+                animEvent.OnSkillFire -= SkillFireShot;
+        }
+
+        public override void OnSkillPressed()
+        {
+            if (skillData == null || !IsSkillReady || IsSkillActive) return;
+
+            _skillTimeRemaining = skillData.GetLevel(_skillLevel).Duration;//시간
+            IsSkillActive = true;//실행중이다
+            _isLeft = false; //스킬 애니메이션은 항상 오른쪽 먼저 왼쪽 순서로 고정되어 있으므로 시작 시 초기화함
+            FireSkillStart();
+        }
+
+        public override void TickSkill(float deltaTime)
+        {
+            if (_skillCooldownRemaining > 0f)
+                _skillCooldownRemaining -= deltaTime;
+
+            if (!IsSkillActive) return;
+            _skillTimeRemaining -= deltaTime;
+            if (_skillTimeRemaining <= 0f)
+            {
+                IsSkillActive = false;
+                FireSkillEnd();
+                if (skillData != null)
+                    _skillCooldownRemaining = skillData.GetLevel(_skillLevel).Cooldown;
+            }
+        }
+
+        private void SkillFireShot()
+        {
+            if (!IsSkillActive) return;
+            FireShot();
+            PlayFireFeedbackOnly();
+        }
 
         public override void Fire()
         {
-            if (Camera.main == null) return;
+            if (IsSkillActive) return;
             if (Time.time < nextFireTime) return;
-
             nextFireTime = Time.time + fireDelay;
+
+            FireShot();
+            base.Fire();
+        }
+
+        private void FireShot()
+        {
+            if (Camera.main == null) return;
 
             LastFiredLeft = _isLeft;
             Transform currentMuzzle = _isLeft ? muzzleLeft : muzzleRight;
@@ -46,8 +109,6 @@ namespace _02_Scripts.Gun.G_MachineGun
             {
                 tracer.transform.position = ray.origin + ray.direction * 1000f;
             }
-
-            base.Fire();
         }
 
         protected override void PlayFireEffect()
