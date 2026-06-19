@@ -62,7 +62,11 @@ namespace _02_Scripts.Manager
             if (PauseManager.Instance != null && PauseManager.Instance.JustResumed) return;
             if (_currentWeapon.IsAutoFire && _playerInput.IsFireHeld)
                 _currentWeapon.Fire();
-            _currentWeapon.TickSkill(Time.deltaTime);
+
+            // 스킬 쿨타임은 장착 여부와 무관하게 흘러야 하므로 모든 무기의 스킬을 틱한다.
+            // (다른 무기를 들고 있어도 머신건 스킬 쿨이 계속 줄어들도록)
+            for (int i = 0; i < weapons.Length; i++)
+                weapons[i].TickSkill(Time.deltaTime);
         }
 
         private void OnFirePressed()
