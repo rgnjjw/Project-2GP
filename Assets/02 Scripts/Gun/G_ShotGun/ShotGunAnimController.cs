@@ -9,11 +9,13 @@ namespace _02_Scripts.Gun.G_ShotGun
         [SerializeField] private AnimParamSO bodyEquipLeft;
         [SerializeField] private AnimParamSO gunEquip;
 
+        [SerializeField] private AnimParamSO gunEnd;
+        [SerializeField] private AnimParamSO bodyEnd;
+
         [SerializeField] private AnimParamSO bodyFireRight;
         [SerializeField] private AnimParamSO bodyFireLeft;
         [SerializeField] private AnimParamSO gunFire;
 
-        [Header("Skill (Chainsaw)")]
         [SerializeField] private AnimParamSO skillBodyAnimParam;
         [SerializeField] private AnimParamSO skillGunAnimParam;
 
@@ -41,28 +43,30 @@ namespace _02_Scripts.Gun.G_ShotGun
 
         protected override void OnEquipAnim()
         {
-            gunRenderer.PlayClip(bodyEquipLeft.ParamHash, 0, 0, 3);
-            gunRenderer.PlayClip(bodyEquipRight.ParamHash, 0, 0, 2);
+            gunRenderer.PlayClip(bodyEquipLeft.ParamHash, 0, 0, 2);
+            gunRenderer.PlayClip(bodyEquipRight.ParamHash, 0, 0, 3);
             gunRenderer.PlayClip(gunEquip.ParamHash, 0, 0, 1);
         }
 
         protected override void OnFireAnim()
         {
-            gunRenderer.PlayClip(bodyFireLeft.ParamHash, 0, 0, 3);
-            gunRenderer.PlayClip(bodyFireRight.ParamHash, 0, 0, 2);
+            gunRenderer.PlayClip(bodyFireLeft.ParamHash, 0, 0, 2);
+            gunRenderer.PlayClip(bodyFireRight.ParamHash, 0, 0, 3);
             gunRenderer.PlayClip(gunFire.ParamHash, 0, 0, 1);
         }
 
         private void OnSkillStartAnim()
         {
             if (skillBodyAnimParam != null)
-                gunRenderer.PlayClip(skillBodyAnimParam.ParamHash, 0, 0);
+                gunRenderer.PlayClip(skillBodyAnimParam.ParamHash, 0,0, 3);
             if (skillGunAnimParam != null)
                 gunRenderer.PlayClip(skillGunAnimParam.ParamHash, 0, 0, 1);
         }
 
         private void OnSkillEndAnim()
         {
+            gunRenderer.PlayClip(gunEnd.ParamHash, 0, 0,1);
+            gunRenderer.PlayClip(bodyEnd.ParamHash, 0, 0, 3);
         }
     }
 }

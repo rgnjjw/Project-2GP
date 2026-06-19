@@ -11,10 +11,12 @@ namespace _02_Scripts.Gun.G_ShotGun
         [SerializeField] private ShotGunSkillDataSO skillData;
         [SerializeField] private Transform chainsawOrigin;
 
+        private const float SkillTickInterval = 0.1f;
+
         private int _skillLevel = 1;
         private float _skillCooldownRemaining;
         private bool _isGrinding;
-        private float _damageAccumulator;
+        private float _tickTimer;
 
         public bool IsGrinding => _isGrinding;
         public bool IsSkillReady => _skillCooldownRemaining <= 0f;
@@ -25,7 +27,7 @@ namespace _02_Scripts.Gun.G_ShotGun
         {
             if (skillData == null || !IsSkillReady) return;
             _isGrinding = true;
-            _damageAccumulator = 0f;
+            _tickTimer = 0f;
             FireSkillStart();
         }
 
@@ -45,13 +47,15 @@ namespace _02_Scripts.Gun.G_ShotGun
 
             if (!_isGrinding || skillData == null) return;
 
-            var data = skillData.GetLevel(_skillLevel);
-            _damageAccumulator += data.DamagePerSecond * deltaTime;
+            _tickTimer += deltaTime;
 
-            if (_damageAccumulator >= 1f)
+            if (_tickTimer >= SkillTickInterval)
             {
-                int dmg = Mathf.FloorToInt(_damageAccumulator);
-                _damageAccumulator -= dmg;
+                _tickTimer -= SkillTickInterval;
+
+                var data = skillData.GetLevel(_skillLevel);
+                int dmg = Mathf.RoundToInt(data.DamagePerSecond * SkillTickInterval);
+                if (dmg <= 0) dmg = 1;
 
                 Transform origin = chainsawOrigin != null ? chainsawOrigin : muzzleTrm;
                 Collider[] hits = Physics.OverlapSphere(origin.position, data.Range, skillData.EnemyMask);

@@ -56,7 +56,7 @@ namespace _02_Scripts.Gun
         {
             if (target == null) return;
             target.ApplyDamage(damage);
-            EventBus.Publish(new PlayerDamageDealtEvent(damage));
+            EventBus.Publish(new PlayerDamageDealtEvent(damage));//?
         }
 
         protected Vector3 GetHitPoint(Ray ray, float maxDistance)
