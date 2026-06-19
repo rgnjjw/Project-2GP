@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using _02_Scripts.Agent;
 using _02_Scripts.Gun.Skill;
 using UnityEngine;
@@ -10,6 +11,12 @@ namespace _02_Scripts.Gun.G_ShotGun
         [SerializeField] private float spreadAngle = 10f;
         [SerializeField] private ShotGunSkillDataSO skillData;
         [SerializeField] private Transform chainsawOrigin;
+
+        [Header("Beam (LineRenderer)")]
+        [SerializeField] private Material beamMaterial;
+        [SerializeField] private float beamWidth = 0.02f;
+
+        private readonly List<LineRenderer> _pelletBeams = new();
 
         private const float SkillTickInterval = 0.1f;
 
@@ -86,27 +93,41 @@ namespace _02_Scripts.Gun.G_ShotGun
             {
                 Ray ray = GetSpreadRay();
 
-                var tracer = Instantiate(tracerEffect, muzzleTrm.position, Quaternion.identity);
-                tracer.AddPosition(muzzleTrm.position);
-
+                Vector3 endPoint = ray.origin + ray.direction * 1000f;
                 if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layerMask))
                 {
+                    endPoint = hit.point;
                     hitEffect.transform.position = hit.point;
                     hitEffect.transform.forward = hit.normal;
                     hitEffect.Emit(1);
 
-                    tracer.transform.position = hit.point;
-
                     if (hit.transform.TryGetComponent<Enemy.Enemy>(out var enemy))
                         DealDamage(enemy.GetModule<AgentHealth>(), bulletDamage);
                 }
-                else
-                {
-                    tracer.transform.position = ray.origin + ray.direction * 1000f;
-                }
+
+                ShowBeam(GetOrCreatePelletBeam(i), muzzleTrm.position, endPoint);
             }
 
             base.Fire();
+        }
+
+        private LineRenderer GetOrCreatePelletBeam(int index)
+        {
+            while (_pelletBeams.Count <= index)
+            {
+                var go = new GameObject($"PelletBeam_{_pelletBeams.Count}");
+                go.transform.SetParent(transform);
+                var lr = go.AddComponent<LineRenderer>();
+                lr.positionCount = 2;
+                lr.useWorldSpace = true;
+                lr.widthMultiplier = beamWidth;
+                if (beamMaterial != null) lr.material = beamMaterial;
+                lr.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+                lr.receiveShadows = false;
+                lr.enabled = false;
+                _pelletBeams.Add(lr);
+            }
+            return _pelletBeams[index];
         }
 
         private Ray GetSpreadRay()

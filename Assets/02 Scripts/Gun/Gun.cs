@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using _02_Scripts.Agent;
 using _02_Scripts.Core.Utility;
@@ -18,7 +19,9 @@ namespace _02_Scripts.Gun
         [SerializeField] private RecoilEvent recoilEvent;
         [SerializeField] protected ParticleSystem fireEffect;
         [SerializeField] protected ParticleSystem hitEffect;
-        [SerializeField] protected TrailRenderer tracerEffect;
+        [SerializeField] protected float beamDuration = 0.03f;
+
+        private readonly Dictionary<LineRenderer, Coroutine> _beamRoutines = new();
 
         public virtual bool IsAutoFire => false;
         public bool isFiring = false;
@@ -73,6 +76,29 @@ namespace _02_Scripts.Gun
 
         protected void FireSkillStart() => OnSkillStart?.Invoke();
         protected void FireSkillEnd() => OnSkillEnd?.Invoke();
+
+        // 미리 달아둔 LineRenderer를 재사용: start(총구)→end(명중점)로 위치만 갱신하고 잠깐 켰다가 끈다.
+        protected void ShowBeam(LineRenderer beam, Vector3 start, Vector3 end)
+        {
+            if (beam == null) return;
+
+            beam.useWorldSpace = true;
+            beam.positionCount = 2;
+            beam.SetPosition(0, start);
+            beam.SetPosition(1, end);
+            beam.enabled = true;
+
+            if (_beamRoutines.TryGetValue(beam, out var running) && running != null)
+                StopCoroutine(running);
+            _beamRoutines[beam] = StartCoroutine(HideBeamAfter(beam, beamDuration));
+        }
+
+        private IEnumerator HideBeamAfter(LineRenderer beam, float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            if (beam != null) beam.enabled = false;
+            _beamRoutines[beam] = null;
+        }
 
         protected List<Vector3> GetReflectedPoints(Ray ray, int maxBounce, float maxDistance)
         {

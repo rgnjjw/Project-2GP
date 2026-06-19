@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ShotGunSkillDataSO
   m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.Gun.Skill.ShotGunSkillDataSO
   <Levels>k__BackingField:
-  - DamagePerSecond: 10
+  - DamagePerSecond: 30
     Range: 2
     Cooldown: 5
   - DamagePerSecond: 15

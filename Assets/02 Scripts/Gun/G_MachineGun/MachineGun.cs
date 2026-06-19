@@ -13,6 +13,9 @@ namespace _02_Scripts.Gun.G_MachineGun
         [SerializeField] private MachineGunSkillDataSO skillData;
         [SerializeField] private GunAnimationEvent animEvent;
 
+        [Header("Beam (LineRenderer)")]
+        [SerializeField] private LineRenderer fireBeam;
+
         public override bool IsAutoFire => true;
         public bool LastFiredLeft { get; private set; }
         [field:SerializeField] public bool IsSkillActive { get; private set; }
@@ -91,24 +94,21 @@ namespace _02_Scripts.Gun.G_MachineGun
 
             Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0));
 
-            var tracer = Instantiate(tracerEffect, currentMuzzle.position, Quaternion.identity);
-            tracer.AddPosition(currentMuzzle.position);
-
+            Vector3 endPoint = ray.origin + ray.direction * 1000f;
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layerMask))
             {
+                endPoint = hit.point;
+
                 hitEffect.transform.position = hit.point;
                 hitEffect.transform.forward = hit.normal;
                 hitEffect.Emit(1);
 
-                tracer.transform.position = hit.point;
-
                 if (hit.transform.TryGetComponent<Enemy.Enemy>(out var enemy))
                     DealDamage(enemy.GetModule<AgentHealth>(), bulletDamage);
             }
-            else
-            {
-                tracer.transform.position = ray.origin + ray.direction * 1000f;
-            }
+
+            // 발사한 총구 → 끝점(조준점/벽)을 잇는 빔
+            ShowBeam(fireBeam, currentMuzzle.position, endPoint);
         }
 
         protected override void PlayFireEffect()

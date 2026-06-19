@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6226587243315376909}
   - component: {fileID: 813393238023917797}
   - component: {fileID: 4263621928059462462}
-  - component: {fileID: 830576857581534509}
   m_Layer: 0
   m_Name: SkillBullet
   m_TagString: Untagged
@@ -28,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 744272118835503665}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0038, y: 146.52876, z: 4}
+  m_LocalPosition: {x: -0.0038, y: 146.52876, z: 8.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -109,7 +108,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fec54f8a66da0d8439011fcb6fc4ef6c, type: 2}
+  - {fileID: 2100000, guid: 2d5d06b7abc191145a6b9fcdd7401461, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -193,15 +192,3 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
---- !u!114 &830576857581534509
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 744272118835503665}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09eaf4dc2a259764d8f8f248b4463a63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.Gun.G_Pistol.PiercingBullet
