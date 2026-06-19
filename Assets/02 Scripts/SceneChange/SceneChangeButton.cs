@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using _02_Scripts.Manager;
+using _02_Scripts.UI;
 
 namespace _02_Scripts.SceneChange
 {
@@ -27,7 +28,7 @@ namespace _02_Scripts.SceneChange
             _button.onClick.RemoveListener(OnClickChangeScene);
         }
 
-        private async void OnClickChangeScene()
+        private void OnClickChangeScene()
         {
             string sceneName = targetScene.SceneName;
 
@@ -38,6 +39,21 @@ namespace _02_Scripts.SceneChange
             }
 
             _button.interactable = false;
+
+            var pauseManager = FindFirstObjectByType<PauseManager>();
+            if (pauseManager != null)
+            {
+                pauseManager.RunAfterSubPanelClosed(() => LoadSceneAsync(sceneName));
+            }
+            else
+            {
+                LoadSceneAsync(sceneName);
+            }
+        }
+
+        private async void LoadSceneAsync(string sceneName)
+        {
+            Time.timeScale = 1f;
 
             if (useSingleLoad)
             {

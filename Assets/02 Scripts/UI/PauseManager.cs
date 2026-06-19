@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using _02_Scripts.Core.Utility;
 using _02_Scripts.Manager;
@@ -9,12 +10,13 @@ namespace _02_Scripts.UI
     public class PauseManager : MonoSingleton<PauseManager>
     {
         [SerializeField] private GameObject pauseMenuPanel;
+        [SerializeField] private SlidePanel soundPanel;
 
         public bool IsPaused { get; private set; }
-        public bool IsSubPanelOpen { get; private set; }
+        public bool IsSubPanelOpen => soundPanel != null && soundPanel.IsOpen;
         public bool JustResumed { get; private set; }
 
-        private void Awake()
+        protected override void Awake()
         {
             pauseMenuPanel.SetActive(false);
         }
@@ -31,6 +33,7 @@ namespace _02_Scripts.UI
         {
             if (IsSubPanelOpen)
             {
+                soundPanel.Close();
                 return;
             }
 
@@ -54,6 +57,11 @@ namespace _02_Scripts.UI
 
         public void Resume()
         {
+            RunAfterSubPanelClosed(ResumeInternal);
+        }
+
+        private void ResumeInternal()
+        {
             IsPaused = false;
             Time.timeScale = 1f;
             pauseMenuPanel.SetActive(false);
@@ -68,14 +76,21 @@ namespace _02_Scripts.UI
             CursorManager.Instance.SetCursorVisible(false);
         }
 
-        public void OpenSubPanel()
+        public void RunAfterSubPanelClosed(Action action)
         {
-            IsSubPanelOpen = true;
+            if (IsSubPanelOpen)
+            {
+                soundPanel.Close(onComplete: action);
+            }
+            else
+            {
+                action?.Invoke();
+            }
         }
 
-        public void CloseSubPanel()
+        public void ToggleSubPanel()
         {
-            IsSubPanelOpen = false;
+            soundPanel.Toggle();
         }
     }
 }
