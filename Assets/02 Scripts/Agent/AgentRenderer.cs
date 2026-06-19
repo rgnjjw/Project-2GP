@@ -8,16 +8,15 @@ namespace _02_Scripts.Agent
     public class AgentRenderer : MonoBehaviour, IModule, IRenderer
     {
         public Animator Animator { get; private set; }
-        
 
         public virtual void Initialize(ModuleOwner owner)
         {
             Animator = GetComponent<Animator>();
         }
 
-        public void PlayClip(int clipHash, float normalizedTime, float crossFadeDuration, int layerIndex = 0)
+        public void PlayClip(int clipHash, float fixedTimeOffset, float crossFadeDuration, int layerIndex = 0)
         {
-            Animator.CrossFadeInFixedTime(clipHash, crossFadeDuration, layerIndex, normalizedTime);
+            Animator.CrossFadeInFixedTime(clipHash, crossFadeDuration, layerIndex, fixedTimeOffset);
         }
     }
 }

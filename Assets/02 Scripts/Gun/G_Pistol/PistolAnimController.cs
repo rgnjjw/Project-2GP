@@ -8,7 +8,6 @@ namespace _02_Scripts.Gun.G_Pistol
         [SerializeField] private AnimParamSO equipAnimParam;
         [SerializeField] private AnimParamSO fireAnimParam;
 
-        [Header("Skill")]
         [SerializeField] private AnimParamSO skillChargeBodyAnimParam;
         [SerializeField] private AnimParamSO skillChargeGunAnimParam;
         [SerializeField] private AnimParamSO skillFireBodyAnimParam;
@@ -51,7 +50,7 @@ namespace _02_Scripts.Gun.G_Pistol
             if (skillChargeBodyAnimParam != null)
                 gunRenderer.PlayClip(skillChargeBodyAnimParam.ParamHash, 0, 0);
             if (skillChargeGunAnimParam != null)
-                gunRenderer.PlayClip(skillChargeGunAnimParam.ParamHash, 0, 0, 1);
+                gunRenderer.PlayClip(skillChargeGunAnimParam.ParamHash, 0, 0);
         }
 
         private void OnSkillFireAnim()
@@ -59,7 +58,7 @@ namespace _02_Scripts.Gun.G_Pistol
             if (skillFireBodyAnimParam != null)
                 gunRenderer.PlayClip(skillFireBodyAnimParam.ParamHash, 0, 0);
             if (skillFireGunAnimParam != null)
-                gunRenderer.PlayClip(skillFireGunAnimParam.ParamHash, 0, 0, 1);
+                gunRenderer.PlayClip(skillFireGunAnimParam.ParamHash, 0, 0);
         }
     }
 }
