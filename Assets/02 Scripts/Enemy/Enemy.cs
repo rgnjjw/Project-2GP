@@ -22,6 +22,7 @@ namespace _02_Scripts.Enemy
         private HitFlash _hitFlash;
 
         private float _lastHitAnimTime;
+        private bool _isDead;
 
         protected override void Awake()
         {
@@ -55,6 +56,9 @@ namespace _02_Scripts.Enemy
 
         protected override void OnDead()
         {
+            if (_isDead) return;
+            _isDead = true;
+
             LevelManager.Instance.AddExp(10);
 
             if (_capsuleCollider != null)

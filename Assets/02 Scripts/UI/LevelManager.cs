@@ -7,12 +7,13 @@ namespace _02_Scripts.UI
     public class LevelManager : MonoSingleton<LevelManager>
     {
         [SerializeField] private BarUI levelBar;
-        [SerializeField] private int[] expPerLevel; // 레벨별 필요한 경험치의 양
-        
+        [SerializeField] private int[] expPerLevel;
+
         public event Action<int> OnLevelUp;
 
         public int CurrentLevel => _currentLevel;
         public float ExpMultiplier { get; set; } = 1f;
+
         private int _currentLevel = 1;
         private int _currentExp;
 
@@ -21,28 +22,32 @@ namespace _02_Scripts.UI
             if (_currentLevel > expPerLevel.Length) return;
 
             _currentExp += Mathf.RoundToInt(amount * ExpMultiplier);
-            ProcessExp();
-        }
 
-        private void ProcessExp()
-        {
-            if (_currentLevel > expPerLevel.Length) return;
-
-            int needed = expPerLevel[_currentLevel - 1];
-
-            if (_currentExp >= needed)
+            int levelsGained = 0;
+            while (_currentLevel <= expPerLevel.Length
+                   && _currentExp >= expPerLevel[_currentLevel - 1])
             {
-                levelBar.SetFill(1f, () =>
+                _currentExp -= expPerLevel[_currentLevel - 1];
+                _currentLevel++;
+                levelsGained++;
+            }
+
+            float fill = _currentLevel > expPerLevel.Length
+                ? 1f
+                : (float)_currentExp / expPerLevel[_currentLevel - 1];
+
+            if (levelsGained > 0)
+            {
+                int startLevel = _currentLevel - levelsGained;
+                levelBar.QueueLevelUps(levelsGained, fill, () =>
                 {
-                    _currentExp -= needed;
-                    _currentLevel++;
-                    OnLevelUp?.Invoke(_currentLevel);
-                    ProcessExp();
+                    startLevel++;
+                    OnLevelUp?.Invoke(startLevel);
                 });
             }
             else
             {
-                levelBar.SetFill((float)_currentExp / needed);
+                levelBar.SetFill(fill);
             }
         }
     }

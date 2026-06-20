@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,6 +15,14 @@ namespace _02_Scripts.UI
         [SerializeField] private float followDuration = 0.4f;
         [SerializeField] private Ease ease = Ease.Linear;
 
+        private float _lastTarget = -1f;
+        private bool _isLevelUpAnimating;
+        private Sequence _levelUpSeq;
+
+        private readonly Queue<Action> _levelUpCallbacks = new();
+        private float _pendingFillAfter;
+
+        // ── Realtime (스태미나 등) ──────────────────────────────────────────
         private float _rtTarget = -1f;
         private bool _rtIncreasing;
         private float _rtLagStart;
@@ -44,10 +53,8 @@ namespace _02_Scripts.UI
 
             _rtTarget = amount;
 
-            if (_rtIncreasing)
-                followBar.fillAmount = amount;
-            else
-                bar.fillAmount = amount;
+            if (_rtIncreasing) followBar.fillAmount = amount;
+            else bar.fillAmount = amount;
         }
 
         private void Update()
@@ -64,33 +71,96 @@ namespace _02_Scripts.UI
                 followBar.fillAmount = Mathf.MoveTowards(followBar.fillAmount, _rtTarget, step);
         }
 
-        public void SetFill(float targetAmount, Action onComplete = null)
+        // ── 일반 fill (순수 시각 효과, 게임 로직과 무관) ──────────────────────
+        public void SetFill(float targetAmount)
         {
+            bool wasLevelUp = _isLevelUpAnimating;
+            _isLevelUpAnimating = false;
+            _levelUpCallbacks.Clear();
+
+            _levelUpSeq?.Kill();
+            _levelUpSeq = null;
             bar.DOKill();
             followBar.DOKill();
 
-            bool isIncreasing = targetAmount > bar.fillAmount;
+            if (wasLevelUp)
+            {
+                followBar.fillAmount = bar.fillAmount;
+                _lastTarget = bar.fillAmount;
+            }
+
+            bool isIncreasing = _lastTarget < 0f || targetAmount >= _lastTarget;
+            _lastTarget = targetAmount;
 
             if (isIncreasing)
             {
                 followBar.DOFillAmount(targetAmount, followDuration).SetEase(ease);
-                bar.DOFillAmount(targetAmount, barDuration).SetEase(ease).SetDelay(followDelay)
-                    .OnComplete(() =>
-                    {
-                        if (Mathf.Approximately(bar.fillAmount, 1f))
-                        {
-                            bar.fillAmount = 0f;
-                            followBar.fillAmount = 0f;
-                        }
-                        onComplete?.Invoke();
-                    });
+                bar.DOFillAmount(targetAmount, barDuration).SetEase(ease).SetDelay(followDelay);
             }
             else
             {
                 bar.DOFillAmount(targetAmount, barDuration).SetEase(ease);
                 followBar.DOFillAmount(targetAmount, followDuration).SetEase(ease).SetDelay(followDelay);
-                onComplete?.Invoke();
             }
+        }
+
+        // ── 레벨업 시각 효과 ───────────────────────────────────────────────
+        /// <summary>
+        /// count번 "꽉 차고 리셋"을 순서대로 재생한 뒤 finalFill까지 채운다.
+        /// onEachLevelUp은 각 climb이 끝나고 0으로 리셋된 직후(=실제 레벨업 처리 시점)에 호출된다.
+        /// </summary>
+        public void QueueLevelUps(int count, float finalFill, Action onEachLevelUp = null)
+        {
+            if (count <= 0)
+            {
+                SetFill(finalFill);
+                return;
+            }
+
+            for (int i = 0; i < count; i++)
+                _levelUpCallbacks.Enqueue(onEachLevelUp);
+
+            _pendingFillAfter = finalFill;
+
+            if (!_isLevelUpAnimating)
+                PlayNextLevelUp();
+        }
+
+        private void PlayNextLevelUp()
+        {
+            _isLevelUpAnimating = true;
+
+            Action callback = _levelUpCallbacks.Count > 0 ? _levelUpCallbacks.Dequeue() : null;
+
+            bar.DOKill();
+            followBar.DOKill();
+
+            followBar.fillAmount = bar.fillAmount;
+            _lastTarget = 1f;
+
+            _levelUpSeq = DOTween.Sequence();
+            _levelUpSeq.Join(bar.DOFillAmount(1f, barDuration).SetEase(ease));
+            _levelUpSeq.Join(followBar.DOFillAmount(1f, barDuration).SetEase(ease));
+            _levelUpSeq.OnComplete(() =>
+            {
+                _levelUpSeq = null;
+                bar.fillAmount = 0f;
+                followBar.fillAmount = 0f;
+                _lastTarget = 0f;
+
+                // 바가 꽉 찼다가 0으로 리셋된 "직후"에 실제 레벨업 이벤트 발동
+                callback?.Invoke();
+
+                if (_levelUpCallbacks.Count > 0)
+                {
+                    PlayNextLevelUp();
+                }
+                else
+                {
+                    _isLevelUpAnimating = false;
+                    SetFill(_pendingFillAfter);
+                }
+            });
         }
     }
 }
