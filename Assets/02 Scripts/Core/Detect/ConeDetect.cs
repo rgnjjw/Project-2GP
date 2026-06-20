@@ -18,10 +18,12 @@ namespace _02_Scripts.Core.Detect
         public override bool HasAnyInRange(Transform trm)
         {
             float halfAngle = angle * 0.5f;
-            foreach (var col in Physics.OverlapSphere(trm.position, radius, layerMask))
+            int count = Physics.OverlapSphereNonAlloc(trm.position, radius, OverlapBuffer, layerMask);
+            for (int i = 0; i < count; i++)
             {
-                if (col.transform == trm) continue;
-                Vector3 dir = (col.transform.position - trm.position).normalized;
+                Transform t = OverlapBuffer[i].transform;
+                if (t == trm) continue;
+                Vector3 dir = (t.position - trm.position).normalized;
                 if (Vector3.Angle(trm.forward, dir) <= halfAngle)
                     return true;
             }
@@ -34,17 +36,19 @@ namespace _02_Scripts.Core.Detect
             float minDist = float.MaxValue;
             float halfAngle = angle * 0.5f;
 
-            foreach (var col in Physics.OverlapSphere(trm.position, radius, layerMask))
+            int count = Physics.OverlapSphereNonAlloc(trm.position, radius, OverlapBuffer, layerMask);
+            for (int i = 0; i < count; i++)
             {
-                if (col.transform == trm) continue;
-                Vector3 dir = (col.transform.position - trm.position).normalized;
+                Transform t = OverlapBuffer[i].transform;
+                if (t == trm) continue;
+                Vector3 dir = (t.position - trm.position).normalized;
                 if (Vector3.Angle(trm.forward, dir) > halfAngle) continue;
 
-                float dist = Vector3.Distance(trm.position, col.transform.position);
+                float dist = (trm.position - t.position).sqrMagnitude;
                 if (dist < minDist)
                 {
                     minDist = dist;
-                    closest = col.transform;
+                    closest = t;
                 }
             }
             return closest;
@@ -55,12 +59,14 @@ namespace _02_Scripts.Core.Detect
             var results = new List<Transform>();
             float halfAngle = angle * 0.5f;
 
-            foreach (var col in Physics.OverlapSphere(trm.position, radius, layerMask))
+            int count = Physics.OverlapSphereNonAlloc(trm.position, radius, OverlapBuffer, layerMask);
+            for (int i = 0; i < count; i++)
             {
-                if (col.transform == trm) continue;
-                Vector3 dir = (col.transform.position - trm.position).normalized;
+                Transform t = OverlapBuffer[i].transform;
+                if (t == trm) continue;
+                Vector3 dir = (t.position - trm.position).normalized;
                 if (Vector3.Angle(trm.forward, dir) <= halfAngle)
-                    results.Add(col.transform);
+                    results.Add(t);
             }
             return results;
         }

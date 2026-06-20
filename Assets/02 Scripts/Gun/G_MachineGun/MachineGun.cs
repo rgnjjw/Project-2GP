@@ -92,13 +92,13 @@ namespace _02_Scripts.Gun.G_MachineGun
 
         private void FireShot()
         {
-            if (Camera.main == null) return;
+            if (MainCamera == null) return;
 
             LastFiredLeft = _isLeft;
             Transform currentMuzzle = _isLeft ? muzzleLeft : muzzleRight;
             _isLeft = !_isLeft;
 
-            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0));
+            Ray ray = MainCamera.ScreenPointToRay(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0));
 
             Vector3 endPoint = ray.origin + ray.direction * 1000f;
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layerMask))

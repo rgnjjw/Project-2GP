@@ -19,10 +19,10 @@ namespace _02_Scripts.Core.Detect
 
         public override bool HasAnyInRange(Transform trm)
         {
-            var cols = Physics.OverlapBox(GetCenter(trm), size * 0.5f, trm.rotation, layerMask);
-            foreach (var col in cols)
+            int count = Physics.OverlapBoxNonAlloc(GetCenter(trm), size * 0.5f, OverlapBuffer, trm.rotation, layerMask);
+            for (int i = 0; i < count; i++)
             {
-                if (col.transform != trm) return true;
+                if (OverlapBuffer[i].transform != trm) return true;
             }
             return false;
         }
@@ -32,14 +32,16 @@ namespace _02_Scripts.Core.Detect
             Transform closest = null;
             float minDist = float.MaxValue;
 
-            foreach (var col in Physics.OverlapBox(GetCenter(trm), size * 0.5f, trm.rotation, layerMask))
+            int count = Physics.OverlapBoxNonAlloc(GetCenter(trm), size * 0.5f, OverlapBuffer, trm.rotation, layerMask);
+            for (int i = 0; i < count; i++)
             {
-                if (col.transform == trm) continue;
-                float dist = Vector3.Distance(trm.position, col.transform.position);
+                Transform t = OverlapBuffer[i].transform;
+                if (t == trm) continue;
+                float dist = (trm.position - t.position).sqrMagnitude;
                 if (dist < minDist)
                 {
                     minDist = dist;
-                    closest = col.transform;
+                    closest = t;
                 }
             }
             return closest;
@@ -48,10 +50,11 @@ namespace _02_Scripts.Core.Detect
         public override List<Transform> GetAllInRange(Transform trm)
         {
             var results = new List<Transform>();
-            foreach (var col in Physics.OverlapBox(GetCenter(trm), size * 0.5f, trm.rotation, layerMask))
+            int count = Physics.OverlapBoxNonAlloc(GetCenter(trm), size * 0.5f, OverlapBuffer, trm.rotation, layerMask);
+            for (int i = 0; i < count; i++)
             {
-                if (col.transform != trm)
-                    results.Add(col.transform);
+                if (OverlapBuffer[i].transform != trm)
+                    results.Add(OverlapBuffer[i].transform);
             }
             return results;
         }

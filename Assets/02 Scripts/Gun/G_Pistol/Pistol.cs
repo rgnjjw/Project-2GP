@@ -34,10 +34,10 @@ namespace _02_Scripts.Gun.G_Pistol
         public override void OnSkillPressed()
         {
             if (skillData == null || !IsSkillReady) return;
-            if (Camera.main == null) return;
+            if (MainCamera == null) return;
 
             var data = skillData.GetLevel(_skillLevel);
-            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0));
+            Ray ray = MainCamera.ScreenPointToRay(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0));
 
             Vector3 endPoint = ray.origin + ray.direction * 1000f;
             RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity, skillData.HitMask);
@@ -77,12 +77,12 @@ namespace _02_Scripts.Gun.G_Pistol
 
         public override void Fire()
         {
-            if (Camera.main == null) return;
+            if (MainCamera == null) return;
             if (Time.time < nextFireTime) return;
 
             nextFireTime = Time.time + fireDelay;
 
-            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0));
+            Ray ray = MainCamera.ScreenPointToRay(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0));
 
             Vector3 endPoint = ray.origin + ray.direction * 1000f;
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layerMask))

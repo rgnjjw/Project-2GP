@@ -111,8 +111,8 @@ namespace _02_Scripts.Agent
         protected void CheckGround()
         {
             bool before = IsGrounded;
-            IsGrounded = Physics.OverlapBox(transform.position, groundCheckSize, Quaternion.identity, whatIsGround)
-                .Length > 0;
+            // CheckBox는 bool만 반환해 OverlapBox와 달리 배열을 할당하지 않는다(매 FixedUpdate·에이전트마다 GC 방지).
+            IsGrounded = Physics.CheckBox(transform.position, groundCheckSize, Quaternion.identity, whatIsGround);
             if (before != IsGrounded)
             {
                 OnGroundStatusChanged?.Invoke(IsGrounded);

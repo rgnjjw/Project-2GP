@@ -24,6 +24,10 @@ namespace _02_Scripts.Enemy
         {
             base.Initialize(owner);
             NavMeshAgent.updateRotation = false;
+            // 적은 NavMeshAgent로 이동(루트 모션 X)하므로 화면 밖에선 애니메이터 평가를 생략해도 위치가 어긋나지 않는다.
+            // 적이 많을 때 오프스크린 애니메이션 연산을 줄여 프레임을 확보한다.
+            if (Animator != null)
+                Animator.cullingMode = AnimatorCullingMode.CullUpdateTransforms;
             if (owner is Enemy enemy)
             {
                 _enemy = enemy;

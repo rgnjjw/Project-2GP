@@ -17,6 +17,7 @@ namespace _02_Scripts.Gun.G_ShotGun
         [SerializeField] private float beamWidth = 0.02f;
 
         private readonly List<LineRenderer> _pelletBeams = new();
+        private static readonly Collider[] _skillHitBuffer = new Collider[32];
 
         private const float SkillTickInterval = 0.1f;
 
@@ -71,14 +72,14 @@ namespace _02_Scripts.Gun.G_ShotGun
                 if (dmg <= 0) dmg = 1;
 
                 Transform origin = chainsawOrigin != null ? chainsawOrigin : muzzleTrm;
-                Collider[] hits = Physics.OverlapSphere(origin.position, data.Range, skillData.EnemyMask);
+                int hitCount = Physics.OverlapSphereNonAlloc(origin.position, data.Range, _skillHitBuffer, skillData.EnemyMask);
 
                 AgentHealth closest = null;
                 float closestDist = float.MaxValue;
-                foreach (var col in hits)
+                for (int h = 0; h < hitCount; h++)
                 {
-                    if (!col.transform.TryGetComponent<Enemy.Enemy>(out var enemy)) continue;
-                    float dist = Vector3.Distance(origin.position, col.transform.position);
+                    if (!_skillHitBuffer[h].transform.TryGetComponent<Enemy.Enemy>(out var enemy)) continue;
+                    float dist = (origin.position - enemy.transform.position).sqrMagnitude;
                     if (dist < closestDist)
                     {
                         closestDist = dist;
@@ -138,7 +139,7 @@ namespace _02_Scripts.Gun.G_ShotGun
 
         private Ray GetSpreadRay()
         {
-            Camera cam = Camera.main;
+            Camera cam = MainCamera;
             Vector3 center = new Vector3(Screen.width / 2f, Screen.height / 2f, 0);
             Ray baseRay = cam.ScreenPointToRay(center);
 

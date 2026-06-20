@@ -32,6 +32,17 @@ namespace _02_Scripts.Gun
 
         protected float nextFireTime;
 
+        // Camera.main은 내부적으로 태그 검색을 수행하므로 매 발사(샷건은 펠릿마다)마다 호출하면 비싸다. 캐싱한다.
+        private Camera _cachedCamera;
+        protected Camera MainCamera
+        {
+            get
+            {
+                if (_cachedCamera == null) _cachedCamera = Camera.main;
+                return _cachedCamera;
+            }
+        }
+
         public virtual void Equip()
         {
             OnEquip?.Invoke();
