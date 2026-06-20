@@ -133,3 +133,181 @@ MonoBehaviour:
   - Prefab: {fileID: 4948131087671999246, guid: 33b88620517e4f447b8832afcf32fb51, type: 3}
     Position: {x: 0, y: 26, z: 12}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: -0.28, y: 25, z: -0.18}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: -10.499999, y: 25, z: -20.5}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: -9.499999, y: 25, z: -11.5}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: 11, y: 25, z: -11.5}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: 10.5, y: 25, z: -20}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: 3.5, y: 25, z: -12.5}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: -3.5, y: 25, z: -13}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: 10, y: 25, z: 12}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: 10, y: 25, z: 21}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: 3, y: 25, z: 12}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: -2.5, y: 25, z: 12}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: -10.76, y: 25, z: 11.82}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: -10.34, y: 25, z: 20.06}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 2510478182919719789, guid: fb86683530b9c5748b2fc70fcfc52684, type: 3}
+    Position: {x: 19.91, y: 31.55, z: -0.23}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 2510478182919719789, guid: fb86683530b9c5748b2fc70fcfc52684, type: 3}
+    Position: {x: -19.91, y: 31.55, z: 0.23}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 5484240879173902304, guid: a32ff5dc73c6bc74d80f79720bb824a6, type: 3}
+    Position: {x: 1.5, y: 43, z: 18.23}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 5484240879173902304, guid: a32ff5dc73c6bc74d80f79720bb824a6, type: 3}
+    Position: {x: 16.85, y: 43.43, z: 22.9}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 5484240879173902304, guid: a32ff5dc73c6bc74d80f79720bb824a6, type: 3}
+    Position: {x: 22.98, y: 43.43, z: 23.12}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 5484240879173902304, guid: a32ff5dc73c6bc74d80f79720bb824a6, type: 3}
+    Position: {x: 22.98, y: 43.43, z: -23.06}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 5484240879173902304, guid: a32ff5dc73c6bc74d80f79720bb824a6, type: 3}
+    Position: {x: 16.73, y: 43.43, z: -23.06}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 5484240879173902304, guid: a32ff5dc73c6bc74d80f79720bb824a6, type: 3}
+    Position: {x: -23.34, y: 43.43, z: -23.06}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 5484240879173902304, guid: a32ff5dc73c6bc74d80f79720bb824a6, type: 3}
+    Position: {x: -16.99, y: 43.43, z: 22.89}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 5484240879173902304, guid: a32ff5dc73c6bc74d80f79720bb824a6, type: 3}
+    Position: {x: -23.34, y: 43.43, z: 24}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 5484240879173902304, guid: a32ff5dc73c6bc74d80f79720bb824a6, type: 3}
+    Position: {x: -16.94, y: 43.43, z: -23.06}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 5484240879173902304, guid: a32ff5dc73c6bc74d80f79720bb824a6, type: 3}
+    Position: {x: 1.5, y: 43, z: 22.5}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 5484240879173902304, guid: a32ff5dc73c6bc74d80f79720bb824a6, type: 3}
+    Position: {x: -2.5, y: 43, z: 22.5}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 5484240879173902304, guid: a32ff5dc73c6bc74d80f79720bb824a6, type: 3}
+    Position: {x: -2.5, y: 43, z: 18}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 5484240879173902304, guid: a32ff5dc73c6bc74d80f79720bb824a6, type: 3}
+    Position: {x: 1.5, y: 43, z: -18}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 5484240879173902304, guid: a32ff5dc73c6bc74d80f79720bb824a6, type: 3}
+    Position: {x: 1.5, y: 43, z: -22}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 5484240879173902304, guid: a32ff5dc73c6bc74d80f79720bb824a6, type: 3}
+    Position: {x: -2.5, y: 43, z: -22}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 5484240879173902304, guid: a32ff5dc73c6bc74d80f79720bb824a6, type: 3}
+    Position: {x: -2.41, y: 43, z: -17.69}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: -19.993132, y: 37, z: 17.66}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: 20.45, y: 37, z: 17.66}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: 20.45, y: 37, z: -18.56}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  SpawnPoints:
+  - Type: 0
+    Position: {x: -9.499999, y: 25, z: -11.5}
+  - Type: 0
+    Position: {x: 11, y: 25, z: -11.5}
+  - Type: 1
+    Position: {x: 1.5, y: 43, z: 22.5}
+  - Type: 0
+    Position: {x: -10.76, y: 25, z: 11.82}
+  - Type: 0
+    Position: {x: -10.34, y: 25, z: 20.06}
+  - Type: 1
+    Position: {x: 1.5, y: 43, z: -22}
+  - Type: 0
+    Position: {x: 10, y: 25, z: 21}
+  - Type: 1
+    Position: {x: 1.5, y: 43, z: 18.23}
+  - Type: 0
+    Position: {x: 3, y: 25, z: 12}
+  - Type: 1
+    Position: {x: -23.34, y: 43.43, z: 24}
+  - Type: 0
+    Position: {x: -0.28, y: 25, z: -0.18}
+  - Type: 0
+    Position: {x: 20.45, y: 37, z: -18.56}
+  - Type: 1
+    Position: {x: 16.73, y: 43.43, z: -23.06}
+  - Type: 1
+    Position: {x: 22.98, y: 43.43, z: 23.12}
+  - Type: 0
+    Position: {x: 10, y: 25, z: 12}
+  - Type: 1
+    Position: {x: 22.98, y: 43.43, z: -23.06}
+  - Type: 1
+    Position: {x: 16.85, y: 43.43, z: 22.9}
+  - Type: 1
+    Position: {x: -2.5, y: 43, z: 22.5}
+  - Type: 0
+    Position: {x: -2.5, y: 25, z: 12}
+  - Type: 1
+    Position: {x: -2.41, y: 43, z: -17.69}
+  - Type: 1
+    Position: {x: -16.94, y: 43.43, z: -23.06}
+  - Type: 1
+    Position: {x: -2.5, y: 43, z: 18}
+  - Type: 2
+    Position: {x: -19.91, y: 31.55, z: 0.23}
+  - Type: 1
+    Position: {x: -16.99, y: 43.43, z: 22.89}
+  - Type: 0
+    Position: {x: -10.499999, y: 25, z: -20.5}
+  - Type: 0
+    Position: {x: 20.45, y: 37, z: 17.66}
+  - Type: 1
+    Position: {x: -2.5, y: 43, z: -22}
+  - Type: 1
+    Position: {x: -23.34, y: 43.43, z: -23.06}
+  - Type: 0
+    Position: {x: 10.5, y: 25, z: -20}
+  - Type: 2
+    Position: {x: 19.91, y: 31.55, z: -0.23}
+  - Type: 0
+    Position: {x: -3.5, y: 25, z: -13}
+  - Type: 0
+    Position: {x: 3.5, y: 25, z: -12.5}
+  - Type: 1
+    Position: {x: 1.5, y: 43, z: -18}
+  - Type: 0
+    Position: {x: -19.993132, y: 37, z: 17.66}
+  Waves:
+  - {fileID: 11400000, guid: c8ab36aa6f2d5f340ba036d8ec07f9dd, type: 2}
+  - {fileID: 11400000, guid: 0e6cc49d26a1f504c81c81579c2209be, type: 2}
+  - {fileID: 11400000, guid: d103b6f39e4713241af913edd8a19991, type: 2}
+  meleeWeight: 3
+  rangedWeight: 5
+  bossWeight: 2

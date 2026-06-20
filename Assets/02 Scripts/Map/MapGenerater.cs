@@ -9,11 +9,11 @@ namespace _02_Scripts.Map
 {
     public class MapGenerator : MonoBehaviour
     {
-        [SerializeField] private MapDataSO data;
         [SerializeField] private float generateDuration = 0.5f;
         [SerializeField] private float waitBetweenObjects = 0.1f;
         [SerializeField] private Ease ease = Ease.OutBack;
         [SerializeField] private NavMeshSurface navMeshSurface;
+        private MapDataSO _data;
 
         public event Action OnGenerateComplete;
         public event Action OnDestroyComplete;
@@ -25,7 +25,7 @@ namespace _02_Scripts.Map
 
         public void StartGenerate(MapDataSO overrideData)
         {
-            data = overrideData;
+            _data = overrideData;
             StartCoroutine(GenerateMap());
         }
 
@@ -36,7 +36,7 @@ namespace _02_Scripts.Map
         {
             _spawnedObjects.Clear();
 
-            foreach (var objData in data.Objects)
+            foreach (var objData in _data.Objects)
             {
                 if (objData.Prefab == null) continue;
 

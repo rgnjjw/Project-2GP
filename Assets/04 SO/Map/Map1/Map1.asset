@@ -49,8 +49,176 @@ MonoBehaviour:
   - Prefab: {fileID: 1076990371101664459, guid: 98abb1b52b55f97459d3fe26870737f4, type: 3}
     Position: {x: 14.999999, y: 6.5, z: -7.999999}
     Rotation: {x: -0, y: 0.7071068, z: -0, w: -0.7071068}
-  SpawnPoints: []
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: 21, y: 25, z: 9}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: 9.21, y: 25, z: 23.46}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: -8.91, y: 25, z: 22.9}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: -11.5, y: 25, z: -22}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: 23, y: 25, z: -10.5}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: 7.5, y: 25, z: -22}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: -22.5, y: 25, z: -11.5}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: -22.5, y: 25, z: 10}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: -22.28, y: 25, z: 21.61}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: 21.5, y: 25, z: 21}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: 21.46, y: 25, z: -21.22}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: -21, y: 25, z: -21}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: -0.71, y: 25, z: 15.54}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: -16, y: 25, z: 0.5}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: 15, y: 25, z: 0.5}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
+    Position: {x: -0.1, y: 25, z: -14.71}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 2510478182919719789, guid: fb86683530b9c5748b2fc70fcfc52684, type: 3}
+    Position: {x: -0.36, y: 25, z: 0.39}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 2510478182919719789, guid: fb86683530b9c5748b2fc70fcfc52684, type: 3}
+    Position: {x: 8.07, y: 25, z: -7.55}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 2510478182919719789, guid: fb86683530b9c5748b2fc70fcfc52684, type: 3}
+    Position: {x: 8, y: 25, z: 8.5}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 2510478182919719789, guid: fb86683530b9c5748b2fc70fcfc52684, type: 3}
+    Position: {x: -8.5, y: 25, z: 8}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 2510478182919719789, guid: fb86683530b9c5748b2fc70fcfc52684, type: 3}
+    Position: {x: -8.41, y: 25, z: -7.1}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 5484240879173902304, guid: a32ff5dc73c6bc74d80f79720bb824a6, type: 3}
+    Position: {x: -15.01, y: 31, z: 14.97}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 5484240879173902304, guid: a32ff5dc73c6bc74d80f79720bb824a6, type: 3}
+    Position: {x: 15, y: 31, z: 15}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 5484240879173902304, guid: a32ff5dc73c6bc74d80f79720bb824a6, type: 3}
+    Position: {x: 14.97, y: 31, z: -14.7}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 5484240879173902304, guid: a32ff5dc73c6bc74d80f79720bb824a6, type: 3}
+    Position: {x: 10.01, y: 29.19, z: -14.97}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 5484240879173902304, guid: a32ff5dc73c6bc74d80f79720bb824a6, type: 3}
+    Position: {x: -10, y: 29.19, z: 15}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 5484240879173902304, guid: a32ff5dc73c6bc74d80f79720bb824a6, type: 3}
+    Position: {x: -15.18, y: 29.19, z: -9.88}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 5484240879173902304, guid: a32ff5dc73c6bc74d80f79720bb824a6, type: 3}
+    Position: {x: -10, y: 29.19, z: -15.5}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 5484240879173902304, guid: a32ff5dc73c6bc74d80f79720bb824a6, type: 3}
+    Position: {x: -15.27, y: 29.19, z: 9.9}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 5484240879173902304, guid: a32ff5dc73c6bc74d80f79720bb824a6, type: 3}
+    Position: {x: 10, y: 29.19, z: 15}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 5484240879173902304, guid: a32ff5dc73c6bc74d80f79720bb824a6, type: 3}
+    Position: {x: 15.06, y: 29.19, z: 10.02}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 5484240879173902304, guid: a32ff5dc73c6bc74d80f79720bb824a6, type: 3}
+    Position: {x: 14.95, y: 29.19, z: -9.95}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 5484240879173902304, guid: a32ff5dc73c6bc74d80f79720bb824a6, type: 3}
+    Position: {x: -15.1, y: 31, z: -14.81}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  SpawnPoints:
+  - Type: 1
+    Position: {x: -15.18, y: 29.19, z: -9.88}
+  - Type: 1
+    Position: {x: -10, y: 29.19, z: 15}
+  - Type: 0
+    Position: {x: 21.5, y: 25, z: 21}
+  - Type: 0
+    Position: {x: -22.28, y: 25, z: 21.61}
+  - Type: 1
+    Position: {x: -15.27, y: 29.19, z: 9.9}
+  - Type: 0
+    Position: {x: -16, y: 25, z: 0.5}
+  - Type: 1
+    Position: {x: -10, y: 29.19, z: -15.5}
+  - Type: 0
+    Position: {x: -0.71, y: 25, z: 15.54}
+  - Type: 2
+    Position: {x: -8.41, y: 25, z: -7.1}
+  - Type: 1
+    Position: {x: -15.01, y: 31, z: 14.97}
+  - Type: 1
+    Position: {x: 10, y: 29.19, z: 15}
+  - Type: 0
+    Position: {x: -22.5, y: 25, z: 10}
+  - Type: 0
+    Position: {x: 9.21, y: 25, z: 23.46}
+  - Type: 0
+    Position: {x: 7.5, y: 25, z: -22}
+  - Type: 1
+    Position: {x: 15.06, y: 29.19, z: 10.02}
+  - Type: 0
+    Position: {x: -8.91, y: 25, z: 22.9}
+  - Type: 0
+    Position: {x: -21, y: 25, z: -21}
+  - Type: 0
+    Position: {x: 21.46, y: 25, z: -21.22}
+  - Type: 0
+    Position: {x: 15, y: 25, z: 0.5}
+  - Type: 2
+    Position: {x: 8, y: 25, z: 8.5}
+  - Type: 1
+    Position: {x: 10.01, y: 29.19, z: -14.97}
+  - Type: 0
+    Position: {x: -0.1, y: 25, z: -14.71}
+  - Type: 0
+    Position: {x: -22.5, y: 25, z: -11.5}
+  - Type: 2
+    Position: {x: 8.07, y: 25, z: -7.55}
+  - Type: 0
+    Position: {x: 21, y: 25, z: 9}
+  - Type: 0
+    Position: {x: -11.5, y: 25, z: -22}
+  - Type: 2
+    Position: {x: -0.36, y: 25, z: 0.39}
+  - Type: 1
+    Position: {x: 15, y: 31, z: 15}
+  - Type: 1
+    Position: {x: 14.95, y: 29.19, z: -9.95}
+  - Type: 1
+    Position: {x: -15.1, y: 31, z: -14.81}
+  - Type: 2
+    Position: {x: -8.5, y: 25, z: 8}
+  - Type: 1
+    Position: {x: 14.97, y: 31, z: -14.7}
+  - Type: 0
+    Position: {x: 23, y: 25, z: -10.5}
   Waves:
   - {fileID: 11400000, guid: 40a0bd0f5e1a4ba488a70e59701aeca2, type: 2}
   - {fileID: 11400000, guid: dfbeb30597ed6d649879f8e6dad099af, type: 2}
   - {fileID: 11400000, guid: bfb807378a2e17e40bd63ef635f3b4aa, type: 2}
+  meleeWeight: 5
+  rangedWeight: 3
+  bossWeight: 2
