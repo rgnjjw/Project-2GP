@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using _02_Scripts.Player;
 using UnityEngine;
@@ -7,6 +8,13 @@ namespace _02_Scripts.Chip.Dash
     [Chip("Dash")]
     public class DashChip : IChip
     {
+        public event Action<int, int> OnMaxCountChanged; // (currentCount, maxCount)
+        public event Action OnDashUsed;
+        public event Action OnDashRecharged;
+
+        public int CurrentDashCount => _currentDashCount;
+        public int MaxDashCount => _maxDashCount;
+
         private PlayerInputSO _playerInputSO;
         private PlayerMover _playerMover;
         private PlayerVFXContainer _vfxContainer;
@@ -31,6 +39,7 @@ namespace _02_Scripts.Chip.Dash
 
             ApplyLevelStats(chip);
             _currentDashCount = _maxDashCount;
+            OnMaxCountChanged?.Invoke(_currentDashCount, _maxDashCount);
         }
 
         public void OnUnequip(ChipInstance chip, Player.Player player)
@@ -41,12 +50,19 @@ namespace _02_Scripts.Chip.Dash
 
         public void OnLevelUp(ChipInstance chip)
         {
+            int oldMax = _maxDashCount;
             ApplyLevelStats(chip);
+
+            // 새로 늘어난 슬롯은 즉시 충전
+            if (_maxDashCount > oldMax)
+                _currentDashCount = _maxDashCount;
+
             if (_rechargeCoroutine != null)
             {
                 StopRecharge();
                 _rechargeCoroutine = _player.StartCoroutine(RechargeRoutine());
             }
+            OnMaxCountChanged?.Invoke(_currentDashCount, _maxDashCount);
         }
 
         private void ApplyLevelStats(ChipInstance chip)
@@ -87,6 +103,7 @@ namespace _02_Scripts.Chip.Dash
             _playerMover.SetDashVelocity(dashDir * _dashSpeed, _dashDuration);
 
             _currentDashCount--;
+            OnDashUsed?.Invoke();
 
             if (_rechargeCoroutine == null)
                 _rechargeCoroutine = _player.StartCoroutine(RechargeRoutine());
@@ -98,6 +115,7 @@ namespace _02_Scripts.Chip.Dash
             {
                 yield return new WaitForSeconds(_rechargeTime);
                 _currentDashCount = Mathf.Min(_currentDashCount + 1, _maxDashCount);
+                OnDashRecharged?.Invoke();
             }
             _rechargeCoroutine = null;
         }

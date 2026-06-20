@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using _02_Scripts.Core.ModuleSystem;
 using _02_Scripts.Player;
@@ -9,6 +10,8 @@ namespace _02_Scripts.Manager
 {
     public class GunManager : MonoBehaviour, IModule, IAfterInitModule
     {
+        public event Action<Gun.Gun> OnWeaponChanged;
+
         [SerializeField] private Gun.Gun[] weapons;
         [SerializeField] private CurrentGunUI currentGunUI;
         private Gun.Gun _currentWeapon;
@@ -98,6 +101,7 @@ namespace _02_Scripts.Manager
 
             _currentIndex = index;
             _currentWeapon = weapons[_currentIndex];
+            OnWeaponChanged?.Invoke(_currentWeapon);
 
             switch (index)
             {

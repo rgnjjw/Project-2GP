@@ -22,9 +22,11 @@ namespace _02_Scripts.Gun.G_Pistol
 
         private int _skillLevel = 1;
         private float _skillCooldownRemaining;
+        private float _skillCooldownMax;
         private readonly HashSet<Enemy.Enemy> _skillHitEnemies = new();
 
-        public float SkillCooldownRemaining => _skillCooldownRemaining;
+        public override float SkillCooldownRemaining => _skillCooldownRemaining;
+        public override float SkillCooldownMax => _skillCooldownMax;
         public bool IsSkillReady => _skillCooldownRemaining <= 0f;
 
         public override void SetSkillLevel(int level) => _skillLevel = level;
@@ -58,6 +60,7 @@ namespace _02_Scripts.Gun.G_Pistol
 
             ShowBeam(skillBeam, muzzleTrm.position, endPoint);
 
+            _skillCooldownMax = data.Cooldown;
             _skillCooldownRemaining = data.Cooldown;
 
             skillFireEffect?.Play();

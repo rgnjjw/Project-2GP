@@ -22,9 +22,12 @@ namespace _02_Scripts.Gun.G_MachineGun
 
         private bool _isLeft;
         private int _skillLevel = 1;
-        private float _skillCooldownRemaining;//쿨타임
-        private float _skillTimeRemaining;//스킬의 지속시간
-    
+        private float _skillCooldownRemaining;
+        private float _skillCooldownMax;
+        private float _skillTimeRemaining;
+
+        public override float SkillCooldownRemaining => _skillCooldownRemaining;
+        public override float SkillCooldownMax => _skillCooldownMax;
         public bool IsSkillReady => _skillCooldownRemaining <= 0f;
 
         public override void SetSkillLevel(int level) => _skillLevel = level;
@@ -63,7 +66,10 @@ namespace _02_Scripts.Gun.G_MachineGun
                 IsSkillActive = false;
                 FireSkillEnd();
                 if (skillData != null)
-                    _skillCooldownRemaining = skillData.GetLevel(_skillLevel).Cooldown;
+                {
+                    _skillCooldownMax = skillData.GetLevel(_skillLevel).Cooldown;
+                    _skillCooldownRemaining = _skillCooldownMax;
+                }
             }
         }
 

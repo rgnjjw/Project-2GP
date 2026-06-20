@@ -22,11 +22,14 @@ namespace _02_Scripts.Gun.G_ShotGun
 
         private int _skillLevel = 1;
         private float _skillCooldownRemaining;
+        private float _skillCooldownMax;
         private bool _isGrinding;
         private float _tickTimer;
 
         public bool IsGrinding => _isGrinding;
         public bool IsSkillReady => _skillCooldownRemaining <= 0f;
+        public override float SkillCooldownRemaining => _skillCooldownRemaining;
+        public override float SkillCooldownMax => _skillCooldownMax;
 
         public override void SetSkillLevel(int level) => _skillLevel = level;
 
@@ -44,7 +47,10 @@ namespace _02_Scripts.Gun.G_ShotGun
             _isGrinding = false;
             FireSkillEnd();
             if (skillData != null)
-                _skillCooldownRemaining = skillData.GetLevel(_skillLevel).Cooldown;
+            {
+                _skillCooldownMax = skillData.GetLevel(_skillLevel).Cooldown;
+                _skillCooldownRemaining = _skillCooldownMax;
+            }
         }
 
         public override void TickSkill(float deltaTime)

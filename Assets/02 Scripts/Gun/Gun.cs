@@ -74,6 +74,10 @@ namespace _02_Scripts.Gun
         public virtual void TickSkill(float deltaTime) { }
         public virtual void SetSkillLevel(int level) { }
 
+        public virtual float SkillCooldownRemaining => 0f;
+        public virtual float SkillCooldownMax => 0f;
+        public float SkillCooldownNormalized => SkillCooldownMax <= 0f ? 1f : 1f - (SkillCooldownRemaining / SkillCooldownMax);
+
         protected void FireSkillStart() => OnSkillStart?.Invoke();
         protected void FireSkillEnd() => OnSkillEnd?.Invoke();
 
