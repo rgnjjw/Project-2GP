@@ -32,4 +32,4 @@ MonoBehaviour:
           serializedVersion: 2
           m_Bits: 256
         gizmoColor: {r: 1, g: 1, b: 0, a: 1}
-        radius: 30
+        radius: 15

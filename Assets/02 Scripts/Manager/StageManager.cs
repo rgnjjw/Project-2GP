@@ -1,3 +1,4 @@
+using System.Collections;
 using _02_Scripts.Core.Utility;
 using _02_Scripts.Map;
 using UnityEngine;
@@ -12,6 +13,9 @@ namespace _02_Scripts.Manager
 
         [Tooltip("무한 순환할 맵 목록. 한 맵 클리어 시 직전 맵을 제외한 랜덤 맵으로 교체된다.")]
         [SerializeField] private MapDataSO[] maps;
+
+        [Tooltip("마지막 적 처치 후 맵을 내리기까지의 유예(초). 사망 연출이 끝날 시간을 준다.")]
+        [SerializeField] private float clearGraceDelay = 1.5f;
 
         public int CurrentLevel { get; private set; } = 1;
 
@@ -44,10 +48,17 @@ namespace _02_Scripts.Manager
             waveManager.StartWaves(CurrentLevel);
         }
 
-        // 이 맵의 모든 웨이브 클리어 → 난이도 한 단계 올리고 맵 제거
+        // 이 맵의 모든 웨이브 클리어 → 난이도 한 단계 올리고, 사망 연출 후 맵 제거
         private void OnAllWavesCleared()
         {
             CurrentLevel++;
+            StartCoroutine(DescendAfterDelay());
+        }
+
+        // 마지막 적의 사망 연출이 끝날 시간을 준 뒤 맵을 내린다(시체가 남은 채 갑자기 내려가지 않도록).
+        private IEnumerator DescendAfterDelay()
+        {
+            yield return new WaitForSeconds(clearGraceDelay);
             mapGenerator.StartDestroy();
         }
 
