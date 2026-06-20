@@ -62,18 +62,18 @@ namespace _02_Scripts.Enemy.Skill
                     player.GetModule<AgentHealth>().ApplyDamage(Damage);
             }
 
-            EnemyBulletBeam beam = GetOrCreateBeam(_muzzle);
-            beam.Show(origin, endPoint, beamDuration);
+            EnemyBulletBeamSKillSO beamSKillSO = GetOrCreateBeam(_muzzle);
+            beamSKillSO.Show(origin, endPoint, beamDuration);
         }
 
-        private EnemyBulletBeam GetOrCreateBeam(Transform muzzle)
+        private EnemyBulletBeamSKillSO GetOrCreateBeam(Transform muzzle)
         {
-            var beam = muzzle.GetComponentInChildren<EnemyBulletBeam>();
+            var beam = muzzle.GetComponentInChildren<EnemyBulletBeamSKillSO>();
             if (beam == null)
             {
                 var go = new GameObject("BulletBeam");
                 go.transform.SetParent(muzzle);
-                beam = go.AddComponent<EnemyBulletBeam>();
+                beam = go.AddComponent<EnemyBulletBeamSKillSO>();
                 beam.Setup(beamMaterial, beamWidth);
             }
             return beam;

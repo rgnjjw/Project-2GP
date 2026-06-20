@@ -13,7 +13,10 @@ namespace _02_Scripts.Enemy
         Explosion,
         MuzzleFlash,
         DeathBurst,
-        Shield // 추가
+        Shield,
+        AreaHealEffect,
+        HealedEffect
+        
     }
 
     [Serializable]

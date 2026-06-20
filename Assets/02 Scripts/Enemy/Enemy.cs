@@ -26,6 +26,7 @@ namespace _02_Scripts.Enemy
         private AgentHealth _agentHealth;
         private CapsuleCollider _capsuleCollider;
         private HitFlash _hitFlash;
+        private EnemyVfxController _vfxController;
 
         private float _lastHitAnimTime;
         private bool _isDead;
@@ -43,13 +44,22 @@ namespace _02_Scripts.Enemy
             _agentHealth = GetModule<AgentHealth>();
             _hitFlash = GetModule<HitFlash>();
             _capsuleCollider = GetComponent<CapsuleCollider>();
+            _vfxController = GetComponent<EnemyVfxController>();
 
-            _navEnemyRenderer.NavMeshAgent.stoppingDistance =
-                _enemySkillController.GetMinSkillRange() - 0.2f;
+            _navEnemyRenderer.NavMeshAgent.stoppingDistance = _enemySkillController.GetMinSkillRange() - 0.2f;
 
             _agentHealth.CurrentHp.OnValueChanged += OnDamaged;
+            _agentHealth.CurrentHp.OnValueChanged += OnHealed;
 
             _navEnemyRenderer.Animator.SetLayerWeight(hitLayerIndex, 0f);
+        }
+
+        private void OnHealed(int before, int current)
+        {
+            if (current >= before)
+            {
+                _vfxController.Play(EnemyVfxType.HealedEffect);
+            }
         }
 
         private void OnDamaged(int before, int current)

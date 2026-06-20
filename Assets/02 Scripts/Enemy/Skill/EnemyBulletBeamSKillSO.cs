@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace _02_Scripts.Enemy.Skill
 {
-    public class EnemyBulletBeam : MonoBehaviour
+    public class EnemyBulletBeamSKillSO : MonoBehaviour
     {
         private LineRenderer _lr;
         private Coroutine _hideRoutine;
