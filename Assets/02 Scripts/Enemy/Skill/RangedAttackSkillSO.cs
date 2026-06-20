@@ -16,76 +16,113 @@ namespace _02_Scripts.Enemy.Skill
         [SerializeField] private float beamWidth = 0.02f;
         [SerializeField] private float beamDuration = 0.08f;
 
-        private Transform _muzzle;
-        private Transform _target;
-        private EnemyAnimationEvent _animEvent;
-        private EnemyLaserAimer _laserAimer;
-
         public override void ExecuteSkill(Enemy enemy)
         {
-            _target = TargetFinder?.GetClosest(enemy.transform) ?? enemy.CurrentTarget;
-            _muzzle = FindMuzzle(enemy);
-            _animEvent = enemy.GetModule<EnemyAnimationEvent>();
-            _laserAimer = enemy.GetModule<EnemyLaserAimer>();
+            if (enemy == null)
+                return;
 
-            _animEvent.OnPrepare += HandlePrepare;
-            _animEvent.OnAttack += HandleAttack;
+            Transform target = TargetFinder?.GetClosest(enemy.transform) ?? enemy.CurrentTarget;
+            Transform muzzle = FindMuzzle(enemy);
+            EnemyAnimationEvent animEvent = enemy.GetModule<EnemyAnimationEvent>();
+            EnemyLaserAimer laserAimer = enemy.GetModule<EnemyLaserAimer>();
+            EnemyVfxController vfx = enemy.GetModule<EnemyVfxController>();
+
+            if (animEvent == null)
+            {
+                FireByCurrentMuzzleDirection(muzzle, vfx);
+                NotifyComplete();
+                return;
+            }
+
+            void HandlePrepare()
+            {
+                animEvent.OnPrepare -= HandlePrepare;
+
+                if (LaserPrefab != null && laserAimer != null && muzzle != null)
+                    laserAimer.StartAim(LaserPrefab, muzzle, target, TargetLayer);
+            }
+
+            void HandleAttack()
+            {
+                animEvent.OnPrepare -= HandlePrepare;
+                animEvent.OnAttack -= HandleAttack;
+
+                laserAimer?.StopAim();
+
+                FireByCurrentMuzzleDirection(muzzle, vfx);
+
+                NotifyComplete();
+            }
+
+            animEvent.OnPrepare += HandlePrepare;
+            animEvent.OnAttack += HandleAttack;
         }
 
-        private void HandlePrepare()
+        private void FireByCurrentMuzzleDirection(Transform muzzle, EnemyVfxController vfx)
         {
-            if (LaserPrefab != null && _laserAimer != null)
-                _laserAimer.StartAim(LaserPrefab, _muzzle, _target, TargetLayer);
+            if (muzzle == null)
+                return;
+
+            FireBeam(muzzle, muzzle.position, muzzle.forward);
+            vfx?.Play(EnemyVfxType.MuzzleFlash);
         }
 
-        private void HandleAttack()
+        private void FireBeam(Transform muzzle, Vector3 origin, Vector3 direction)
         {
-            _laserAimer?.StopAim();
+            if (muzzle == null)
+                return;
 
-            // 플레이어 위치로 재조준하지 않고, 조준 단계에서 회전이 멈춘 그대로의 총구 정면 방향으로 발사한다.
-            if (_muzzle != null)
-                FireBeam(_muzzle.position, _muzzle.forward);
+            if (direction.sqrMagnitude <= 0.0001f)
+                direction = muzzle.forward;
 
-            _animEvent.OnPrepare -= HandlePrepare;
-            _animEvent.OnAttack -= HandleAttack;
+            direction.Normalize();
 
-            NotifyComplete();
-        }
-
-        private void FireBeam(Vector3 origin, Vector3 direction)
-        {
             Vector3 endPoint = origin + direction * 100f;
+
             if (Physics.Raycast(origin, direction, out RaycastHit hit, Mathf.Infinity, TargetLayer))
             {
                 endPoint = hit.point;
-                if (hit.transform.TryGetComponent<Player.Player>(out var player))
-                    player.GetModule<AgentHealth>().ApplyDamage(Damage);
+
+                if (hit.transform.TryGetComponent<Player.Player>(out Player.Player player))
+                {
+                    AgentHealth health = player.GetModule<AgentHealth>();
+
+                    if (health != null)
+                        health.ApplyDamage(Damage);
+                }
             }
 
-            EnemyBulletBeamSKillSO beamSKillSO = GetOrCreateBeam(_muzzle);
-            beamSKillSO.Show(origin, endPoint, beamDuration);
+            EnemyBulletBeamSKillSO beam = GetOrCreateBeam(muzzle);
+            beam.Show(origin, endPoint, beamDuration);
         }
 
         private EnemyBulletBeamSKillSO GetOrCreateBeam(Transform muzzle)
         {
-            var beam = muzzle.GetComponentInChildren<EnemyBulletBeamSKillSO>();
+            EnemyBulletBeamSKillSO beam = muzzle.GetComponentInChildren<EnemyBulletBeamSKillSO>();
+
             if (beam == null)
             {
-                var go = new GameObject("BulletBeam");
-                go.transform.SetParent(muzzle);
-                beam = go.AddComponent<EnemyBulletBeamSKillSO>();
+                GameObject beamObject = new GameObject("BulletBeam");
+                beamObject.transform.SetParent(muzzle, false);
+
+                beam = beamObject.AddComponent<EnemyBulletBeamSKillSO>();
                 beam.Setup(beamMaterial, beamWidth);
             }
+
             return beam;
         }
 
         private Transform FindMuzzle(Enemy enemy)
         {
-            foreach (Transform t in enemy.GetComponentsInChildren<Transform>(true))
+            if (enemy == null)
+                return null;
+
+            foreach (Transform child in enemy.GetComponentsInChildren<Transform>(true))
             {
-                if (t.name == "Muzzle" || t.CompareTag("Muzzle"))
-                    return t;
+                if (child.name == "Muzzle" || child.CompareTag("Muzzle"))
+                    return child;
             }
+
             return enemy.transform;
         }
     }

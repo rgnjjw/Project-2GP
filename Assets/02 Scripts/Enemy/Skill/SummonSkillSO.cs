@@ -24,6 +24,8 @@ namespace _02_Scripts.Enemy.Skill
 
         public override void ExecuteSkill(Enemy enemy)
         {
+            enemy.GetModule<EnemyVfxController>()?.Play(EnemyVfxType.Summon);
+
             var spawnedPositions = new List<Vector3>();
 
             for (int i = 0; i < SummonCount; i++)

@@ -9,33 +9,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 436615f52f1741699d05aa7fa627d3e8, type: 3}
-  m_Name: Yelling
-  m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.Enemy.Skill.MeleeAttackSkill
+  m_Script: {fileID: 11500000, guid: b52d4efbab4346678578f553baa19721, type: 3}
+  m_Name: SummonSkillSO
+  m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.Enemy.Skill.SummonSkillSO
   <AnimParam>k__BackingField: {fileID: 11400000, guid: 177b15bdb4315614780a65eb32cf476a, type: 2}
-  <Cooldown>k__BackingField: 10
+  <Cooldown>k__BackingField: 30
   DamageAreaDetection:
-    rid: 4481138043974844645
+    rid: 4481138170555793682
   TargetFinder:
-    rid: 4481138043974844644
-  <Damage>k__BackingField: 10
+    rid: 4481138170555793680
+  <SummonCount>k__BackingField: 5
+  <SpawnRadius>k__BackingField: 10
+  <MinSpacing>k__BackingField: 1.5
+  <MaxAttempts>k__BackingField: 20
+  summonPool:
+  - Prefab: {fileID: 4763488186940335154, guid: eb7d038c96d56d24ead1bebbd0e7c4fd, type: 3}
+    Weight: 1
   references:
     version: 2
     RefIds:
-    - rid: 4481138043974844644
-      type: {class: BoxDetect, ns: _02_Scripts.Core.Detect, asm: Assembly-CSharp}
+    - rid: 4481138170555793680
+      type: {class: SphereDetect, ns: _02_Scripts.Core.Detect, asm: Assembly-CSharp}
       data:
         layerMask:
           serializedVersion: 2
           m_Bits: 256
         gizmoColor: {r: 0, g: 1, b: 0, a: 1}
-        size: {x: 20, y: 3, z: 20}
-        offset: {x: 0, y: 2, z: 1.41}
-    - rid: 4481138043974844645
+        radius: 30
+    - rid: 4481138170555793682
       type: {class: SphereDetect, ns: _02_Scripts.Core.Detect, asm: Assembly-CSharp}
       data:
         layerMask:
           serializedVersion: 2
           m_Bits: 256
         gizmoColor: {r: 1, g: 0, b: 0, a: 1}
-        radius: 10
+        radius: 30

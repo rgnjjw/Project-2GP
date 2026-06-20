@@ -4,11 +4,8 @@ using UnityEngine;
 
 namespace _02_Scripts.Enemy.Skill
 {
-    // 힐 대상/추격 대상 선정 로직을 한 곳에 모은다.
-    // 태그·레이어가 아니라 Enemy 컴포넌트의 스킬 구성으로 "힐러"를 식별한다.
     public static class HealTargeting
     {
-        // 힐러 = 힐 스킬을 하나라도 가진 적.
         public static bool IsHealer(Enemy enemy)
         {
             var controller = enemy.GetModule<EnemySkillController>();
@@ -20,7 +17,6 @@ namespace _02_Scripts.Enemy.Skill
             return false;
         }
 
-        // 유효한 힐 대상: 자기 자신 X, 죽은 적 X, 다른 힐러 X, 풀피 X → 살아있는 다친 일반 아군만 O.
         public static bool IsValidTarget(Enemy self, Transform candidate, out Enemy ally)
         {
             ally = null;
@@ -36,7 +32,6 @@ namespace _02_Scripts.Enemy.Skill
             return true;
         }
 
-        // 범위 안에서 체력이 가장 낮은(동률이면 가장 가까운) 유효 아군.
         public static Transform GetLowestHp(Enemy self, AbstractDetection range)
         {
             if (range == null) return null;

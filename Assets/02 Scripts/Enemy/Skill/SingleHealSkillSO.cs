@@ -8,48 +8,68 @@ namespace _02_Scripts.Enemy.Skill
     {
         [field: SerializeField] public int HealAmount { get; private set; } = 30;
 
-        private EnemyAnimationEvent _animEvent;
-        private Enemy _enemy;
-        private Transform _healTarget;
-        private NavEnemyRenderer _navRenderer;
-
         public override void ExecuteSkill(Enemy enemy)
         {
-            _enemy = enemy;
-            _healTarget = HealTargeting.GetLowestHp(enemy, TargetFinder);
-            _animEvent = enemy.GetModule<EnemyAnimationEvent>();
-            _navRenderer = enemy.GetModule<NavEnemyRenderer>();
+            if (enemy == null)
+                return;
 
-            // 힐 대상(아군) 쪽으로 즉시 시선을 스냅한다(요청: 바로 회전).
-            // Prepare 시점에 한 번 더 보정(공격 상태가 플레이어 쪽으로 스냅하는 것보다 나중에 실행되어 덮어씀).
-            FaceHealTarget();
-            _animEvent.OnPrepare += HandlePrepare;
-            _animEvent.OnAttack += HandleAttack;
+            Transform healTarget = HealTargeting.GetLowestHp(enemy, TargetFinder);
+            EnemyAnimationEvent animEvent = enemy.GetModule<EnemyAnimationEvent>();
+            NavEnemyRenderer navRenderer = enemy.GetModule<NavEnemyRenderer>();
+            EnemyVfxController vfx = enemy.GetModule<EnemyVfxController>();
+
+            FaceHealTarget(healTarget, navRenderer);
+
+            if (animEvent == null)
+            {
+                HealTarget(healTarget);
+                vfx?.Play(EnemyVfxType.SingleHealEffect);
+                NotifyComplete();
+                return;
+            }
+
+            void HandlePrepare()
+            {
+                animEvent.OnPrepare -= HandlePrepare;
+                FaceHealTarget(healTarget, navRenderer);
+            }
+
+            void HandleAttack()
+            {
+                animEvent.OnPrepare -= HandlePrepare;
+                animEvent.OnAttack -= HandleAttack;
+
+                HealTarget(healTarget);
+
+                vfx?.Play(EnemyVfxType.SingleHealEffect);
+
+                NotifyComplete();
+            }
+
+            animEvent.OnPrepare += HandlePrepare;
+            animEvent.OnAttack += HandleAttack;
         }
 
-        private void HandlePrepare()
+        private void FaceHealTarget(Transform healTarget, NavEnemyRenderer navRenderer)
         {
-            _animEvent.OnPrepare -= HandlePrepare;
-            FaceHealTarget();
+            if (healTarget == null || navRenderer == null)
+                return;
+
+            navRenderer.SnapLookAt(healTarget.position);
         }
 
-        private void FaceHealTarget()
+        private void HealTarget(Transform healTarget)
         {
-            if (_healTarget != null)
-                _navRenderer?.SnapLookAt(_healTarget.position);
-        }
+            if (healTarget == null)
+                return;
 
-        private void HandleAttack()
-        {
-            _animEvent.OnAttack -= HandleAttack;
-            _animEvent.OnPrepare -= HandlePrepare;
+            if (!healTarget.TryGetComponent<Enemy>(out Enemy ally))
+                return;
 
-            if (_healTarget != null && _healTarget.TryGetComponent<Enemy>(out var ally))
-                ally.GetModule<AgentHealth>()?.ApplyHeal(HealAmount);
+            AgentHealth health = ally.GetModule<AgentHealth>();
 
-            // _vfx?.Play(EnemyVfxType.None); 이건 힐받은놈이 이펙트로 교체함
-
-            NotifyComplete();
+            if (health != null)
+                health.ApplyHeal(HealAmount);
         }
     }
 }

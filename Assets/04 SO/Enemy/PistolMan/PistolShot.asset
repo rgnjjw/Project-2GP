@@ -9,35 +9,43 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52a4b5c4b26cee740a92cf998120d593, type: 3}
+  m_Script: {fileID: 11500000, guid: 21826b5dc0ca4443a2eef6c9f50ba479, type: 3}
   m_Name: PistolShot
-  m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.Enemy.Skill.RangedAttackSkillSO
+  m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.Enemy.Skill.ProjectileSkillSO
   <AnimParam>k__BackingField: {fileID: 11400000, guid: 71ea734fa451e0348bc958795d2de4aa, type: 2}
-  <Cooldown>k__BackingField: 4
+  <Cooldown>k__BackingField: 1
   DamageAreaDetection:
-    rid: -2
+    rid: 4481138170555793714
   TargetFinder:
-    rid: 4481138055766605857
-  <Damage>k__BackingField: 20
+    rid: 4481138170555793713
+  <Damage>k__BackingField: 10
+  <ProjectileSpeed>k__BackingField: 40
   <TargetLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 256
-  <TargetHeightOffset>k__BackingField: 1.8
-  <LaserPrefab>k__BackingField: {fileID: 4999676970033354722, guid: e7f744b06b4d5d3438ab253e4d8dc15c, type: 3}
-  beamMaterial: {fileID: 2100000, guid: 2d5d06b7abc191145a6b9fcdd7401461, type: 2}
-  beamWidth: 0.02
-  beamDuration: 0.08
+  <ShotCount>k__BackingField: 3
+  attackStateName: PISTOLSHOT
+  animationLayer: 0
+  projectilePrefab: {fileID: 8945377058224139532, guid: db772bf803bee9644910c616caad519b, type: 3}
+  targetHeightOffset: 1
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
-    - rid: 4481138055766605857
+    - rid: 4481138170555793713
       type: {class: BoxDetect, ns: _02_Scripts.Core.Detect, asm: Assembly-CSharp}
       data:
         layerMask:
           serializedVersion: 2
           m_Bits: 256
         gizmoColor: {r: 0, g: 1, b: 0, a: 1}
-        size: {x: 15, y: 2.5, z: 15}
-        offset: {x: 0, y: 1.25, z: 0}
+        size: {x: 12, y: 2, z: 12}
+        offset: {x: 0, y: 1, z: 0}
+    - rid: 4481138170555793714
+      type: {class: BoxDetect, ns: _02_Scripts.Core.Detect, asm: Assembly-CSharp}
+      data:
+        layerMask:
+          serializedVersion: 2
+          m_Bits: 1
+        gizmoColor: {r: 0, g: 0, b: 0, a: 0}
+        size: {x: 1, y: 1, z: 1}
+        offset: {x: 0, y: 0, z: 0}

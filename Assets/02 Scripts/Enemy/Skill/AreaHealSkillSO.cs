@@ -8,47 +8,59 @@ namespace _02_Scripts.Enemy.Skill
     {
         [field: SerializeField] public int HealAmount { get; private set; } = 20;
 
-        private EnemyAnimationEvent _animEvent;
-        private EnemyVfxController _vfx;
-        private Enemy _enemy;
-
         public override void ExecuteSkill(Enemy enemy)
         {
-            _enemy = enemy;
-            _animEvent = enemy.GetModule<EnemyAnimationEvent>();
-            _vfx = enemy.GetModule<EnemyVfxController>();
+            if (enemy == null)
+                return;
 
-            _animEvent.OnAttack += HandleAttack;
-            _animEvent.OnAttackEnd += HandleAttackEnd;
+            EnemyAnimationEvent animEvent = enemy.GetModule<EnemyAnimationEvent>();
+            EnemyVfxController vfx = enemy.GetModule<EnemyVfxController>();
+
+            if (animEvent == null)
+            {
+                HealAllInRange(enemy, vfx);
+                NotifyComplete();
+                return;
+            }
+
+            void HandleAttack()
+            {
+                animEvent.OnAttack -= HandleAttack;
+
+                HealAllInRange(enemy, vfx);
+                NotifyComplete();
+            }
+
+            void HandleAttackEnd()
+            {
+                animEvent.OnAttackEnd -= HandleAttackEnd;
+                vfx?.Stop(EnemyVfxType.AreaHealEffect);
+            }
+
+            animEvent.OnAttack += HandleAttack;
+            animEvent.OnAttackEnd += HandleAttackEnd;
         }
 
-        private void HandleAttack()
+        private void HealAllInRange(Enemy enemy, EnemyVfxController vfx)
         {
-            _animEvent.OnAttack -= HandleAttack;
-            HealAllInRange();
-            NotifyComplete();
-        }
+            if (enemy == null)
+                return;
 
-        // 광역힐 모션이 끝나면 이펙트를 끈다.
-        private void HandleAttackEnd()
-        {
-            _animEvent.OnAttackEnd -= HandleAttackEnd;
-            _vfx?.Stop(EnemyVfxType.AreaHealEffect);
-        }
-
-        private void HealAllInRange()
-        {
             if (DamageAreaDetection != null)
             {
-                foreach (var t in DamageAreaDetection.GetAllInRange(_enemy.transform))
+                foreach (var target in DamageAreaDetection.GetAllInRange(enemy.transform))
                 {
-                    if (!IsValidTarget(_enemy, t, out var ally)) continue;
+                    if (!IsValidTarget(enemy, target, out Enemy ally))
+                        continue;
 
-                    ally.GetModule<AgentHealth>()?.ApplyHeal(HealAmount);
+                    AgentHealth allyHealth = ally.GetModule<AgentHealth>();
+
+                    if (allyHealth != null)
+                        allyHealth.ApplyHeal(HealAmount);
                 }
             }
 
-            _vfx?.Play(EnemyVfxType.AreaHealEffect);
+            vfx?.Play(EnemyVfxType.AreaHealEffect);
         }
     }
 }

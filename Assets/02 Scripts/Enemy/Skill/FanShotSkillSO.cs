@@ -11,45 +11,53 @@ namespace _02_Scripts.Enemy.Skill
 
         [Header("부채꼴")]
         [field: SerializeField] public int BulletCount { get; private set; } = 5;
-        [Tooltip("전체 퍼지는 각도 (예: 60이면 좌우 30도씩)")]
+
+        [Tooltip("전체 퍼지는 각도. 예: 60이면 좌우 30도씩")]
         [field: SerializeField] public float SpreadAngle { get; private set; } = 60f;
 
         [Header("투사체")]
         [SerializeField] private Projectile projectilePrefab;
         [SerializeField] private float targetHeightOffset = 1f;
 
-        private Transform _muzzle;
-        private Transform _target;
-        private EnemyAnimationEvent _animEvent;
-        private EnemyVfxController _vfx;
-
         public override void ExecuteSkill(Enemy enemy)
         {
-            _target = TargetFinder?.GetClosest(enemy.transform) ?? enemy.CurrentTarget;
-            _muzzle = FindMuzzle(enemy);
-            _animEvent = enemy.GetModule<EnemyAnimationEvent>();
-            _vfx = enemy.GetModule<EnemyVfxController>();
+            if (enemy == null)
+                return;
 
-            _animEvent.OnAttack += HandleAttack;
+            Transform target = TargetFinder?.GetClosest(enemy.transform) ?? enemy.CurrentTarget;
+            Transform muzzle = FindMuzzle(enemy);
+            EnemyAnimationEvent animEvent = enemy.GetModule<EnemyAnimationEvent>();
+            EnemyVfxController vfx = enemy.GetModule<EnemyVfxController>();
+
+            if (animEvent == null)
+            {
+                FireFan(muzzle, target, vfx);
+                NotifyComplete();
+                return;
+            }
+
+            void HandleAttack()
+            {
+                animEvent.OnAttack -= HandleAttack;
+
+                FireFan(muzzle, target, vfx);
+                NotifyComplete();
+            }
+
+            animEvent.OnAttack += HandleAttack;
         }
 
-        private void HandleAttack()
+        private void FireFan(Transform muzzle, Transform target, EnemyVfxController vfx)
         {
-            _animEvent.OnAttack -= HandleAttack;
-            FireFan();
-            NotifyComplete();
-        }
+            if (projectilePrefab == null || muzzle == null)
+                return;
 
-        private void FireFan()
-        {
-            if (projectilePrefab == null || _muzzle == null) return;
-
-            Vector3 centerDir = GetFireDirection();
+            Vector3 centerDirection = GetFireDirection(muzzle, target);
 
             if (BulletCount <= 1)
             {
-                SpawnBullet(centerDir);
-                _vfx?.Play(EnemyVfxType.MuzzleFlash);
+                SpawnBullet(muzzle, centerDirection);
+                vfx?.Play(EnemyVfxType.MuzzleFlash);
                 return;
             }
 
@@ -59,38 +67,59 @@ namespace _02_Scripts.Enemy.Skill
             for (int i = 0; i < BulletCount; i++)
             {
                 float angle = -halfAngle + step * i;
-                // 월드 Y축 기준 회전: Y(고도)값은 그대로 보존되고 좌우(수평)만 퍼짐
-                Vector3 dir = Quaternion.AngleAxis(angle, Vector3.up) * centerDir;
-                SpawnBullet(dir);
+                Vector3 direction = Quaternion.AngleAxis(angle, Vector3.up) * centerDirection;
+
+                SpawnBullet(muzzle, direction);
             }
 
-            _vfx?.Play(EnemyVfxType.MuzzleFlash);
+            vfx?.Play(EnemyVfxType.MuzzleFlash);
         }
 
-        private void SpawnBullet(Vector3 direction)
+        private void SpawnBullet(Transform muzzle, Vector3 direction)
         {
-            // TODO: 풀링 적용 시 이 두 줄만 PoolManager.Get(...)으로 교체
-            Projectile proj = Object.Instantiate(projectilePrefab, _muzzle.position, Quaternion.LookRotation(direction));
-            proj.Init(direction, ProjectileSpeed, Damage, TargetLayer);
+            if (muzzle == null || projectilePrefab == null)
+                return;
+
+            if (direction.sqrMagnitude <= 0.0001f)
+                direction = muzzle.forward;
+
+            Projectile projectile = Object.Instantiate(
+                projectilePrefab,
+                muzzle.position,
+                Quaternion.LookRotation(direction.normalized)
+            );
+
+            projectile.Init(direction.normalized, ProjectileSpeed, Damage, TargetLayer);
         }
 
-        private Vector3 GetFireDirection()
+        private Vector3 GetFireDirection(Transform muzzle, Transform target)
         {
-            if (_target != null)
+            if (muzzle == null)
+                return Vector3.forward;
+
+            if (target != null)
             {
-                Vector3 aimPoint = _target.position + Vector3.up * targetHeightOffset;
-                return (aimPoint - _muzzle.position).normalized; // 높이값(기울기) 그대로 유지
+                Vector3 aimPoint = target.position + Vector3.up * targetHeightOffset;
+                Vector3 direction = aimPoint - muzzle.position;
+
+                if (direction.sqrMagnitude > 0.0001f)
+                    return direction.normalized;
             }
-            return _muzzle.forward;
+
+            return muzzle.forward;
         }
 
         private Transform FindMuzzle(Enemy enemy)
         {
-            foreach (Transform t in enemy.GetComponentsInChildren<Transform>(true))
+            if (enemy == null)
+                return null;
+
+            foreach (Transform child in enemy.GetComponentsInChildren<Transform>(true))
             {
-                if (t.name == "Muzzle" || t.CompareTag("Muzzle"))
-                    return t;
+                if (child.name == "Muzzle" || child.CompareTag("Muzzle"))
+                    return child;
             }
+
             return enemy.transform;
         }
     }

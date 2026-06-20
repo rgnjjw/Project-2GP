@@ -7,10 +7,12 @@ namespace _02_Scripts.Enemy.Skill
     public class MeleeAttackSkill : SkillSO
     {
         [field: SerializeField] public int Damage { get; private set; }
+        [field: SerializeField] public EnemyVfxType  VfxType { get; private set; }
 
         public override void ExecuteSkill(Enemy enemy)
         {
             var animEvent = enemy.GetModule<EnemyAnimationEvent>();
+            var vfx = enemy.GetModule<EnemyVfxController>();
 
             void HandleAttack()
             {
@@ -19,6 +21,8 @@ namespace _02_Scripts.Enemy.Skill
                 var closest = DamageAreaDetection.GetClosest(enemy.transform);
                 if (closest != null && closest.TryGetComponent<Player.Player>(out var player))
                     player.GetModule<AgentHealth>().ApplyDamage(Damage);
+
+                vfx?.Play(VfxType);
 
                 NotifyComplete();
             }

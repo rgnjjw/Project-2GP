@@ -13,50 +13,66 @@ namespace _02_Scripts.Enemy.Skill
         [Tooltip("폭발(OnAttack) 이후, 실제로 죽기까지 추가 지연 (이펙트 보여줄 시간)")]
         [SerializeField] private float deathDelay = 0.1f;
 
-        private EnemyAnimationEvent _animEvent;
-        private EnemyVfxController _vfx;
-        private Enemy _enemy;
-
         public override void ExecuteSkill(Enemy enemy)
         {
-            _enemy = enemy;
-            _animEvent = enemy.GetModule<EnemyAnimationEvent>();
-            _vfx = enemy.GetModule<EnemyVfxController>();
+            if (enemy == null)
+                return;
 
-            _animEvent.OnAttack += HandleAttack;
+            EnemyAnimationEvent animEvent = enemy.GetModule<EnemyAnimationEvent>();
+            EnemyVfxController vfx = enemy.GetModule<EnemyVfxController>();
+
+            if (animEvent == null)
+            {
+                Explode(enemy, vfx);
+                return;
+            }
+
+            void HandleAttack()
+            {
+                animEvent.OnAttack -= HandleAttack;
+                Explode(enemy, vfx);
+            }
+
+            animEvent.OnAttack -= HandleAttack;
+            animEvent.OnAttack += HandleAttack;
         }
 
-        private void HandleAttack()
+        private void Explode(Enemy enemy, EnemyVfxController vfx)
         {
-            _animEvent.OnAttack -= HandleAttack;
+            if (enemy == null)
+                return;
 
-            Explode();
-        }
-
-        private void Explode()
-        {
             if (DamageAreaDetection != null)
             {
-                foreach (var t in DamageAreaDetection.GetAllInRange(_enemy.transform))
+                foreach (var target in DamageAreaDetection.GetAllInRange(enemy.transform))
                 {
-                    if (t.TryGetComponent<Player.Player>(out var player))
-                        player.GetModule<AgentHealth>().ApplyDamage(Damage);
+                    if (target.TryGetComponent<Player.Player>(out var player))
+                    {
+                        AgentHealth playerHealth = player.GetModule<AgentHealth>();
+
+                        if (playerHealth != null)
+                            playerHealth.ApplyDamage(Damage);
+                    }
                 }
             }
 
-            _vfx?.Play(EnemyVfxType.Explosion);
+            vfx?.Play(EnemyVfxType.Explosion);
 
-            _enemy.StartCoroutine(KillSelfAfterDelay());
+            enemy.StartCoroutine(KillSelfAfterDelay(enemy));
         }
 
-        private IEnumerator KillSelfAfterDelay()
+        private IEnumerator KillSelfAfterDelay(Enemy enemy)
         {
             NotifyComplete();
 
             if (deathDelay > 0f)
                 yield return new WaitForSeconds(deathDelay);
 
-            var health = _enemy.GetModule<AgentHealth>();
+            if (enemy == null)
+                yield break;
+
+            AgentHealth health = enemy.GetModule<AgentHealth>();
+
             if (health != null)
                 health.ApplyDamage(int.MaxValue);
         }

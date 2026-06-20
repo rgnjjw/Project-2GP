@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 namespace _02_Scripts.Enemy.Skill
@@ -12,78 +11,119 @@ namespace _02_Scripts.Enemy.Skill
 
         [Header("연속 발사")]
         [field: SerializeField] public int ShotCount { get; private set; } = 3;
-        [field: SerializeField] public float ShotInterval { get; private set; } = 0.1f;
+
+        [Header("애니메이션 반복")]
+        [Tooltip("MAGIC 같은 Animator State 이름. Animator State 이름과 정확히 같아야 함.")]
+        [SerializeField] private string attackStateName = "MAGIC";
+
+        [Tooltip("공격 애니메이션이 들어있는 Animator Layer")]
+        [SerializeField] private int animationLayer = 0;
 
         [Header("투사체")]
         [SerializeField] private Projectile projectilePrefab;
         [SerializeField] private float targetHeightOffset = 1f;
 
-        private Transform _muzzle;
-        private Transform _target;
-        private EnemyAnimationEvent _animEvent;
-        private EnemyVfxController _vfx;
-        private Enemy _enemy;
-
         public override void ExecuteSkill(Enemy enemy)
         {
-            _enemy = enemy;
-            _target = TargetFinder?.GetClosest(enemy.transform) ?? enemy.CurrentTarget;
-            _muzzle = FindMuzzle(enemy);
-            _animEvent = enemy.GetModule<EnemyAnimationEvent>();
-            _vfx = enemy.GetModule<EnemyVfxController>();
+            if (enemy == null)
+                return;
 
-            _animEvent.OnAttack += HandleAttack;
-        }
+            Transform target = TargetFinder?.GetClosest(enemy.transform) ?? enemy.CurrentTarget;
+            Transform muzzle = FindMuzzle(enemy);
+            EnemyAnimationEvent animEvent = enemy.GetModule<EnemyAnimationEvent>();
+            EnemyVfxController vfx = enemy.GetModule<EnemyVfxController>();
+            Animator animator = enemy.GetComponentInChildren<Animator>();
 
-        private void HandleAttack()
-        {
-            _animEvent.OnAttack -= HandleAttack;
-            _enemy.StartCoroutine(FireSequence());
-        }
-
-        private IEnumerator FireSequence()
-        {
-            for (int i = 0; i < ShotCount; i++)
+            if (animEvent == null || animator == null)
             {
-                FireOne();
-
-                if (i < ShotCount - 1)
-                    yield return new WaitForSeconds(ShotInterval);
+                FireOne(muzzle, target, vfx);
+                NotifyComplete();
+                return;
             }
 
-            NotifyComplete();
-        }
+            int remainingShots = Mathf.Max(1, ShotCount);
+            int attackStateHash = Animator.StringToHash(attackStateName);
 
-        private void FireOne()
-        {
-            if (projectilePrefab == null || _muzzle == null) return;
-
-            Vector3 direction = GetFireDirection();
-
-            // TODO: 나중에 풀링 적용 시 이 두 줄만 PoolManager.Get(...)으로 교체
-            Projectile proj = Object.Instantiate(projectilePrefab, _muzzle.position, Quaternion.LookRotation(direction));
-            proj.Init(direction, ProjectileSpeed, Damage, TargetLayer);
-
-            _vfx?.Play(EnemyVfxType.MuzzleFlash);
-        }
-
-        private Vector3 GetFireDirection()
-        {
-            if (_target != null)
+            void HandleAttack()
             {
-                Vector3 aimPoint = _target.position + Vector3.up * targetHeightOffset;
-                return (aimPoint - _muzzle.position).normalized;
+                FireOne(muzzle, target, vfx);
+                remainingShots--;
             }
-            return _muzzle.forward;
+
+            void HandleAttackEnd()
+            {
+                if (remainingShots > 0)
+                {
+                    animator.Play(attackStateHash, animationLayer, 0f);
+                    return;
+                }
+
+                animEvent.OnAttack -= HandleAttack;
+                animEvent.OnAttackEnd -= HandleAttackEnd;
+
+                NotifyComplete();
+            }
+
+            animEvent.OnAttack -= HandleAttack;
+            animEvent.OnAttackEnd -= HandleAttackEnd;
+
+            animEvent.OnAttack += HandleAttack;
+            animEvent.OnAttackEnd += HandleAttackEnd;
+
+            animator.Play(attackStateHash, animationLayer, 0f);
+        }
+
+        private void FireOne(Transform muzzle, Transform target, EnemyVfxController vfx)
+        {
+            if (projectilePrefab == null || muzzle == null)
+                return;
+
+            Vector3 direction = GetFireDirection(muzzle, target);
+
+            if (direction.sqrMagnitude <= 0.0001f)
+                direction = muzzle.forward;
+
+            direction.Normalize();
+
+            Projectile projectile = Object.Instantiate(
+                projectilePrefab,
+                muzzle.position,
+                Quaternion.LookRotation(direction)
+            );
+
+            projectile.Init(direction, ProjectileSpeed, Damage, TargetLayer);
+
+            vfx?.Play(EnemyVfxType.MuzzleFlash);
+        }
+
+        private Vector3 GetFireDirection(Transform muzzle, Transform target)
+        {
+            if (muzzle == null)
+                return Vector3.forward;
+
+            if (target != null)
+            {
+                Vector3 aimPoint = target.position + Vector3.up * targetHeightOffset;
+                Vector3 direction = aimPoint - muzzle.position;
+
+                if (direction.sqrMagnitude > 0.0001f)
+                    return direction.normalized;
+            }
+
+            return muzzle.forward;
         }
 
         private Transform FindMuzzle(Enemy enemy)
         {
-            foreach (Transform t in enemy.GetComponentsInChildren<Transform>(true))
+            if (enemy == null)
+                return null;
+
+            foreach (Transform child in enemy.GetComponentsInChildren<Transform>(true))
             {
-                if (t.name == "Muzzle" || t.CompareTag("Muzzle"))
-                    return t;
+                if (child.name == "Muzzle" || child.CompareTag("Muzzle"))
+                    return child;
             }
+
             return enemy.transform;
         }
     }

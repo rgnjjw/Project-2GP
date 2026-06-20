@@ -32,6 +32,8 @@ namespace _02_Scripts.Enemy.Skill
             NavEnemyRenderer navRenderer = enemy.GetModule<NavEnemyRenderer>();
             if (navRenderer == null) { NotifyComplete(); yield break; }
 
+            EnemyVfxController vfx = enemy.GetModule<EnemyVfxController>();
+
             NavMeshAgent agent = navRenderer.NavMeshAgent;
             if (agent == null || !agent.isOnNavMesh) { NotifyComplete(); yield break; }
 
@@ -55,6 +57,8 @@ namespace _02_Scripts.Enemy.Skill
             navRenderer.IsRotationLocked = true;
             enemy.transform.rotation = dashRotation;
             navRenderer.transform.rotation = dashRotation;
+
+            vfx?.Play(EnemyVfxType.Dash);
 
             yield return null; // 경로 계산 대기 (이 전에 remainingDistance가 0이라 즉시 종료되는 버그 방지)
 
@@ -95,6 +99,8 @@ namespace _02_Scripts.Enemy.Skill
                 agent.ResetPath();
             
             navRenderer.IsRotationLocked = false;
+
+            vfx?.Stop(EnemyVfxType.Dash);
 
             NotifyComplete();
         }

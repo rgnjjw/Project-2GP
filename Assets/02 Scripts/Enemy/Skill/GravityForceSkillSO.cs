@@ -9,46 +9,57 @@ namespace _02_Scripts.Enemy.Skill
     {
         [Header("끌어당기기 / 밀어내기")]
         [SerializeField] private float forceDuration = 1.5f;
-        [Tooltip("양수면 끌어당김(적 쪽으로), 음수면 밀어냄(적 반대쪽으로)")]
+
+        [Tooltip("양수면 끌어당김, 음수면 밀어냄")]
         [SerializeField] private float forceSpeed = 8f;
-        [Tooltip("끌어당기기일 때만 적용: 이 거리보다 가까워지면 즉시 종료하고 폭발")]
+
+        [Tooltip("끌어당기기일 때만 적용. 이 거리보다 가까워지면 즉시 종료하고 폭발")]
         [SerializeField] private float minDistance = 1.5f;
 
         [Header("종료 시 폭발")]
         [SerializeField] private int explosionDamage = 25;
 
-        private EnemyAnimationEvent _animEvent;
-        private EnemyVfxController _vfx;
-        private Enemy _enemy;
-        private Transform _target;
-
         public override void ExecuteSkill(Enemy enemy)
         {
-            _enemy = enemy;
-            _target = TargetFinder?.GetClosest(enemy.transform) ?? enemy.CurrentTarget;
-            _animEvent = enemy.GetModule<EnemyAnimationEvent>();
-            _vfx = enemy.GetModule<EnemyVfxController>();
+            if (enemy == null)
+                return;
 
-            _animEvent.OnAttack += HandleAttack;
-        }
+            Transform target = TargetFinder?.GetClosest(enemy.transform) ?? enemy.CurrentTarget;
+            EnemyAnimationEvent animEvent = enemy.GetModule<EnemyAnimationEvent>();
+            EnemyVfxController vfx = enemy.GetModule<EnemyVfxController>();
 
-        private void HandleAttack()
-        {
-            _animEvent.OnAttack -= HandleAttack;
-
-            if (_target == null)
+            if (animEvent == null)
             {
-                NotifyComplete();
+                enemy.StartCoroutine(ForceRoutine(enemy, target, vfx));
                 return;
             }
 
-            _enemy.StartCoroutine(ForceRoutine());
+            void HandleAttack()
+            {
+                animEvent.OnAttack -= HandleAttack;
+
+                if (target == null)
+                {
+                    NotifyComplete();
+                    return;
+                }
+
+                enemy.StartCoroutine(ForceRoutine(enemy, target, vfx));
+            }
+
+            animEvent.OnAttack += HandleAttack;
         }
 
-        private IEnumerator ForceRoutine()
+        private IEnumerator ForceRoutine(Enemy enemy, Transform target, EnemyVfxController vfx)
         {
-            var player = _target.GetComponent<Player.Player>();
-            var mover = player?.GetModule<AgentMover>();
+            if (enemy == null || target == null)
+            {
+                NotifyComplete();
+                yield break;
+            }
+
+            Player.Player player = target.GetComponent<Player.Player>();
+            AgentMover mover = player != null ? player.GetModule<AgentMover>() : null;
 
             if (player == null || mover == null)
             {
@@ -57,26 +68,29 @@ namespace _02_Scripts.Enemy.Skill
             }
 
             bool isPulling = forceSpeed > 0f;
-
-            _vfx?.Play(EnemyVfxType.GravityZone); 
-            mover.BeginSlide(Vector3.zero);
-
             float elapsed = 0f;
+
+            vfx?.Play(EnemyVfxType.GravityZone);
+            mover.BeginSlide(Vector3.zero);
 
             while (elapsed < forceDuration)
             {
+                if (enemy == null || player == null)
+                    break;
+
                 elapsed += Time.fixedDeltaTime;
 
-                Vector3 toEnemy = _enemy.transform.position - player.transform.position;
-                toEnemy.y = 0f; // 수평으로만 작용 (공중으로 띄우지 않음)
+                Vector3 toEnemy = enemy.transform.position - player.transform.position;
+                toEnemy.y = 0f;
 
                 float distance = toEnemy.magnitude;
 
                 if (isPulling && distance <= minDistance)
                     break;
 
-                Vector3 dir = distance > 0.0001f ? toEnemy.normalized : Vector3.zero;
-                Vector3 forceVelocity = dir * forceSpeed;
+                Vector3 direction = distance > 0.0001f ? toEnemy.normalized : Vector3.zero;
+                Vector3 forceVelocity = direction * forceSpeed;
+
                 mover.UpdateSlideVelocity(forceVelocity);
 
                 yield return new WaitForFixedUpdate();
@@ -84,26 +98,41 @@ namespace _02_Scripts.Enemy.Skill
 
             mover.EndSlide();
 
-            Explode(player);
+            if (enemy != null)
+                Explode(enemy, player, vfx);
+
+            vfx?.Stop(EnemyVfxType.GravityZone);
+
             NotifyComplete();
         }
 
-        private void Explode(Player.Player player)
+        private void Explode(Enemy enemy, Player.Player fallbackPlayer, EnemyVfxController vfx)
         {
+            if (enemy == null)
+                return;
+
             if (DamageAreaDetection != null)
             {
-                foreach (var t in DamageAreaDetection.GetAllInRange(_enemy.transform))
+                foreach (var target in DamageAreaDetection.GetAllInRange(enemy.transform))
                 {
-                    if (t.TryGetComponent<Player.Player>(out var p))
-                        p.GetModule<AgentHealth>().ApplyDamage(explosionDamage);
+                    if (!target.TryGetComponent<Player.Player>(out Player.Player player))
+                        continue;
+
+                    AgentHealth health = player.GetModule<AgentHealth>();
+
+                    if (health != null)
+                        health.ApplyDamage(explosionDamage);
                 }
             }
-            else if (player != null)
+            else if (fallbackPlayer != null)
             {
-                player.GetModule<AgentHealth>().ApplyDamage(explosionDamage);
+                AgentHealth health = fallbackPlayer.GetModule<AgentHealth>();
+
+                if (health != null)
+                    health.ApplyDamage(explosionDamage);
             }
 
-            _vfx?.Play(EnemyVfxType.Explosion);
+            vfx?.Play(EnemyVfxType.Explosion);
         }
     }
 }

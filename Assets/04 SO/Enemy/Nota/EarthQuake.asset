@@ -19,6 +19,7 @@ MonoBehaviour:
   TargetFinder:
     rid: 4481138043974844644
   <Damage>k__BackingField: 30
+  <VfxType>k__BackingField: 12
   references:
     version: 2
     RefIds:

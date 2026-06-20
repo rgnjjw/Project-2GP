@@ -14,8 +14,14 @@ namespace _02_Scripts.Enemy
         Shield,
         AreaHealEffect,
         HealedEffect,
-        GravityZone
-        
+        GravityZone,
+
+        // 아래는 끝에 추가(기존 직렬화 값 보존)
+        MeleeAttack,
+        Dash,
+        Summon,
+        SingleHealEffect,
+        EarthQuake
     }
 
     [Serializable]
@@ -49,7 +55,6 @@ namespace _02_Scripts.Enemy
             ps.Play();
         }
 
-        // 지속형 이펙트(보호막 같은) 끝낼 때 호출
         public void Stop(EnemyVfxType type)
         {
             if (!_vfxDict.TryGetValue(type, out var ps) || ps == null) return;
