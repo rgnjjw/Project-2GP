@@ -402,7 +402,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.Enemy.NavEnemyRenderer
   <NavMeshAgent>k__BackingField: {fileID: 7779685470382147140}
   <SpeedAnimParam>k__BackingField: {fileID: 11400000, guid: 308aeae103cd3914cb03ea43dec1f282, type: 2}
-  rotateSpeed: 100
+  rotateSpeed: 260
 --- !u!114 &9049166627936516952
 MonoBehaviour:
   m_ObjectHideFlags: 0

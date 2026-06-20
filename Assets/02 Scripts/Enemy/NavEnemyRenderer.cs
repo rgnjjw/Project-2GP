@@ -70,6 +70,17 @@ namespace _02_Scripts.Enemy
             );
         }
 
+        // 조준 시작 시 단 한 번 플레이어 방향으로 즉시 회전(스냅)하고 이후엔 추적하지 않는다.
+        // → 발사 방향이 그 즉시 고정되어, 레이저로 예고된 직선을 플레이어가 피할 수 있다.
+        public void SnapLookAtTarget()
+        {
+            if (_enemy == null || _enemy.CurrentTarget == null) return;
+            Vector3 direction = _enemy.CurrentTarget.position - _enemyTrm.position;
+            direction.y = 0f;
+            if (direction.sqrMagnitude < 0.001f) return;
+            _enemyTrm.rotation = Quaternion.LookRotation(direction);
+        }
+
         private void LookAtTarget(Transform target)
         {
             Vector3 direction = target.position - _enemyTrm.position;

@@ -37,10 +37,11 @@ namespace _02_Scripts.Enemy
 
         private void Update()
         {
-            if (!_active || _laser == null || _target == null || _muzzle == null) return;
+            if (!_active || _laser == null || _muzzle == null) return;
 
-            Vector3 targetPos = _target.position + Vector3.up * targetHeightOffset;
-            Vector3 direction = (targetPos - _muzzle.position).normalized;
+            // 플레이어 위치로 꺾지 않고 총구가 바라보는 방향(forward)으로 곧게 직선 조준.
+            // 조준 단계에서 적이 플레이어 쪽으로 회전하므로 forward가 자연스럽게 플레이어를 향하게 된다.
+            Vector3 direction = _muzzle.forward;
             Vector3 endPos = Physics.Raycast(_muzzle.position, direction, out RaycastHit hit, Mathf.Infinity, _layerMask)
                 ? hit.point
                 : _muzzle.position + direction * 100f;

@@ -41,6 +41,13 @@ namespace _02_Scripts.Enemy.State
                 return;
             }
 
+            // 스냅 회전이 향할 대상을 확실히 갱신해 둔다(아이들에서 바로 진입한 경우 CurrentTarget이 비어있을 수 있음).
+            if (_currentSkill.TargetFinder != null)
+            {
+                var t = _currentSkill.TargetFinder.GetClosest(enemy.transform);
+                if (t != null) enemy.CurrentTarget = t;
+            }
+
             _animEnded = false;
             _skillEnded = false;
 
@@ -55,7 +62,8 @@ namespace _02_Scripts.Enemy.State
 
         private void HandlePrepare()
         {
-            _navEnemyRenderer.UseForcedRotation = true;
+            // 조준 시작 시 단 한 번만 플레이어 방향으로 회전하고 고정(이후 추적 회전 없음).
+            _navEnemyRenderer.SnapLookAtTarget();
         }
 
         private void HandleAttack()

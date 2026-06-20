@@ -42,12 +42,9 @@ namespace _02_Scripts.Enemy.Skill
         {
             _laserAimer?.StopAim();
 
-            if (_target != null)
-            {
-                Vector3 targetPos = _target.position + Vector3.up * TargetHeightOffset;
-                Vector3 dir = (targetPos - _muzzle.position).normalized;
-                FireBeam(_muzzle.position, dir);
-            }
+            // 플레이어 위치로 재조준하지 않고, 조준 단계에서 회전이 멈춘 그대로의 총구 정면 방향으로 발사한다.
+            if (_muzzle != null)
+                FireBeam(_muzzle.position, _muzzle.forward);
 
             _animEvent.OnPrepare -= HandlePrepare;
             _animEvent.OnAttack -= HandleAttack;
