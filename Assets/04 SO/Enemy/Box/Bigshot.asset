@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 21826b5dc0ca4443a2eef6c9f50ba479, type: 3}
-  m_Name: BigMagicSkill
+  m_Name: Bigshot
   m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.Enemy.Skill.ProjectileSkillSO
-  <AnimParam>k__BackingField: {fileID: 11400000, guid: 36b900b8306c61644b76e10b98a99dfe, type: 2}
-  <Cooldown>k__BackingField: 15
+  <AnimParam>k__BackingField: {fileID: 11400000, guid: 6a56efc6fdd8c0e46b07eeca4c9b2ba4, type: 2}
+  <Cooldown>k__BackingField: 5
   DamageAreaDetection:
     rid: 4481138170555793714
   TargetFinder:
     rid: 4481138170555793713
   <Damage>k__BackingField: 40
-  <ProjectileSpeed>k__BackingField: 25
+  <ProjectileSpeed>k__BackingField: 10
   <TargetLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 256
-  <ShotCount>k__BackingField: 1
-  attackStateName: BIGMAGIC
+  <ShotCount>k__BackingField: 2
+  attackStateName: BIGSHOT
   animationLayer: 0
   projectilePrefab: {fileID: 8945377058224139532, guid: 04f0080d22a31b54bb61f9d8165012f9, type: 3}
   targetHeightOffset: 1
@@ -38,7 +38,7 @@ MonoBehaviour:
           serializedVersion: 2
           m_Bits: 256
         gizmoColor: {r: 0, g: 1, b: 0, a: 1}
-        size: {x: 20, y: 2, z: 20}
+        size: {x: 25, y: 2, z: 25}
         offset: {x: 0, y: 1, z: 0}
     - rid: 4481138170555793714
       type: {class: BoxDetect, ns: _02_Scripts.Core.Detect, asm: Assembly-CSharp}
