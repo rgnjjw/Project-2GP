@@ -77,7 +77,6 @@ namespace _02_Scripts.Enemy
             if (_isDead) return;
             _isDead = true;
 
-            // HP가 0이 된 즉시 '살아있는 적'에서 제외(사망 연출 중인 적은 위협으로 치지 않음).
             AliveEnemies.Remove(this);
 
             LevelManager.Instance.AddExp(10);
@@ -91,7 +90,6 @@ namespace _02_Scripts.Enemy
 
         private void OnDestroy()
         {
-            // 사망 처리 없이 파괴되는 경우(맵 정리 등)에도 레지스트리에서 확실히 제외.
             AliveEnemies.Remove(this);
 
             if (_agentHealth != null)

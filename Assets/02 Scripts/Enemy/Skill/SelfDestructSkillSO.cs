@@ -23,18 +23,11 @@ namespace _02_Scripts.Enemy.Skill
             _animEvent = enemy.GetModule<EnemyAnimationEvent>();
             _vfx = enemy.GetModule<EnemyVfxController>();
 
-            _animEvent.OnPrepare += HandlePrepare;
             _animEvent.OnAttack += HandleAttack;
-        }
-
-        private void HandlePrepare()
-        {
-            _vfx?.Play(EnemyVfxType.ExplosionWarmup);
         }
 
         private void HandleAttack()
         {
-            _animEvent.OnPrepare -= HandlePrepare;
             _animEvent.OnAttack -= HandleAttack;
 
             Explode();
