@@ -9,13 +9,12 @@ namespace _02_Scripts.Enemy
     {
         None,
         HitFlash,
-        ExplosionWarmup,
         Explosion,
         MuzzleFlash,
-        DeathBurst,
         Shield,
         AreaHealEffect,
-        HealedEffect
+        HealedEffect,
+        GravityZone
         
     }
 

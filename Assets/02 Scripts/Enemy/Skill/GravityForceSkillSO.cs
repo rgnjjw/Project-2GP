@@ -58,8 +58,7 @@ namespace _02_Scripts.Enemy.Skill
 
             bool isPulling = forceSpeed > 0f;
 
-            _vfx?.Play(EnemyVfxType.None); // TODO: 중력장 전용 VFX 타입 추가해서 교체
-
+            _vfx?.Play(EnemyVfxType.GravityZone); 
             mover.BeginSlide(Vector3.zero);
 
             float elapsed = 0f;
@@ -73,7 +72,6 @@ namespace _02_Scripts.Enemy.Skill
 
                 float distance = toEnemy.magnitude;
 
-                // 끌어당기는 중이고 너무 가까워지면 조기 종료
                 if (isPulling && distance <= minDistance)
                     break;
 
