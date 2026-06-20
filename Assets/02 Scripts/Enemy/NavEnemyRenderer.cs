@@ -24,10 +24,17 @@ namespace _02_Scripts.Enemy
         {
             base.Initialize(owner);
             NavMeshAgent.updateRotation = false;
-            // 적은 NavMeshAgent로 이동(루트 모션 X)하므로 화면 밖에선 애니메이터 평가를 생략해도 위치가 어긋나지 않는다.
-            // 적이 많을 때 오프스크린 애니메이션 연산을 줄여 프레임을 확보한다.
             if (Animator != null)
+            {
+                // 적은 NavMeshAgent로 이동하므로 루트 모션이 켜져 있으면 애니메이터가 위치를 덮어써
+                // NavMeshAgent 이동을 상쇄한다(달리기 애니메이션만 재생되고 제자리에 머무는 버그).
+                // 어떤 모델을 쓰든 항상 끄도록 강제한다.
+                Animator.applyRootMotion = false;
+
+                // 적은 NavMeshAgent로 이동(루트 모션 X)하므로 화면 밖에선 애니메이터 평가를 생략해도 위치가 어긋나지 않는다.
+                // 적이 많을 때 오프스크린 애니메이션 연산을 줄여 프레임을 확보한다.
                 Animator.cullingMode = AnimatorCullingMode.CullUpdateTransforms;
+            }
             if (owner is Enemy enemy)
             {
                 _enemy = enemy;
@@ -37,6 +44,16 @@ namespace _02_Scripts.Enemy
 
         private void Update()
         {
+            // 에이전트가 NavMesh 밖에 있으면 이동/경로 탐색이 불가능해 제자리 달리기가 된다.
+            // (런타임에 NavMesh가 늦게 구워지거나, 살짝 벗어난 위치에 스폰된 경우 대비)
+            // 근처 NavMesh 위로 끌어다 붙여 자가 복구한다.
+            if (NavMeshAgent.enabled && !NavMeshAgent.isOnNavMesh)
+            {
+                if (NavMesh.SamplePosition(NavMeshAgent.transform.position, out NavMeshHit hit, 8f, NavMesh.AllAreas))
+                    NavMeshAgent.Warp(hit.position);
+                return;
+            }
+
             if (IsRotationLocked) return;
 
             if (UseForcedRotation && _enemy.CurrentTarget != null)
@@ -76,6 +93,17 @@ namespace _02_Scripts.Enemy
         {
             if (_enemy == null || _enemy.CurrentTarget == null) return;
             Vector3 direction = _enemy.CurrentTarget.position - _enemyTrm.position;
+            direction.y = 0f;
+            if (direction.sqrMagnitude < 0.001f) return;
+            _enemyTrm.rotation = Quaternion.LookRotation(direction);
+        }
+
+        // 플레이어(CurrentTarget)가 아닌 임의의 위치를 향해 즉시 1회 회전(스냅).
+        // 힐처럼 아군을 바라봐야 하는 스킬에서 사용한다.
+        public void SnapLookAt(Vector3 worldPosition)
+        {
+            if (_enemyTrm == null) return;
+            Vector3 direction = worldPosition - _enemyTrm.position;
             direction.y = 0f;
             if (direction.sqrMagnitude < 0.001f) return;
             _enemyTrm.rotation = Quaternion.LookRotation(direction);

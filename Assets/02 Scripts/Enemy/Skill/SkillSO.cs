@@ -16,7 +16,10 @@ namespace _02_Scripts.Enemy.Skill
 
         public event Action OnExecutionComplete;
 
-        public bool CanExecuteSkill(Enemy enemy)
+        // 힐 스킬 여부(힐러 식별에 사용). 힐 스킬에서 true로 오버라이드한다.
+        public virtual bool IsHealSkill => false;
+
+        public virtual bool CanExecuteSkill(Enemy enemy)
             => TargetFinder != null && TargetFinder.HasAnyInRange(enemy.transform);
 
         public abstract void ExecuteSkill(Enemy enemy);

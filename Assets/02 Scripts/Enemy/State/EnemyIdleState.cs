@@ -54,8 +54,8 @@ namespace _02_Scripts.Enemy.State
 
             if (_enemyDataContainer.ChaseRange.HasAnyInRange(enemy.transform))
             {
-                if (enemy.CurrentTarget == null)
-                    enemy.CurrentTarget = _enemyDataContainer.ChaseRange.GetClosest(enemy.transform);
+                // 힐러는 체력이 가장 낮은 아군을, 일반 적은 가장 가까운 대상을 잡는다.
+                enemy.CurrentTarget = HealTargeting.SelectChaseTarget(enemy, _enemyDataContainer.ChaseRange);
 
                 if (enemy.CurrentTarget == null) return;
 

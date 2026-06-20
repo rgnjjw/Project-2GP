@@ -19,6 +19,7 @@ MonoBehaviour:
     - {fileID: 2147767683307753553, guid: 6d8eb2f00e62ac64f9d8128caff77694, type: 3}
     - {fileID: 8291943934468267832, guid: e07f9bbf37d470048b86f0dac618f8a8, type: 3}
     - {fileID: 2354599137957298582, guid: b363d3b81c7c2e24fa37700494da482f, type: 3}
+    - {fileID: 9042831491106391645, guid: e94a57ec118e8b843886e7d08027d165, type: 3}
     rangedPrefabs:
     - {fileID: 2444220667432071365, guid: 51f9703a8193386468bef51358fb4903, type: 3}
     bossPrefabs:

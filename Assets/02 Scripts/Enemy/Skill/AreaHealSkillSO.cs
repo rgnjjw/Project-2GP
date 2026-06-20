@@ -4,10 +4,9 @@ using UnityEngine;
 namespace _02_Scripts.Enemy.Skill
 {
     [CreateAssetMenu(fileName = "AreaHealSkillSO", menuName = "Skill/AreaHealSkillSO", order = 0)]
-    public class AreaHealSkillSO : SkillSO
+    public class AreaHealSkillSO : HealSkillSO
     {
         [field: SerializeField] public int HealAmount { get; private set; } = 20;
-        [SerializeField] private bool includeSelf = true;
 
         private EnemyAnimationEvent _animEvent;
         private EnemyVfxController _vfx;
@@ -20,6 +19,7 @@ namespace _02_Scripts.Enemy.Skill
             _vfx = enemy.GetModule<EnemyVfxController>();
 
             _animEvent.OnAttack += HandleAttack;
+            _animEvent.OnAttackEnd += HandleAttackEnd;
         }
 
         private void HandleAttack()
@@ -29,23 +29,26 @@ namespace _02_Scripts.Enemy.Skill
             NotifyComplete();
         }
 
+        // 광역힐 모션이 끝나면 이펙트를 끈다.
+        private void HandleAttackEnd()
+        {
+            _animEvent.OnAttackEnd -= HandleAttackEnd;
+            _vfx?.Stop(EnemyVfxType.AreaHealEffect);
+        }
+
         private void HealAllInRange()
         {
-            if (includeSelf)
-                _enemy.GetModule<AgentHealth>()?.ApplyHeal(HealAmount);
-
             if (DamageAreaDetection != null)
             {
                 foreach (var t in DamageAreaDetection.GetAllInRange(_enemy.transform))
                 {
-                    if (t == _enemy.transform) continue; 
+                    if (!IsValidTarget(_enemy, t, out var ally)) continue;
 
-                    if (t.TryGetComponent<Enemy>(out var ally))
-                        ally.GetModule<AgentHealth>()?.ApplyHeal(HealAmount);
+                    ally.GetModule<AgentHealth>()?.ApplyHeal(HealAmount);
                 }
             }
 
-            _vfx?.Play(EnemyVfxType.None);//힐 이펙트
+            _vfx?.Play(EnemyVfxType.AreaHealEffect);
         }
     }
 }

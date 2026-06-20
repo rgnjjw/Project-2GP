@@ -24,7 +24,7 @@ namespace _02_Scripts.Enemy.State
             _checkTimer = 0.2f;
             _navEnemyRenderer.UseChaseRotation = true;
 
-            enemy.CurrentTarget = _enemyDataContainer.ChaseRange.GetClosest(enemy.transform);
+            enemy.CurrentTarget = Skill.HealTargeting.SelectChaseTarget(enemy, _enemyDataContainer.ChaseRange);
             if (enemy.CurrentTarget != null && _navEnemyRenderer.NavMeshAgent.isActiveAndEnabled)
                 _navEnemyRenderer.NavMeshAgent.SetDestination(enemy.CurrentTarget.position);
 
@@ -59,9 +59,13 @@ namespace _02_Scripts.Enemy.State
                 return;
             }
 
-            var target = _enemyDataContainer.ChaseRange.GetClosest(enemy.transform);
-            if (target != null && _navEnemyRenderer.NavMeshAgent.isActiveAndEnabled)
-                _navEnemyRenderer.NavMeshAgent.SetDestination(target.position);
+            var target = Skill.HealTargeting.SelectChaseTarget(enemy, _enemyDataContainer.ChaseRange);
+            if (target != null)
+            {
+                enemy.CurrentTarget = target;
+                if (_navEnemyRenderer.NavMeshAgent.isActiveAndEnabled)
+                    _navEnemyRenderer.NavMeshAgent.SetDestination(target.position);
+            }
         }
 
         public override void Exit()

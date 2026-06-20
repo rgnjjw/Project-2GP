@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75c60dc041b641b9ae3ebcab2f95d41f, type: 3}
+  m_Name: AreaHealSkillSO
+  m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.Enemy.Skill.AreaHealSkillSO
+  <AnimParam>k__BackingField: {fileID: 11400000, guid: 16d00c96b9ce5474fa3fe38d0ca5cfed, type: 2}
+  <Cooldown>k__BackingField: 7
+  DamageAreaDetection:
+    rid: 4481138150854361595
+  TargetFinder:
+    rid: 4481138150854361594
+  <HealAmount>k__BackingField: 50
+  includeSelf: 1
+  references:
+    version: 2
+    RefIds:
+    - rid: 4481138150854361594
+      type: {class: BoxDetect, ns: _02_Scripts.Core.Detect, asm: Assembly-CSharp}
+      data:
+        layerMask:
+          serializedVersion: 2
+          m_Bits: 128
+        gizmoColor: {r: 0, g: 1, b: 0, a: 1}
+        size: {x: 9, y: 2, z: 9}
+        offset: {x: 0, y: 1, z: 0}
+    - rid: 4481138150854361595
+      type: {class: SphereDetect, ns: _02_Scripts.Core.Detect, asm: Assembly-CSharp}
+      data:
+        layerMask:
+          serializedVersion: 2
+          m_Bits: 128
+        gizmoColor: {r: 1, g: 0, b: 0, a: 1}
+        radius: 7

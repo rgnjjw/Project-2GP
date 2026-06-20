@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using _02_Scripts.Agent;
-using _02_Scripts.Core.AnimationSystem;
 using _02_Scripts.Enemy.Skill;
 using _02_Scripts.Enemy.State;
 using _02_Scripts.UI;
@@ -11,13 +10,8 @@ namespace _02_Scripts.Enemy
 {
     public class Enemy : Agent.Agent
     {
-        // 살아있는(HP>0) 모든 적의 전역 레지스트리.
-        // 웨이브 클리어 판정이 '웨이브로 스폰한 적'뿐 아니라 '소환된 적'까지 모두 포함하도록 한다.
         private static readonly HashSet<Enemy> AliveEnemies = new();
         public static int AliveCount => AliveEnemies.Count;
-
-        [SerializeField] private AnimParamSO hitAnimParam;
-        [SerializeField] private int hitLayerIndex = 1;
 
         public Transform CurrentTarget { get; set; }
 
@@ -50,15 +44,13 @@ namespace _02_Scripts.Enemy
 
             _agentHealth.CurrentHp.OnValueChanged += OnDamaged;
             _agentHealth.CurrentHp.OnValueChanged += OnHealed;
-
-            _navEnemyRenderer.Animator.SetLayerWeight(hitLayerIndex, 0f);
         }
 
         private void OnHealed(int before, int current)
         {
             if (current >= before)
             {
-                _vfxController.Play(EnemyVfxType.HealedEffect);
+               _vfxController?.Play(EnemyVfxType.HealedEffect);
             }
         }
 
