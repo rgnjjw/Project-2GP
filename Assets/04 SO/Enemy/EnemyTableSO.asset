@@ -13,19 +13,63 @@ MonoBehaviour:
   m_Name: EnemyTableSO
   m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.Enemy.EnemyTableSO
   LevelTable:
-  - minLevel: 0
-    maxLevel: 1000
+  - minLevel: 1
+    maxLevel: 2
     meleePrefabs:
-    - {fileID: 2147767683307753553, guid: 6d8eb2f00e62ac64f9d8128caff77694, type: 3}
     - {fileID: 8291943934468267832, guid: e07f9bbf37d470048b86f0dac618f8a8, type: 3}
     - {fileID: 2354599137957298582, guid: b363d3b81c7c2e24fa37700494da482f, type: 3}
-    - {fileID: 9042831491106391645, guid: e94a57ec118e8b843886e7d08027d165, type: 3}
+    rangedPrefabs: []
+    bossPrefabs: []
+  - minLevel: 3
+    maxLevel: 4
+    meleePrefabs:
+    - {fileID: 8291943934468267832, guid: e07f9bbf37d470048b86f0dac618f8a8, type: 3}
+    - {fileID: 2354599137957298582, guid: b363d3b81c7c2e24fa37700494da482f, type: 3}
     - {fileID: 945792137003260210, guid: 70ac7c011a8285344bc752958c7742e3, type: 3}
+    - {fileID: 2147767683307753553, guid: 6d8eb2f00e62ac64f9d8128caff77694, type: 3}
+    rangedPrefabs:
+    - {fileID: 5030311328972365038, guid: 51f9703a8193386468bef51358fb4903, type: 3}
+    bossPrefabs: []
+  - minLevel: 5
+    maxLevel: 7
+    meleePrefabs:
+    - {fileID: 8291943934468267832, guid: e07f9bbf37d470048b86f0dac618f8a8, type: 3}
+    - {fileID: 2354599137957298582, guid: b363d3b81c7c2e24fa37700494da482f, type: 3}
+    - {fileID: 945792137003260210, guid: 70ac7c011a8285344bc752958c7742e3, type: 3}
+    - {fileID: 2147767683307753553, guid: 6d8eb2f00e62ac64f9d8128caff77694, type: 3}
+    - {fileID: 9042831491106391645, guid: e94a57ec118e8b843886e7d08027d165, type: 3}
     rangedPrefabs:
     - {fileID: 5030311328972365038, guid: 51f9703a8193386468bef51358fb4903, type: 3}
     - {fileID: 5385627407050190170, guid: b5f2cb7904e7f8040b0ec6e8705ee818, type: 3}
     bossPrefabs:
+    - {fileID: 4657935799037999589, guid: 2d011174e1be9e6448d568d0699a6e9a, type: 3}
+  - minLevel: 8
+    maxLevel: 11
+    meleePrefabs:
+    - {fileID: 8291943934468267832, guid: e07f9bbf37d470048b86f0dac618f8a8, type: 3}
+    - {fileID: 2354599137957298582, guid: b363d3b81c7c2e24fa37700494da482f, type: 3}
+    - {fileID: 945792137003260210, guid: 70ac7c011a8285344bc752958c7742e3, type: 3}
+    - {fileID: 2147767683307753553, guid: 6d8eb2f00e62ac64f9d8128caff77694, type: 3}
+    - {fileID: 9042831491106391645, guid: e94a57ec118e8b843886e7d08027d165, type: 3}
+    rangedPrefabs:
+    - {fileID: 5030311328972365038, guid: 51f9703a8193386468bef51358fb4903, type: 3}
+    - {fileID: 5385627407050190170, guid: b5f2cb7904e7f8040b0ec6e8705ee818, type: 3}
+    bossPrefabs:
+    - {fileID: 4657935799037999589, guid: 2d011174e1be9e6448d568d0699a6e9a, type: 3}
+    - {fileID: 4884800994521478618, guid: 2a3362c8ccfc64142ad1491e8fbaa653, type: 3}
+  - minLevel: 12
+    maxLevel: 1000
+    meleePrefabs:
+    - {fileID: 8291943934468267832, guid: e07f9bbf37d470048b86f0dac618f8a8, type: 3}
+    - {fileID: 2354599137957298582, guid: b363d3b81c7c2e24fa37700494da482f, type: 3}
+    - {fileID: 945792137003260210, guid: 70ac7c011a8285344bc752958c7742e3, type: 3}
+    - {fileID: 2147767683307753553, guid: 6d8eb2f00e62ac64f9d8128caff77694, type: 3}
+    - {fileID: 9042831491106391645, guid: e94a57ec118e8b843886e7d08027d165, type: 3}
+    rangedPrefabs:
+    - {fileID: 5030311328972365038, guid: 51f9703a8193386468bef51358fb4903, type: 3}
+    - {fileID: 5385627407050190170, guid: b5f2cb7904e7f8040b0ec6e8705ee818, type: 3}
+    bossPrefabs:
+    - {fileID: 4657935799037999589, guid: 2d011174e1be9e6448d568d0699a6e9a, type: 3}
     - {fileID: 4884800994521478618, guid: 2a3362c8ccfc64142ad1491e8fbaa653, type: 3}
     - {fileID: 4870927246733940613, guid: a4585686866550a4e9afea0f12d93986, type: 3}
     - {fileID: 6504771105321142212, guid: 4ce069b8c3e64244c90d76c19ef010e5, type: 3}
-    - {fileID: 4657935799037999589, guid: 2d011174e1be9e6448d568d0699a6e9a, type: 3}

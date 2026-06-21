@@ -19,6 +19,9 @@ MonoBehaviour:
     rid: 4481138055766605849
   <EnemySkills>k__BackingField:
   - {fileID: 11400000, guid: 171395edff5a7ef4bbe8c88454c44fb8, type: 2}
+  <ExpReward>k__BackingField: 12
+  <StyleReward>k__BackingField: 14
+  <CurrencyReward>k__BackingField: 0
   references:
     version: 2
     RefIds:

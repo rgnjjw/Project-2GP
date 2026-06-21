@@ -224,124 +224,124 @@ MonoBehaviour:
     Position: {x: -21, y: 31, z: 19}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
   SpawnPoints:
-  - Type: 0
-    Position: {x: -8.5, y: 25, z: 0}
-  - Type: 0
-    Position: {x: 6.5, y: 31, z: -15}
-  - Type: 0
-    Position: {x: -10.85, y: 31, z: -18.76}
-  - Type: 0
-    Position: {x: 0.17, y: 25, z: 8.88}
-  - Type: 0
-    Position: {x: -7, y: 31, z: -15.5}
-  - Type: 0
-    Position: {x: 7, y: 31, z: 23}
+  - Type: 2
+    Position: {x: 15.61, y: 31, z: -16.73}
   - Type: 1
     Position: {x: 14.93, y: 37, z: -23.13}
   - Type: 1
-    Position: {x: 22.79, y: 37, z: 23.31}
-  - Type: 0
-    Position: {x: -21, y: 31, z: 19}
-  - Type: 0
-    Position: {x: 7, y: 31, z: 16}
-  - Type: 0
-    Position: {x: -22.5, y: 31, z: -14.5}
-  - Type: 0
-    Position: {x: -11.41, y: 31, z: 18.97}
-  - Type: 0
-    Position: {x: 0, y: 43, z: 23}
-  - Type: 0
-    Position: {x: -3, y: 43, z: 23}
-  - Type: 0
-    Position: {x: 6, y: 31, z: -23}
-  - Type: 2
-    Position: {x: 15.61, y: 31, z: -16.73}
-  - Type: 0
-    Position: {x: 22, y: 31, z: -19}
-  - Type: 0
-    Position: {x: -1.04, y: 31, z: 19.15}
-  - Type: 0
-    Position: {x: 3, y: 43, z: 23}
-  - Type: 1
-    Position: {x: -23.02, y: 37, z: 23.31}
-  - Type: 0
-    Position: {x: 9.5, y: 31, z: -18.500002}
-  - Type: 1
-    Position: {x: -1.5, y: 37, z: -8.5}
-  - Type: 1
     Position: {x: -23.02, y: 37, z: -23.07}
   - Type: 1
-    Position: {x: 22.79, y: 37, z: -23.25}
-  - Type: 2
-    Position: {x: -15.88, y: 31, z: -16.27}
-  - Type: 0
-    Position: {x: 20, y: 31, z: -14.500002}
-  - Type: 0
-    Position: {x: -8, y: 31, z: 15.5}
-  - Type: 0
-    Position: {x: -2.5, y: 43, z: -23}
-  - Type: 0
-    Position: {x: -22.5, y: 31, z: -18.5}
-  - Type: 0
-    Position: {x: -7.5, y: 31, z: -22.5}
-  - Type: 0
-    Position: {x: 0.16, y: 25, z: -0.17}
-  - Type: 0
-    Position: {x: -21.04, y: 31, z: 15.07}
-  - Type: 1
-    Position: {x: 3.62, y: 37, z: 7.56}
-  - Type: 0
-    Position: {x: 14.5, y: 25, z: 0}
-  - Type: 0
-    Position: {x: 0.05, y: 25, z: -9.97}
-  - Type: 1
-    Position: {x: 22.79, y: 37, z: -23.25}
-  - Type: 0
-    Position: {x: -0.37, y: 43, z: -23.01}
-  - Type: 1
-    Position: {x: 0.01, y: 37, z: -14.09}
-  - Type: 0
-    Position: {x: -13.72, y: 25, z: -0.21}
-  - Type: 1
-    Position: {x: 0.05, y: 37.39, z: 13.94}
+    Position: {x: -15.11, y: 37, z: 23.31}
   - Type: 0
     Position: {x: -20.44, y: 25, z: -0.19}
   - Type: 0
+    Position: {x: 0, y: 43, z: 23}
+  - Type: 0
+    Position: {x: 21.46, y: 25, z: -0.01}
+  - Type: 0
+    Position: {x: -7.5, y: 31, z: -22.5}
+  - Type: 0
+    Position: {x: -22.5, y: 31, z: -18.5}
+  - Type: 0
+    Position: {x: -22.5, y: 31, z: -18.5}
+  - Type: 0
+    Position: {x: 14.5, y: 25, z: 0}
+  - Type: 0
+    Position: {x: -11.41, y: 31, z: 18.97}
+  - Type: 0
+    Position: {x: -0.37, y: 43, z: -23.01}
+  - Type: 0
     Position: {x: 22, y: 31, z: 19.5}
   - Type: 0
-    Position: {x: 22, y: 31, z: 15.5}
+    Position: {x: -21, y: 31, z: 19}
+  - Type: 0
+    Position: {x: 9.5, y: 31, z: -18.500002}
+  - Type: 0
+    Position: {x: -2.5, y: 43, z: -23}
   - Type: 1
     Position: {x: 14.93, y: 37, z: 23.31}
+  - Type: 0
+    Position: {x: 20, y: 31, z: -14.500002}
+  - Type: 0
+    Position: {x: 2.94, y: 43, z: -23.12}
   - Type: 2
     Position: {x: -15.96, y: 31, z: 16.59}
   - Type: 1
-    Position: {x: -1.5, y: 37, z: 8.5}
+    Position: {x: 3.62, y: 37, z: 7.56}
+  - Type: 0
+    Position: {x: -8, y: 31, z: 15.5}
+  - Type: 0
+    Position: {x: 6.5, y: 31, z: -15}
+  - Type: 0
+    Position: {x: 22, y: 31, z: 15.5}
   - Type: 1
     Position: {x: 3, y: 37, z: -8.5}
   - Type: 0
-    Position: {x: -21, y: 31, z: 19}
+    Position: {x: -3, y: 43, z: 23}
   - Type: 2
     Position: {x: 15.54, y: 31, z: 18.31}
   - Type: 0
     Position: {x: 9.5, y: 31, z: -18.500002}
+  - Type: 0
+    Position: {x: 3, y: 43, z: 23}
+  - Type: 1
+    Position: {x: 22.79, y: 37, z: -23.25}
+  - Type: 0
+    Position: {x: 6, y: 31, z: -23}
+  - Type: 1
+    Position: {x: 22.79, y: 37, z: -23.25}
+  - Type: 0
+    Position: {x: -21, y: 31, z: 19}
+  - Type: 0
+    Position: {x: -10.85, y: 31, z: -18.76}
+  - Type: 0
+    Position: {x: -22.5, y: 31, z: -14.5}
+  - Type: 0
+    Position: {x: 22, y: 31, z: -19}
+  - Type: 1
+    Position: {x: -1.5, y: 37, z: -8.5}
+  - Type: 0
+    Position: {x: 10.5, y: 31, z: 19.5}
+  - Type: 2
+    Position: {x: -15.88, y: 31, z: -16.27}
+  - Type: 0
+    Position: {x: 7.5, y: 25, z: 0}
+  - Type: 1
+    Position: {x: -15.11, y: 37, z: -23.07}
+  - Type: 0
+    Position: {x: 0.16, y: 25, z: -0.17}
   - Type: 2
     Position: {x: 0.05, y: 35.28, z: 0.16}
   - Type: 0
-    Position: {x: 10.5, y: 31, z: 19.5}
+    Position: {x: -7, y: 31, z: -15.5}
+  - Type: 1
+    Position: {x: -1.5, y: 37, z: 8.5}
   - Type: 0
-    Position: {x: 7.5, y: 25, z: 0}
+    Position: {x: 0.05, y: 25, z: -9.97}
   - Type: 0
-    Position: {x: 2.94, y: 43, z: -23.12}
+    Position: {x: -21.04, y: 31, z: 15.07}
+  - Type: 1
+    Position: {x: -23.02, y: 37, z: 23.31}
   - Type: 0
-    Position: {x: 21.46, y: 25, z: -0.01}
+    Position: {x: -13.72, y: 25, z: -0.21}
   - Type: 0
     Position: {x: -8.26, y: 31, z: 23.32}
-  - Type: 1
-    Position: {x: -15.11, y: 37, z: -23.07}
-  - Type: 1
-    Position: {x: -15.11, y: 37, z: 23.31}
   - Type: 0
-    Position: {x: -22.5, y: 31, z: -18.5}
+    Position: {x: 7, y: 31, z: 23}
+  - Type: 1
+    Position: {x: 22.79, y: 37, z: 23.31}
+  - Type: 1
+    Position: {x: 0.01, y: 37, z: -14.09}
+  - Type: 1
+    Position: {x: 0.05, y: 37.39, z: 13.94}
+  - Type: 0
+    Position: {x: -1.04, y: 31, z: 19.15}
+  - Type: 0
+    Position: {x: 0.17, y: 25, z: 8.88}
+  - Type: 0
+    Position: {x: -8.5, y: 25, z: 0}
+  - Type: 0
+    Position: {x: 7, y: 31, z: 16}
   Waves:
   - {fileID: 11400000, guid: 9f8ddc951141e8b45ae02899f7cb6959, type: 2}
   - {fileID: 11400000, guid: 2a6f03f286610354aacc23d46de2e694, type: 2}

@@ -29,7 +29,6 @@ namespace _02_Scripts.Chip
             var effect = chip.GetEffect();//효과 생성
             if (effect == null)
             {
-                Debug.LogError($"[ChipController] ChipId '{chip.Data?.ChipId}' 효과 없음 - 장착 실패");
                 return false;
             }
             effect.OnEquip(chip, _player);

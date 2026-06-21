@@ -1,3 +1,4 @@
+using System.Collections;
 using DG.Tweening;
 using _02_Scripts.Agent;
 using _02_Scripts.Manager;
@@ -19,6 +20,12 @@ namespace _02_Scripts.Player
         [SerializeField] private BarUI barUI;
         [SerializeField] private Image redPanel;
         [SerializeField] private RecoilEvent recoilEvent;
+
+        [Header("사망 시")]
+        [Tooltip("사망 후 이동할 메인화면 씬 이름")]
+        [SerializeField] private string mainSceneName = "Title";
+        [Tooltip("사망 연출을 보여줄 시간(초) 뒤 메인화면으로 이동")]
+        [SerializeField] private float deathToMenuDelay = 1.5f;
 
         private Controls _controls;
         private GunManager _gunManager;
@@ -71,7 +78,21 @@ namespace _02_Scripts.Player
 
         protected override void OnDead()
         {
+            // 플레이어 사망 → 잠시 뒤 메인화면으로.
+            StartCoroutine(GoToMainMenuAfterDelay());
+        }
 
+        private IEnumerator GoToMainMenuAfterDelay()
+        {
+            // 일시정지 상태여도 진행되도록 Realtime 대기.
+            yield return new WaitForSecondsRealtime(deathToMenuDelay);
+
+            Time.timeScale = 1f;
+
+            if (GameSceneManager.Instance != null)
+                _ = GameSceneManager.Instance.LoadOneSceneAsync(mainSceneName);
+            else
+                UnityEngine.SceneManagement.SceneManager.LoadScene(mainSceneName);
         }
 
         protected void OnDestroy()

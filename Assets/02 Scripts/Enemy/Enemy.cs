@@ -71,13 +71,21 @@ namespace _02_Scripts.Enemy
 
             AliveEnemies.Remove(this);
 
-            LevelManager.Instance.AddExp(10);
+            // 적별 보상(EnemyDataSO). 없으면 기본값으로 폴백.
+            EnemyDataContainer data = GetModule<EnemyDataContainer>();
+            int expReward = data != null ? data.ExpReward : 10;
+            float styleReward = data != null ? data.StyleReward : 10f;
+            int currencyReward = data != null ? data.CurrencyReward : 0;
+
+            LevelManager.Instance.AddExp(expReward);
+            if (currencyReward > 0)
+                Manager.CurrencyManager.Instance.AddCurrency(currencyReward);
 
             if (_capsuleCollider != null)
                 _capsuleCollider.enabled = false;
 
             ChangeState(EnemyStateEnum.DEAD);
-            StyleManager.Instance.AddStyleScore(StyleAction.Kill);
+            StyleManager.Instance.AddStyleScore(styleReward, $"Kill! +{styleReward:0}");
         }
 
         private void OnDestroy()

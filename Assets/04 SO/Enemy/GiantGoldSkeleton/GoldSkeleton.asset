@@ -23,6 +23,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b5c4b707aa6d95c46a252f2b1b0950bc, type: 2}
   - {fileID: 11400000, guid: d45c662909410b64c94aae4c80220d84, type: 2}
   - {fileID: 11400000, guid: c369462e24cefe74586ba84ee2fd507c, type: 2}
+  <ExpReward>k__BackingField: 150
+  <StyleReward>k__BackingField: 70
+  <CurrencyReward>k__BackingField: 150
   references:
     version: 2
     RefIds:
@@ -33,4 +36,4 @@ MonoBehaviour:
           serializedVersion: 2
           m_Bits: 256
         gizmoColor: {r: 1, g: 1, b: 0, a: 1}
-        radius: 15
+        radius: 30

@@ -17,5 +17,7 @@ namespace _02_Scripts.Chip
         [field: SerializeField] public int MaxLevel { get; private set; } = 5;
 
         [field: SerializeField] public LevelData[] LevelNameAndDescData { get; private set; }
+
+        public virtual IChip CreateEffect() => ChipFactory.Create(ChipId);
     }
 }

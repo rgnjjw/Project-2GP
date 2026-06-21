@@ -21,6 +21,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1652253cd3acb5c4099539ead8d92c53, type: 2}
   - {fileID: 11400000, guid: bc23249c229792542b0b779b9d9ee740, type: 2}
   - {fileID: 11400000, guid: a2d69038638a9af4d8c3a1b11f758014, type: 2}
+  <ExpReward>k__BackingField: 90
+  <StyleReward>k__BackingField: 50
+  <CurrencyReward>k__BackingField: 80
   references:
     version: 2
     RefIds:

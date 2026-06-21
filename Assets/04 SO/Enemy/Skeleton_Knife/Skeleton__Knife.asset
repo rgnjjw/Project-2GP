@@ -20,6 +20,9 @@ MonoBehaviour:
   <EnemySkills>k__BackingField:
   - {fileID: 11400000, guid: 0c27489cad96d194a8fba6c0dcc40c60, type: 2}
   - {fileID: 11400000, guid: 290e17b34c14aa046a3d26c02100fccb, type: 2}
+  <ExpReward>k__BackingField: 8
+  <StyleReward>k__BackingField: 8
+  <CurrencyReward>k__BackingField: 0
   references:
     version: 2
     RefIds:
@@ -30,4 +33,4 @@ MonoBehaviour:
           serializedVersion: 2
           m_Bits: 256
         gizmoColor: {r: 1, g: 1, b: 0, a: 1}
-        radius: 10
+        radius: 20

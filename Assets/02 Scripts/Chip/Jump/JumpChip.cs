@@ -86,7 +86,6 @@ namespace _02_Scripts.Chip.Jump
 
         private void ExecuteJump()
         {
-            // EffectManager.Instance?.Play("JumpDust");
             _playerMover.StopImmediately(false, true, false);
             _playerMover.AddForceToAgent(Vector3.up * _jumpPower);
             SoundManager.Instance.PlaySound("Jump");

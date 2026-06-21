@@ -61,6 +61,15 @@ namespace _02_Scripts.UI.StyleBar
             OnStyleAction?.Invoke(message);
         }
 
+        // 적별로 다른 스타일 점수를 직접 넣는다(킬 보상 등). message가 비면 피드 표시 생략.
+        public void AddStyleScore(float score, string message)
+        {
+            AddScore(score);
+            NotifyAction();
+            if (!string.IsNullOrEmpty(message))
+                OnStyleAction?.Invoke(message);
+        }
+
         private void AddScore(float amount)
         {
             CurrentScore += amount;

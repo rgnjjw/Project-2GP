@@ -38,9 +38,8 @@ namespace _02_Scripts.Manager
 
         public void AfterInit()
         {
+            // 권총(0)만 기본 보유. 샷건(1)·머신건(2)은 행동칩처럼 인게임 무기칩 드롭으로 해금된다.
             _unlockedWeapons.Add(0);
-            _unlockedWeapons.Add(1);
-            _unlockedWeapons.Add(2);
             if (ShopManager.Instance != null)
                 ShopManager.Instance.OnWeaponUnlocked += UnlockWeapon;
             SwapWeapon(0);

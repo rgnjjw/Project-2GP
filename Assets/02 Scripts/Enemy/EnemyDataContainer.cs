@@ -9,6 +9,12 @@ namespace _02_Scripts.Enemy
     {
         public SkillSO[] EnemySkills { get; private set; }
         public AbstractDetection ChaseRange { get; private set; }
+
+        // 처치 보상(적별). Enemy.OnDead에서 사용.
+        public int ExpReward => initDataSO.ExpReward;
+        public float StyleReward => initDataSO.StyleReward;
+        public int CurrencyReward => initDataSO.CurrencyReward;
+
         private NavEnemyRenderer _navEnemyRenderer;
 
         public override void Initialize(ModuleOwner owner)

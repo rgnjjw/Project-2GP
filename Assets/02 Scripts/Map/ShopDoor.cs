@@ -9,7 +9,8 @@ namespace _02_Scripts.Map
         [SerializeField] private Vector3 detectSize = new Vector3(3f, 2f, 3f);
         [SerializeField] private Vector3 detectOffset;
         [SerializeField] private LayerMask playerLayer;
-
+        
+        
         private bool _isOpen;
 
         private void FixedUpdate()

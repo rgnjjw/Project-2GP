@@ -149,88 +149,88 @@ MonoBehaviour:
     Position: {x: 0.6, y: 31, z: -16.67}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
   SpawnPoints:
-  - Type: 1
-    Position: {x: -9.499999, y: 37.63, z: -23}
   - Type: 0
-    Position: {x: -4.84, y: 31.34, z: -17.06}
-  - Type: 1
-    Position: {x: -21, y: 31, z: 21}
-  - Type: 1
-    Position: {x: 12.54, y: 31, z: -21.43}
-  - Type: 2
-    Position: {x: 19.5, y: 25, z: 1}
+    Position: {x: 6.5, y: 31.34, z: 16.5}
   - Type: 0
     Position: {x: -9, y: 25, z: 10.5}
-  - Type: 0
-    Position: {x: 9.15, y: 25, z: 10.77}
-  - Type: 0
-    Position: {x: 23, y: 25, z: 14}
   - Type: 1
-    Position: {x: 3.64, y: 37.63, z: 22.67}
+    Position: {x: -12, y: 31, z: 23.5}
+  - Type: 0
+    Position: {x: -19.94, y: 25, z: -5.3}
   - Type: 1
     Position: {x: -22.5, y: 31, z: -19}
-  - Type: 1
-    Position: {x: -12.5, y: 31, z: -19.5}
+  - Type: 0
+    Position: {x: -18.5, y: 25, z: 6.5}
+  - Type: 0
+    Position: {x: -9.13, y: 25, z: -11.12}
+  - Type: 0
+    Position: {x: 8, y: 25, z: -11}
   - Type: 0
     Position: {x: 5.23, y: 31.34, z: -17.1}
   - Type: 1
     Position: {x: 16.43, y: 37.63, z: 23}
   - Type: 0
-    Position: {x: 6.5, y: 31.34, z: 16.5}
+    Position: {x: 9.15, y: 25, z: 10.77}
   - Type: 2
-    Position: {x: -17.35, y: 25, z: 2.21}
-  - Type: 1
-    Position: {x: 21, y: 31, z: 19}
-  - Type: 1
-    Position: {x: -3, y: 37.63, z: -22.5}
+    Position: {x: 19.5, y: 25, z: 1}
   - Type: 1
     Position: {x: 10.21, y: 37.63, z: 22.95}
   - Type: 1
-    Position: {x: -17.4, y: 37.63, z: -22.81}
-  - Type: 1
-    Position: {x: 17.14, y: 31, z: 19.23}
-  - Type: 0
-    Position: {x: 0, y: 25, z: 10.5}
-  - Type: 1
-    Position: {x: 13.29, y: 31, z: 19.49}
-  - Type: 0
-    Position: {x: 16.5, y: 25, z: -5}
-  - Type: 0
-    Position: {x: -9.13, y: 25, z: -11.12}
-  - Type: 1
-    Position: {x: -8, y: 31, z: 20}
-  - Type: 0
-    Position: {x: 8, y: 25, z: -11}
+    Position: {x: 0.5, y: 31, z: 16}
   - Type: 0
     Position: {x: -5.5, y: 31.34, z: 17}
   - Type: 0
-    Position: {x: -18.5, y: 25, z: 6.5}
-  - Type: 0
-    Position: {x: 18.3, y: 25, z: -13.89}
-  - Type: 0
-    Position: {x: -22.8, y: 25, z: 15.07}
-  - Type: 1
-    Position: {x: 0.6, y: 31, z: -16.67}
+    Position: {x: 17, y: 25, z: 8}
   - Type: 2
-    Position: {x: -0.59, y: 25, z: 1.22}
+    Position: {x: -17.35, y: 25, z: 2.21}
+  - Type: 1
+    Position: {x: -9.499999, y: 37.63, z: -23}
+  - Type: 1
+    Position: {x: -3, y: 37.63, z: -22.5}
   - Type: 1
     Position: {x: -17, y: 31, z: -19}
-  - Type: 0
-    Position: {x: -19.94, y: 25, z: -5.3}
   - Type: 1
-    Position: {x: -12, y: 31, z: 23.5}
+    Position: {x: 3.64, y: 37.63, z: 22.67}
+  - Type: 1
+    Position: {x: 17.14, y: 31, z: 19.23}
   - Type: 0
     Position: {x: 0.47, y: 25, z: -11.13}
   - Type: 0
-    Position: {x: 17, y: 25, z: 8}
+    Position: {x: 18.3, y: 25, z: -13.89}
+  - Type: 0
+    Position: {x: 16.5, y: 25, z: -5}
+  - Type: 1
+    Position: {x: 21, y: 31, z: 19}
+  - Type: 1
+    Position: {x: 12.54, y: 31, z: -21.43}
+  - Type: 1
+    Position: {x: -17.4, y: 37.63, z: -22.81}
+  - Type: 0
+    Position: {x: 23, y: 25, z: 14}
+  - Type: 0
+    Position: {x: -22.8, y: 25, z: 15.07}
+  - Type: 1
+    Position: {x: -8, y: 31, z: 20}
+  - Type: 2
+    Position: {x: -0.59, y: 25, z: 1.22}
+  - Type: 1
+    Position: {x: 0.6, y: 31, z: -16.67}
+  - Type: 1
+    Position: {x: -21, y: 31, z: 21}
+  - Type: 0
+    Position: {x: -4.84, y: 31.34, z: -17.06}
+  - Type: 1
+    Position: {x: 17.89, y: 31, z: -20.63}
+  - Type: 0
+    Position: {x: 0, y: 25, z: 10.5}
   - Type: 1
     Position: {x: 22.61, y: 31, z: -19.98}
-  - Type: 1
-    Position: {x: 0.5, y: 31, z: 16}
   - Type: 0
     Position: {x: -22.48, y: 25, z: -12.38}
   - Type: 1
-    Position: {x: 17.89, y: 31, z: -20.63}
+    Position: {x: -12.5, y: 31, z: -19.5}
+  - Type: 1
+    Position: {x: 13.29, y: 31, z: 19.49}
   Waves:
   - {fileID: 11400000, guid: 048aa27b221e8d442a4e6066231c8b02, type: 2}
   - {fileID: 11400000, guid: 9ac489ea49b0184419ac796f64060335, type: 2}

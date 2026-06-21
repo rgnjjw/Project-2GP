@@ -97,6 +97,8 @@ namespace _02_Scripts.Gun.G_Pistol
 
                 if (hit.transform.TryGetComponent<Enemy.Enemy>(out var enemy))
                     DealDamage(enemy.GetModule<AgentHealth>(), bulletDamage);
+                else if (hit.transform.TryGetComponent<IShootable>(out var shootable))
+                    shootable.OnShot();
             }
 
             ShowBeam(fireBeam, muzzleTrm.position, endPoint);

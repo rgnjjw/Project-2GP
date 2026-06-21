@@ -112,6 +112,8 @@ namespace _02_Scripts.Gun.G_MachineGun
 
                 if (hit.transform.TryGetComponent<Enemy.Enemy>(out var enemy))
                     DealDamage(enemy.GetModule<AgentHealth>(), bulletDamage);
+                else if (hit.transform.TryGetComponent<IShootable>(out var shootable))
+                    shootable.OnShot();
             }
 
             // 발사한 총구 → 끝점(조준점/벽)을 잇는 빔

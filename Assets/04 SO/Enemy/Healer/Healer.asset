@@ -20,6 +20,9 @@ MonoBehaviour:
   <EnemySkills>k__BackingField:
   - {fileID: 11400000, guid: 416ab14456c50f242b855f6c4596a046, type: 2}
   - {fileID: 11400000, guid: ca58c256f14ce6447a23ef8495ed0c35, type: 2}
+  <ExpReward>k__BackingField: 15
+  <StyleReward>k__BackingField: 14
+  <CurrencyReward>k__BackingField: 0
   references:
     version: 2
     RefIds:
