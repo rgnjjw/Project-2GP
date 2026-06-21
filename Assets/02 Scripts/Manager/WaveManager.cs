@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using _02_Scripts.Agent;
 using _02_Scripts.Enemy;
 using _02_Scripts.Map;
 using UnityEngine;
@@ -31,7 +30,6 @@ namespace _02_Scripts.Manager
         private MapDataSO _mapData;
         private int _waveIndex;
 
-        // 타입별 스폰 위치 캐시(맵 단위로 한 번만 필터)
         private readonly List<SpawnPointData> _meleePoints = new();
         private readonly List<SpawnPointData> _rangedPoints = new();
         private readonly List<SpawnPointData> _bossPoints = new();

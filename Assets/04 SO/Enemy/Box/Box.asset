@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18f35416a0c64d2c9f04197c957164fa, type: 3}
   m_Name: Box
   m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.Enemy.EnemyDataSO
-  <Health>k__BackingField: 200
-  <MaxHealth>k__BackingField: 200
+  <Health>k__BackingField: 400
+  <MaxHealth>k__BackingField: 400
   <MoveSpeed>k__BackingField: 3
   <ChaseRange>k__BackingField:
     rid: 4481138055766605849
   <EnemySkills>k__BackingField:
   - {fileID: 11400000, guid: f5bd94ca18ce6774ca31f2f174c718fb, type: 2}
+  - {fileID: 11400000, guid: fff823df966e2ad41bc56f9767657736, type: 2}
   references:
     version: 2
     RefIds:
@@ -29,4 +30,4 @@ MonoBehaviour:
           serializedVersion: 2
           m_Bits: 256
         gizmoColor: {r: 1, g: 1, b: 0, a: 1}
-        radius: 20
+        radius: 30

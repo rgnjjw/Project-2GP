@@ -19,7 +19,7 @@ MonoBehaviour:
   TargetFinder:
     rid: 4481138170555793713
   <Damage>k__BackingField: 40
-  <ProjectileSpeed>k__BackingField: 10
+  <ProjectileSpeed>k__BackingField: 20
   <TargetLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 256

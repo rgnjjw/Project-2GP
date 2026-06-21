@@ -12,8 +12,19 @@ namespace _02_Scripts.Enemy.Skill
         [Header("부채꼴")]
         [field: SerializeField] public int BulletCount { get; private set; } = 5;
 
-        [Tooltip("전체 퍼지는 각도. 예: 60이면 좌우 30도씩")]
+        [Tooltip("전체 퍼지는 각도. 360이면 원형 탄막. 예: BulletCount 8 + SpreadAngle 360 = 45도 간격 8방향.")]
         [field: SerializeField] public float SpreadAngle { get; private set; } = 60f;
+
+        [Header("반복 발사")]
+        [Tooltip("부채꼴 발사를 몇 번 반복할지. 1이면 애니메이션 1번, 부채꼴 1번 발사.")]
+        [SerializeField] private int volleyCount = 1;
+
+        [Header("애니메이션 반복")]
+        [Tooltip("Animator State 이름. 예: Base Layer.MAGIC")]
+        [SerializeField] private string attackStateName = "Base Layer.MAGIC";
+
+        [Tooltip("공격 애니메이션이 있는 Animator Layer")]
+        [SerializeField] private int animationLayer = 0;
 
         [Header("투사체")]
         [SerializeField] private Projectile projectilePrefab;
@@ -28,23 +39,45 @@ namespace _02_Scripts.Enemy.Skill
             Transform muzzle = FindMuzzle(enemy);
             EnemyAnimationEvent animEvent = enemy.GetModule<EnemyAnimationEvent>();
             EnemyVfxController vfx = enemy.GetModule<EnemyVfxController>();
+            Animator animator = enemy.GetComponentInChildren<Animator>();
 
-            if (animEvent == null)
+            if (animEvent == null || animator == null)
             {
                 FireFan(muzzle, target, vfx);
                 NotifyComplete();
                 return;
             }
 
+            int remainingVolleyCount = Mathf.Max(1, volleyCount);
+            int attackStateHash = Animator.StringToHash(attackStateName);
+
             void HandleAttack()
             {
-                animEvent.OnAttack -= HandleAttack;
-
                 FireFan(muzzle, target, vfx);
+                remainingVolleyCount--;
+            }
+
+            void HandleAttackEnd()
+            {
+                if (remainingVolleyCount > 0)
+                {
+                    animator.Play(attackStateHash, animationLayer, 0f);
+                    return;
+                }
+
+                animEvent.OnAttack -= HandleAttack;
+                animEvent.OnAttackEnd -= HandleAttackEnd;
+
                 NotifyComplete();
             }
 
+            animEvent.OnAttack -= HandleAttack;
+            animEvent.OnAttackEnd -= HandleAttackEnd;
+
             animEvent.OnAttack += HandleAttack;
+            animEvent.OnAttackEnd += HandleAttackEnd;
+
+            animator.Play(attackStateHash, animationLayer, 0f);
         }
 
         private void FireFan(Transform muzzle, Transform target, EnemyVfxController vfx)
@@ -54,25 +87,57 @@ namespace _02_Scripts.Enemy.Skill
 
             Vector3 centerDirection = GetFireDirection(muzzle, target);
 
-            if (BulletCount <= 1)
+            if (centerDirection.sqrMagnitude <= 0.0001f)
+                centerDirection = muzzle.forward;
+
+            centerDirection.Normalize();
+
+            int bulletCount = Mathf.Max(1, BulletCount);
+            float spreadAngle = Mathf.Max(0f, SpreadAngle);
+
+            if (bulletCount <= 1)
             {
                 SpawnBullet(muzzle, centerDirection);
                 vfx?.Play(EnemyVfxType.MuzzleFlash);
                 return;
             }
 
-            float halfAngle = SpreadAngle * 0.5f;
-            float step = SpreadAngle / (BulletCount - 1);
+            if (spreadAngle >= 360f)
+            {
+                FireCircle(muzzle, centerDirection, bulletCount);
+                vfx?.Play(EnemyVfxType.MuzzleFlash);
+                return;
+            }
 
-            for (int i = 0; i < BulletCount; i++)
+            FireFanShape(muzzle, centerDirection, bulletCount, spreadAngle);
+            vfx?.Play(EnemyVfxType.MuzzleFlash);
+        }
+
+        private void FireCircle(Transform muzzle, Vector3 centerDirection, int bulletCount)
+        {
+            float step = 360f / bulletCount;
+
+            for (int i = 0; i < bulletCount; i++)
+            {
+                float angle = step * i;
+                Vector3 direction = Quaternion.AngleAxis(angle, Vector3.up) * centerDirection;
+
+                SpawnBullet(muzzle, direction);
+            }
+        }
+
+        private void FireFanShape(Transform muzzle, Vector3 centerDirection, int bulletCount, float spreadAngle)
+        {
+            float halfAngle = spreadAngle * 0.5f;
+            float step = spreadAngle / (bulletCount - 1);
+
+            for (int i = 0; i < bulletCount; i++)
             {
                 float angle = -halfAngle + step * i;
                 Vector3 direction = Quaternion.AngleAxis(angle, Vector3.up) * centerDirection;
 
                 SpawnBullet(muzzle, direction);
             }
-
-            vfx?.Play(EnemyVfxType.MuzzleFlash);
         }
 
         private void SpawnBullet(Transform muzzle, Vector3 direction)
@@ -83,13 +148,15 @@ namespace _02_Scripts.Enemy.Skill
             if (direction.sqrMagnitude <= 0.0001f)
                 direction = muzzle.forward;
 
+            direction.Normalize();
+
             Projectile projectile = Object.Instantiate(
                 projectilePrefab,
                 muzzle.position,
-                Quaternion.LookRotation(direction.normalized)
+                Quaternion.LookRotation(direction)
             );
 
-            projectile.Init(direction.normalized, ProjectileSpeed, Damage, TargetLayer);
+            projectile.Init(direction, ProjectileSpeed, Damage, TargetLayer);
         }
 
         private Vector3 GetFireDirection(Transform muzzle, Transform target)

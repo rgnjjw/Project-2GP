@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49f5bdf43b5248eeaebb021f1ef435d7, type: 3}
+  m_Name: AroundShot Skill
+  m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.Enemy.Skill.FanShotSkillSO
+  <AnimParam>k__BackingField: {fileID: 11400000, guid: a5a84f1a99754ab429daefdea8e7ddde, type: 2}
+  <Cooldown>k__BackingField: 8
+  DamageAreaDetection:
+    rid: -2
+  TargetFinder:
+    rid: 4481138170555793753
+  <Damage>k__BackingField: 30
+  <ProjectileSpeed>k__BackingField: 20
+  <TargetLayer>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 256
+  <BulletCount>k__BackingField: 10
+  <SpreadAngle>k__BackingField: 60
+  volleyCount: 1
+  attackStateName: AROUNDSHOT
+  animationLayer: 8
+  projectilePrefab: {fileID: 8945377058224139532, guid: b4eb89c0c26e68f41961c259c47c8b5f, type: 3}
+  targetHeightOffset: 1
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 4481138170555793753
+      type: {class: SphereDetect, ns: _02_Scripts.Core.Detect, asm: Assembly-CSharp}
+      data:
+        layerMask:
+          serializedVersion: 2
+          m_Bits: 256
+        gizmoColor: {r: 0, g: 1, b: 0, a: 1}
+        radius: 15

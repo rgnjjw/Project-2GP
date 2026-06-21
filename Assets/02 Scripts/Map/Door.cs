@@ -13,17 +13,17 @@ namespace _02_Scripts.Map
 
         private void Awake()
         {
-            _closedPosition = transform.position;
+            _closedPosition = transform.localPosition;
         }
 
         public void Open()
         {
-            transform.DOMove(openPosition, duration).SetEase(ease);
+            transform.DOLocalMove(openPosition, duration).SetEase(ease);
         }
 
         public void Close()
         {
-            transform.DOMove(_closedPosition, duration).SetEase(ease);
+            transform.DOLocalMove(_closedPosition, duration).SetEase(ease);
         }
     }
 }

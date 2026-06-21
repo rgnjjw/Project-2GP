@@ -10,7 +10,8 @@ namespace _02_Scripts.Manager
     {
         [SerializeField] private MapGenerator mapGenerator;
         [SerializeField] private WaveManager waveManager;
-
+        [SerializeField] private GameObject[] arrows;
+        
         [Tooltip("무한 순환할 맵 목록. 한 맵 클리어 시 직전 맵을 제외한 랜덤 맵으로 교체된다.")]
         [SerializeField] private MapDataSO[] maps;
 
@@ -18,6 +19,10 @@ namespace _02_Scripts.Manager
         [SerializeField] private float clearGraceDelay = 1.5f;
 
         public int CurrentLevel { get; private set; } = 1;
+
+        // 이 맵의 웨이브를 모두 클리어하고 맵이 다 내려간 상태인지.
+        // 상점 문은 이 값이 true일 때만 열린다.
+        public bool IsStageCleared { get; private set; }
 
         private MapDataSO _currentMap;
 
@@ -27,6 +32,10 @@ namespace _02_Scripts.Manager
             mapGenerator.OnGenerateComplete += OnMapGenerated;
             mapGenerator.OnDestroyComplete += OnMapDestroyed;
             waveManager.OnAllWavesCleared += OnAllWavesCleared;
+            foreach (var arrow in arrows)
+            {
+                arrow.SetActive(false);
+            }
         }
 
         private void Start()
@@ -37,6 +46,11 @@ namespace _02_Scripts.Manager
 
         public void StartStage(MapDataSO mapData)
         {
+            IsStageCleared = false; // 새 스테이지 시작 → 클리어 상태 해제(상점 문 닫힘)
+            foreach (var arrow in arrows)
+            {
+                arrow.SetActive(false);
+            }
             _currentMap = mapData;
             waveManager.SetMapData(mapData);
             mapGenerator.StartGenerate(mapData);
@@ -62,11 +76,15 @@ namespace _02_Scripts.Manager
             mapGenerator.StartDestroy();
         }
 
-        // 맵 제거 연출이 끝나면 다음(직전 제외 랜덤) 맵을 솟아오르게
+        // 맵 제거 연출이 끝나면 클리어 상태로 전환한다.
+        // 다음 맵은 자동 생성하지 않는다 → 상점에서 스테이지 버튼(StartStage)으로 진행한다.
         private void OnMapDestroyed()
         {
-            if (maps == null || maps.Length == 0) return;
-            StartStage(PickNextMap());
+            IsStageCleared = true;
+            foreach (var arrow in arrows)
+            {
+                arrow.SetActive(true);
+            }
         }
 
         // 직전 맵을 제외한 랜덤 맵 선택(맵이 하나뿐이면 그대로)

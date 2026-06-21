@@ -1,3 +1,4 @@
+using _02_Scripts.Manager;
 using UnityEngine;
 
 namespace _02_Scripts.Map
@@ -9,7 +10,6 @@ namespace _02_Scripts.Map
         [SerializeField] private Vector3 detectOffset;
         [SerializeField] private LayerMask playerLayer;
 
-        // private bool _isCanUse = false;
         private bool _isOpen;
 
         private void FixedUpdate()
@@ -20,19 +20,24 @@ namespace _02_Scripts.Map
                 transform.rotation,
                 playerLayer).Length > 0;
 
-            if (playerInRange && !_isOpen)
+            bool shouldOpen = playerInRange && IsStageCleared();
+
+            if (shouldOpen && !_isOpen)
             {
                 _isOpen = true;
                 foreach (var door in doors)
                     door.Open();
             }
-            else if (!playerInRange && _isOpen)
+            else if (!shouldOpen && _isOpen)
             {
                 _isOpen = false;
                 foreach (var door in doors)
                     door.Close();
             }
         }
+
+        private static bool IsStageCleared()
+            => StageManager.Instance != null && StageManager.Instance.IsStageCleared;
 
         private void OnDrawGizmosSelected()
         {
