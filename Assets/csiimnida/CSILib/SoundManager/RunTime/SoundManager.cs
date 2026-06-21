@@ -117,7 +117,7 @@ namespace csiimnida.CSILib.SoundManager.RunTime
             Destroy(obj);
         }
 
-        private void StopSound(string soundName)
+        public void StopSound(string soundName)
         {
             if (_playingSounds.TryGetValue(soundName, out AudioSource obj))
             {

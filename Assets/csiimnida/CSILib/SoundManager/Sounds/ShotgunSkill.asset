@@ -15,7 +15,7 @@ MonoBehaviour:
   soundName: ShotgunSkill
   soundType: 1
   clip: {fileID: 8300000, guid: 8e8dd3e7dd2ba3f4cb1bbaaa6464b213, type: 3}
-  loop: 0
+  loop: 1
   Priority: 128
   volume: 1
   pitch: 1
