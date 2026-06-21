@@ -29,6 +29,7 @@ MonoBehaviour:
   attackStateName: AROUNDSHOT
   animationLayer: 8
   projectilePrefab: {fileID: 8945377058224139532, guid: b4eb89c0c26e68f41961c259c47c8b5f, type: 3}
+  projectileItem: {fileID: 0}
   targetHeightOffset: 1
   references:
     version: 2

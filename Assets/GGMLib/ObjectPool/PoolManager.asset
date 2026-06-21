@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60e0feeb458e41bdaebf5d69e9527bcb, type: 3}
   m_Name: PoolManager
   m_EditorClassIdentifier: ObjectPool.Runtime.Assembly::GGMLib.ObjectPool.Runtime.PoolManagerSO
-  itemList: []
+  itemList:
+  - {fileID: 11400000, guid: 89d68458eafe7894bbc63c81e0742ec7, type: 2}
+  - {fileID: 11400000, guid: 93919fee3dbd161499b564814eb05838, type: 2}
+  - {fileID: 11400000, guid: a3c6cf96125cc6d42b6c814193d969ce, type: 2}

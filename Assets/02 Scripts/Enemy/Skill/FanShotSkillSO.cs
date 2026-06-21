@@ -1,3 +1,4 @@
+using GGMLib.ObjectPool.Runtime;
 using UnityEngine;
 
 namespace _02_Scripts.Enemy.Skill
@@ -28,6 +29,8 @@ namespace _02_Scripts.Enemy.Skill
 
         [Header("투사체")]
         [SerializeField] private Projectile projectilePrefab;
+        [Tooltip("풀링용 아이템. 지정하면 풀에서 가져오고, 비우면 projectilePrefab을 Instantiate한다.")]
+        [SerializeField] private PoolItemSO projectileItem;
         [SerializeField] private float targetHeightOffset = 1f;
 
         public override void ExecuteSkill(Enemy enemy)
@@ -150,13 +153,27 @@ namespace _02_Scripts.Enemy.Skill
 
             direction.Normalize();
 
-            Projectile projectile = Object.Instantiate(
-                projectilePrefab,
-                muzzle.position,
-                Quaternion.LookRotation(direction)
-            );
+            Projectile projectile = SpawnProjectile(muzzle.position, Quaternion.LookRotation(direction));
+            if (projectile == null)
+                return;
 
             projectile.Init(direction, ProjectileSpeed, Damage, TargetLayer);
+        }
+
+        // 풀이 준비돼 있고 projectileItem이 지정됐으면 풀에서, 아니면 프리팹을 Instantiate.
+        private Projectile SpawnProjectile(Vector3 position, Quaternion rotation)
+        {
+            if (projectileItem != null && PoolManagerSO.Instance != null)
+            {
+                Projectile pooled = PoolManagerSO.Instance.Pop<Projectile>(projectileItem);
+                pooled.transform.SetPositionAndRotation(position, rotation);
+                return pooled;
+            }
+
+            if (projectilePrefab == null)
+                return null;
+
+            return Object.Instantiate(projectilePrefab, position, rotation);
         }
 
         private Vector3 GetFireDirection(Transform muzzle, Transform target)

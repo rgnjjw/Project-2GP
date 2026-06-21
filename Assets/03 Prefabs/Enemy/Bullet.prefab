@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a447b09a83aa42a6b7221aac2cd4a755, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.Enemy.Projectile
+  <Item>k__BackingField: {fileID: 11400000, guid: 89d68458eafe7894bbc63c81e0742ec7, type: 2}
   lifetime: 5
 --- !u!96 &2958837876656722288
 TrailRenderer:

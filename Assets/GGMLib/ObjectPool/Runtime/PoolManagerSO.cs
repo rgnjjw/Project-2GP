@@ -8,12 +8,17 @@ namespace GGMLib.ObjectPool.Runtime
 	[CreateAssetMenu(fileName = "PoolManager", menuName = "Lib/Pool/PoolManager", order = 10)]
 	public class PoolManagerSO : ScriptableObject
 	{
+		// 런타임 어디서든 풀에 접근할 수 있도록 InitializePool에서 설정되는 전역 접근자.
+		// (SoundManager 등 프로젝트의 다른 싱글톤과 동일한 사용 패턴)
+		public static PoolManagerSO Instance { get; private set; }
+
 		public List<PoolItemSO> itemList = new();
 		private Dictionary<PoolItemSO, Pool> _pools;
 		private Transform _rootTrm;
 
 		public void InitializePool(Transform rootTrm)
 		{
+			Instance = this;
 			_rootTrm = rootTrm;
 			_pools = new  Dictionary<PoolItemSO, Pool>();
 

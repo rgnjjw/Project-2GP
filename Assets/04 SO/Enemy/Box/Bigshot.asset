@@ -27,6 +27,7 @@ MonoBehaviour:
   attackStateName: BIGSHOT
   animationLayer: 0
   projectilePrefab: {fileID: 8945377058224139532, guid: 04f0080d22a31b54bb61f9d8165012f9, type: 3}
+  projectileItem: {fileID: 11400000, guid: 93919fee3dbd161499b564814eb05838, type: 2}
   targetHeightOffset: 1
   references:
     version: 2

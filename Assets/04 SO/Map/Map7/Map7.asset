@@ -13,318 +13,15 @@ MonoBehaviour:
   m_Name: Map7
   m_EditorClassIdentifier: Assembly-CSharp::_02_Scripts.Map.MapDataSO
   Objects:
-  - Prefab: {fileID: 741147138512769619, guid: 8d780d7a300eff64c80edf62291644c3, type: 3}
-    Position: {x: 23, y: 30, z: 23}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 741147138512769619, guid: 8d780d7a300eff64c80edf62291644c3, type: 3}
-    Position: {x: 23, y: 30, z: 17}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 741147138512769619, guid: 8d780d7a300eff64c80edf62291644c3, type: 3}
-    Position: {x: 17, y: 30, z: 23}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 741147138512769619, guid: 8d780d7a300eff64c80edf62291644c3, type: 3}
-    Position: {x: 11, y: 30, z: 23}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 741147138512769619, guid: 8d780d7a300eff64c80edf62291644c3, type: 3}
-    Position: {x: -1, y: 30, z: 23}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 741147138512769619, guid: 8d780d7a300eff64c80edf62291644c3, type: 3}
-    Position: {x: -7, y: 30, z: 23}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 741147138512769619, guid: 8d780d7a300eff64c80edf62291644c3, type: 3}
-    Position: {x: -5, y: 36, z: 23}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 741147138512769619, guid: 8d780d7a300eff64c80edf62291644c3, type: 3}
-    Position: {x: -17, y: 36, z: 23}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 3549726794461907295, guid: 6e5dde1aa3112e645beb975fe66d47ef, type: 3}
+  - Prefab: {fileID: 8978532414781277106, guid: 155e6f16e6376dc42aea55c5279d3b37, type: 3}
     Position: {x: -21, y: 42, z: 17}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 3549726794461907295, guid: 6e5dde1aa3112e645beb975fe66d47ef, type: 3}
+  - Prefab: {fileID: 4158961302234340135, guid: 281b1e1fbadedeb448421fda4ef65749, type: 3}
     Position: {x: 23, y: 42, z: -23}
     Rotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  - Prefab: {fileID: 741147138512769619, guid: 8d780d7a300eff64c80edf62291644c3, type: 3}
-    Position: {x: -17, y: 42, z: 23}
+  - Prefab: {fileID: 7217638815833364493, guid: 6358aeba0c97bd54b9be4f28f388ccfb, type: 3}
+    Position: {x: 0, y: 0, z: 0}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 741147138512769619, guid: 8d780d7a300eff64c80edf62291644c3, type: 3}
-    Position: {x: -11, y: 36, z: 23}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 741147138512769619, guid: 8d780d7a300eff64c80edf62291644c3, type: 3}
-    Position: {x: -11, y: 42, z: 23}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 741147138512769619, guid: 8d780d7a300eff64c80edf62291644c3, type: 3}
-    Position: {x: -13, y: 30, z: 23}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 741147138512769619, guid: 8d780d7a300eff64c80edf62291644c3, type: 3}
-    Position: {x: -19, y: 30, z: 23}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 741147138512769619, guid: 8d780d7a300eff64c80edf62291644c3, type: 3}
-    Position: {x: 1, y: 36, z: 23}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 741147138512769619, guid: 8d780d7a300eff64c80edf62291644c3, type: 3}
-    Position: {x: 5, y: 30, z: 23}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5505273674467962943, guid: ed77705454873054d845340443e3a1a2, type: 3}
-    Position: {x: 18, y: 28, z: 14}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5505273674467962943, guid: ed77705454873054d845340443e3a1a2, type: 3}
-    Position: {x: 16, y: 28, z: 14}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: 10, y: 32, z: 20}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: 8, y: 32, z: 20}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: 6, y: 34, z: 20}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: 4, y: 32, z: 20}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: 4, y: 34, z: 20}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: -2, y: 38, z: 20}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: -4, y: 38, z: 20}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: -6, y: 38, z: 20}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: -8, y: 38, z: 20}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: -6, y: 40, z: 20}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: -14, y: 44, z: 20}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: -16, y: 44, z: 20}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: -18, y: 44, z: 20}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: -20, y: 44, z: 20}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: -20, y: 46, z: 20}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: -22, y: 46, z: 20}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: -24, y: 46, z: 20}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: -22, y: 42, z: 20}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: -24, y: 42, z: 20}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: -24, y: 38, z: 20}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: -22, y: 34, z: 20}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: -24, y: 34, z: 20}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: -22, y: 44, z: 20}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: -24, y: 44, z: 20}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: -22, y: 44, z: 20}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: -24, y: 44, z: 20}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: -24, y: 44, z: 18}
-    Rotation: {x: 0.00000034873256, y: 0.70710707, z: -0.00000032927014, w: 0.70710653}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: -24, y: 44, z: 16}
-    Rotation: {x: 0.00000034873256, y: 0.70710707, z: -0.00000032927014, w: 0.70710653}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: -24, y: 44, z: 16}
-    Rotation: {x: 0.00000034873256, y: 0.70710707, z: -0.00000032927014, w: 0.70710653}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: -24, y: 46, z: 18}
-    Rotation: {x: 0.00000034873256, y: 0.70710707, z: -0.00000032927014, w: 0.70710653}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: -24, y: 46, z: 16}
-    Rotation: {x: 0.00000034873256, y: 0.70710707, z: -0.00000032927014, w: 0.70710653}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: 21.99994, y: 47.99997, z: -24.000023}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: 21.99994, y: 43.99997, z: -24.000023}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: 21.99994, y: 45.99997, z: -24.000023}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: 23.99994, y: 47.99997, z: -24.000023}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: 23.99994, y: 47.99997, z: -18.000023}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: 23.99994, y: 43.99997, z: -10.000023}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: 17.99994, y: 43.99997, z: -10.000023}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: 23.99994, y: 37.99997, z: -4.000023}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: 17.99994, y: 37.99997, z: -4.000023}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: 23.99994, y: 31.99997, z: 1.9999771}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: 17.99994, y: 31.99997, z: 1.9999771}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: 17.99994, y: 47.99997, z: -18.000023}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: 23.99994, y: 43.99997, z: -24.000023}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: 23.99994, y: 45.99997, z: -24.000023}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: -24, y: 46, z: 16}
-    Rotation: {x: 0.00000034873256, y: 0.70710707, z: -0.00000032927014, w: 0.70710653}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: -22, y: 40, z: 20}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: -24, y: 40, z: 20}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: -22, y: 36, z: 20}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: -24, y: 36, z: 20}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: -22, y: 32, z: 20}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: -24, y: 32, z: 20}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: -24, y: 28, z: 20}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: -24, y: 26, z: 20}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: -24, y: 30, z: 20}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: -18, y: 46, z: 20}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: -8, y: 40, z: 20}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5186938424266684178, guid: 487013f261fc42c49b260097f6c4f024, type: 3}
-    Position: {x: 6, y: 32, z: 20}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5505273674467962943, guid: ed77705454873054d845340443e3a1a2, type: 3}
-    Position: {x: 18, y: 26, z: 14}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5505273674467962943, guid: ed77705454873054d845340443e3a1a2, type: 3}
-    Position: {x: 16, y: 26, z: 14}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5505273674467962943, guid: ed77705454873054d845340443e3a1a2, type: 3}
-    Position: {x: 14, y: 26, z: 14}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5505273674467962943, guid: ed77705454873054d845340443e3a1a2, type: 3}
-    Position: {x: 12, y: 26, z: 14}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5505273674467962943, guid: ed77705454873054d845340443e3a1a2, type: 3}
-    Position: {x: 18, y: 26, z: 16}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5505273674467962943, guid: ed77705454873054d845340443e3a1a2, type: 3}
-    Position: {x: 16, y: 26, z: 16}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5505273674467962943, guid: ed77705454873054d845340443e3a1a2, type: 3}
-    Position: {x: 14, y: 26, z: 16}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5505273674467962943, guid: ed77705454873054d845340443e3a1a2, type: 3}
-    Position: {x: 12, y: 26, z: 16}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5505273674467962943, guid: ed77705454873054d845340443e3a1a2, type: 3}
-    Position: {x: 18, y: 28, z: 16}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5505273674467962943, guid: ed77705454873054d845340443e3a1a2, type: 3}
-    Position: {x: 16, y: 28, z: 16}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5505273674467962943, guid: ed77705454873054d845340443e3a1a2, type: 3}
-    Position: {x: 18, y: 28, z: 18}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5505273674467962943, guid: ed77705454873054d845340443e3a1a2, type: 3}
-    Position: {x: 16, y: 28, z: 18}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5505273674467962943, guid: ed77705454873054d845340443e3a1a2, type: 3}
-    Position: {x: 18, y: 26, z: 18}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5505273674467962943, guid: ed77705454873054d845340443e3a1a2, type: 3}
-    Position: {x: 16, y: 26, z: 18}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5505273674467962943, guid: ed77705454873054d845340443e3a1a2, type: 3}
-    Position: {x: 14, y: 26, z: 18}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 5505273674467962943, guid: ed77705454873054d845340443e3a1a2, type: 3}
-    Position: {x: 12, y: 26, z: 18}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 8928722805584317096, guid: a291b9d57cd9d714ba3ad827c320e54d, type: 3}
-    Position: {x: 12, y: 32, z: 24}
-    Rotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  - Prefab: {fileID: 8928722805584317096, guid: a291b9d57cd9d714ba3ad827c320e54d, type: 3}
-    Position: {x: 8, y: 34, z: 24}
-    Rotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  - Prefab: {fileID: 8928722805584317096, guid: a291b9d57cd9d714ba3ad827c320e54d, type: 3}
-    Position: {x: 4, y: 36, z: 24}
-    Rotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  - Prefab: {fileID: 8928722805584317096, guid: a291b9d57cd9d714ba3ad827c320e54d, type: 3}
-    Position: {x: 0, y: 38, z: 24}
-    Rotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  - Prefab: {fileID: 8928722805584317096, guid: a291b9d57cd9d714ba3ad827c320e54d, type: 3}
-    Position: {x: -4, y: 40, z: 24}
-    Rotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  - Prefab: {fileID: 8928722805584317096, guid: a291b9d57cd9d714ba3ad827c320e54d, type: 3}
-    Position: {x: -8, y: 42, z: 24}
-    Rotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  - Prefab: {fileID: 8928722805584317096, guid: a291b9d57cd9d714ba3ad827c320e54d, type: 3}
-    Position: {x: -12, y: 44, z: 24}
-    Rotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  - Prefab: {fileID: 8928722805584317096, guid: a291b9d57cd9d714ba3ad827c320e54d, type: 3}
-    Position: {x: -16, y: 46, z: 24}
-    Rotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  - Prefab: {fileID: 8928722805584317096, guid: a291b9d57cd9d714ba3ad827c320e54d, type: 3}
-    Position: {x: -24, y: 48, z: 16}
-    Rotation: {x: -0, y: 1, z: -0, w: 0}
-  - Prefab: {fileID: 8928722805584317096, guid: a291b9d57cd9d714ba3ad827c320e54d, type: 3}
-    Position: {x: 14, y: 28, z: 14}
-    Rotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  - Prefab: {fileID: 8928722805584317096, guid: a291b9d57cd9d714ba3ad827c320e54d, type: 3}
-    Position: {x: 10, y: 26, z: 14}
-    Rotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
   - Prefab: {fileID: 2201632357478705074, guid: 8bbf9780923e4a840a3fdc9971dbb8bb, type: 3}
     Position: {x: -12, y: 19, z: -12}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
@@ -334,65 +31,8 @@ MonoBehaviour:
   - Prefab: {fileID: 8023243943003075433, guid: 355742be7a3f82f4086b6d432700e58e, type: 3}
     Position: {x: -12, y: 8.5, z: 2}
     Rotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  - Prefab: {fileID: 4948131087671999246, guid: 33b88620517e4f447b8832afcf32fb51, type: 3}
-    Position: {x: 24, y: 26, z: -12}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 4948131087671999246, guid: 33b88620517e4f447b8832afcf32fb51, type: 3}
-    Position: {x: 18, y: 26, z: -12}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 4948131087671999246, guid: 33b88620517e4f447b8832afcf32fb51, type: 3}
-    Position: {x: 18, y: 32, z: -12}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 4948131087671999246, guid: 33b88620517e4f447b8832afcf32fb51, type: 3}
-    Position: {x: 18, y: 32, z: -6}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 4948131087671999246, guid: 33b88620517e4f447b8832afcf32fb51, type: 3}
-    Position: {x: 24, y: 32, z: -6}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 4948131087671999246, guid: 33b88620517e4f447b8832afcf32fb51, type: 3}
-    Position: {x: 18, y: 32, z: 0}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 4948131087671999246, guid: 33b88620517e4f447b8832afcf32fb51, type: 3}
-    Position: {x: 24, y: 32, z: 0}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 4948131087671999246, guid: 33b88620517e4f447b8832afcf32fb51, type: 3}
-    Position: {x: 18, y: 26, z: 0}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 4948131087671999246, guid: 33b88620517e4f447b8832afcf32fb51, type: 3}
-    Position: {x: 24, y: 26, z: 0}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 4948131087671999246, guid: 33b88620517e4f447b8832afcf32fb51, type: 3}
-    Position: {x: 18, y: 26, z: 6}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 4948131087671999246, guid: 33b88620517e4f447b8832afcf32fb51, type: 3}
-    Position: {x: 24, y: 26, z: 6}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 4948131087671999246, guid: 33b88620517e4f447b8832afcf32fb51, type: 3}
-    Position: {x: 18, y: 26, z: -6}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 4948131087671999246, guid: 33b88620517e4f447b8832afcf32fb51, type: 3}
-    Position: {x: 24, y: 26, z: -6}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 4948131087671999246, guid: 33b88620517e4f447b8832afcf32fb51, type: 3}
-    Position: {x: 18, y: 38, z: -12}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 4948131087671999246, guid: 33b88620517e4f447b8832afcf32fb51, type: 3}
-    Position: {x: 18, y: 38, z: -6}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 4948131087671999246, guid: 33b88620517e4f447b8832afcf32fb51, type: 3}
-    Position: {x: 24, y: 38, z: -6}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 4948131087671999246, guid: 33b88620517e4f447b8832afcf32fb51, type: 3}
-    Position: {x: 18, y: 44, z: -12}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 4948131087671999246, guid: 33b88620517e4f447b8832afcf32fb51, type: 3}
-    Position: {x: 24, y: 44, z: -12}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 4948131087671999246, guid: 33b88620517e4f447b8832afcf32fb51, type: 3}
-    Position: {x: 24, y: 32, z: -12}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-  - Prefab: {fileID: 4948131087671999246, guid: 33b88620517e4f447b8832afcf32fb51, type: 3}
-    Position: {x: 24, y: 38, z: -12}
+  - Prefab: {fileID: 8880044880227085318, guid: 46c09e95f8ca4904289717c788ef52a0, type: 3}
+    Position: {x: 0, y: 0, z: 0}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
   - Prefab: {fileID: 5484240879173902304, guid: a32ff5dc73c6bc74d80f79720bb824a6, type: 3}
     Position: {x: -14.05, y: 45.42, z: 21.89}
@@ -495,76 +135,79 @@ MonoBehaviour:
     Rotation: {x: -0, y: -0, z: -0, w: 1}
   - Prefab: {fileID: 6343705959604840918, guid: 67d56ea5659623a4cacae1675d835dd7, type: 3}
     Position: {x: -23.95, y: 47, z: 24.19}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+  - Prefab: {fileID: 1522922845385875653, guid: cb81deaa140beef459ea25be6c751a59, type: 3}
+    Position: {x: 0, y: 0, z: 0}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
   SpawnPoints:
-  - Type: 0
-    Position: {x: 21.47, y: 49.42, z: -21.67}
-  - Type: 0
-    Position: {x: -20.84, y: 50.36, z: 0.09}
-  - Type: 0
-    Position: {x: 20.37, y: 25.68, z: -2.75}
-  - Type: 1
-    Position: {x: -17, y: 49.59, z: -22}
-  - Type: 1
-    Position: {x: 9.2, y: 49.59, z: -21.94}
-  - Type: 1
-    Position: {x: -2.06, y: 39.38, z: 21.89}
-  - Type: 0
-    Position: {x: 19.11, y: 25.68, z: 9.46}
-  - Type: 0
-    Position: {x: 0.5, y: 25.68, z: 10.5}
-  - Type: 0
-    Position: {x: -20.77, y: 50.36, z: 10.45}
-  - Type: 1
-    Position: {x: -6.06, y: 41.15, z: 21.89}
-  - Type: 1
-    Position: {x: 10, y: 34.16, z: 22.5}
-  - Type: 1
-    Position: {x: -9.96, y: 43.5, z: 21.89}
-  - Type: 1
-    Position: {x: 17.5, y: 49.59, z: -19.5}
-  - Type: 2
-    Position: {x: 1.68, y: 49.45, z: -21.93}
-  - Type: 2
-    Position: {x: 21.62, y: 31, z: 21.5}
-  - Type: 1
-    Position: {x: -3, y: 49.59, z: -22}
-  - Type: 0
-    Position: {x: 9.26, y: 25.68, z: 2.04}
-  - Type: 0
-    Position: {x: -6.08, y: 25.68, z: 15.23}
-  - Type: 2
-    Position: {x: 2.15, y: 26.08, z: 1.32}
-  - Type: 0
-    Position: {x: -6.08, y: 25.68, z: 15.23}
-  - Type: 0
-    Position: {x: -21.5, y: 50.36, z: -21}
-  - Type: 0
-    Position: {x: 20.33, y: 25.68, z: -16.58}
-  - Type: 1
-    Position: {x: 17.5, y: 49.59, z: -19.5}
-  - Type: 2
-    Position: {x: -11.84, y: 33.51, z: -12.3}
   - Type: 1
     Position: {x: -10, y: 49.59, z: -22.5}
   - Type: 1
-    Position: {x: -14.05, y: 45.42, z: 21.89}
+    Position: {x: 9.2, y: 49.59, z: -21.94}
   - Type: 1
-    Position: {x: 1.81, y: 37.33, z: 21.89}
-  - Type: 0
-    Position: {x: -23.95, y: 47, z: 24.19}
+    Position: {x: -14.05, y: 45.42, z: 21.89}
   - Type: 0
     Position: {x: -21.2, y: 50.36, z: -11.26}
   - Type: 0
-    Position: {x: -20, y: 47, z: 20}
+    Position: {x: -15.499999, y: 25.68, z: 15}
   - Type: 0
     Position: {x: 19.51, y: 25.68, z: 2.86}
   - Type: 0
-    Position: {x: 20.5, y: 25.68, z: -10}
+    Position: {x: -20, y: 47, z: 20}
   - Type: 0
-    Position: {x: -15.499999, y: 25.68, z: 15}
+    Position: {x: 21.47, y: 49.42, z: -21.67}
+  - Type: 0
+    Position: {x: -20.77, y: 50.36, z: 10.45}
+  - Type: 2
+    Position: {x: -11.84, y: 33.51, z: -12.3}
+  - Type: 1
+    Position: {x: -6.06, y: 41.15, z: 21.89}
+  - Type: 0
+    Position: {x: -6.08, y: 25.68, z: 15.23}
+  - Type: 0
+    Position: {x: 20.37, y: 25.68, z: -2.75}
+  - Type: 1
+    Position: {x: -3, y: 49.59, z: -22}
+  - Type: 2
+    Position: {x: 21.62, y: 31, z: 21.5}
+  - Type: 1
+    Position: {x: 17.5, y: 49.59, z: -19.5}
+  - Type: 1
+    Position: {x: -9.96, y: 43.5, z: 21.89}
+  - Type: 0
+    Position: {x: 20.33, y: 25.68, z: -16.58}
+  - Type: 0
+    Position: {x: -21.5, y: 50.36, z: -21}
   - Type: 1
     Position: {x: 5.93, y: 36.16, z: 22.34}
+  - Type: 0
+    Position: {x: 20.5, y: 25.68, z: -10}
+  - Type: 0
+    Position: {x: -23.95, y: 47, z: 24.19}
+  - Type: 1
+    Position: {x: 1.81, y: 37.33, z: 21.89}
+  - Type: 0
+    Position: {x: -6.08, y: 25.68, z: 15.23}
+  - Type: 0
+    Position: {x: 19.11, y: 25.68, z: 9.46}
+  - Type: 2
+    Position: {x: 1.68, y: 49.45, z: -21.93}
+  - Type: 2
+    Position: {x: 2.15, y: 26.08, z: 1.32}
+  - Type: 0
+    Position: {x: 9.26, y: 25.68, z: 2.04}
+  - Type: 0
+    Position: {x: -20.84, y: 50.36, z: 0.09}
+  - Type: 0
+    Position: {x: 0.5, y: 25.68, z: 10.5}
+  - Type: 1
+    Position: {x: 10, y: 34.16, z: 22.5}
+  - Type: 1
+    Position: {x: 17.5, y: 49.59, z: -19.5}
+  - Type: 1
+    Position: {x: -2.06, y: 39.38, z: 21.89}
+  - Type: 1
+    Position: {x: -17, y: 49.59, z: -22}
   Waves:
   - {fileID: 11400000, guid: 852105c2422718147bc28aa5182707d5, type: 2}
   - {fileID: 11400000, guid: af57724d01b2aaa4eaf544d8372f228e, type: 2}

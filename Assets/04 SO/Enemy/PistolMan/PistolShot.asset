@@ -27,6 +27,7 @@ MonoBehaviour:
   attackStateName: PISTOLSHOT
   animationLayer: 0
   projectilePrefab: {fileID: 8945377058224139532, guid: db772bf803bee9644910c616caad519b, type: 3}
+  projectileItem: {fileID: 11400000, guid: a3c6cf96125cc6d42b6c814193d969ce, type: 2}
   targetHeightOffset: 1
   references:
     version: 2

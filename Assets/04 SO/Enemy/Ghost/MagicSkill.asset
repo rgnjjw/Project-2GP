@@ -27,6 +27,7 @@ MonoBehaviour:
   attackStateName: MAGIC
   animationLayer: 0
   projectilePrefab: {fileID: 8945377058224139532, guid: b4eb89c0c26e68f41961c259c47c8b5f, type: 3}
+  projectileItem: {fileID: 11400000, guid: 89d68458eafe7894bbc63c81e0742ec7, type: 2}
   targetHeightOffset: 1
   references:
     version: 2
