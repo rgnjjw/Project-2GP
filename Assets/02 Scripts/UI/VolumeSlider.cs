@@ -1,6 +1,7 @@
 using csiimnida.CSILib.SoundManager.RunTime;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace _02_Scripts.UI
@@ -12,7 +13,7 @@ namespace _02_Scripts.UI
     /// 슬라이더 범위(min~max)는 자유 — 내부에서 0~1로 정규화한다.
     /// </summary>
     [RequireComponent(typeof(Slider))]
-    public class VolumeSlider : MonoBehaviour
+    public class VolumeSlider : MonoBehaviour, IPointerUpHandler
     {
         public enum Channel
         {
@@ -50,6 +51,12 @@ namespace _02_Scripts.UI
         {
             float value01 = Mathf.InverseLerp(slider.minValue, slider.maxValue, raw);
             VolumeSettings.SaveAndApply(mixer, Param, value01);
+        }
+
+        // 드래그를 놓는 순간(손 뗄 때) 한 번만 재생 — 드래그 중 매 프레임 울리는 것을 피한다.
+        public void OnPointerUp(PointerEventData eventData)
+        {
+            SoundManager.Instance.PlaySound("SliderClickOut");
         }
     }
 }

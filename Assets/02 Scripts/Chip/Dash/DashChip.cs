@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using _02_Scripts.Player;
+using csiimnida.CSILib.SoundManager.RunTime;
 using UnityEngine;
 
 namespace _02_Scripts.Chip.Dash
@@ -101,6 +102,7 @@ namespace _02_Scripts.Chip.Dash
                 : _player.transform.forward;
 
             _playerMover.SetDashVelocity(dashDir * _dashSpeed, _dashDuration);
+            SoundManager.Instance.PlaySound("Dash");
 
             _currentDashCount--;
             OnDashUsed?.Invoke();

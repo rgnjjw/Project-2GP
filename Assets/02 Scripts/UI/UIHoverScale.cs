@@ -1,3 +1,4 @@
+using csiimnida.CSILib.SoundManager.RunTime;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -22,6 +23,7 @@ namespace _02_Scripts.UI
         {
             _tween?.Kill();
             _tween = transform.DOScale(_originalScale * hoverScale, duration).SetEase(ease).SetUpdate(true);
+            SoundManager.Instance.PlaySound("UIHover");
         }
 
         public void OnPointerExit(PointerEventData eventData)

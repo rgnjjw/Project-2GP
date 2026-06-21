@@ -1,4 +1,5 @@
 using _02_Scripts.Player;
+using csiimnida.CSILib.SoundManager.RunTime;
 using UnityEngine;
 
 namespace _02_Scripts.Chip.Jump
@@ -88,6 +89,7 @@ namespace _02_Scripts.Chip.Jump
             // EffectManager.Instance?.Play("JumpDust");
             _playerMover.StopImmediately(false, true, false);
             _playerMover.AddForceToAgent(Vector3.up * _jumpPower);
+            SoundManager.Instance.PlaySound("Jump");
             _currentJumpCount++;
         }
     }

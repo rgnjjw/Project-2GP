@@ -4,6 +4,7 @@ using _02_Scripts.Agent;
 using _02_Scripts.Core.Utility;
 using _02_Scripts.Gun.Skill;
 using _02_Scripts.Player;
+using csiimnida.CSILib.SoundManager.RunTime;
 using UnityEngine;
 
 namespace _02_Scripts.Gun.G_Pistol
@@ -65,6 +66,7 @@ namespace _02_Scripts.Gun.G_Pistol
 
             skillFireEffect?.Play();
             EventBus.Publish(skillRecoilEvent);
+            SoundManager.Instance.PlaySound("PistolSkillFire");
 
             FireSkillStart();
         }
@@ -98,6 +100,7 @@ namespace _02_Scripts.Gun.G_Pistol
             }
 
             ShowBeam(fireBeam, muzzleTrm.position, endPoint);
+            SoundManager.Instance.PlaySound("PistolFire");
 
             base.Fire();
         }

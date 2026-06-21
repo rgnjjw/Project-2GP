@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using _02_Scripts.Agent;
 using _02_Scripts.Gun.Skill;
+using csiimnida.CSILib.SoundManager.RunTime;
 using UnityEngine;
 
 namespace _02_Scripts.Gun.G_ShotGun
@@ -39,6 +40,8 @@ namespace _02_Scripts.Gun.G_ShotGun
             if (skillData == null || !IsSkillReady) return;
             _isGrinding = true;
             _tickTimer = 0f;
+            // 꾹 누르는 동안 계속 도는 루프 사운드. 뗄 때(OnSkillReleased) 멈춘다.
+            SoundManager.Instance.PlaySound("ShotgunSkill");
             FireSkillStart();
         }
 
@@ -46,6 +49,7 @@ namespace _02_Scripts.Gun.G_ShotGun
         {
             if (!_isGrinding) return;
             _isGrinding = false;
+            SoundManager.Instance.StopSound("ShotgunSkill");
             FireSkillEnd();
             if (skillData != null)
             {
@@ -115,6 +119,7 @@ namespace _02_Scripts.Gun.G_ShotGun
                 ShowBeam(GetOrCreatePelletBeam(i), muzzleTrm.position, endPoint);
             }
 
+            SoundManager.Instance.PlaySound("ShotgunFire");
             base.Fire();
         }
 

@@ -1,4 +1,6 @@
 using _02_Scripts.Agent;
+using _02_Scripts.Core.ModuleSystem;
+using csiimnida.CSILib.SoundManager.RunTime;
 using UnityEngine;
 
 namespace _02_Scripts.Player
@@ -14,7 +16,33 @@ namespace _02_Scripts.Player
         private float _lastGroundedTime = -999f;
         private Vector3 _slopeNormal = Vector3.up;
 
+        // 스폰 직후 false→true 접지에서 착지음이 울리지 않도록, 한 번 공중에 뜬 뒤부터만 재생한다.
+        private bool _hasLeftGround;
+
         public bool IsGroundedOrCoyote => IsGrounded || (Time.time - _lastGroundedTime <= coyoteTime);
+
+        public override void Initialize(ModuleOwner moduleOwner)
+        {
+            base.Initialize(moduleOwner);
+            OnGroundStatusChanged += HandleGroundStatusChanged;
+        }
+
+        private void OnDestroy()
+        {
+            OnGroundStatusChanged -= HandleGroundStatusChanged;
+        }
+
+        private void HandleGroundStatusChanged(bool isGrounded)
+        {
+            if (!isGrounded)
+            {
+                _hasLeftGround = true;
+                return;
+            }
+
+            if (_hasLeftGround)
+                SoundManager.Instance.PlaySound("Landing");
+        }
 
         protected override void FixedUpdate()
         {

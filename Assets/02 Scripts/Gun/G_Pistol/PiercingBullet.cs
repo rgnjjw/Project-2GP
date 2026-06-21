@@ -16,6 +16,17 @@ namespace _02_Scripts.Gun.G_Pistol
 
         private readonly HashSet<Enemy.Enemy> _hitEnemies = new();
 
+        // 매 프레임 Physics.RaycastAll은 호출마다 새 배열을 할당해 GC를 유발한다.
+        // 총알마다 버퍼를 1회 만들어 재사용(RaycastNonAlloc)해 매 프레임 할당을 없앤다.
+        private readonly RaycastHit[] _hitBuffer = new RaycastHit[32];
+
+        private static readonly IComparer<RaycastHit> DistanceComparer = new RaycastHitDistanceComparer();
+
+        private sealed class RaycastHitDistanceComparer : IComparer<RaycastHit>
+        {
+            public int Compare(RaycastHit a, RaycastHit b) => a.distance.CompareTo(b.distance);
+        }
+
         public void Initialize(Vector3 direction, int damage, float speed, float autoDeleteTime, LayerMask hitMask)
         {
             _direction = direction.normalized;
@@ -39,13 +50,14 @@ namespace _02_Scripts.Gun.G_Pistol
             float stepDistance = _speed * Time.deltaTime;
             Ray ray = new Ray(transform.position, _direction);
 
-            RaycastHit[] hits = Physics.RaycastAll(ray, stepDistance + 0.1f, _hitMask);
-            if (hits.Length > 0)
+            int hitCount = Physics.RaycastNonAlloc(ray, _hitBuffer, stepDistance + 0.1f, _hitMask);
+            if (hitCount > 0)
             {
-                System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
+                System.Array.Sort(_hitBuffer, 0, hitCount, DistanceComparer);
 
-                foreach (var hit in hits)
+                for (int i = 0; i < hitCount; i++)
                 {
+                    RaycastHit hit = _hitBuffer[i];
                     if (hit.transform.TryGetComponent<Enemy.Enemy>(out var enemy))
                     {
                         if (_hitEnemies.Add(enemy))

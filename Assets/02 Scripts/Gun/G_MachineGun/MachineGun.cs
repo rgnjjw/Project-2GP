@@ -1,5 +1,6 @@
 using _02_Scripts.Agent;
 using _02_Scripts.Gun.Skill;
+using csiimnida.CSILib.SoundManager.RunTime;
 using UnityEngine;
 
 namespace _02_Scripts.Gun.G_MachineGun
@@ -115,6 +116,8 @@ namespace _02_Scripts.Gun.G_MachineGun
 
             // 발사한 총구 → 끝점(조준점/벽)을 잇는 빔
             ShowBeam(fireBeam, currentMuzzle.position, endPoint);
+
+            SoundManager.Instance.PlaySound("MachinegunFire");
         }
 
         protected override void PlayFireEffect()
