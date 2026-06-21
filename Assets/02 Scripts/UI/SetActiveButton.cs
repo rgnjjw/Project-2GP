@@ -4,16 +4,10 @@ namespace _02_Scripts.UI
 {
     public class SetActiveButton : MonoBehaviour
     {
-        [SerializeField] private SlidePanel slidePanel;
-
-        public void Toggle()
+        [SerializeField] private GameObject target;
+        public void OnButtonPressed()
         {
-            slidePanel.Toggle();
-        }
-
-        public void Close()
-        {
-            slidePanel.Close();
+            target.SetActive(true);
         }
     }
 }
