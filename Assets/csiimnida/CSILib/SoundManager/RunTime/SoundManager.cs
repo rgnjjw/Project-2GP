@@ -22,7 +22,19 @@ namespace csiimnida.CSILib.SoundManager.RunTime
             {
                 Debug.LogError("AudioMixer가 할당되지 않았습니다. SoundManager를 사용하기 전에 할당해주세요.");
             }
+        }
 
+        private void Start()
+        {
+            // AudioMixer.SetFloat은 Awake 타이밍엔 믹서가 아직 완전히 로드되지 않아 무시된다.
+            // (설정창을 열 때 VolumeSlider가 다시 적용해야 비로소 들리는 증상의 원인)
+            // 한 프레임 뒤에 적용해야 저장된 볼륨이 게임 시작부터 반영된다.
+            StartCoroutine(ApplySavedVolumesDelayed());
+        }
+
+        private IEnumerator ApplySavedVolumesDelayed()
+        {
+            yield return null;
             ApplySavedVolumes();
         }
 

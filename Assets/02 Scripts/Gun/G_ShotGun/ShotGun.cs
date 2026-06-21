@@ -58,6 +58,14 @@ namespace _02_Scripts.Gun.G_ShotGun
             }
         }
 
+        // 전기톱(우클릭)을 누른 채로 무기를 바꾸면 OnSkillReleased가 호출되지 않아
+        // 루프 사운드가 계속 재생된다. 무기 해제 시 진행 중인 스킬을 정리한다.
+        public override void OnUnequip()
+        {
+            if (_isGrinding)
+                OnSkillReleased();
+        }
+
         public override void TickSkill(float deltaTime)
         {
             if (_skillCooldownRemaining > 0f)

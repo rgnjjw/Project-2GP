@@ -99,6 +99,10 @@ namespace _02_Scripts.Manager
             if (index < 0 || index >= weapons.Length) return;
             if (!_unlockedWeapons.Contains(index)) return;
 
+            // 이전 무기 해제 처리(전기톱 루프 사운드 등 진행 중 스킬 정리).
+            if (_currentWeapon != null)
+                _currentWeapon.OnUnequip();
+
             _currentIndex = index;
             _currentWeapon = weapons[_currentIndex];
             OnWeaponChanged?.Invoke(_currentWeapon);

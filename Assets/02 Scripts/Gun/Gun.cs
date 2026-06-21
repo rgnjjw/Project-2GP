@@ -48,6 +48,18 @@ namespace _02_Scripts.Gun
             OnEquip?.Invoke();
         }
 
+        // 다른 무기로 교체되어 이 무기가 해제될 때 호출. (진행 중인 스킬/루프 사운드 정리용)
+        public virtual void OnUnequip() { }
+
+        // 무기가 비활성화되면(교체 등) 진행 중이던 빔 코루틴이 강제로 멈춰
+        // LineRenderer가 켜진 채로 공중에 남는 문제가 있어, 비활성화 시 모든 빔을 끈다.
+        protected virtual void OnDisable()
+        {
+            foreach (var beam in _beamRoutines.Keys)
+                if (beam != null) beam.enabled = false;
+            _beamRoutines.Clear();
+        }
+
         public virtual void Fire()
         {
             EventBus.Publish(recoilEvent);
@@ -110,7 +122,8 @@ namespace _02_Scripts.Gun
 
         private IEnumerator HideBeamAfter(LineRenderer beam, float delay)
         {
-            yield return new WaitForSeconds(delay);
+            // 일시정지(timeScale 0) 중에도 빔이 남지 않도록 Realtime으로 대기한다.
+            yield return new WaitForSecondsRealtime(delay);
             if (beam != null) beam.enabled = false;
             _beamRoutines[beam] = null;
         }

@@ -10,7 +10,8 @@ namespace _02_Scripts.Gun.G_ShotGun
         [SerializeField] private AnimParamSO gunEquip;
 
         [SerializeField] private AnimParamSO gunEnd;
-        [SerializeField] private AnimParamSO bodyEnd;
+        [SerializeField] private AnimParamSO bodyEndLeft;
+        [SerializeField] private AnimParamSO bodyEndRight;
 
         [SerializeField] private AnimParamSO bodyFireRight;
         [SerializeField] private AnimParamSO bodyFireLeft;
@@ -66,7 +67,8 @@ namespace _02_Scripts.Gun.G_ShotGun
         private void OnSkillEndAnim()
         {
             gunRenderer.PlayClip(gunEnd.ParamHash, 0, 0,1);
-            gunRenderer.PlayClip(bodyEnd.ParamHash, 0, 0, 3);
+            gunRenderer.PlayClip(bodyEndRight.ParamHash, 0, 0, 3);
+            gunRenderer.PlayClip(bodyEndLeft.ParamHash, 0, 0, 2);
         }
     }
 }
