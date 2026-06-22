@@ -36,11 +36,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Metallic: 1
-    - _Smoothness: 0.4
+    - _Metallic: 0.25
+    - _Smoothness: 0.2
     m_Colors:
-    - _BaseColor: {r: 0.31132078, g: 0.31132078, b: 0.31132078, a: 1}
-    - _Color: {r: 0.31132075, g: 0.31132075, b: 0.31132075, a: 1}
+    - _BaseColor: {r: 0.3098039, g: 0.3098039, b: 0.3098039, a: 1}
+    - _Color: {r: 0.30980387, g: 0.30980387, b: 0.30980387, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &1042191261070231486

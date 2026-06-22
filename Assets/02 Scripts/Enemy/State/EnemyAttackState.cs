@@ -32,6 +32,7 @@ namespace _02_Scripts.Enemy.State
             }
             
             _navEnemyRenderer.UseForcedRotation = false;
+            _navEnemyRenderer.UseInstantForcedRotation = false;
 
             _currentSkill = _enemySkillController.GetAvailableSkill();
 
@@ -40,6 +41,10 @@ namespace _02_Scripts.Enemy.State
                 enemy.ChangeState(EnemyStateEnum.IDLE);
                 return;
             }
+
+            // 공격(특히 원거리)은 발사 순간까지 플레이어를 즉시 추적하도록 한다.
+            // 힐 스킬은 아군을 바라봐야 하므로 제외.
+            _navEnemyRenderer.UseInstantForcedRotation = !_currentSkill.IsHealSkill;
 
             // 스냅 회전이 향할 대상을 확실히 갱신해 둔다(아이들에서 바로 진입한 경우 CurrentTarget이 비어있을 수 있음).
             if (_currentSkill.TargetFinder != null)
@@ -66,12 +71,14 @@ namespace _02_Scripts.Enemy.State
 
         private void HandlePrepare()
         {
-            // 조준 시작 시 단 한 번만 플레이어 방향으로 회전하고 고정(이후 추적 회전 없음).
+            // 예열 시작 시점에 즉시 한 번 정렬(이후엔 UseInstantForcedRotation이 매 프레임 추적).
             _navEnemyRenderer.SnapLookAtTarget();
         }
 
         private void HandleAttack()
         {
+            // 발사 시점에도 계속 즉시 추적(애니메이션 끝날 때까지). 추적 종료는 Exit에서 처리.
+            // 탄/빔은 이 프레임의 바라보는 방향으로 나가므로 조준은 정확하다.
             _navEnemyRenderer.UseForcedRotation = false;
         }
 
@@ -100,6 +107,7 @@ namespace _02_Scripts.Enemy.State
         {
             base.Exit();
             _navEnemyRenderer.UseForcedRotation = false;
+            _navEnemyRenderer.UseInstantForcedRotation = false;
             _enemyAnimationEvent.OnAttackEnd -= HandleAttackEnd;
             _enemyAnimationEvent.OnPrepare -= HandlePrepare;
             _enemyAnimationEvent.OnAttack -= HandleAttack;

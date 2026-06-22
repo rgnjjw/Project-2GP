@@ -20,6 +20,10 @@ namespace _02_Scripts.Enemy
         public bool UseForcedRotation { get; set; }
         public bool UseChaseRotation { get; set; }
 
+        // 공격 예열 중(발사 직전까지) 매 프레임 즉시(스냅) 플레이어를 바라보게 하는 모드.
+        // 발사 순간에 꺼서 그 방향으로 탄/빔을 고정한다.
+        public bool UseInstantForcedRotation { get; set; }
+
         public override void Initialize(ModuleOwner owner)
         {
             base.Initialize(owner);
@@ -56,7 +60,9 @@ namespace _02_Scripts.Enemy
 
             if (IsRotationLocked) return;
 
-            if (UseForcedRotation && _enemy.CurrentTarget != null)
+            if (UseInstantForcedRotation && _enemy.CurrentTarget != null)
+                SnapLookAtTarget();
+            else if (UseForcedRotation && _enemy.CurrentTarget != null)
                 LookAtTarget(_enemy.CurrentTarget);
             else if (UseChaseRotation && _enemy.CurrentTarget != null)
                 ChaseRotation(_enemy.CurrentTarget);
