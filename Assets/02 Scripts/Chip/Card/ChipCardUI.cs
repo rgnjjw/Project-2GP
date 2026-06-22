@@ -39,7 +39,9 @@ namespace _02_Scripts.Chip.Card
 
         private void OnDestroy()
         {
-            LevelManager.Instance.OnLevelUp -= ShowCards;
+            // 종료/씬 언로드 시 LevelManager가 먼저 파괴되면 Instance가 null이라 NRE가 났다.
+            if (LevelManager.Instance != null)
+                LevelManager.Instance.OnLevelUp -= ShowCards;
         }
 
         private void Start()
