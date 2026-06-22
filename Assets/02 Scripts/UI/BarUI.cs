@@ -74,6 +74,16 @@ namespace _02_Scripts.UI
         // ── 일반 fill (순수 시각 효과, 게임 로직과 무관) ──────────────────────
         public void SetFill(float targetAmount)
         {
+            // 레벨업 연출이 진행 중이면 끼어들지 않는다.
+            // (예전엔 여기서 시퀀스를 죽이고 콜백을 비워버려서, 연출 도중 경험치가 더 들어오면
+            //  '레벨업 카드' 콜백이 사라져 카드가 가끔 무시됐음 → 간헐적 버그의 원인)
+            // 진행 중에 들어온 경험치는 최종 fill만 갱신해두고 연출이 끝날 때 반영된다.
+            if (_isLevelUpAnimating)
+            {
+                _pendingFillAfter = targetAmount;
+                return;
+            }
+
             bool wasLevelUp = _isLevelUpAnimating;
             _isLevelUpAnimating = false;
             _levelUpCallbacks.Clear();

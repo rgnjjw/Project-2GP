@@ -19,7 +19,7 @@ namespace _02_Scripts.Enemy.Skill
             if (animEvent == null)
             {
                 HealAllInRange(enemy, vfx);
-                NotifyComplete();
+                NotifyComplete(enemy);
                 return;
             }
 
@@ -28,7 +28,7 @@ namespace _02_Scripts.Enemy.Skill
                 animEvent.OnAttack -= HandleAttack;
 
                 HealAllInRange(enemy, vfx);
-                NotifyComplete();
+                NotifyComplete(enemy);
             }
 
             void HandleAttackEnd()

@@ -1,4 +1,3 @@
-using System.Collections;
 using DG.Tweening;
 using _02_Scripts.Agent;
 using _02_Scripts.Manager;
@@ -22,10 +21,8 @@ namespace _02_Scripts.Player
         [SerializeField] private RecoilEvent recoilEvent;
 
         [Header("사망 시")]
-        [Tooltip("사망 후 이동할 메인화면 씬 이름")]
-        [SerializeField] private string mainSceneName = "Title";
-        [Tooltip("사망 연출을 보여줄 시간(초) 뒤 메인화면으로 이동")]
-        [SerializeField] private float deathToMenuDelay = 1.5f;
+        [Tooltip("죽었을 때 보여줄 패널('메인으로 가기' 버튼 포함). 버튼엔 SceneChangeButton(Title) 연결.")]
+        [SerializeField] private GameObject deathPanel;
 
         private Controls _controls;
         private GunManager _gunManager;
@@ -35,6 +32,11 @@ namespace _02_Scripts.Player
 
         protected override void Awake()
         {
+            // 이전 세션(다시하기 전)의 죽은 입력 구독을 먼저 정리한다.
+            // base.Awake()에서 모듈들이 다시 구독하므로 그 전에 비워야 한다.
+            if (PlayerInputSO != null)
+                PlayerInputSO.ClearAllEvents();
+
             base.Awake();
 
             _controls = new Controls();
@@ -78,26 +80,31 @@ namespace _02_Scripts.Player
 
         protected override void OnDead()
         {
-            // 플레이어 사망 → 잠시 뒤 메인화면으로.
-            StartCoroutine(GoToMainMenuAfterDelay());
-        }
+            // 플레이어 사망 → 게임 멈추고 죽음 패널 표시. 이동은 패널의 '메인으로' 버튼이 처리.
+            Time.timeScale = 0f;
 
-        private IEnumerator GoToMainMenuAfterDelay()
-        {
-            // 일시정지 상태여도 진행되도록 Realtime 대기.
-            yield return new WaitForSecondsRealtime(deathToMenuDelay);
+            if (deathPanel != null)
+                deathPanel.SetActive(true);
 
-            Time.timeScale = 1f;
-
-            if (GameSceneManager.Instance != null)
-                _ = GameSceneManager.Instance.LoadOneSceneAsync(mainSceneName);
-            else
-                UnityEngine.SceneManagement.SceneManager.LoadScene(mainSceneName);
+            if (CursorManager.Instance != null)
+                CursorManager.Instance.SetCursorVisible(true);
         }
 
         protected void OnDestroy()
         {
             _playerHealth.CurrentHp.OnValueChanged -= OnHpChanged;
+
+            // Controls는 C# 객체라 Player가 파괴돼도 InputSystem에 등록된 채 살아남는다.
+            // Disable/Dispose하지 않으면, 씬 재시작 때마다 이전 세션의 Controls가
+            // 그대로 살아 같은 PlayerInputSO 콜백을 계속 호출한다. → 키 한 번에
+            // 점프/대쉬 이벤트가 N번 발생(점프가 비정상적으로 세지고, 대쉬가 한 번에 다 소모됨).
+            if (_controls != null)
+            {
+                _controls.Player.Disable();
+                _controls.Player.RemoveCallbacks(PlayerInputSO);
+                _controls.Dispose();
+                _controls = null;
+            }
         }
 
         public void ChangeState(PlayerStateEnum nextState)

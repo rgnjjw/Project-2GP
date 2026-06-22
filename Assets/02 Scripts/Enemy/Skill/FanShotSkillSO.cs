@@ -47,7 +47,7 @@ namespace _02_Scripts.Enemy.Skill
             if (animEvent == null || animator == null)
             {
                 FireFan(muzzle, target, vfx);
-                NotifyComplete();
+                NotifyComplete(enemy);
                 return;
             }
 
@@ -71,7 +71,7 @@ namespace _02_Scripts.Enemy.Skill
                 animEvent.OnAttack -= HandleAttack;
                 animEvent.OnAttackEnd -= HandleAttackEnd;
 
-                NotifyComplete();
+                NotifyComplete(enemy);
             }
 
             animEvent.OnAttack -= HandleAttack;

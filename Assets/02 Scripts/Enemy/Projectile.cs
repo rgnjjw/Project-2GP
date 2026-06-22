@@ -38,21 +38,23 @@ namespace _02_Scripts.Enemy
                 return;
             }
 
-            float moveDist = _speed * Time.deltaTime;
-
-            if (Physics.Raycast(transform.position, _direction, out RaycastHit hit, moveDist, _targetLayer))
-            {
-                HandleHit(hit);
-                return;
-            }
-
-            transform.position += _direction * moveDist;
+            // 실체 오브젝트로 직접 이동(레이캐스트 X). 충돌 판정은 OnTriggerEnter가 담당.
+            transform.position += _direction * (_speed * Time.deltaTime);
         }
 
-        private void HandleHit(RaycastHit hit)
+        // 실체 충돌 기반 피해. 트리거 콜라이더에 닿으면 처리한다.
+        // (프리팹에 Is Trigger 콜라이더 + Kinematic Rigidbody 필요)
+        private void OnTriggerEnter(Collider other)
         {
-            if (hit.collider.TryGetComponent<Player.Player>(out var player))
-                player.GetModule<AgentHealth>().ApplyDamage(_damage);
+            if (!_initialized) return;
+
+            // 대상 레이어(플레이어/벽 등)에 속한 것만 반응한다.
+            if ((_targetLayer.value & (1 << other.gameObject.layer)) == 0) return;
+
+            // 플레이어에 맞으면 피해를 준다(벽 등에 맞으면 피해 없이 사라짐).
+            Player.Player player = other.GetComponentInParent<Player.Player>();
+            if (player != null)
+                player.GetModule<AgentHealth>()?.ApplyDamage(_damage);
 
             ReturnToPool();
         }

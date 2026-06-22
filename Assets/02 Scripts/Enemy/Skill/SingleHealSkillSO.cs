@@ -24,7 +24,7 @@ namespace _02_Scripts.Enemy.Skill
             {
                 HealTarget(healTarget);
                 vfx?.Play(EnemyVfxType.SingleHealEffect);
-                NotifyComplete();
+                NotifyComplete(enemy);
                 return;
             }
 
@@ -43,7 +43,7 @@ namespace _02_Scripts.Enemy.Skill
 
                 vfx?.Play(EnemyVfxType.SingleHealEffect);
 
-                NotifyComplete();
+                NotifyComplete(enemy);
             }
 
             animEvent.OnPrepare += HandlePrepare;

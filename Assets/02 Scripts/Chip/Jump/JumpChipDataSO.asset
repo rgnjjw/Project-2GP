@@ -25,21 +25,21 @@ MonoBehaviour:
       (\uC5F0\uC18D\uC810\uD504 \uAC00\uB2A5\uD69F\uC218\uAC00 \uB298\uC5B4\uB0A9\uB2C8\uB2E4.)"
   - Name: "\uC810\uD504\uCE69_Lv3"
     Description: "\uC810\uD504\uCE69\uC744 \uC5C5\uADF8\uB808\uC774\uB4DC \uD569\uB2C8\uB2E4. 
-      (\uC810\uD504 \uD30C\uC6CC\uAC00 \uC99D\uAC00\uD569\uB2C8\uB2E4.)"
+      (\uC5F0\uC18D\uC810\uD504 \uAC00\uB2A5\uD69F\uC218\uAC00 \uB298\uC5B4\uB0A9\uB2C8\uB2E4.)"
   - Name: "\uC810\uD504\uCE69_Lv4"
     Description: "\uC810\uD504\uCE69\uC744 \uC5C5\uADF8\uB808\uC774\uB4DC \uD569\uB2C8\uB2E4.
       (\uC5F0\uC18D\uC810\uD504 \uAC00\uB2A5\uD69F\uC218\uAC00 \uB298\uC5B4\uB0A9\uB2C8\uB2E4.)"
   - Name: "\uC810\uD504\uCE69_Lv5"
     Description: "\uC810\uD504\uCE69\uC744 \uC5C5\uADF8\uB808\uC774\uB4DC \uD569\uB2C8\uB2E4.
-      (\uC810\uD504 \uD30C\uC6CC\uAC00 \uC99D\uAC00\uD569\uB2C8\uB2E4.)"
+      (\uC5F0\uC18D\uC810\uD504 \uAC00\uB2A5\uD69F\uC218\uAC00 \uB298\uC5B4\uB0A9\uB2C8\uB2E4.)"
   <LevelData>k__BackingField:
   - JumpPower: 5
     MaxJumpCount: 1
   - JumpPower: 5
     MaxJumpCount: 2
-  - JumpPower: 8
-    MaxJumpCount: 2
-  - JumpPower: 12
-    MaxJumpCount: 2
-  - JumpPower: 12
+  - JumpPower: 5
     MaxJumpCount: 3
+  - JumpPower: 5
+    MaxJumpCount: 4
+  - JumpPower: 5
+    MaxJumpCount: 5

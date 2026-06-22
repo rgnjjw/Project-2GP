@@ -27,6 +27,7 @@ namespace _02_Scripts.UI.StyleBar
 
         private void OnDestroy()
         {
+            if (StyleManager.Instance == null) return;
             StyleManager.Instance.OnGradeChanged -= UpdateGrade;
             StyleManager.Instance.OnScoreChanged -= UpdateScore;
             StyleManager.Instance.OnStyleAction -= UpdateFeed;

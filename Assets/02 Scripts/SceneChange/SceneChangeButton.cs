@@ -55,6 +55,14 @@ namespace _02_Scripts.SceneChange
         {
             Time.timeScale = 1f;
 
+            // GameSceneManager(부트 매니저)가 없으면(예: 에디터에서 MainScene 직접 Play)
+            // 직접 단일 로드로 폴백한다 → Instance null로 인한 NullReference 방지.
+            if (GameSceneManager.Instance == null)
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+                return;
+            }
+
             if (useSingleLoad)
             {
                 await GameSceneManager.Instance.LoadOneSceneAsync(sceneName);

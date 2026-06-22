@@ -63,7 +63,7 @@ namespace _02_Scripts.Enemy.Skill
 
         private IEnumerator KillSelfAfterDelay(Enemy enemy)
         {
-            NotifyComplete();
+            NotifyComplete(enemy);
 
             if (deathDelay > 0f)
                 yield return new WaitForSeconds(deathDelay);

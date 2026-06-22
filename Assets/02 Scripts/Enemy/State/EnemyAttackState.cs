@@ -51,6 +51,10 @@ namespace _02_Scripts.Enemy.State
             _animEnded = false;
             _skillEnded = false;
 
+            // 이전 공격이 OnAttack 전에 중단됐다면 스킬이 남긴 익명 핸들러가 그대로 붙어 있을 수 있다.
+            // 새 공격을 등록하기 전에 비워, 한 번의 OnAttack에 데미지가 중복 적용되는 것을 막는다.
+            _enemyAnimationEvent.ClearAttackEvents();
+
             _enemyAnimationEvent.OnAttackEnd += HandleAttackEnd;
             _enemyAnimationEvent.OnPrepare += HandlePrepare;
             _enemyAnimationEvent.OnAttack += HandleAttack;
@@ -77,8 +81,10 @@ namespace _02_Scripts.Enemy.State
             TryTransition();
         }
 
-        private void HandleSkillComplete()
+        private void HandleSkillComplete(Enemy completedEnemy)
         {
+            // 같은 스킬 에셋을 공유하는 다른 적의 완료 신호는 무시(교차 오발 방지).
+            if (completedEnemy != enemy) return;
             _skillEnded = true;
             TryTransition();
         }

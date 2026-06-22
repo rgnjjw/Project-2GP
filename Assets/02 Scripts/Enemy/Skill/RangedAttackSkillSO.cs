@@ -30,7 +30,7 @@ namespace _02_Scripts.Enemy.Skill
             if (animEvent == null)
             {
                 FireByCurrentMuzzleDirection(muzzle, vfx);
-                NotifyComplete();
+                NotifyComplete(enemy);
                 return;
             }
 
@@ -51,7 +51,7 @@ namespace _02_Scripts.Enemy.Skill
 
                 FireByCurrentMuzzleDirection(muzzle, vfx);
 
-                NotifyComplete();
+                NotifyComplete(enemy);
             }
 
             animEvent.OnPrepare += HandlePrepare;

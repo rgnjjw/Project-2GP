@@ -24,7 +24,7 @@ namespace _02_Scripts.Enemy.Skill
 
                 vfx?.Play(VfxType);
 
-                NotifyComplete();
+                NotifyComplete(enemy);
             }
 
             animEvent.OnAttack += HandleAttack;

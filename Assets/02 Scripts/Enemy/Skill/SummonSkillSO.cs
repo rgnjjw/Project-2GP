@@ -53,7 +53,7 @@ namespace _02_Scripts.Enemy.Skill
                 });
             }
 
-            NotifyComplete();
+            NotifyComplete(enemy);
         }
 
         private bool TryGetSpawnPosition(Vector3 center, List<Vector3> occupied, out Vector3 result)

@@ -31,6 +31,10 @@ namespace _02_Scripts.UI
 
         private void HandleEscapePressed()
         {
+            // 칩 카드 선택 중에는 일시정지 창이 끼어들지 못하게 막는다.
+            if (_02_Scripts.Chip.Card.ChipCardUI.IsSelecting)
+                return;
+
             if (IsSubPanelOpen)
             {
                 soundPanel.Close();

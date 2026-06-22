@@ -30,6 +30,27 @@ namespace _02_Scripts.Player
         public event Action OnSkillKeyPressed;
         public event Action OnSkillKeyReleased;
 
+        // ScriptableObject는 씬을 다시 로드해도 살아있어, 이전 세션에서 등록된(이미 파괴된 객체의)
+        // 이벤트 구독이 그대로 남는다. 그 죽은 구독이 호출되면 예외가 나며 이벤트 체인이 끊겨
+        // 새 플레이어의 대쉬/슬라이드/공격 등이 동작하지 않는다. → 새 플레이어 생성 시 전부 비운다.
+        public void ClearAllEvents()
+        {
+            OnChipInput = null;
+            OnJumpKeyPressed = null;
+            OnJumpKeyReleased = null;
+            OnDashKeyPressed = null;
+            OnSlideKeyPressed = null;
+            OnRunKeyPressed = null;
+            OnRunKeyReleased = null;
+            OnFireKeyPressed = null;
+            OnScrollWeaponInput = null;
+            OnWeapon1Pressed = null;
+            OnWeapon2Pressed = null;
+            OnWeapon3Pressed = null;
+            OnSkillKeyPressed = null;
+            OnSkillKeyReleased = null;
+        }
+
         public void OnScrollWeapon(InputAction.CallbackContext context)
         {
             if (context.performed)

@@ -79,8 +79,20 @@ namespace _02_Scripts.Manager
         private void OnAllWavesCleared()
         {
             GrantGradeReward();
+            HealPlayerFull();
             CurrentLevel++;
             StartCoroutine(DescendAfterDelay());
+        }
+
+        // 스테이지 클리어 시 플레이어 체력을 가득 채운다.
+        private void HealPlayerFull()
+        {
+            var player = FindFirstObjectByType<_02_Scripts.Player.Player>();
+            if (player == null) return;
+
+            var health = player.GetModule<_02_Scripts.Agent.AgentHealth>();
+            if (health != null)
+                health.ApplyHeal(health.MaxHp);
         }
 
         // 스테이지 클리어 보상: 현재 스타일 등급(D/C/B/A/S)에 따라 재화 지급.

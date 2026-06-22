@@ -19,6 +19,7 @@ namespace _02_Scripts.UI
 
         public void AddExp(int amount)
         {
+            if (expPerLevel == null || expPerLevel.Length == 0) return;
             if (_currentLevel > expPerLevel.Length) return;
 
             _currentExp += Mathf.RoundToInt(amount * ExpMultiplier);

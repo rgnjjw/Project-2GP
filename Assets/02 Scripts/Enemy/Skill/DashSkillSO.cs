@@ -20,7 +20,7 @@ namespace _02_Scripts.Enemy.Skill
             Transform target = TargetFinder?.GetClosest(enemy.transform) ?? enemy.CurrentTarget;
             if (target == null)
             {
-                NotifyComplete();
+                NotifyComplete(enemy);
                 return;
             }
 
@@ -30,12 +30,12 @@ namespace _02_Scripts.Enemy.Skill
         private IEnumerator DashCoroutine(Enemy enemy, Vector3 targetPos)
         {
             NavEnemyRenderer navRenderer = enemy.GetModule<NavEnemyRenderer>();
-            if (navRenderer == null) { NotifyComplete(); yield break; }
+            if (navRenderer == null) { NotifyComplete(enemy); yield break; }
 
             EnemyVfxController vfx = enemy.GetModule<EnemyVfxController>();
 
             NavMeshAgent agent = navRenderer.NavMeshAgent;
-            if (agent == null || !agent.isOnNavMesh) { NotifyComplete(); yield break; }
+            if (agent == null || !agent.isOnNavMesh) { NotifyComplete(enemy); yield break; }
 
             Vector3 direction = (targetPos - enemy.transform.position).normalized;
             Vector3 dashDest = enemy.transform.position + direction * DashDistance;
@@ -102,7 +102,7 @@ namespace _02_Scripts.Enemy.Skill
 
             vfx?.Stop(EnemyVfxType.Dash);
 
-            NotifyComplete();
+            NotifyComplete(enemy);
         }
     }
 }

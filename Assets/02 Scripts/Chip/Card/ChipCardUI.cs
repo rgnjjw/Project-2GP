@@ -24,6 +24,9 @@ namespace _02_Scripts.Chip.Card
         [SerializeField] private float enterStagger  = 0.08f;
         [SerializeField] private float exitDuration  = 0.35f;
         
+        // 카드 선택 창이 떠 있는 동안 true. (일시정지 등 다른 입력이 끼어들지 못하게 막는 용도)
+        public static bool IsSelecting { get; private set; }
+
         private RectTransform _rectTransform;
         private Vector2 _originalPosition;
         private ChipInstance[] _stageChipInstances;
@@ -65,6 +68,7 @@ namespace _02_Scripts.Chip.Card
             Shuffle(available);
             int count = Mathf.Min(cards.Length, available.Count);
 
+            IsSelecting = true;
             Time.timeScale = 0f;
             panel.SetActive(true);
             CursorManager.Instance.SetCursorVisible(true);
@@ -159,6 +163,7 @@ namespace _02_Scripts.Chip.Card
                 panel.SetActive(false);
                 _rectTransform.anchoredPosition = _originalPosition;
                 CursorManager.Instance.SetCursorVisible(false);
+                IsSelecting = false;
             });
         }
 
