@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: SoundManager.runtime::csiimnida.CSILib.SoundManager.RunTime.SoundSo
   soundName: MachinegunFire
   soundType: 1
-  clip: {fileID: 8300000, guid: a4bae4a214b6df7489b84a7fc3542429, type: 3}
+  clip: {fileID: 8300000, guid: 812b50bb38b38c0429403c7a983720e0, type: 3}
   loop: 0
   Priority: 128
   volume: 1

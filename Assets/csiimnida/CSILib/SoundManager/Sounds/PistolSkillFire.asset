@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: SoundManager.runtime::csiimnida.CSILib.SoundManager.RunTime.SoundSo
   soundName: PistolSkillFire
   soundType: 1
-  clip: {fileID: 8300000, guid: 5903b244a8d87714c921890648df6627, type: 3}
+  clip: {fileID: 8300000, guid: d7a5fda2732147d48be0f01361d94c53, type: 3}
   loop: 0
   Priority: 128
   volume: 1

@@ -12,12 +12,11 @@ namespace csiimnida.CSILib.SoundManager.RunTime
         [SerializeField] private SoundListSo _soundListSo;
         [SerializeField] private AudioMixer _mixer;
 
-        [Tooltip("같은 이름 단발(one-shot) 사운드의 동시 재생 최대 개수. 연사 등으로 무한정 쌓여 오디오 보이스 한도를 넘기는 것을 막는다.")]
-        [SerializeField] private int maxConcurrentPerSound = 8;
-
         private Dictionary<string, AudioSource> _playingSounds = new();
-        // 단발 사운드는 이름별로 살아있는 AudioSource들을 추적해 개수를 제한한다(가장 오래된 것부터 회수).
-        private readonly Dictionary<string, List<AudioSource>> _oneShots = new();
+        // 단발 사운드는 이름별 '영구 AudioSource' 하나로 PlayOneShot한다.
+        // → 발사할 때마다 GameObject를 새로 만들지 않아 생성 지연/싱크 밀림이 없고,
+        //   PlayOneShot이 겹침을 알아서 처리해 연사에도 끊기지 않는다.
+        private readonly Dictionary<string, AudioSource> _oneShotPlayers = new();
         private void Awake()
         {
             if (_soundListSo == null)
@@ -69,49 +68,49 @@ namespace csiimnida.CSILib.SoundManager.RunTime
                 return;
             }
 
-            // 루프 사운드는 이름당 하나만 유지(중복 루프 방지)하므로 먼저 정리하고 딕셔너리로 추적한다.
             if (so.loop)
+            {
+                // 루프 사운드: 이름당 하나만 유지(중복 루프 방지). 전용 GameObject로 재생 + 추적.
                 StopSound(soundName);
-            else
-                // 단발 SFX는 서로 끊지 않고 겹쳐 재생되되, 같은 소리가 무한정 쌓이지 않게 개수를 제한한다.
-                // (연사 시 수십 개가 쌓여 오디오 보이스 한도를 넘기면 새 발사음이 안 들리는 문제 방지)
-                EnforceOneShotCap(soundName);
 
-            GameObject obj = new GameObject(soundName + " Sound");
-            if (at != null)
-                obj.transform.position = at.position;
+                GameObject obj = new GameObject(soundName + " Sound");
+                if (at != null) obj.transform.position = at.position;
 
-            AudioSource source = obj.AddComponent<AudioSource>();
-
-            if (so.loop)
-            {
+                AudioSource source = obj.AddComponent<AudioSource>();
                 _playingSounds[soundName] = source;
-            }
-            else
-            {
-                if (!_oneShots.TryGetValue(soundName, out var list))
-                    _oneShots[soundName] = list = new List<AudioSource>();
-                list.Add(source);
+                AssignMixerGroup(source, so);
+                SetAudio(source, so);
+                return;
             }
 
-            AssignMixerGroup(source, so);
-            SetAudio(source, so);
+            // 단발(one-shot): 이름별 영구 소스로 PlayOneShot.
+            // 매 발사 GameObject 생성이 없어 지연/싱크 밀림이 없고, 겹침도 자연스럽게 처리된다.
+            AudioSource player = GetOneShotPlayer(soundName);
+            if (at != null) player.transform.position = at.position;
+
+            AssignMixerGroup(player, so);
+            player.priority = so.Priority;
+            player.volume = so.volume;
+            player.panStereo = so.stereoPan;
+            player.spatialBlend = so.SpatialBlend;
+            player.pitch = so.RandomPitch ? Random.Range(so.MinPitch, so.MaxPitch) : so.pitch;
+
+            player.PlayOneShot(so.clip);
         }
 
-        // 같은 이름 단발 사운드가 한계 개수에 도달하면, 가장 오래된 것부터 정리해 새 소리가 항상 재생되게 한다.
-        private void EnforceOneShotCap(string soundName)
+        // 단발 사운드용 영구 AudioSource를 이름별로 하나 만들어 재사용한다.
+        private AudioSource GetOneShotPlayer(string soundName)
         {
-            if (!_oneShots.TryGetValue(soundName, out var list)) return;
+            if (_oneShotPlayers.TryGetValue(soundName, out AudioSource src) && src != null)
+                return src;
 
-            list.RemoveAll(s => s == null);
-
-            int cap = Mathf.Max(1, maxConcurrentPerSound);
-            while (list.Count >= cap)
-            {
-                AudioSource oldest = list[0];
-                list.RemoveAt(0);
-                if (oldest != null) Destroy(oldest.gameObject);
-            }
+            GameObject obj = new GameObject($"OneShot_{soundName}");
+            obj.transform.SetParent(transform, false);
+            src = obj.AddComponent<AudioSource>();
+            src.playOnAwake = false;
+            src.loop = false;
+            _oneShotPlayers[soundName] = src;
+            return src;
         }
 
         private void AssignMixerGroup(AudioSource source, SoundSo so)
@@ -174,10 +173,6 @@ namespace csiimnida.CSILib.SoundManager.RunTime
                 foreach (var kv in _playingSounds)
                     if (kv.Value == source) { key = kv.Key; break; }
                 if (key != null) _playingSounds.Remove(key);
-
-                // 단발 추적 목록에서도 제거
-                foreach (var kv in _oneShots)
-                    if (kv.Value.Remove(source)) break;
 
                 Destroy(source.gameObject);
             }
