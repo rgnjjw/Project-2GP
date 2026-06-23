@@ -26,8 +26,21 @@ namespace _02_Scripts.Player
         [Tooltip("벽 판정용 캡슐 콜라이더(보통 플레이어 루트의 CapsuleCollider).")]
         [SerializeField] private CapsuleCollider playerCollider;
 
+        [Header("Gravity (중력/낙하 조절)")]
+        [Tooltip("플레이어 커스텀 중력을 켤지. 켜면 Rigidbody의 Use Gravity를 끄고 여기 값으로 직접 처리한다.")]
+        [SerializeField] private bool useCustomGravity = true;
+        [Tooltip("중력 배율. 1=기본, 0.5=둥둥(약하게), 2=무겁게(강하게).")]
+        [SerializeField] private float gravityScale = 1f;
+        [Tooltip("떨어질 때(상승이 끝나 하강하는 동안) 추가로 곱하는 가속 배율. 1=동일, 2=두 배 빠르게 낙하.")]
+        [SerializeField] private float fallMultiplier = 1f;
+        [Tooltip("상승 중 점프키를 떼면 적용할 가속 배율(짧은 점프). 1=영향 없음, 2=빨리 정점 찍고 하강.")]
+        [SerializeField] private float lowJumpMultiplier = 1f;
+        [Tooltip("접지 상태에서 바닥에 붙어있게 하는 작은 하강 속도(누적 방지).")]
+        [SerializeField] private float groundStickVelocity = -2f;
+
         private float _lastGroundedTime = -999f;
         private Vector3 _slopeNormal = Vector3.up;
+        private PlayerInputSO _input;
 
         // 스폰 직후 false→true 접지에서 착지음이 울리지 않도록, 한 번 공중에 뜬 뒤부터만 재생한다.
         private bool _hasLeftGround;
@@ -38,6 +51,13 @@ namespace _02_Scripts.Player
         {
             base.Initialize(moduleOwner);
             OnGroundStatusChanged += HandleGroundStatusChanged;
+
+            if (moduleOwner is Player player)
+                _input = player.PlayerInputSO;
+
+            // 커스텀 중력을 쓰면 Rigidbody 기본 중력을 끄고 여기서 직접 적용한다.
+            if (useCustomGravity && _rigidbody != null)
+                _rigidbody.useGravity = false;
         }
 
         private void OnDestroy()
@@ -69,11 +89,47 @@ namespace _02_Scripts.Player
             {
                 _slopeNormal = Vector3.up;
             }
+
+            ApplyGravity();
+        }
+
+        // 플레이어 중력을 직접 적용해 인스펙터에서 중력/낙하 가속을 조절할 수 있게 한다.
+        private void ApplyGravity()
+        {
+            if (!useCustomGravity || _rigidbody == null) return;
+
+            Vector3 v = _rigidbody.linearVelocity;
+
+            if (IsGrounded)
+            {
+                // 경사면에선 MoveCharacter가 설정한 수직 속도를 유지(경사 따라 이동),
+                // 평지에선 작은 접지 속도로 고정해 하강 속도가 무한정 누적되는 것을 막는다.
+                bool onSlope = _slopeNormal != Vector3.up;
+                if (!onSlope && v.y < 0f)
+                {
+                    v.y = groundStickVelocity;
+                    _rigidbody.linearVelocity = v;
+                }
+                return;
+            }
+
+            float g = Physics.gravity.y * gravityScale; // 음수(아래 방향)
+
+            float mult = 1f;
+            if (v.y < 0f)
+                mult = fallMultiplier;                                  // 하강 중 → 낙하 가속
+            else if (v.y > 0f && _input != null && !_input.IsJumping)
+                mult = lowJumpMultiplier;                               // 상승 중 점프키 뗌 → 짧은 점프
+
+            v.y += g * mult * Time.fixedDeltaTime;
+            _rigidbody.linearVelocity = v;
         }
 
         private void DetectSlope()
         {
-            if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, slopeRayDistance))
+            // 바닥 레이어만, 트리거는 무시(트리거를 경사면으로 오인해 감속/수직 이상 발생 방지).
+            if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, slopeRayDistance,
+                    whatIsGround, QueryTriggerInteraction.Ignore))
             {
                 float angle = Vector3.Angle(hit.normal, Vector3.up);
                 if (angle <= maxSlopeAngle)

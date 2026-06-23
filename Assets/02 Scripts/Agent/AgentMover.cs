@@ -8,7 +8,7 @@ namespace _02_Scripts.Agent
     public class AgentMover : MonoBehaviour,IModule, IMover
     {
         [Header("Agent Values")]
-        [SerializeField] private LayerMask whatIsGround;
+        [SerializeField] protected LayerMask whatIsGround;
         [SerializeField] private Vector3 groundCheckSize;
         protected float _moveSpeed;
 
@@ -112,7 +112,9 @@ namespace _02_Scripts.Agent
         {
             bool before = IsGrounded;
             // CheckBox는 bool만 반환해 OverlapBox와 달리 배열을 할당하지 않는다(매 FixedUpdate·에이전트마다 GC 방지).
-            IsGrounded = Physics.CheckBox(transform.position, groundCheckSize, Quaternion.identity, whatIsGround);
+            // 트리거 콜라이더는 접지로 치지 않는다(트리거 통과 시 잘못 접지 판정 → 감속/이상 동작 방지).
+            IsGrounded = Physics.CheckBox(transform.position, groundCheckSize, Quaternion.identity, whatIsGround,
+                QueryTriggerInteraction.Ignore);
             if (before != IsGrounded)
             {
                 OnGroundStatusChanged?.Invoke(IsGrounded);

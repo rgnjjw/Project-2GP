@@ -732,6 +732,7 @@ MonoBehaviour:
   <NavMeshAgent>k__BackingField: {fileID: 3606267079864196982}
   <SpeedAnimParam>k__BackingField: {fileID: 11400000, guid: 308aeae103cd3914cb03ea43dec1f282, type: 2}
   rotateSpeed: 100
+  rotateMinDistance: 3.5
 --- !u!114 &5732108688251981821
 MonoBehaviour:
   m_ObjectHideFlags: 0

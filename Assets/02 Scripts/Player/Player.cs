@@ -24,6 +24,9 @@ namespace _02_Scripts.Player
         [Tooltip("죽었을 때 보여줄 패널('메인으로 가기' 버튼 포함). 버튼엔 SceneChangeButton(Title) 연결.")]
         [SerializeField] private GameObject deathPanel;
 
+        [Tooltip("HP가 0이 된 뒤 사망 처리(패널 표시/게임 정지)까지의 지연(초). 체력바가 0으로 바뀌는 걸 보여줄 시간.")]
+        [SerializeField] private float deathDelay = 2f;
+
         private Controls _controls;
         private GunManager _gunManager;
         private AgentHealth _playerHealth;
@@ -80,6 +83,17 @@ namespace _02_Scripts.Player
 
         protected override void OnDead()
         {
+            // HP가 0이 된 직후 바로 멈추면 체력바가 0으로 바뀌는 게 안 보인다.
+            // deathDelay만큼 기다린 뒤 사망 처리(정지/패널)를 한다.
+            StartCoroutine(DeathSequence());
+        }
+
+        private System.Collections.IEnumerator DeathSequence()
+        {
+            // 대기 중엔 timeScale이 정상(1)이라 체력바가 0으로 갱신되는 걸 보여줄 수 있다.
+            if (deathDelay > 0f)
+                yield return new WaitForSecondsRealtime(deathDelay);
+
             // 플레이어 사망 → 게임 멈추고 죽음 패널 표시. 이동은 패널의 '메인으로' 버튼이 처리.
             Time.timeScale = 0f;
 

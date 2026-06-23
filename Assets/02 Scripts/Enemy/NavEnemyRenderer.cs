@@ -13,6 +13,10 @@ namespace _02_Scripts.Enemy
 
         [SerializeField] private float rotateSpeed = 360f;
 
+        [Tooltip("타겟이 이 수평거리보다 가까우면 회전을 갱신하지 않는다(마지막 방향 유지). " +
+                 "거대한 적은 플레이어가 몸 근처에 오면 방향이 홱홱 뒤집혀 빙글빙글 도는 것을 막는다. 몸집에 맞춰 키울 것.")]
+        [SerializeField] private float rotateMinDistance = 0.75f;
+
         private Transform _enemyTrm;
         private Enemy _enemy;
 
@@ -76,7 +80,8 @@ namespace _02_Scripts.Enemy
             Vector3 toTarget = target.position - _enemyTrm.position;
             toTarget.y = 0f;
 
-            if (toTarget.sqrMagnitude < 0.001f) return;
+            // 너무 가까우면(거대 적의 몸 근처) 방향이 불안정해 빙글빙글 도므로 회전 갱신을 멈춘다.
+            if (toTarget.sqrMagnitude < rotateMinDistance * rotateMinDistance) return;
 
             float speedRatio = Mathf.Clamp01(NavMeshAgent.velocity.magnitude / NavMeshAgent.speed);
 
@@ -100,7 +105,8 @@ namespace _02_Scripts.Enemy
             if (_enemy == null || _enemy.CurrentTarget == null) return;
             Vector3 direction = _enemy.CurrentTarget.position - _enemyTrm.position;
             direction.y = 0f;
-            if (direction.sqrMagnitude < 0.001f) return;
+            // 너무 가까우면 방향이 불안정해 즉시 스냅이 좌우로 홱홱 뒤집힌다(거대 적 회전 광란 방지).
+            if (direction.sqrMagnitude < rotateMinDistance * rotateMinDistance) return;
             _enemyTrm.rotation = Quaternion.LookRotation(direction);
         }
 
@@ -119,7 +125,7 @@ namespace _02_Scripts.Enemy
         {
             Vector3 direction = target.position - _enemyTrm.position;
             direction.y = 0f;
-            if (direction.sqrMagnitude < 0.001f) return;
+            if (direction.sqrMagnitude < rotateMinDistance * rotateMinDistance) return;
             _enemyTrm.rotation = Quaternion.RotateTowards(
                 _enemyTrm.rotation,
                 Quaternion.LookRotation(direction),
