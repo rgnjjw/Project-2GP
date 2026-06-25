@@ -24,7 +24,6 @@ MonoBehaviour:
     - {fileID: 6504771105321142212, guid: 4ce069b8c3e64244c90d76c19ef010e5, type: 3}
     - {fileID: 4870927246733940613, guid: a4585686866550a4e9afea0f12d93986, type: 3}
     - {fileID: 4884800994521478618, guid: 2a3362c8ccfc64142ad1491e8fbaa653, type: 3}
-    - {fileID: 4657935799037999589, guid: 2d011174e1be9e6448d568d0699a6e9a, type: 3}
   - minLevel: 3
     maxLevel: 4
     meleePrefabs:

@@ -160,7 +160,6 @@ namespace _02_Scripts.Enemy.Skill
             projectile.Init(direction, ProjectileSpeed, Damage, TargetLayer);
         }
 
-        // 풀이 준비돼 있고 projectileItem이 지정됐으면 풀에서, 아니면 프리팹을 Instantiate.
         private Projectile SpawnProjectile(Vector3 position, Quaternion rotation)
         {
             if (projectileItem != null && PoolManagerSO.Instance != null)

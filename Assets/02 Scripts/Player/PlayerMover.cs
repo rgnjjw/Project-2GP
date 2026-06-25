@@ -42,6 +42,9 @@ namespace _02_Scripts.Player
         private Vector3 _slopeNormal = Vector3.up;
         private PlayerInputSO _input;
 
+        // 점프 직후 잠깐 경사 수직 보정을 끄는 시점. 경사/계단에서 점프 상승 속도가 덮어써지는 것 방지.
+        private float _slopeSuppressUntil = -999f;
+
         // 스폰 직후 false→true 접지에서 착지음이 울리지 않도록, 한 번 공중에 뜬 뒤부터만 재생한다.
         private bool _hasLeftGround;
 
@@ -91,6 +94,15 @@ namespace _02_Scripts.Player
             }
 
             ApplyGravity();
+        }
+
+        // 위로 향한 힘(점프/벽점프/슬라이드점프)이 들어오면, 잠깐 경사 수직 보정을 꺼서
+        // 경사·계단에서도 점프 상승 속도가 유지되게 한다.
+        public override void AddForceToAgent(Vector3 force)
+        {
+            if (force.y > 0f)
+                _slopeSuppressUntil = Time.time + 0.2f;
+            base.AddForceToAgent(force);
         }
 
         // 플레이어 중력을 직접 적용해 인스펙터에서 중력/낙하 가속을 조절할 수 있게 한다.
@@ -168,19 +180,22 @@ namespace _02_Scripts.Player
                 if (onSlope)
                     target = ProjectOnSlope(target);
 
+                // 점프 직후엔 경사 수직 보정을 건너뛴다(안 그러면 상승 속도가 덮어써져 계단/경사에서 점프가 씹힘).
+                bool applySlopeY = onSlope && Time.time >= _slopeSuppressUntil;
+
                 if (_postDashVelocity.sqrMagnitude > target.sqrMagnitude + 0.01f)
                 {
                     _postDashVelocity = Vector3.MoveTowards(_postDashVelocity, target, PostDashDecay * Time.fixedDeltaTime);
                     velocity.x = _postDashVelocity.x;
                     velocity.z = _postDashVelocity.z;
-                    if (onSlope) velocity.y = _postDashVelocity.y;
+                    if (applySlopeY) velocity.y = _postDashVelocity.y;
                 }
                 else
                 {
                     _postDashVelocity = Vector3.zero;
                     velocity.x = target.x;
                     velocity.z = target.z;
-                    if (onSlope) velocity.y = target.y;
+                    if (applySlopeY) velocity.y = target.y;
                 }
             }
 

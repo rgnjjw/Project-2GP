@@ -58,8 +58,6 @@ namespace _02_Scripts.Enemy.Skill
             return best;
         }
 
-        // 추격 대상 선정: 힐러는 체력이 가장 낮은 아군을 우선 추격(다친 아군이 없으면 가장 가까운 아군).
-        // 일반 적은 기존대로 가장 가까운 대상(=플레이어)을 추격한다.
         public static Transform SelectChaseTarget(Enemy enemy, AbstractDetection range)
         {
             if (range == null) return null;
