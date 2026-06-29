@@ -12,6 +12,12 @@ namespace _02_Scripts.UI
     /// - 위치만 카메라 뷰포트에 맞춰 자동 재배치 → 화면비가 바뀌어도 항상 시야 안.
     /// - 각 HUD 요소(코너에 두는 부모 RectTransform)에 하나씩 붙인다.
     ///   예: InfoUI = (0,0) 좌하단, StyleUI = (1,1) 우상단.
+    ///
+    /// 위치 수정 방법:
+    /// - "Live Edit Mode"를 켜면 자동 재배치(Apply)가 멈춰서 씬뷰에서 자유롭게 드래그할 수 있다.
+    /// - 원하는 위치로 옮긴 뒤 인스펙터의 "Capture Current Position" 버튼(컨텍스트 메뉴)을 누르면
+    ///   현재 위치가 뷰포트 좌표로 역산되어 Viewport Position에 자동으로 채워진다.
+    /// - 그 다음 Live Edit Mode를 끄면 그 위치가 새로운 "디자인 위치"로 고정되어 항상 유지된다.
     /// </summary>
     [ExecuteAlways]
     [RequireComponent(typeof(RectTransform))]
@@ -30,6 +36,12 @@ namespace _02_Scripts.UI
 
         [Tooltip("카메라 정면 기준 평면 거리(원근감·크기 결정). 0 이하면 시작 시 현재 거리를 자동 사용.")]
         [SerializeField] private float planeDistance = 0f;
+
+        [Header("위치 편집용")]
+        [Tooltip("켜면 자동 재배치(Apply)가 멈춘다. 씬뷰에서 자유롭게 드래그해서 위치를 잡은 뒤, " +
+                 "컨텍스트 메뉴의 'Capture Current Position'을 눌러 그 위치를 Viewport Position에 반영하라. " +
+                 "끄면 다시 Viewport Position 기준으로 자동 재배치된다.")]
+        [SerializeField] private bool liveEditMode = false;
 
         [Header("선택: 보통은 꺼둔다(디자인 보존)")]
         [Tooltip("요소를 카메라와 정면으로 정렬(기울어진 스타일 회전을 무시). 기본 꺼짐.")]
@@ -91,6 +103,9 @@ namespace _02_Scripts.UI
 
         private void Apply()
         {
+            // Live Edit Mode가 켜져 있으면 자동 재배치를 건너뛴다 → 씬뷰에서 자유롭게 드래그 가능.
+            if (liveEditMode) return;
+
             if (_rt == null) _rt = (RectTransform)transform;
             Camera cam = ResolveCamera();
             if (cam == null) return;
@@ -111,5 +126,40 @@ namespace _02_Scripts.UI
             if (alignToCamera)
                 _rt.rotation = cam.transform.rotation;
         }
+
+#if UNITY_EDITOR
+        /// <summary>
+        /// 현재 RectTransform의 월드 위치를 카메라 뷰포트 좌표로 역산해서 viewportPosition에 채워넣는다.
+        /// Live Edit Mode로 위치를 직접 옮긴 뒤 이 메뉴를 눌러 새 "디자인 위치"로 확정한다.
+        /// </summary>
+        [ContextMenu("Capture Current Position as Viewport")]
+        private void CaptureCurrentPositionAsViewport()
+        {
+            Init();
+            Camera cam = ResolveCamera();
+            if (cam == null)
+            {
+                Debug.LogWarning($"[{name}] 카메라를 찾을 수 없어 캡처에 실패했습니다.", this);
+                return;
+            }
+
+            // 평면 거리도 현재 상태 기준으로 다시 캡처(요소를 z축으로도 옮겼을 경우 대비).
+            float d = Vector3.Dot(_rt.position - cam.transform.position, cam.transform.forward);
+            if (d > 0.001f)
+            {
+                _planeDistance = d;
+                _distanceCaptured = true;
+                planeDistance = d; // 자동 거리 대신 지금 거리를 그대로 고정해두면 다음에도 동일하게 재현된다.
+            }
+
+            Vector3 viewportPoint = cam.WorldToViewportPoint(_rt.position);
+            viewportPosition = new Vector2(viewportPoint.x, viewportPoint.y);
+
+            Debug.Log($"[{name}] 캡처 완료 → Viewport Position = ({viewportPosition.x:F3}, {viewportPosition.y:F3}), Plane Distance = {planeDistance:F2}\n" +
+                      "Live Edit Mode를 꺼서 새 위치를 고정하세요.", this);
+
+            UnityEditor.EditorUtility.SetDirty(this);
+        }
+#endif
     }
 }
