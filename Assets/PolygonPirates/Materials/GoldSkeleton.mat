@@ -8,26 +8,26 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: GoldSkeleton
-  m_Shader: {fileID: 4800000, guid: 6c046203321edf34fb092959a05e5b4a, type: 3}
+  m_Shader: {fileID: 4800000, guid: 733fefdcde0d35f4b822d2935d5a22f4, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _MK_ALBEDO_MAP
+  - _MK_EMISSION_MAP
   - _MK_ENVIRONMENT_REFLECTIONS_AMBIENT
   - _MK_LIGHT_CEL
-  - _MK_OUTLINE_HULL_CLIP
   - _MK_RECEIVE_SHADOWS
-  - _MK_SPECULAR_ISOTROPIC
   m_InvalidKeywords:
   - _EMISSION
   - _MK_ARTISTIC_ANIMATION_STUTTER
+  - _MK_OUTLINE_HULL_CLIP
   - _MK_WRAPPED_DIFFUSE
   - _RECEIVESHADOWS_ON
   - _WRAPPEDLIGHTING_ON
   m_LightmapFlags: 1
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2000
+  m_CustomRenderQueue: 1997
   stringTagMap:
     IGNOREPROJECTOR: False
     RenderType: Opaque
@@ -73,7 +73,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 6fa6e3a289a54da4387f58e1eb847ef8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _GoochRamp:
@@ -203,9 +203,9 @@ Material:
     - _GoochRampIntensity: 0.5
     - _HatchingMapScale: 1
     - _Hue: 0
-    - _IndirectFade: 0.367
+    - _IndirectFade: 0.406
     - _Initialized: 0
-    - _InputTab: 0
+    - _InputTab: 1
     - _Iridescence: 0
     - _IridescenceSize: 1
     - _IridescenceSmoothness: 0.5
@@ -231,7 +231,7 @@ Material:
     - _Parallax: 0.02
     - _ReceiveShadows: 1
     - _RenderFace: 2
-    - _RenderPriority: 0
+    - _RenderPriority: 3
     - _Rim: 0
     - _RimSize: 1
     - _RimSmoothness: 0.5
@@ -240,9 +240,9 @@ Material:
     - _SketchMapScale: 1
     - _Smoothness: 0.3
     - _SmoothnessTextureChannel: 0
-    - _Specular: 1
+    - _Specular: 0
     - _SpecularHighlights: 1
-    - _SpecularIntensity: 1
+    - _SpecularIntensity: 4.05
     - _SpecularSmoothness: 0.572
     - _SpecularThresholdOffset: 0.25
     - _SrcBlend: 1
@@ -265,13 +265,13 @@ Material:
     - _ZTest: 4
     - _ZWrite: 1
     m_Colors:
-    - _AlbedoColor: {r: 1, g: 0.7420101, b: 0.4716981, a: 1}
-    - _Color: {r: 1, g: 0.74201, b: 0.4716981, a: 1}
+    - _AlbedoColor: {r: 1, g: 0.8301325, b: 0, a: 1}
+    - _Color: {r: 1, g: 0.8301325, b: 0, a: 1}
     - _DissolveBorderColor: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColorUI: {r: 1, g: 1, b: 1, a: 1}
     - _GoochBrightColor: {r: 1, g: 1, b: 1, a: 1}
-    - _GoochDarkColor: {r: 0.4669811, g: 0.36880568, b: 0, a: 1}
+    - _GoochDarkColor: {r: 0.495283, g: 0.39123198, b: 0, a: 1}
     - _IridescenceColor: {r: 1, g: 1, b: 1, a: 0.5}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _RimBrightColor: {r: 1, g: 1, b: 1, a: 1}

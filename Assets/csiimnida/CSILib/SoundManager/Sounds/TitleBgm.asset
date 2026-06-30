@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TitleBgm
   m_EditorClassIdentifier: SoundManager.runtime::csiimnida.CSILib.SoundManager.RunTime.SoundSo
   soundName: TitleBgm
-  soundType: 1
+  soundType: 0
   clip: {fileID: 8300000, guid: 60ffb5633f1edb34a883cda2bb97fbae, type: 3}
   loop: 1
   Priority: 128
